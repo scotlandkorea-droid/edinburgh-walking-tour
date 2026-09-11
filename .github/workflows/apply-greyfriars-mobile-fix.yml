@@ -1,0 +1,51 @@
+name: Apply Greyfriars mobile fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-greyfriars-mobile-fix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Greyfriars detail navigation on mobile
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files = [
+              'places/greyfriars-bobby-story.html',
+              'places/greyfriars-harry-potter.html',
+              'places/greyfriars-flodden-wall.html',
+              'places/greyfriars-old-cemetery.html',
+              'places/greyfriars-kirk.html',
+              'places/greyfriars-alexander-henderson.html',
+              'places/greyfriars-covenanter-martyrs.html',
+          ]
+          old = '@media(max-width:560px){.navbox{grid-template-columns:1fr 1fr}.hub{grid-column:1/-1;grid-row:1}.navbox .prev{grid-column:1}.navbox .next{grid-column:2}}'
+          new = '@media(max-width:560px){.navbox{display:flex;flex-direction:column;gap:8px;align-items:stretch}.navbox a{display:block;width:100%;padding:11px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);text-align:left;line-height:1.45}.navbox .hub{text-align:center}.navbox .next{text-align:left}.course{margin-top:12px;padding:12px;background:var(--sage);border-radius:12px;text-align:center}}'
+          changed = 0
+          for name in files:
+              p = Path(name)
+              s = p.read_text(encoding='utf-8')
+              if old not in s:
+                  raise SystemExit(f'Expected mobile CSS not found in {name}')
+              p.write_text(s.replace(old, new), encoding='utf-8')
+              changed += 1
+          print(f'Patched {changed} Greyfriars detail pages')
+          PY
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add places/greyfriars-*.html
+          git commit -m 'Fix Greyfriars mobile navigation' || exit 0
+          git push
