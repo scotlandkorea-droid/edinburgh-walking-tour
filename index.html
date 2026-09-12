@@ -27,15 +27,15 @@
 
     .guide{background:var(--guide-bg)}.guide-card{padding:8px 0}.guide .kicker{display:inline-flex;align-items:center;min-height:30px;padding:0 11px;border-radius:999px;background:var(--guide-accent);color:#455249;letter-spacing:.08em}.guide .section-head{margin-bottom:22px}.guide .section-head h2{max-width:780px}.guide-copy{max-width:800px;font-size:17px;color:#36423c}.guide-copy p{margin:0 0 17px}
 
-    .walked{background:#fff}.photo-grid{display:grid;grid-template-columns:1fr;gap:14px}.photo-card{overflow:hidden;border-radius:20px;background:#eee;min-height:310px;margin:0}.photo-card img{width:100%;height:100%;object-fit:cover}.photo-card:nth-child(1) img{object-position:center 42%}.photo-card:nth-child(2) img{object-position:center 34%}.photo-caption{font-size:13px;color:var(--muted);margin-top:12px}
+    .walked{background:#fff}.photo-grid{display:grid;grid-template-columns:1fr;gap:14px}.photo-card{overflow:hidden;border-radius:20px;background:#eee;aspect-ratio:4/3;margin:0}.photo-card img{width:100%;height:100%;object-fit:cover}.photo-card:nth-child(1) img{object-position:center 42%}.photo-card:nth-child(2) img{object-position:center 38%}.photo-card:nth-child(3) img{object-position:center 42%}
 
     .travel{background:var(--cream)}.travel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.travel-card{min-height:128px;border-radius:18px;padding:20px;border:1px solid rgba(24,33,29,.07);display:flex;flex-direction:column;justify-content:space-between;font-weight:800;transition:.18s ease}.travel-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(24,33,29,.07)}.travel-card span{font-size:22px;letter-spacing:-.035em}.travel-card small{color:var(--muted);font-weight:600}.travel-card:nth-child(4n+2){background:var(--sage)}.travel-card:nth-child(4n+3){background:var(--sand)}.travel-card:nth-child(4n+4){background:var(--mist)}.travel-card:nth-child(4n+5){background:var(--heather)}.travel-feature{grid-column:1/-1;position:relative;overflow:hidden;min-height:230px;color:white;border:none;isolation:isolate;background:#27352e}.travel-feature-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 58%}.travel-feature:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,25,23,.08),rgba(20,25,23,.76))}.travel-feature small{color:rgba(255,255,255,.88)}
 
     .contact{text-align:center}.contact-box{background:#f7f5ef;border-radius:26px;padding:36px 22px}.contact h2{font-size:clamp(30px,7vw,46px);letter-spacing:-.045em;margin:0 0 12px}.contact p{color:var(--muted);margin:0 auto 8px;max-width:670px}.contact .meta{font-weight:800;color:var(--ink);margin:12px 0 22px}.contact-actions{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:22px}.contact-actions .btn{min-width:220px}.btn-email{background:#fff;color:var(--ink);border:1px solid #cbc5ba;box-shadow:none}.btn-email:hover{background:#f1eee7}.contact-help{margin-top:12px!important;font-size:13px;color:var(--muted)!important}
     footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);font-size:13px}.foot{display:flex;flex-direction:column;gap:8px}
 
-    @media(min-width:620px){.wrap{width:min(var(--max),calc(100% - 56px))}.hero-inner{transform:translateY(-1vh)}.guide-card{padding:42px 38px}.summary-line{display:inline}.summary-line+.summary-line:before{content:" · "}.feature-grid{grid-template-columns:1fr 1fr}.route-mobile{display:none}.route-desktop{display:block}.route-grid{grid-template-columns:repeat(3,1fr)}.photo-grid{grid-template-columns:1fr 1fr}.travel-grid{grid-template-columns:repeat(3,1fr)}.travel-feature{grid-column:span 2}.contact-box{padding:48px}.contact-actions{flex-direction:row;justify-content:center}}
-    @media(min-width:900px){.nav{display:flex}.hero{min-height:82vh}.hero-inner{padding-bottom:76px;transform:translateY(-1vh)}.feature-grid{grid-template-columns:repeat(5,1fr)}.route-grid{grid-template-columns:repeat(4,1fr)}.photo-grid{grid-template-columns:repeat(2,1fr)}.photo-card{min-height:440px}.travel-grid{grid-template-columns:repeat(3,1fr)}.travel-feature{grid-column:span 1}.foot{flex-direction:row;justify-content:space-between}}
+    @media(min-width:620px){.wrap{width:min(var(--max),calc(100% - 56px))}.hero-inner{transform:translateY(-1vh)}.guide-card{padding:42px 38px}.summary-line{display:inline}.summary-line+.summary-line:before{content:" · "}.feature-grid{grid-template-columns:1fr 1fr}.route-mobile{display:none}.route-desktop{display:block}.route-grid{grid-template-columns:repeat(3,1fr)}.photo-grid{grid-template-columns:repeat(2,1fr)}.travel-grid{grid-template-columns:repeat(3,1fr)}.travel-feature{grid-column:span 2}.contact-box{padding:48px}.contact-actions{flex-direction:row;justify-content:center}}
+    @media(min-width:900px){.nav{display:flex}.hero{min-height:82vh}.hero-inner{padding-bottom:76px;transform:translateY(-1vh)}.feature-grid{grid-template-columns:repeat(5,1fr)}.route-grid{grid-template-columns:repeat(4,1fr)}.photo-grid{grid-template-columns:repeat(3,1fr)}.travel-grid{grid-template-columns:repeat(3,1fr)}.travel-feature{grid-column:span 1}.foot{flex-direction:row;justify-content:space-between}}
   </style>
 </head>
 <body>
@@ -139,9 +139,10 @@
   <section class="walked">
     <div class="wrap"><div class="section-head"><div class="kicker">TOGETHER IN EDINBURGH</div><h2>함께 걸은 에든버러</h2><p>혼자 오신 분부터 가족과 친구, 여러 모임과 단체까지, 많은 분들과 에든버러의 길을 함께 걸어왔습니다.</p></div>
       <div class="photo-grid">
-        <figure class="photo-card"><img src="assets/tour-scott-monument.jpg" alt="스콧 기념탑 앞에서 에든버러 워킹투어를 함께하는 모습" loading="lazy"></figure>
-        <figure class="photo-card"><img src="assets/tour-castle.jpg" alt="에든버러 성을 바라보며 워킹투어를 함께하는 모습" loading="lazy"></figure>
-      </div><p class="photo-caption">사진은 공개 허락을 받은 실제 투어 사진을 중심으로 구성합니다.</p>
+        <figure class="photo-card"><img src="IMG_1617.jpg" alt="에든버러 워킹투어를 함께한 여행자들의 모습" loading="lazy"></figure>
+        <figure class="photo-card"><img src="1280＿1756577702945.jpg" alt="에든버러를 함께 걸으며 여행하는 모습" loading="lazy"></figure>
+        <figure class="photo-card"><img src="1280＿1756577756454.jpg" alt="에든버러 워킹투어에 함께한 여행자들의 모습" loading="lazy"></figure>
+      </div>
     </div>
   </section>
 
