@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://edinburgh-walking-tour.scotlandkorea.workers.dev/sitemap.xml
