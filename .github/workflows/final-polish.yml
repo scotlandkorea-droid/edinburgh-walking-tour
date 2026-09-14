@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/final-polish.yml'
+      - 'scripts/final_polish.py'
   workflow_dispatch:
 
 permissions:
@@ -27,10 +28,10 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html assets/tour-map.js
+          git add index.html assets/tour-map.js places travel edinburgh
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Polish route arrows travel inquiry and garden map'
+            git commit -m 'Complete detail breadcrumbs and sharing metadata'
             git push
           fi
