@@ -1,0 +1,18 @@
+name: Fix mobile global navigation
+on: [push]
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch mobile nav and breadcrumbs
+        run: |
+          python -c 'from pathlib import Path; import re; nav="<a href=\"/edinburgh/tour-guide.html\">투어 안내</a><a href=\"/#tour\">투어 코스</a><a href=\"/#explore\">장소 · 테마 · 인물</a><a href=\"/#walked\">함께한 분들</a><a href=\"/#guide\">안내자 소개</a><a href=\"/#travel\">여행 정보</a><a href=\"/#contact\">문의</a>"; files=["edinburgh/places.html","edinburgh/themes.html","edinburgh/people.html","scotland/index.html"]; [(lambda p: p.write_text(re.sub(r"(<details class=\"mobile-menu\"><summary[^>]*>.*?</summary><nav>).*?(</nav></details>)",lambda m:m.group(1)+nav+m.group(2),p.read_text(),count=1,flags=re.S)))(Path(f)) for f in files]'
+          python -c 'from pathlib import Path; d={"edinburgh/places.html":"장소로 보기","edinburgh/themes.html":"테마로 보기","edinburgh/people.html":"인물로 보기","scotland/index.html":"스코틀랜드 전역"}; [(lambda p,l: p.write_text(p.read_text().replace(f"<div class=\"breadcrumbs\"> › {l}</div>",f"<div class=\"breadcrumbs\"><a href=\"/\">홈</a> › {l}</div>").replace("<summary>≡</summary>","<summary aria-label=\"메뉴 열기\">≡</summary>")))(Path(f),l) for f,l in d.items()]'
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add edinburgh/places.html edinburgh/themes.html edinburgh/people.html scotland/index.html
+          git commit -m "Unify mobile navigation and restore home breadcrumbs" || exit 0
+          git push
