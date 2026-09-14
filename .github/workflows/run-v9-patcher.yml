@@ -1,0 +1,47 @@
+name: Run V9 patcher
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-v9-patcher.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract and run V9 patch script
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('.github/workflows/apply-v9-final-updates.yml').read_text(encoding='utf-8')
+          marker = "          python - <<'PY'\n"
+          start = source.index(marker) + len(marker)
+          end = source.index("\n          PY", start)
+          body = source[start:end]
+          lines = []
+          for line in body.splitlines():
+              lines.append(line[10:] if line.startswith('          ') else line)
+          Path('/tmp/apply_v9.py').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+          PY
+          python /tmp/apply_v9.py
+      - name: Commit V9 updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets places travel edinburgh
+          if git diff --cached --quiet; then
+            echo 'No site changes to commit.'
+          else
+            git commit -m 'Apply final integrated V9 site updates'
+            git push
+          fi
