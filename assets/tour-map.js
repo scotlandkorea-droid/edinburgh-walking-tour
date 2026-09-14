@@ -2,14 +2,14 @@
 const stops=[
   {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326,start:true},
   {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95141,lng:-3.19361},
-  {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95546,lng:-3.19900},
+  {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95300,lng:-3.19610},
   {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
   {n:'에든버러 성',u:'/places/edinburgh-castle.html',lat:55.94868,lng:-3.20041},
   {n:'그래스마켓',u:'/places/grassmarket.html',lat:55.94757,lng:-3.19600},
   {n:'그레이프라이어스',u:'/places/greyfriars.html',lat:55.94700,lng:-3.19272},
   {n:'바비 동상',u:'/places/greyfriars-bobby.html',lat:55.94692,lng:-3.19130},
   {n:'국립박물관',u:'/places/national-museum.html',lat:55.94694,lng:-3.18889},
-  {n:'엘리펀트 하우스',u:'/places/elephant-house.html',lat:55.94865,lng:-3.19407},
+  {n:'엘리펀트 하우스',u:'/places/elephant-house.html',lat:55.94750,lng:-3.19167},
   {n:'데이비드 흄 동상',u:'/places/david-hume.html',lat:55.94956,lng:-3.19263},
   {n:'세인트 자일스',u:'/places/st-giles.html',lat:55.94944,lng:-3.19083},
   {n:'로열마일',u:'/places/royal-mile.html',lat:55.95056,lng:-3.18556},
@@ -18,27 +18,36 @@ const stops=[
   {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
   {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
   {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'에든버러 웨이벌리역',u:'/places/waverley-station.html',lat:55.95200,lng:-3.18900,end:true}
+  // 웨이벌리역 END는 역 중앙이 아니라 발모럴 호텔/프린스 스트리트 쪽 출입구를 대표점으로 사용한다.
+  {n:'에든버러 웨이벌리역',u:'/places/waverley-station.html',lat:55.95255,lng:-3.18935,end:true}
 ];
-// Princes Street Gardens is one place/marker. Extra points below are route-only waypoints.
+// 장소 마커와 실제 걷는 선을 분리한다. 뉴타운은 프린스 스트리트/The Mound 인근 설명 지점으로 두고 북쪽 깊은 우회를 만들지 않는다.
 const path=[
-  [55.95236,-3.19326],[55.95141,-3.19361],[55.95045,-3.19720],[55.95015,-3.20420],[55.95055,-3.19930],[55.95083,-3.19577],
-  [55.95300,-3.19610],[55.95120,-3.19560],[55.94972,-3.19528],[55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
-  [55.94765,-3.19120],[55.94865,-3.19407],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],[55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191],[55.95320,-3.18490],[55.95200,-3.18900]
+  [55.95236,-3.19326],
+  [55.95141,-3.19361],[55.95055,-3.19715],[55.95016,-3.20410],[55.95045,-3.20010],[55.95082,-3.19582],
+  [55.95300,-3.19610],[55.95155,-3.19582],[55.95055,-3.19555],[55.94972,-3.19528],
+  [55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
+  [55.94750,-3.19167],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],
+  [55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191],
+  // 칼튼 힐 정상에서 종점으로 직선 연결하지 않고, 도로 쪽으로 내려와 Waterloo Place/Princes Street 방향으로 완만하게 이어간다.
+  [55.95415,-3.18275],[55.95372,-3.18390],[55.95342,-3.18510],[55.95316,-3.18655],[55.95288,-3.18800],[55.95255,-3.18935]
 ];
+const arrowSegments=[1,4,6,9,12,15,18,21,24,27,29];
 const preview=document.querySelector('[data-route-preview]');
 const openBtn=document.querySelector('[data-route-map-open]');
 const modal=document.getElementById('routeMapModal');
 const mapEl=document.getElementById('routeMap');
 if(!preview||!openBtn||!modal||!mapEl)return;
 function renderPreview(){
-  const all=path;const lats=all.map(p=>p[0]),lngs=all.map(p=>p[1]);
+  const lats=path.map(p=>p[0]),lngs=path.map(p=>p[1]);
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const project=([lat,lng])=>{const x=45+(lng-minLng)/(maxLng-minLng)*910;const y=185-(lat-minLat)/(maxLat-minLat)*145;return [x,y]};
   const pts=path.map(p=>project(p).join(',')).join(' ');
-  const dots=stops.slice(1).map((s,i)=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
+  const dots=stops.slice(1,-1).map(s=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
+  const arrows=arrowSegments.filter(i=>i<path.length-1).map(i=>{const a=project(path[i]),b=project(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<text class="preview-arrow" x="${x.toFixed(1)}" y="${y.toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})">›</text>`}).join('');
   const [sx,sy]=project([stops[0].lat,stops[0].lng]);
-  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${dots}<g class="preview-end" transform="translate(${(project([stops[stops.length-1].lat,stops[stops.length-1].lng])[0]-12).toFixed(1)} ${(project([stops[stops.length-1].lat,stops[stops.length-1].lng])[1]-15).toFixed(1)})"><text x="0" y="0">END</text></g><g class="preview-start" transform="translate(${(sx-30).toFixed(1)} ${(sy-35).toFixed(1)})"><path d="M0 28V0m2 2h30l-7 8 7 8H2"/><text x="5" y="-6">START</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
+  const [ex,ey]=project([stops[stops.length-1].lat,stops[stops.length-1].lng]);
+  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
 }
 renderPreview();
 let map=null,lastFocus=null,leafletPromise=null;
@@ -50,16 +59,21 @@ function loadLeaflet(){
     const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';s.crossOrigin='';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
   });return leafletPromise;
 }
+function arrowAngle(a,b){const lat=(a[0]+b[0])/2*Math.PI/180;const dx=(b[1]-a[1])*Math.cos(lat),dy=-(b[0]-a[0]);return Math.atan2(dy,dx)*180/Math.PI}
 function initMap(){
-  if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(path,{padding:[24,24]})},80);return}
+  if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(path,{padding:[28,28]})},80);return}
   map=L.map(mapEl,{zoomControl:true,scrollWheelZoom:true});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
+  arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
   stops.forEach((s,i)=>{
-    const icon=L.divIcon({className:'route-map-marker-wrap',html:i===0?'<span class="route-map-marker start">⚑ START</span>':(i===stops.length-1?'<span class="route-map-marker end">END</span>':'<span class="route-map-marker"></span>'),iconSize:i===0?[28,28]:[18,18],iconAnchor:i===0?[14,14]:[9,9]});
-    L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(`<strong>${s.n}</strong><br><a href="${s.u}">자세히 보기 ›</a>`);
+    const isStart=i===0,isEnd=i===stops.length-1;
+    const html=isStart?'<span class="route-map-marker start">⚑ START</span>':(isEnd?'<span class="route-map-marker end">END</span>':'<span class="route-map-marker"></span>');
+    const icon=L.divIcon({className:'route-map-marker-wrap',html,iconSize:isStart?[62,24]:(isEnd?[48,24]:[18,18]),iconAnchor:isStart?[31,12]:(isEnd?[24,12]:[9,9])});
+    const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(`<strong>${s.n}</strong><br><a href="${s.u}">자세히 보기 ›</a>`);
+    m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,10]:(isEnd?[0,10]:[0,-8]),className:'route-map-label'});
   });
-  map.fitBounds(path,{padding:[24,24]});
+  map.fitBounds(path,{padding:[28,28]});
 }
 async function openMap(){
   lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('map-open');modal.querySelector('.route-map-close').focus();
