@@ -1,0 +1,259 @@
+name: Apply final integrated V9 updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-v9-final-updates.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply V9 homepage and detail-page updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re, html
+
+          ORIGIN = 'https://fanciful-naiad-e1081c.netlify.app'
+
+          # ---------- shared route map ----------
+          tour_map_js = r'''(()=>{
+          const stops=[
+            {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326,start:true},
+            {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95141,lng:-3.19361},
+            {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95546,lng:-3.19900},
+            {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
+            {n:'에든버러 성',u:'/places/edinburgh-castle.html',lat:55.94868,lng:-3.20041},
+            {n:'그래스마켓',u:'/places/grassmarket.html',lat:55.94757,lng:-3.19600},
+            {n:'그레이프라이어스',u:'/places/greyfriars.html',lat:55.94700,lng:-3.19272},
+            {n:'바비 동상',u:'/places/greyfriars-bobby.html',lat:55.94692,lng:-3.19130},
+            {n:'국립박물관',u:'/places/national-museum.html',lat:55.94694,lng:-3.18889},
+            {n:'엘리펀트 하우스',u:'/places/elephant-house.html',lat:55.94865,lng:-3.19407},
+            {n:'데이비드 흄 동상',u:'/places/david-hume.html',lat:55.94956,lng:-3.19263},
+            {n:'세인트 자일스',u:'/places/st-giles.html',lat:55.94944,lng:-3.19083},
+            {n:'로열마일',u:'/places/royal-mile.html',lat:55.95056,lng:-3.18556},
+            {n:'존 녹스 하우스',u:'/places/john-knox-house.html',lat:55.95067,lng:-3.18510},
+            {n:'캐넌게이트',u:'/places/canongate.html',lat:55.95158,lng:-3.17899},
+            {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
+            {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
+            {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191}
+          ];
+          // Princes Street Gardens is one place/marker. Extra points below are route-only waypoints.
+          const path=[
+            [55.95236,-3.19326],[55.95141,-3.19361],[55.95083,-3.19577],[55.95011,-3.19908],[55.95015,-3.20466],[55.95050,-3.19980],[55.95083,-3.19577],
+            [55.95546,-3.19900],[55.94972,-3.19528],[55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
+            [55.94865,-3.19407],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],[55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191]
+          ];
+          const preview=document.querySelector('[data-route-preview]');
+          const openBtn=document.querySelector('[data-route-map-open]');
+          const modal=document.getElementById('routeMapModal');
+          const mapEl=document.getElementById('routeMap');
+          if(!preview||!openBtn||!modal||!mapEl)return;
+          function renderPreview(){
+            const all=path;const lats=all.map(p=>p[0]),lngs=all.map(p=>p[1]);
+            const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
+            const project=([lat,lng])=>{const x=45+(lng-minLng)/(maxLng-minLng)*910;const y=185-(lat-minLat)/(maxLat-minLat)*145;return [x,y]};
+            const pts=path.map(p=>project(p).join(',')).join(' ');
+            const dots=stops.map((s,i)=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===0?6:4.3}" class="${i===0?'start-dot':'stop-dot'}"><title>${s.n}</title></circle>`}).join('');
+            const [sx,sy]=project([stops[0].lat,stops[0].lng]);
+            preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 18개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${dots}<g class="preview-start" transform="translate(${(sx-30).toFixed(1)} ${(sy-35).toFixed(1)})"><path d="M0 28V0m2 2h30l-7 8 7 8H2"/><text x="5" y="-6">START</text></g><text class="preview-label" x="50" y="207">Edinburgh · walking route preview</text></svg>`;
+          }
+          renderPreview();
+          let map=null,lastFocus=null,leafletPromise=null;
+          function loadLeaflet(){
+            if(window.L)return Promise.resolve();
+            if(leafletPromise)return leafletPromise;
+            leafletPromise=new Promise((resolve,reject)=>{
+              if(!document.querySelector('link[data-leaflet]')){const l=document.createElement('link');l.rel='stylesheet';l.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';l.dataset.leaflet='1';document.head.appendChild(l)}
+              const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';s.crossOrigin='';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
+            });return leafletPromise;
+          }
+          function initMap(){
+            if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(path,{padding:[24,24]})},80);return}
+            map=L.map(mapEl,{zoomControl:true,scrollWheelZoom:true});
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+            L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
+            stops.forEach((s,i)=>{
+              const icon=L.divIcon({className:'route-map-marker-wrap',html:i===0?'<span class="route-map-marker start">⚑</span>':'<span class="route-map-marker"></span>',iconSize:i===0?[28,28]:[18,18],iconAnchor:i===0?[14,14]:[9,9]});
+              L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(`<strong>${s.n}</strong><br><a href="${s.u}">자세히 보기 ›</a>`);
+            });
+            map.fitBounds(path,{padding:[24,24]});
+          }
+          async function openMap(){
+            lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('map-open');modal.querySelector('.route-map-close').focus();
+            mapEl.innerHTML='<div class="map-loading">지도를 불러오는 중입니다…</div>';
+            try{await loadLeaflet();mapEl.innerHTML='';initMap();setTimeout(()=>map.invalidateSize(),100)}catch(e){mapEl.innerHTML='<div class="map-loading">지도를 불러오지 못했습니다. 위의 코스 목록은 계속 이용할 수 있습니다.</div>'}
+          }
+          function closeMap(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('map-open');if(lastFocus)lastFocus.focus()}
+          openBtn.addEventListener('click',openMap);preview.addEventListener('click',openMap);preview.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openMap()}});
+          modal.querySelector('.route-map-close').addEventListener('click',closeMap);modal.addEventListener('click',e=>{if(e.target===modal)closeMap()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeMap()});
+          })();'''
+          Path('assets/tour-map.js').write_text(tour_map_js, encoding='utf-8')
+
+          # ---------- shared detail-page behavior ----------
+          detail_tools_js = r'''(()=>{
+          const courseSlugs=new Set(['scott-monument','princes-street','new-town','new-college','edinburgh-castle','grassmarket','greyfriars','greyfriars-bobby','national-museum','elephant-house','david-hume','st-giles','royal-mile','john-knox-house','canongate','scottish-parliament','holyrood-palace','calton-hill']);
+          const travelCats={'airport-transport':'교통','accommodation':'숙소','food-drink':'음식','shopping':'쇼핑','hiking':'트레킹','festivals':'축제','when-to-go':'언제','where-to-go':'어디','itineraries':'추천 일정','st-andrews':'어디'};
+          const style=document.createElement('style');style.textContent=`.detail-share{display:flex;align-items:center;gap:10px;margin:36px 0 22px;padding-top:18px;border-top:1px solid #e8e2d9}.detail-share button{border:1px solid #d9ded9;background:#fff;color:#405047;border-radius:999px;padding:9px 13px;font:inherit;font-size:14px;font-weight:750;cursor:pointer}.detail-share span{font-size:13px;color:#6b756f}.quiet-kakao{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:36px!important;padding:0 14px!important;border-radius:999px!important;background:#fbf4d5!important;color:#393424!important;border:1px solid rgba(53,47,27,.05)!important;box-shadow:none!important;font-size:13px!important;font-weight:760!important;text-decoration:none!important}.detail-contact{padding:14px 12px!important;background:transparent!important;border:0!important;margin:8px 0 22px!important;text-align:center!important}.detail-contact p{display:none!important}.breadcrumbs,.crumbs{font-size:13px!important;color:#68736d!important;margin:0 0 16px!important}.breadcrumbs a,.crumbs a{color:#55645c!important;text-decoration:none!important}.detail-return{font-size:14px!important;color:#667169!important;font-weight:700!important}.share-fallback{position:fixed;left:-9999px}@media(max-width:560px){.detail-share{margin-top:28px}.quiet-kakao{min-height:34px!important;padding:0 12px!important}}`;document.head.appendChild(style);
+          const path=location.pathname,slug=(path.split('/').pop()||'').replace(/\.html$/,'');
+          const h1=document.querySelector('h1'),title=(h1?.textContent||document.title.split('|')[0]).trim();
+          function makeCrumb(){if(document.querySelector('.breadcrumbs,.crumbs'))return;let parts=[];
+            if(path.startsWith('/places/')&&courseSlugs.has(slug))parts=[['/','홈'],['/#tour','워킹투어 코스'],[null,title]];
+            else if(path.startsWith('/places/'))parts=[['/','홈'],['/edinburgh/places.html','장소로 보기'],[null,title]];
+            else if(path.startsWith('/travel/')){parts=[['/','홈'],['/#travel','여행 정보']];if(travelCats[slug])parts.push(['/#travel',travelCats[slug]]);parts.push([null,title])}
+            else if(path.includes('/people/'))parts=[['/','홈'],['/edinburgh/people.html','인물로 보기'],[null,title]];
+            else if(path.includes('/themes/'))parts=[['/','홈'],['/edinburgh/themes.html','테마로 보기'],[null,title]];
+            else if(path.endsWith('/edinburgh/tour-guide.html'))parts=[['/','홈'],[null,'투어 안내']];
+            if(!parts.length||!h1)return;const el=document.createElement('div');el.className='breadcrumbs';el.innerHTML=parts.map(([u,t])=>u?`<a href="${u}">${t}</a>`:t).join(' › ');h1.parentNode.insertBefore(el,h1)}
+          makeCrumb();
+          document.querySelectorAll('.breadcrumbs a,.crumbs a').forEach(a=>{if(a.textContent.trim()==='투어 코스')a.textContent='워킹투어 코스'});
+          document.querySelectorAll('a').forEach(a=>{const t=a.textContent.trim();if(t.includes('카카오톡')){a.textContent='카카오톡 문의';a.classList.add('quiet-kakao')}if((t.includes('메인으로 돌아가기')||t==='← 메인으로')&&path.startsWith('/places/'))a.remove();if(t.includes('여행정보로 돌아가기'))a.classList.add('detail-return')});
+          document.querySelectorAll('.detail-contact p').forEach(p=>p.remove());
+          function shareTarget(){return document.querySelector('.detail-pager,.navbox')||document.querySelector('.detail-contact')||document.querySelector('a.detail-return')||document.querySelector('main article .quiet-kakao')||document.querySelector('main .quiet-kakao')}
+          if(!document.querySelector('.detail-share')){const target=shareTarget();const host=target?.parentElement||document.querySelector('main article')||document.querySelector('main .wrap');if(host){const box=document.createElement('div');box.className='detail-share';box.innerHTML='<button type="button" aria-label="현재 페이지 공유하기">↗ 공유하기</button><span aria-live="polite"></span>';if(target&&target.parentElement===host)host.insertBefore(box,target);else host.appendChild(box);const b=box.querySelector('button'),msg=box.querySelector('span');b.addEventListener('click',async()=>{const data={title:document.title,text:(document.querySelector('meta[name="description"]')?.content||title),url:location.href};try{if(navigator.share){await navigator.share(data)}else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);msg.textContent='링크가 복사되었습니다.'}else{const i=document.createElement('input');i.className='share-fallback';i.value=location.href;document.body.appendChild(i);i.select();document.execCommand('copy');i.remove();msg.textContent='링크가 복사되었습니다.'}}catch(e){if(e?.name!=='AbortError')msg.textContent='주소를 복사해 공유해 주세요.'}})}}
+          })();'''
+          Path('assets/detail-tools.js').write_text(detail_tools_js, encoding='utf-8')
+
+          # ---------- main page ----------
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          old='에든버러 워킹투어에 관심이 있으시면 편하게 문의해 주세요.'
+          if old not in s and '에든버러 워킹투어, 편하게 문의해 주세요.' not in s: raise SystemExit('Main contact copy not found')
+          s=s.replace(old,'에든버러 워킹투어, 편하게 문의해 주세요.')
+          if 'data-route-preview' not in s:
+            needle='</div></div></div></section><section class="sage" id="explore">'
+            if needle not in s: raise SystemExit('Course/explore boundary not found')
+            map_preview='<div class="route-map-preview" data-route-preview tabindex="0" role="button" aria-label="에든버러 워킹투어 코스 지도 크게 보기"><div class="route-map-canvas" aria-hidden="true"></div><button type="button" data-route-map-open>코스 지도 크게 보기 ›</button></div>'
+            s=s.replace(needle,'</div></div>'+map_preview+'</div></section><section class="sage" id="explore">',1)
+          if 'class="travel-inquiry"' not in s:
+            needle='</div></div></section><section class="contact" id="contact">'
+            if needle not in s: raise SystemExit('Travel/contact boundary not found')
+            s=s.replace(needle,'</div><p class="travel-inquiry">여행에 궁금한 점이 있으시면 문의해 주세요.</p></div></section><section class="contact" id="contact">',1)
+          if 'id="routeMapModal"' not in s:
+            modal='<div class="route-map-modal" id="routeMapModal" role="dialog" aria-modal="true" aria-label="에든버러 워킹투어 코스 지도" aria-hidden="true"><div class="route-map-dialog"><button class="route-map-close" type="button" aria-label="코스 지도 닫기">×</button><div id="routeMap" class="route-map-live"></div></div></div>'
+            s=s.replace('</main><footer>',f'</main>{modal}<footer>',1)
+          if '/assets/tour-map.js' not in s:
+            s=s.replace('<script>const menu=', '<script src="/assets/tour-map.js" defer></script><script>const menu=',1)
+          p.write_text(s,encoding='utf-8')
+
+          # ---------- main shared CSS ----------
+          p=Path('assets/site.css'); css=p.read_text(encoding='utf-8')
+          marker='/* V9 2026-09-14 */'
+          if marker not in css:
+            css += r'''
+
+/* V9 2026-09-14 */
+#tour .wrap{width:min(1180px,calc(100% - 36px))}.route-flow{padding-left:76px}.start-flag{left:-66px;top:4px;white-space:nowrap}.start-flag:after{content:"→";position:absolute;left:100%;top:1px;margin-left:7px;color:var(--plum-strong);font-size:16px}.route-card,.travel-card,.feature,.explore-gate{transition:transform .16s ease,border-color .16s ease,background-color .16s ease}.route-card:active,.travel-card:active,.feature:active,.explore-gate:active{transform:scale(1.02)}
+.route-map-preview{margin-top:22px;border:1px solid #d8e1d9;border-radius:18px;background:linear-gradient(180deg,#f8f8f2,#eef3ee);padding:10px 12px 12px;cursor:pointer;overflow:hidden}.route-map-canvas{height:150px}.route-map-canvas svg{width:100%;height:100%;display:block}.map-context{fill:none;stroke:#cbd6ce;stroke-width:2;stroke-dasharray:6 8}.preview-route{fill:none;stroke:#27473a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.stop-dot{fill:#fff;stroke:#5f7669;stroke-width:3}.start-dot{fill:#fff7df;stroke:#5e293c;stroke-width:4}.preview-start path{fill:none;stroke:#5e293c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.preview-start text,.preview-label{font-family:system-ui,sans-serif;fill:#5e293c;font-weight:800;font-size:12px}.preview-label{fill:#6b756f;font-weight:650;font-size:11px;letter-spacing:.04em}.route-map-preview>button{display:block;margin:2px 4px 0 auto;border:0;background:transparent;color:var(--plum);font:inherit;font-weight:800;cursor:pointer;padding:5px 3px}.route-map-modal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(10,16,13,.72)}.route-map-modal.open{display:flex}.route-map-dialog{position:relative;width:min(1120px,96vw);height:min(82vh,760px);background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 22px 70px rgba(0,0,0,.28)}.route-map-live{width:100%;height:100%;min-height:420px}.route-map-close{position:absolute;right:12px;top:12px;z-index:1001;width:42px;height:42px;border:0;border-radius:50%;background:#fff;color:#25372f;font-size:26px;box-shadow:0 4px 18px rgba(0,0,0,.18);cursor:pointer}.map-open{overflow:hidden}.map-loading{height:100%;display:grid;place-items:center;padding:30px;text-align:center;color:var(--muted)}.route-map-marker-wrap{background:transparent!important;border:0!important}.route-map-marker{display:block;width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid #365b4b;box-shadow:0 1px 7px rgba(0,0,0,.25)}.route-map-marker.start{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff7df;color:#5e293c;border:2px solid #5e293c;font-size:13px}.leaflet-popup-content a{color:#6f3547;font-weight:800}
+.travel-card{padding:18px 46px 18px 20px;font-size:17px;text-align:left;justify-content:flex-start}.travel-card:after{right:18px}.travel-inquiry{margin:22px 0 0;font-size:16px;color:#526058}.contact{text-align:left}.contact-box{padding:34px 28px}.contact-heading{position:relative;padding-left:18px;max-width:760px}.contact-heading:before{content:"";position:absolute;left:0;top:.18em;width:3px;height:calc(100% - .3em);border-radius:3px;background:#718c7b}.contact h2{font-size:clamp(28px,5.5vw,44px);white-space:nowrap;letter-spacing:-.04em}.contact p{margin:0;color:var(--muted);max-width:none;white-space:nowrap}.contact-actions{justify-content:flex-start;margin-top:20px;padding-left:18px}
+@media(hover:hover){.route-card:hover,.travel-card:hover,.feature:hover,.explore-gate:hover{transform:scale(1.02)}}
+@media(prefers-reduced-motion:reduce){.route-card,.travel-card,.feature,.explore-gate{transition:none}.route-card:hover,.travel-card:hover,.feature:hover,.explore-gate:hover,.route-card:active,.travel-card:active,.feature:active,.explore-gate:active{transform:none}}
+@media(max-width:719px){#tour .wrap{width:min(1180px,calc(100% - 28px))}.route-flow{padding-left:70px}.route-map-canvas{height:118px}.route-map-preview{margin-top:16px;padding:8px 8px 9px}.travel-card{min-height:88px;padding:16px 42px 16px 18px;font-size:17px}.contact-box{padding:30px 16px}.contact-heading{padding-left:13px}.contact h2{font-size:clamp(21px,6.2vw,31px);white-space:nowrap}.contact p{font-size:14px;white-space:nowrap;letter-spacing:-.02em}.contact-actions{padding-left:13px}.route-map-modal{padding:8px}.route-map-dialog{width:100%;height:88vh;border-radius:14px}.route-map-live{min-height:360px}}
+'''
+          p.write_text(css,encoding='utf-8')
+
+          # ---------- static OG + breadcrumbs + shared detail JS ----------
+          course_files={f'places/{x}.html' for x in ['scott-monument','princes-street','new-town','new-college','edinburgh-castle','grassmarket','greyfriars','greyfriars-bobby','national-museum','elephant-house','david-hume','st-giles','royal-mile','john-knox-house','canongate','scottish-parliament','holyrood-palace','calton-hill']}
+          detail_files=set(course_files)
+          detail_files.update(Path('travel').glob('*.html'))
+          detail_files.update(Path('edinburgh/people').glob('*.html'))
+          detail_files.update(Path('edinburgh/themes').glob('*.html'))
+          detail_files.update(Path('edinburgh/places').glob('*.html'))
+          detail_files.add(Path('edinburgh/tour-guide.html'))
+          detail_files.update(Path('places').glob('greyfriars-*.html'))
+          detail_files={Path(x) for x in detail_files if Path(x).exists() and Path(x).name!='_skeleton.html'}
+
+          cats={'airport-transport':'교통','accommodation':'숙소','food-drink':'음식','shopping':'쇼핑','hiking':'트레킹','festivals':'축제','when-to-go':'언제','where-to-go':'어디','itineraries':'추천 일정','st-andrews':'어디'}
+          def attr(pattern,text,default=''):
+            m=re.search(pattern,text,re.I|re.S);return html.unescape(m.group(1).strip()) if m else default
+          def abs_url(src):
+            if not src:return ORIGIN+'/assets/edinburgh-panorama.jpg'
+            if src.startswith('http://') or src.startswith('https://'):return src
+            if not src.startswith('/'):src='/'+src.lstrip('./')
+            return ORIGIN+src
+          def crumb_for(path,title):
+            slug=path.stem
+            if path.as_posix() in course_files:return f'<div class="breadcrumbs"><a href="/">홈</a> › <a href="/#tour">워킹투어 코스</a> › {html.escape(title)}</div>'
+            if path.parent.as_posix()=='travel':
+              cat=cats.get(slug); mid=f' › <a href="/#travel">{cat}</a>' if cat else ''
+              return f'<div class="breadcrumbs"><a href="/">홈</a> › <a href="/#travel">여행 정보</a>{mid} › {html.escape(title)}</div>'
+            if path.parent.as_posix()=='edinburgh/people':return f'<div class="breadcrumbs"><a href="/">홈</a> › <a href="/edinburgh/people.html">인물로 보기</a> › {html.escape(title)}</div>'
+            if path.parent.as_posix()=='edinburgh/themes':return f'<div class="breadcrumbs"><a href="/">홈</a> › <a href="/edinburgh/themes.html">테마로 보기</a> › {html.escape(title)}</div>'
+            if path.parent.as_posix()=='edinburgh/places':return f'<div class="breadcrumbs"><a href="/">홈</a> › <a href="/edinburgh/places.html">장소로 보기</a> › {html.escape(title)}</div>'
+            if path.as_posix()=='edinburgh/tour-guide.html':return '<div class="breadcrumbs"><a href="/">홈</a> › 투어 안내</div>'
+            return ''
+
+          patched=0
+          for path in sorted(detail_files,key=lambda x:x.as_posix()):
+            s=path.read_text(encoding='utf-8')
+            title=attr(r'<title>(.*?)</title>',s,path.stem).split('|')[0].strip()
+            desc=attr(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']',s,title)
+            first_img=attr(r'<img[^>]+src=["\'](.*?)["\']',s,'')
+            if 'property="og:title"' not in s and "property='og:title'" not in s:
+              og=(f'<meta property="og:type" content="article"><meta property="og:title" content="{html.escape(title,quote=True)}">'
+                  f'<meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:image" content="{html.escape(abs_url(first_img),quote=True)}">'
+                  f'<meta property="og:url" content="{ORIGIN}/{path.as_posix()}">')
+              s=s.replace('</head>',og+'</head>',1)
+            if '/assets/detail-tools.js' not in s:s=s.replace('</head>','<script src="/assets/detail-tools.js" defer></script></head>',1)
+            # Normalize existing breadcrumb wording. If absent, insert a static breadcrumb into a hero/page-hero wrapper when possible.
+            s=s.replace('>투어 코스</a>','>워킹투어 코스</a>')
+            if 'class="breadcrumbs"' not in s and 'class="crumbs"' not in s:
+              crumb=crumb_for(path,title)
+              if crumb:
+                pat=re.compile(r'(<(?:section|div) class=["\'](?:hero|page-hero)["\'][^>]*>\s*<div class=["\']wrap["\'][^>]*>)',re.I)
+                if pat.search(s):s=pat.sub(lambda m:m.group(1)+crumb,s,count=1)
+            # Remove redundant explicit main-return links from place/course details; travel return links stay.
+            if path.as_posix().startswith('places/'):
+              s=re.sub(r'<a\b[^>]*>\s*(?:←\s*)?메인(?: 화면)?으로 돌아가기\s*›?\s*</a>','',s,flags=re.I)
+            path.write_text(s,encoding='utf-8');patched+=1
+          print(f'Patched {patched} detail pages plus main/CSS/shared JS')
+          PY
+
+      - name: Validate generated site files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          css=Path('assets/site.css').read_text(encoding='utf-8')
+          checks={
+            'new main inquiry':'에든버러 워킹투어, 편하게 문의해 주세요.' in s,
+            'travel inquiry':'여행에 궁금한 점이 있으시면 문의해 주세요.' in s,
+            'map preview':'data-route-preview' in s,
+            'map modal':'routeMapModal' in s,
+            'map script':'/assets/tour-map.js' in s,
+            'V9 CSS':'/* V9 2026-09-14 */' in css,
+            'detail tools':Path('assets/detail-tools.js').exists(),
+            'Scott breadcrumb':'워킹투어 코스' in Path('places/scott-monument.html').read_text(encoding='utf-8'),
+            'New Town breadcrumb':'워킹투어 코스' in Path('places/new-town.html').read_text(encoding='utf-8'),
+            'Princes OG':'property="og:title"' in Path('places/princes-street.html').read_text(encoding='utf-8'),
+            'airport detail tools':'/assets/detail-tools.js' in Path('travel/airport-transport.html').read_text(encoding='utf-8'),
+          }
+          bad=[k for k,v in checks.items() if not v]
+          for k,v in checks.items():print(('OK  ' if v else 'FAIL'),k)
+          if bad:raise SystemExit('Validation failed: '+', '.join(bad))
+          PY
+
+      - name: Commit V9 updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets places travel edinburgh
+          if git diff --cached --quiet; then
+            echo 'No site changes to commit.'
+          else
+            git commit -m 'Apply final integrated V9 site updates'
+            git push
+          fi
