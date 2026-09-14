@@ -17,13 +17,14 @@ const stops=[
   {n:'캐넌게이트',u:'/places/canongate.html',lat:55.95158,lng:-3.17899},
   {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
   {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
-  {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191}
+  {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
+  {n:'에든버러 웨이벌리역',u:'/places/waverley-station.html',lat:55.95200,lng:-3.18900,end:true}
 ];
 // Princes Street Gardens is one place/marker. Extra points below are route-only waypoints.
 const path=[
-  [55.95236,-3.19326],[55.95141,-3.19361],[55.95083,-3.19577],[55.95011,-3.19908],[55.95015,-3.20466],[55.95050,-3.19980],[55.95083,-3.19577],
-  [55.95546,-3.19900],[55.94972,-3.19528],[55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
-  [55.94865,-3.19407],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],[55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191]
+  [55.95236,-3.19326],[55.95141,-3.19361],[55.95045,-3.19720],[55.95015,-3.20420],[55.95055,-3.19930],[55.95083,-3.19577],
+  [55.95300,-3.19610],[55.95120,-3.19560],[55.94972,-3.19528],[55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
+  [55.94765,-3.19120],[55.94865,-3.19407],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],[55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191],[55.95320,-3.18490],[55.95200,-3.18900]
 ];
 const preview=document.querySelector('[data-route-preview]');
 const openBtn=document.querySelector('[data-route-map-open]');
@@ -35,9 +36,9 @@ function renderPreview(){
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const project=([lat,lng])=>{const x=45+(lng-minLng)/(maxLng-minLng)*910;const y=185-(lat-minLat)/(maxLat-minLat)*145;return [x,y]};
   const pts=path.map(p=>project(p).join(',')).join(' ');
-  const dots=stops.map((s,i)=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===0?6:4.3}" class="${i===0?'start-dot':'stop-dot'}"><title>${s.n}</title></circle>`}).join('');
+  const dots=stops.slice(1).map((s,i)=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
   const [sx,sy]=project([stops[0].lat,stops[0].lng]);
-  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 18개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${dots}<g class="preview-start" transform="translate(${(sx-30).toFixed(1)} ${(sy-35).toFixed(1)})"><path d="M0 28V0m2 2h30l-7 8 7 8H2"/><text x="5" y="-6">START</text></g><text class="preview-label" x="50" y="207">Edinburgh · walking route preview</text></svg>`;
+  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${dots}<g class="preview-end" transform="translate(${(project([stops[stops.length-1].lat,stops[stops.length-1].lng])[0]-12).toFixed(1)} ${(project([stops[stops.length-1].lat,stops[stops.length-1].lng])[1]-15).toFixed(1)})"><text x="0" y="0">END</text></g><g class="preview-start" transform="translate(${(sx-30).toFixed(1)} ${(sy-35).toFixed(1)})"><path d="M0 28V0m2 2h30l-7 8 7 8H2"/><text x="5" y="-6">START</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
 }
 renderPreview();
 let map=null,lastFocus=null,leafletPromise=null;
@@ -55,7 +56,7 @@ function initMap(){
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
   stops.forEach((s,i)=>{
-    const icon=L.divIcon({className:'route-map-marker-wrap',html:i===0?'<span class="route-map-marker start">⚑</span>':'<span class="route-map-marker"></span>',iconSize:i===0?[28,28]:[18,18],iconAnchor:i===0?[14,14]:[9,9]});
+    const icon=L.divIcon({className:'route-map-marker-wrap',html:i===0?'<span class="route-map-marker start">⚑ START</span>':(i===stops.length-1?'<span class="route-map-marker end">END</span>':'<span class="route-map-marker"></span>'),iconSize:i===0?[28,28]:[18,18],iconAnchor:i===0?[14,14]:[9,9]});
     L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(`<strong>${s.n}</strong><br><a href="${s.u}">자세히 보기 ›</a>`);
   });
   map.fitBounds(path,{padding:[24,24]});
