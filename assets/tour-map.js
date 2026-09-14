@@ -2,6 +2,7 @@
 function setupWalkedGallery(){
   const gallery=document.getElementById('tourGallery');
   if(!gallery)return;
+  if(!document.querySelector('style[data-walked-gallery]')){const s=document.createElement('style');s.dataset.walkedGallery='1';s.textContent='#walked .photo-card{aspect-ratio:4/3!important;background:#f3f1eb!important}#walked .photo-card img{object-fit:contain!important;background:#f3f1eb}@media(max-width:619px){#walked .photo-card{flex-basis:82%!important;max-width:360px!important}}@media(min-width:620px){#walked .photo-card{flex-basis:calc((100% - 32px)/3)!important;max-width:none!important}}';document.head.appendChild(s)}
   const photos=[
     '/assets/1280＿20250828＿084545.jpg',
     '/assets/1280＿20250821＿113352.jpg',
@@ -22,9 +23,7 @@ function setupWalkedGallery(){
   gallery.innerHTML=photos.map((src,i)=>`<figure class="photo-card"><img src="${src}" loading="${i<3?'eager':'lazy'}" decoding="async" alt="함께 걸은 에든버러 워킹투어 사진 ${i+1}"></figure>`).join('');
   const lb=document.getElementById('lightbox');
   const li=lb?.querySelector('img');
-  if(lb&&li){
-    gallery.querySelectorAll('.photo-card img').forEach(img=>{img.onclick=()=>{li.src=img.src;li.alt=img.alt;lb.classList.add('open');lb.setAttribute('aria-hidden','false')}});
-  }
+  if(lb&&li){gallery.querySelectorAll('.photo-card img').forEach(img=>{img.onclick=()=>{li.src=img.src;li.alt=img.alt;lb.classList.add('open');lb.setAttribute('aria-hidden','false')}})}
 }
 setupWalkedGallery();
 const stops=[
