@@ -19,18 +19,18 @@
 
 /* DETAIL ENDING FINAL 2026-09-19
    Single source of truth for detail-page ending layout. */
-.detail-article>.action-buttons:first-of-type{
+.detail-article>.action-buttons{
   display:grid!important;grid-template-columns:1fr!important;justify-items:center!important;
   gap:0!important;margin:40px 0 0!important;padding:20px 0 0!important;
   border-top:1px solid var(--line)!important
 }
-.detail-article>.action-buttons:first-of-type .share-btn{
+.detail-article>.action-buttons .share-btn{
   position:static!important;justify-self:start!important;margin:0 0 34px!important;
   padding:0!important;min-height:auto!important;border:0!important;border-radius:0!important;
   background:transparent!important;box-shadow:none!important;color:#657069!important;
   font:inherit!important;font-size:13px!important;font-weight:720!important;cursor:pointer!important
 }
-.detail-article>.action-buttons:first-of-type .course-hub{
+.detail-article>.action-buttons .course-hub{
   display:inline-flex!important;align-items:center!important;justify-content:center!important;
   margin:0!important;min-height:40px!important;padding:0 16px!important;
   border:1px solid #e3ded5!important;border-radius:999px!important;background:#f7f5ef!important;
@@ -73,7 +73,7 @@ body:has(.detail-article)>footer>a{
   body:has(.detail-article)>footer>a{width:min(var(--max),calc(100% - 56px))!important}
 }
 @media(min-width:720px){
-  .detail-article>.action-buttons:first-of-type{margin-top:48px!important;padding-top:24px!important}
+  .detail-article>.action-buttons{margin-top:48px!important;padding-top:24px!important}
   .detail-article>.page-nav a{min-height:70px!important;padding:14px 16px!important}
   .detail-article>.kakao-action{padding-top:118px!important}
 }
