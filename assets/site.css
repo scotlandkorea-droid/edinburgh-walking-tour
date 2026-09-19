@@ -51,7 +51,7 @@
 .detail-article>.page-nav.single a{justify-content:center!important;text-align:center!important}
 .detail-article>.kakao-action{
   display:flex!important;justify-content:center!important;margin:0!important;
-  padding:92px 0 10px!important;border:0!important
+  padding:110px 0 0!important;border:0!important
 }
 .detail-article>.kakao-action .kakao-btn{
   display:inline-flex!important;align-items:center!important;justify-content:center!important;
@@ -75,5 +75,5 @@ body:has(.detail-article)>footer>a{
 @media(min-width:720px){
   .detail-article>.action-buttons:first-of-type{margin-top:48px!important;padding-top:24px!important}
   .detail-article>.page-nav a{min-height:70px!important;padding:14px 16px!important}
-  .detail-article>.kakao-action{padding-top:100px!important}
+  .detail-article>.kakao-action{padding-top:118px!important}
 }
