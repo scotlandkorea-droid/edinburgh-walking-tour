@@ -1,2 +1,0 @@
-Force Netlify redeploy after Scott Monument image fix.
-2026-09-11
