@@ -1,0 +1,15 @@
+(()=>{const article=document.querySelector('main article,main .travel-article,main .wrap');if(!article)return;
+const oldEnding=article.querySelector('.travel-ending');if(oldEnding)oldEnding.remove();
+document.querySelectorAll('script[src*="/assets/detail-tools.js"]').forEach(s=>s.remove());
+const ending=document.createElement('div');ending.className='travel-ending';
+ending.innerHTML='<button class="travel-share" type="button" aria-label="현재 페이지 공유하기">↗ 공유하기</button><div class="travel-hub-row"><a class="travel-hub" href="/#travel">스코틀랜드 여행정보 전체 보기</a></div><nav class="travel-series" aria-label="같은 여행정보 항목의 이전·다음 글"></nav><div class="travel-kakao"><a href="https://open.kakao.com/o/snuaTFyg" target="_blank" rel="noopener">카카오톡 문의</a></div>';
+article.appendChild(ending);
+const nav=ending.querySelector('.travel-series'),prev=document.querySelector('link[rel="prev"]'),next=document.querySelector('link[rel="next"]');
+const label=el=>el?.dataset?.label||el?.title||'';
+if(prev){const a=document.createElement('a');a.className='prev';a.href=prev.href;a.textContent='← '+(label(prev)||'이전 글');nav.appendChild(a)}
+if(next){const a=document.createElement('a');a.className='next';a.href=next.href;a.textContent=(label(next)||'다음 글')+' →';nav.appendChild(a)}
+if(!prev&&!next)nav.hidden=true;else if(!(prev&&next))nav.classList.add('single');
+let footer=document.querySelector('body>footer');if(footer)footer.remove();footer=document.createElement('footer');footer.className='travel-footer';footer.innerHTML='<a href="/">에든버러 워킹투어</a>';document.body.appendChild(footer);
+const b=ending.querySelector('.travel-share');b.addEventListener('click',async()=>{const original='↗ 공유하기',data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);b.textContent='✓ 링크 복사됨';setTimeout(()=>b.textContent=original,1800)}}catch(e){if(e?.name!=='AbortError'){b.textContent='주소를 복사해 공유해 주세요.';setTimeout(()=>b.textContent=original,2200)}}});
+const menu=document.querySelector('.mobile-menu');if(menu){const close=()=>menu.removeAttribute('open');menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()})}
+})();
