@@ -108,3 +108,11 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .detail-article .page-nav .page-nav-empty{display:block;min-width:0}
 .detail-article .page-nav.page-nav-next-only .next{grid-column:2;justify-content:flex-end;text-align:right}
 .detail-article .page-nav.page-nav-prev-only .prev{grid-column:1;justify-content:flex-start;text-align:left}
+
+/* GREYFRIARS STORY SERIES NAV 2026-09-19 */
+.greyfriars-story-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
+.greyfriars-story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
+.greyfriars-story-tab span{font-weight:800}
+.greyfriars-story-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
+.greyfriars-story-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
+@media(min-width:900px){.greyfriars-story-tabs{flex-wrap:wrap;overflow:visible;gap:7px}.greyfriars-story-tab{font-size:12px;padding:7px 8px}}
