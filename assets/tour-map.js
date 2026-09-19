@@ -22,7 +22,7 @@ function setupWalkedGallery(){
   ];
   gallery.innerHTML=photos.map((src,i)=>`<figure class="photo-card"><img src="${src}" loading="${i<3?'eager':'lazy'}" decoding="async" alt="함께 걸은 에든버러 워킹투어 사진 ${i+1}"></figure>`).join('');
   let note=document.querySelector('#walked .walked-consent');
-  if(!note){note=document.createElement('p');note.className='walked-consent';note.textContent='사진은 모두 공개 동의를 받아 사용합니다.';gallery.closest('.gallery-shell')?.after(note)}else{note.textContent='사진은 모두 공개 동의를 받아 사용합니다.'}
+
   const lb=document.getElementById('lightbox');
   const li=lb?.querySelector('img');
   if(lb&&li){gallery.querySelectorAll('.photo-card img').forEach(img=>{img.onclick=()=>{li.src=img.src;li.alt=img.alt;lb.classList.add('open');lb.setAttribute('aria-hidden','false')}})}
