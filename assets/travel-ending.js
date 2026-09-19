@@ -1,6 +1,6 @@
 (()=>{const header=document.querySelector('body>header');if(header){header.className='site-header';header.innerHTML='<div class="wrap topbar"><a class="brand" href="/"><span class="mark">EW</span><span>에든버러 워킹투어</span></a><nav class="nav"><a href="/edinburgh/tour-guide.html">투어 안내</a><a href="/#tour">투어 코스</a><a href="/#explore">장소 · 테마 · 인물</a><a href="/#walked">함께한 분들</a><a href="/#guide">안내자 소개</a><a href="/#travel">여행 정보</a><a href="/#contact">문의</a></nav><details class="mobile-menu"><summary aria-label="메뉴 열기">≡</summary><nav><a href="/edinburgh/tour-guide.html">투어 안내</a><a href="/#tour">투어 코스</a><a href="/#explore">장소 · 테마 · 인물</a><a href="/#walked">함께한 분들</a><a href="/#guide">안내자 소개</a><a href="/#travel">여행 정보</a><a href="/#contact">문의</a></nav></details></div>'}
 const article=document.querySelector('main article,main .travel-article,main .wrap');if(!article)return;
-document.querySelectorAll('.travel-ending').forEach(x=>x.remove());
+const existingEnding=article.querySelector('.travel-ending');
 const top=[
 ['when-to-go.html','언제'],['where-to-go.html','어디'],['airport-transport.html','교통'],['accommodation.html','숙소'],['food-drink.html','음식'],['shopping.html','쇼핑'],['hiking.html','트레킹'],['festivals.html','축제'],['itineraries.html','추천 일정']
 ];
@@ -14,7 +14,7 @@ else{const i=top.findIndex(x=>x[0]===file);if(i>0)prev=top[i-1];if(i>=0&&i<top.l
 const explicitPrev=document.querySelector('link[rel="prev"]'),explicitNext=document.querySelector('link[rel="next"]');
 if(explicitPrev)prev=[explicitPrev.getAttribute('href'),explicitPrev.dataset.label||explicitPrev.title||'이전 글'];
 if(explicitNext)next=[explicitNext.getAttribute('href'),explicitNext.dataset.label||explicitNext.title||'다음 글'];
-const ending=document.createElement('div');ending.className='travel-ending';
+if(existingEnding)return;const ending=document.createElement('div');ending.className='travel-ending';
 ending.innerHTML='<button class="travel-share" type="button" aria-label="현재 페이지 공유하기">↗ 공유하기</button><div class="travel-hub-row"><a class="travel-hub"></a></div><nav class="travel-series" aria-label="이전·다음 여행정보"></nav><div class="travel-kakao"><a href="https://open.kakao.com/o/snuaTFyg" target="_blank" rel="noopener">카카오톡 문의</a></div>';
 article.appendChild(ending);
 const hub=ending.querySelector('.travel-hub');hub.href=hubHref;hub.textContent=hubLabel;
