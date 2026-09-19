@@ -116,3 +116,15 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .greyfriars-story-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
 .greyfriars-story-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
 @media(min-width:900px){.greyfriars-story-tabs{flex-wrap:wrap;overflow:visible;gap:7px}.greyfriars-story-tab{font-size:12px;padding:7px 8px}}
+
+/* GREYFRIARS DETAIL INTRO — no hero image/cover 2026-09-19 */
+.greyfriars-intro{background:#fff!important;color:var(--ink)!important;padding:24px 0 12px!important;min-height:0!important;height:auto!important;background-image:none!important}
+.greyfriars-intro:before,.greyfriars-intro:after{display:none!important;content:none!important}
+.greyfriars-intro .wrap{min-height:0!important}
+.greyfriars-intro .crumbs{color:var(--muted)!important;margin:0 0 10px!important}
+.greyfriars-intro .crumbs a{color:inherit!important}
+.greyfriars-intro h1{color:var(--ink)!important;margin:18px 0 8px!important;font-size:clamp(30px,7vw,48px)!important;line-height:1.12!important}
+.greyfriars-intro .lead{color:var(--muted)!important;margin:0!important;font-size:17px!important}
+.greyfriars-intro .greyfriars-story-tabs{margin:12px 0 4px!important}
+body:has(.greyfriars-intro) main{padding-top:28px!important}
+@media(min-width:720px){.greyfriars-intro{padding:30px 0 16px!important}.greyfriars-intro h1{font-size:46px!important}body:has(.greyfriars-intro) main{padding-top:34px!important}}
