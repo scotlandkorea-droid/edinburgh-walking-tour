@@ -39,4 +39,4 @@
 <footer><a href="/">에든버러 워킹투어</a></footer>
 <script>
 (()=>{const menu=document.querySelector('.mobile-menu');if(menu){const close=()=>menu.removeAttribute('open');menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()})}const b=document.querySelector('.travel-share');b?.addEventListener('click',async()=>{const data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);b.textContent='✓ 링크 복사됨';setTimeout(()=>b.textContent='↗ 공유하기',1800)}}catch(e){}})})();
-</script></body></html>
+</script><script src="/assets/travel-ending.js" defer></script></body></html>
