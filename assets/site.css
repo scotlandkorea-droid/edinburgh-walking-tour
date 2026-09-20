@@ -195,3 +195,15 @@ body:has(.detail-intro) main{padding-top:28px!important}
   pointer-events:auto!important;
   touch-action:manipulation!important;
 }
+
+
+/* TOUR MAP POPUP ACTIONS 2026-09-20 */
+.route-popup>strong{display:block;margin:0 0 9px;color:#26372f;font-size:14px;line-height:1.35}
+.route-popup-actions{display:flex;align-items:center;gap:18px;white-space:nowrap}
+.route-popup-action{display:inline-flex;align-items:center;gap:5px;color:#34443c;text-decoration:none;font-size:13px;font-weight:760;line-height:1.2}
+.route-popup-action:hover{text-decoration:underline;text-underline-offset:3px}
+.route-popup-icon{width:17px;height:17px;flex:0 0 17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.route-popup-action.story .route-popup-icon{color:#7a3f56}
+.route-popup-action.map .route-popup-icon{color:#d34a3f;fill:rgba(211,74,63,.08)}
+.route-popup-action.map .route-popup-icon circle{fill:#d34a3f;stroke:#d34a3f}
+@media(max-width:420px){.route-popup-actions{gap:14px}.route-popup-action{font-size:12.5px}}
