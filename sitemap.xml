@@ -227,4 +227,35 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/themes/history-royalty.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/themes/reformation.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/themes/literary-city.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/themes/science-medicine-invention.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/themes/architecture-city.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
