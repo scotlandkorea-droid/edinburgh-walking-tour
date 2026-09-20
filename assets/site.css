@@ -159,3 +159,17 @@ body:has(.detail-intro) main{padding-top:28px!important}
 @media(min-width:620px){.theme-article{width:min(820px,calc(100% - 56px))}.theme-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(min-width:900px){.theme-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.theme-list .story-card{padding:24px}}
 @media(max-width:560px){.theme-article{font-size:16px;line-height:1.78}.theme-article>h2{margin-top:42px}.theme-detail-intro .lead{font-size:18px!important}}
+
+
+/* PEOPLE DETAIL PAGES — 2026-09-20 */
+.people-detail-intro{background:linear-gradient(180deg,#eef3ee 0%,#fff 100%)!important;border-bottom:1px solid var(--line)}
+.people-detail-intro .eyebrow{margin:12px 0 7px!important;color:var(--plum)!important;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.people-detail-intro h1{max-width:900px}
+.people-detail-intro .people-en{font-size:.56em;font-weight:650;color:#536159;letter-spacing:-.02em}
+.people-detail-intro .lead{max-width:850px!important;font-family:Georgia,"Noto Serif KR",Batang,serif!important;font-size:clamp(18px,3.8vw,24px)!important;line-height:1.55!important;color:#4e5b54!important}
+.people-article{width:min(820px,calc(100% - 36px));font-size:17px;line-height:1.82;padding-bottom:0}
+.people-article>p{margin:0 0 17px}
+.people-article>h2{margin-top:50px}
+.people-article>.story-turn{margin:25px 0;font-family:Georgia,"Noto Serif KR",Batang,serif;font-size:clamp(19px,3.5vw,23px);line-height:1.6;color:#4d2b38;font-weight:700}
+@media(min-width:620px){.people-article{width:min(820px,calc(100% - 56px))}}
+@media(max-width:560px){.people-article{font-size:16px;line-height:1.78}.people-article>h2{margin-top:42px}.people-detail-intro .lead{font-size:18px!important}.people-detail-intro .people-en{display:block;margin-top:5px;font-size:.48em}}
