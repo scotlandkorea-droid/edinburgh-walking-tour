@@ -104,7 +104,11 @@ function initMap(){
     const isStart=i===0,isEnd=i===stops.length-1;
     const html=isStart?'<span class="route-map-marker start">⚑ START</span>':(isEnd?'<span class="route-map-marker end">END</span>':'<span class="route-map-marker"></span>');
     const icon=L.divIcon({className:'route-map-marker-wrap',html,iconSize:isStart?[62,24]:(isEnd?[48,24]:[18,18]),iconAnchor:isStart?[31,12]:(isEnd?[24,12]:[9,9])});
-    const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(`<strong>${s.n}</strong><br><a href="${s.u}">자세히 보기 ›</a>`);
+    const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.lat+','+s.lng)}`;
+    const storyIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
+    const mapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
+    const popup=`<div class="route-popup"><strong>${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>이야기 보기</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
+    const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(popup);
     m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,10]:(isEnd?[0,10]:[0,-8]),className:'route-map-label'});
   });
   map.fitBounds(path,{padding:[28,28]});
