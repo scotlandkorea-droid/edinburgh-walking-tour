@@ -66,9 +66,15 @@
   </url>
   <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/grassmarket.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/grassmarket-history-market.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars.html</loc>
