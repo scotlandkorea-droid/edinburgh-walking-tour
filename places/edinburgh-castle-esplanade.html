@@ -8,7 +8,7 @@
 <style>
 .castle-story-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
 .castle-story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
-.castle-story-tab span{font-weight:800}.castle-story-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
+.castle-story-tab span{font-weight:800}.castle-story-tab.pending{opacity:.58;cursor:default}.castle-story-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
 .castle-intro{background:#fff;color:var(--ink);padding:24px 0 12px}.castle-intro h1{margin:18px 0 8px;font-size:clamp(30px,7vw,48px);line-height:1.12}.castle-intro .lead{color:var(--muted);margin:0;font-size:17px}
 .detail-article{max-width:760px}.detail-article p{margin:0 0 16px}.story-question{font-weight:800;color:var(--deep);font-size:1.08em;margin-top:24px!important}
 @media(min-width:900px){.castle-story-tabs{flex-wrap:wrap;overflow:visible}.castle-story-tab{font-size:12px;padding:7px 8px}}
@@ -16,7 +16,16 @@
 <header><div class="wrap"><a class="brand" href="/">에든버러 워킹투어</a></div></header>
 <section class="castle-intro"><div class="wrap">
 <nav class="breadcrumbs"><a href="/">홈</a> › <a href="/#tour">워킹투어 코스</a> › <a href="/places/edinburgh-castle.html">에든버러 성</a> › 01 에스플러네이드와 에든버러 성문</nav>
-<nav class="castle-story-tabs" aria-label="에든버러 성 이야기 목록"><a class="castle-story-tab active" aria-current="page" href="/places/edinburgh-castle-esplanade.html"><span>01</span> 에스플러네이드와 성문</a></nav>
+<nav class="castle-story-tabs" aria-label="에든버러 성 이야기 목록">
+<a class="castle-story-tab active" aria-current="page" href="/places/edinburgh-castle-esplanade.html"><span>01</span> 에스플러네이드와 에든버러 성문</a>
+<span class="castle-story-tab pending"><span>02</span> 아가일 배터리와 원 오클록 건</span>
+<span class="castle-story-tab pending"><span>03</span> 세인트 마가렛 예배당과 몬스 메그</span>
+<span class="castle-story-tab pending"><span>04</span> 하프문 배터리와 데이비드 타워</span>
+<span class="castle-story-tab pending"><span>05</span> 크라운 스퀘어와 그레이트 홀</span>
+<span class="castle-story-tab pending"><span>06</span> 스코틀랜드 왕관 보석과 운명의 돌</span>
+<span class="castle-story-tab pending"><span>07</span> 에든버러 성의 전쟁포로 감옥</span>
+<span class="castle-story-tab pending"><span>08</span> 서쪽 성벽과 에든버러 서쪽 전망</span>
+</nav>
 <h1>에스플러네이드와 에든버러 성문</h1><p class="lead">성으로 들어가는 길에서 만나는 두 영웅과 요새의 첫 관문</p>
 </div></section>
 <main><article class="wrap detail-article">
@@ -48,6 +57,6 @@
 <p>넓은 에스플러네이드에서 시작해 성문을 지나고, 다시 좁은 포틀리스 게이트를 통과했습니다.</p>
 <p><strong>이제 비로소 에든버러 성 안으로 들어왔습니다.</strong></p>
 <div class="action-buttons"><button class="share-btn" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href})}else{navigator.clipboard.writeText(location.href).then(function(){alert('링크가 복사되었습니다.')})}">↗ 공유하기</button><a class="course-hub" href="/places/edinburgh-castle.html">에든버러 성 이야기 전체 보기</a></div>
-<nav class="page-nav page-nav-next-only" aria-label="다음 에든버러 성 이야기"><span class="page-nav-empty" aria-hidden="true"></span><a class="next" href="/places/edinburgh-castle-argyle-battery.html">02 아가일 배터리와 원 오클록 건 →</a></nav>
+<nav class="page-nav page-nav-next-only" aria-label="다음 에든버러 성 이야기"><span class="page-nav-empty" aria-hidden="true"></span><span class="next" aria-disabled="true">02 아가일 배터리와 원 오클록 건 →</span></nav>
 <div class="kakao-action"><a class="kakao-btn" href="https://open.kakao.com/o/snuaTFyg" target="_blank" rel="noopener">카카오톡 문의</a></div>
 </article></main><footer><a href="/">에든버러 워킹투어</a></footer></body></html>
