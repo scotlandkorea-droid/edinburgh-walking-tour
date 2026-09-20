@@ -173,3 +173,25 @@ body:has(.detail-intro) main{padding-top:28px!important}
 .people-article>.story-turn{margin:25px 0;font-family:Georgia,"Noto Serif KR",Batang,serif;font-size:clamp(19px,3.5vw,23px);line-height:1.6;color:#4d2b38;font-weight:700}
 @media(min-width:620px){.people-article{width:min(820px,calc(100% - 56px))}}
 @media(max-width:560px){.people-article{font-size:16px;line-height:1.78}.people-article>h2{margin-top:42px}.people-detail-intro .lead{font-size:18px!important}.people-detail-intro .people-en{display:block;margin-top:5px;font-size:.48em}}
+
+
+/* DETAIL INTERACTION SAFETY 2026-09-20
+   Keep detail-page navigation and action links above legacy decorative layers. */
+.detail-article>.action-buttons,
+.detail-article>.page-nav,
+.detail-article>.kakao-action,
+.greyfriars-story-tabs{
+  position:relative!important;
+  z-index:20!important;
+  pointer-events:auto!important;
+}
+.detail-article>.action-buttons a,
+.detail-article>.action-buttons button,
+.detail-article>.page-nav a,
+.detail-article>.kakao-action a,
+.greyfriars-story-tabs a{
+  position:relative!important;
+  z-index:21!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
