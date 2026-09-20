@@ -258,4 +258,39 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/st-margaret.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/david-i.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/william-wallace.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/adam-smith.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/burke-and-hare.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
