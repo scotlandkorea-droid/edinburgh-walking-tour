@@ -270,7 +270,7 @@ body:has(.course-title) .page-hero{
 body:has(.course-title) .detail-intro,
 body:has(.course-title) .page-hero{padding-bottom:18px!important}
 body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
-body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:8px!important}
+body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:18px!important}
 body:has(.course-title) .quicklook,
 body:has(.course-title) .course-quicklook,
 body:has(.course-title) .detail-summary{
@@ -285,7 +285,7 @@ body:has(.course-title) .detail-summary{margin-top:16px!important}
 body:has(.course-title) .quicklook strong,
 body:has(.course-title) .course-quicklook strong,
 body:has(.course-title) .detail-summary strong{
-  display:block!important;margin:0 0 7px!important;font-size:15px!important;
+  display:block!important;margin:0 0 18px!important;font-size:15px!important;
   line-height:1.45!important;font-weight:850!important;color:#17271f!important
 }
 body:has(.course-title) .quicklook p,
@@ -298,7 +298,7 @@ body:has(.course-title) .detail-summary p{
   body:has(.course-title) .detail-intro,
   body:has(.course-title) .page-hero{padding-bottom:14px!important}
   body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
-  body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:4px!important}
+  body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:18px!important}
   body:has(.course-title) .quicklook,
   body:has(.course-title) .course-quicklook,
   body:has(.course-title) .detail-summary{padding:18px 20px!important;margin-bottom:30px!important}
