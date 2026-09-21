@@ -209,5 +209,9 @@ body:has(.detail-intro) main{padding-top:28px!important}
 @media(max-width:420px){.route-popup-actions{gap:14px}.route-popup-action{font-size:12.5px}}
 
 /* Place-list horizontal touch scrolling — mobile */
-.place-strip{display:flex;flex-wrap:nowrap;gap:8px;width:100%;max-width:100%;overflow-x:scroll;overflow-y:hidden;padding:2px 28px 12px 0;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.place-strip{display:flex;flex-wrap:nowrap;gap:8px;width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;padding:2px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;overscroll-behavior-x:contain}
 .place-strip>a{display:block;flex:0 0 auto;padding:10px 12px;border-radius:10px;background:var(--cream);font-weight:680;white-space:nowrap}
+
+/* Keep horizontal place strips from widening the mobile page itself */
+html,body{max-width:100%;overflow-x:hidden}
+.area,.area-list,.container{min-width:0;max-width:100%}
