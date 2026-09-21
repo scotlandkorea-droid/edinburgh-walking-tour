@@ -216,8 +216,35 @@ body:has(.detail-intro) main{padding-top:28px!important}
 html,body{max-width:100%;overflow-x:hidden}
 .area,.area-list,.container{min-width:0;max-width:100%}
 
-/* COURSE DETAIL TITLE SYSTEM 2026-09-21 */
-.course-title{
+
+
+/* COURSE DETAIL TOP SYSTEM — unified 2026-09-21
+   One source of truth for all 19 walking-tour course pages. */
+body.course-detail .detail-intro,
+body.course-detail .page-hero{
+  background:#fff!important;
+  background-image:none!important;
+  color:var(--ink)!important;
+  padding:24px 0 0!important;
+  min-height:0!important;
+  height:auto!important;
+}
+body.course-detail .detail-intro:before,
+body.course-detail .detail-intro:after,
+body.course-detail .page-hero:before,
+body.course-detail .page-hero:after{display:none!important;content:none!important}
+body.course-detail .breadcrumbs,
+body.course-detail .crumbs{
+  margin:0 0 0!important;
+  padding:0!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+  color:var(--muted)!important;
+}
+body.course-detail .breadcrumbs a,
+body.course-detail .crumbs a{color:inherit!important;text-decoration:none!important}
+body.course-detail .crumbs span{margin:0 6px!important}
+body.course-detail .course-title{
   margin:24px 0 2px!important;
   font-size:clamp(37px,8.6vw,58px)!important;
   line-height:1.02!important;
@@ -225,82 +252,60 @@ html,body{max-width:100%;overflow-x:hidden}
   color:var(--deep,#17271f)!important;
   font-weight:850!important;
 }
-.course-title-en{
-  margin:0 0 0 4px!important;
-  font-size:12px!important;
-  line-height:1.25!important;
-  font-weight:500!important;
-  letter-spacing:.01em!important;
-  color:#929995!important;
-  text-transform:none!important;
-}
-.course-title-en + .lead,
-.page-hero .course-title-en + p{
-  margin:11px 0 0!important;
-  font-size:18px!important;
-  line-height:1.44!important;
-  letter-spacing:-.01em!important;
-}
-body:has(.course-title) .detail-intro,
-body:has(.course-title) .page-hero{
-  padding-bottom:22px!important;
-}
-@media(max-width:719px){
-  .course-title{font-size:clamp(37px,8.6vw,44px)!important}
-}
-
-
-/* COURSE DETAIL TITLE SYSTEM V2 2026-09-21 — St Giles typography + Canongate spacing */
-.course-title-en{
-  margin:1px 0 0 4px!important;
-  font-size:12px!important;
-  line-height:1.25!important;
+body.course-detail .course-title-en{
+  margin:1px 0 0 8px!important;
   font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif!important;
+  font-size:12px!important;
+  line-height:1.25!important;
   font-weight:800!important;
   letter-spacing:.08em!important;
   color:#8a8176!important;
   text-transform:uppercase!important;
 }
-.course-title-en + .lead,
-.page-hero .course-title-en + p{
-  margin-top:11px!important;
+body.course-detail .course-title-en + .lead{
+  margin:18px 0 0!important;
+  max-width:760px!important;
+  font-family:Georgia,"Noto Serif KR",Batang,serif!important;
+  font-size:18px!important;
+  line-height:1.55!important;
+  letter-spacing:-.01em!important;
+  color:#536159!important;
 }
-
-/* COURSE DETAIL POLISH 2026-09-21 */
-body:has(.course-title) .detail-intro,
-body:has(.course-title) .page-hero{padding-bottom:18px!important}
-body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
-body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:18px!important}
-body:has(.course-title) .quicklook,
-body:has(.course-title) .course-quicklook,
-body:has(.course-title) .detail-summary{
-  margin:0 0 34px!important;
-  padding:20px 22px!important;
+body.course-detail .detail-article{
+  padding-top:0!important;
+}
+body.course-detail main,
+body.course-detail main.article{
+  padding-top:0!important;
+}
+body.course-detail .course-overview{
+  margin:18px 0 34px!important;
+  padding:18px 20px!important;
   border:0!important;
   border-radius:16px!important;
   background:#eef3ee!important;
   box-shadow:none!important;
 }
-body:has(.course-title) .detail-summary{margin-top:16px!important}
-body:has(.course-title) .quicklook strong,
-body:has(.course-title) .course-quicklook strong,
-body:has(.course-title) .detail-summary strong{
-  display:block!important;margin:0 0 18px!important;font-size:15px!important;
-  line-height:1.45!important;font-weight:850!important;color:#17271f!important
+body.course-detail .course-overview strong{
+  display:block!important;
+  margin:0 0 18px!important;
+  font-size:15px!important;
+  line-height:1.45!important;
+  font-weight:850!important;
+  color:#17271f!important;
 }
-body:has(.course-title) .quicklook p,
-body:has(.course-title) .course-quicklook p,
-body:has(.course-title) .detail-summary p{
-  margin:0!important;font-size:16px!important;line-height:1.72!important;
-  letter-spacing:-.01em!important;color:#46534c!important
+body.course-detail .course-overview p{
+  margin:0!important;
+  font-size:16px!important;
+  line-height:1.72!important;
+  letter-spacing:-.01em!important;
+  color:#46534c!important;
 }
+body.course-detail .course-overview + *{margin-top:0}
 @media(max-width:719px){
-  body:has(.course-title) .detail-intro,
-  body:has(.course-title) .page-hero{padding-bottom:14px!important}
-  body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
-  body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:18px!important}
-  body:has(.course-title) .quicklook,
-  body:has(.course-title) .course-quicklook,
-  body:has(.course-title) .detail-summary{padding:18px 20px!important;margin-bottom:30px!important}
-  body:has(.course-title) .detail-summary{margin-top:14px!important}
+  body.course-detail .course-title{font-size:clamp(37px,8.6vw,44px)!important}
+}
+@media(min-width:720px){
+  body.course-detail .detail-intro,
+  body.course-detail .page-hero{padding-top:30px!important}
 }
