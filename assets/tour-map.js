@@ -47,7 +47,7 @@ const stops=[
   {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
   {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
   {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948,end:true}
+  {n:'에든버러 웨이벌리역',u:'/places/edinburgh-waverley-station.html',lat:55.95263,lng:-3.18972,end:true}
 ];
 // 장소 마커와 실제 걷는 선을 분리한다. 스콧 기념탑에서 가든으로 들어간 뒤 정원 안을 서쪽으로 걸어 로스 분수 부근까지 간 다음,
 // 북쪽 프린스 스트리트 쪽으로 올라와 동쪽으로 돌아 The Mound/국립미술관 방향으로 이어지는 실제 투어 흐름을 표현한다.
@@ -65,8 +65,9 @@ const path=[
   [55.94868,-3.20041],[55.94757,-3.19600],[55.94700,-3.19272],[55.94692,-3.19130],[55.94694,-3.18889],
   [55.94750,-3.19167],[55.94956,-3.19263],[55.94944,-3.19083],[55.95056,-3.18556],[55.95067,-3.18510],
   [55.95158,-3.17899],[55.95189,-3.17502],[55.95270,-3.17229],[55.95474,-3.18191],
-  // 칼튼 힐에서 발모럴 호텔 Princes Street 정문까지 마지막 구간을 간결한 직선으로 표시한다.
-  [55.95328,-3.18948]
+  // 칼튼 힐에서 도로로 내려와 Waterloo Place와 Princes Street를 따라 웨이벌리역 Balmoral/Princes Street 쪽 입구로 이어진다.
+  [55.95418,-3.18242],[55.95374,-3.18322],[55.95346,-3.18428],[55.95330,-3.18572],
+  [55.95316,-3.18718],[55.95302,-3.18848],[55.95263,-3.18972]
 ];
 const arrowSegments=[2,6,10,13,16,19,22,25,28,31,34,37];
 const preview=document.querySelector('[data-route-preview]');
@@ -109,7 +110,7 @@ function initMap(){
     const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.lat+','+s.lng)}`;
     const storyIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
     const mapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
-    const popup=`<div class="route-popup"><strong>${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>이야기 보기</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
+    const popup=`<div class="route-popup"><strong>${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
     const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(popup);
     m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,10]:(isEnd?[0,10]:[0,-8]),className:'route-map-label'});
   });
