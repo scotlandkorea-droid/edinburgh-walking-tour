@@ -397,4 +397,24 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/edinburgh-castle-esplanade.html</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-harry-potter.html</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-flodden-wall.html</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-old-cemetery.html</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-alexander-henderson.html</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
 </urlset>
