@@ -1,0 +1,1 @@
+(()=>{const menu=document.querySelector('.mobile-menu');if(!menu)return;const close=()=>menu.removeAttribute('open');menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
