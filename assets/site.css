@@ -265,3 +265,42 @@ body:has(.course-title) .page-hero{
 .page-hero .course-title-en + p{
   margin-top:11px!important;
 }
+
+/* COURSE DETAIL POLISH 2026-09-21 */
+body:has(.course-title) .detail-intro,
+body:has(.course-title) .page-hero{padding-bottom:18px!important}
+body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
+body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:8px!important}
+body:has(.course-title) .quicklook,
+body:has(.course-title) .course-quicklook,
+body:has(.course-title) .detail-summary{
+  margin:0 0 34px!important;
+  padding:20px 22px!important;
+  border:0!important;
+  border-radius:16px!important;
+  background:#eef3ee!important;
+  box-shadow:none!important;
+}
+body:has(.course-title) .detail-summary{margin-top:16px!important}
+body:has(.course-title) .quicklook strong,
+body:has(.course-title) .course-quicklook strong,
+body:has(.course-title) .detail-summary strong{
+  display:block!important;margin:0 0 7px!important;font-size:15px!important;
+  line-height:1.45!important;font-weight:850!important;color:#17271f!important
+}
+body:has(.course-title) .quicklook p,
+body:has(.course-title) .course-quicklook p,
+body:has(.course-title) .detail-summary p{
+  margin:0!important;font-size:16px!important;line-height:1.72!important;
+  letter-spacing:-.01em!important;color:#46534c!important
+}
+@media(max-width:719px){
+  body:has(.course-title) .detail-intro,
+  body:has(.course-title) .page-hero{padding-bottom:14px!important}
+  body:has(.course-title) main:has(.detail-article>.quicklook:first-child),
+  body:has(.course-title) main:has(.detail-article>.course-quicklook:first-child){padding-top:4px!important}
+  body:has(.course-title) .quicklook,
+  body:has(.course-title) .course-quicklook,
+  body:has(.course-title) .detail-summary{padding:18px 20px!important;margin-bottom:30px!important}
+  body:has(.course-title) .detail-summary{margin-top:14px!important}
+}
