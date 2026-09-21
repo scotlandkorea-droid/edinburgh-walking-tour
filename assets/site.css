@@ -207,3 +207,7 @@ body:has(.detail-intro) main{padding-top:28px!important}
 .route-popup-action.map .route-popup-icon{color:#d34a3f;fill:rgba(211,74,63,.08)}
 .route-popup-action.map .route-popup-icon circle{fill:#d34a3f;stroke:#d34a3f}
 @media(max-width:420px){.route-popup-actions{gap:14px}.route-popup-action{font-size:12.5px}}
+
+/* Place-list horizontal touch scrolling — aligned with the tour-course feel */
+.place-strip{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 18px 12px 0;scroll-snap-type:x proximity;scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+.place-strip>a{flex:0 0 auto;scroll-snap-align:start;padding:10px 12px;border-radius:10px;background:var(--cream);font-weight:680;white-space:nowrap}
