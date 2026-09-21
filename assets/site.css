@@ -215,3 +215,36 @@ body:has(.detail-intro) main{padding-top:28px!important}
 /* Keep horizontal place strips from widening the mobile page itself */
 html,body{max-width:100%;overflow-x:hidden}
 .area,.area-list,.container{min-width:0;max-width:100%}
+
+/* COURSE DETAIL TITLE SYSTEM 2026-09-21 */
+.course-title{
+  margin:24px 0 2px!important;
+  font-size:clamp(37px,8.6vw,58px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+  color:var(--deep,#17271f)!important;
+  font-weight:850!important;
+}
+.course-title-en{
+  margin:0 0 0 4px!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  font-weight:500!important;
+  letter-spacing:.01em!important;
+  color:#929995!important;
+  text-transform:none!important;
+}
+.course-title-en + .lead,
+.page-hero .course-title-en + p{
+  margin:11px 0 0!important;
+  font-size:18px!important;
+  line-height:1.44!important;
+  letter-spacing:-.01em!important;
+}
+body:has(.course-title) .detail-intro,
+body:has(.course-title) .page-hero{
+  padding-bottom:22px!important;
+}
+@media(max-width:719px){
+  .course-title{font-size:clamp(37px,8.6vw,44px)!important}
+}
