@@ -248,3 +248,20 @@ body:has(.course-title) .page-hero{
 @media(max-width:719px){
   .course-title{font-size:clamp(37px,8.6vw,44px)!important}
 }
+
+
+/* COURSE DETAIL TITLE SYSTEM V2 2026-09-21 — St Giles typography + Canongate spacing */
+.course-title-en{
+  margin:1px 0 0 4px!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+  color:#8a8176!important;
+  text-transform:uppercase!important;
+}
+.course-title-en + .lead,
+.page-hero .course-title-en + p{
+  margin-top:11px!important;
+}
