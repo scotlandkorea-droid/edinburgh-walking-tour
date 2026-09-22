@@ -271,6 +271,23 @@ body.course-detail .course-title-en + .lead{
   letter-spacing:-.01em!important;
   color:#536159!important;
 }
+/* Keep the subtitle-to-content rhythm consistent on course detail pages.
+   The intro owns the subtitle; the following main/article starts after one deliberate gap. */
+body.course-detail .detail-intro,
+body.course-detail .page-hero{
+  padding-bottom:30px!important;
+}
+body.course-detail .detail-intro + main,
+body.course-detail .page-hero + main,
+body.course-detail .detail-intro + .article,
+body.course-detail .page-hero + .article{
+  margin-top:0!important;
+}
+body.course-detail .detail-article>.course-overview:first-child,
+body.course-detail main>.course-overview:first-child,
+body.course-detail main.article>.course-overview:first-child{
+  margin-top:0!important;
+}
 body.course-detail .detail-article{
   padding-top:0!important;
 }
