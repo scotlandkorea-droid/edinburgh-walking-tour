@@ -392,6 +392,14 @@ body.course-detail .stg-story span{grid-column:2;grid-row:2;display:block;margin
 @media(min-width:700px){body.course-detail .storygrid,body.course-detail .stg-storygrid{grid-template-columns:1fr 1fr}body.course-detail .story,body.course-detail .stg-story{padding:24px 52px 24px 24px}}
 
 
+/* NUMBERED STORY CARDS — shared interaction */
+body.course-detail .story,
+body.course-detail .stg-story{transition:background-color .16s ease,border-color .16s ease,transform .16s ease}
+body.course-detail .story:hover,
+body.course-detail .story:focus-visible,
+body.course-detail .stg-story:hover,
+body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);border-color:#cbd4cc;transform:translateY(-1px)}
+
 /* MULTI-STORY PREV/NEXT — shared detail navigation
    One common rule for every multi-story detail page. */
 .page-nav.greyfriars-nav-sample{
