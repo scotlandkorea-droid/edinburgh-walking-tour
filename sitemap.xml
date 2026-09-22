@@ -107,12 +107,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/elephant-house.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/david-hume.html</loc>
     <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
@@ -121,12 +115,6 @@
   <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/st-giles.html</loc>
     <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile.html</loc>
-    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
