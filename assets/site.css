@@ -218,26 +218,6 @@ html,body{max-width:100%;overflow-x:hidden}
 
 
 
-/* COURSE DETAIL LEGACY-CONFLICT NEUTRALIZER — 2026-09-22
-   Course-page top spacing is owned here, not by legacy per-page hero/main rules. */
-body.course-detail .detail-intro + main,
-body.course-detail .page-hero + main{
-  padding-top:0!important;
-}
-body.course-detail .detail-intro + main>.wrap,
-body.course-detail .page-hero + main>.wrap{
-  padding-top:0!important;
-}
-body.course-detail .detail-intro + main .detail-article:first-child,
-body.course-detail .page-hero + main .detail-article:first-child{
-  margin-top:0!important;
-}
-body.course-detail .detail-intro + main .course-overview:first-child,
-body.course-detail .page-hero + main .course-overview:first-child,
-body.course-detail .detail-article>.course-overview:first-child{
-  margin-top:0!important;
-}
-
 /* COURSE DETAIL TOP SYSTEM — unified 2026-09-21
    One source of truth for all 19 walking-tour course pages. */
 body.course-detail .detail-intro,
