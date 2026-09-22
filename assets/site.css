@@ -475,3 +475,56 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   .page-nav.greyfriars-nav-sample strong{font-size:13px!important;line-height:1.42!important;column-gap:6px!important}
 }
 
+
+
+/* V18 2026-09-22 shared detail reading system
+   Princes Street trial promoted to completed story/detail pages.
+   Structural series labels (01/02/03...), quotes, epitaphs, notes, photos and special cards keep their own component styling. */
+body.course-detail .detail-article,
+body.detail-reading .detail-article,
+body.detail-reading .article,
+body.detail-reading main article>.wrap{
+  font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+  font-size:17px;
+  line-height:1.82;
+  letter-spacing:-.012em;
+  color:#39443f;
+  font-weight:420;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+body.course-detail .detail-article>p,
+body.course-detail .detail-article>div:not([class*="nav"]):not([class*="pager"]):not([class*="contact"]):not([class*="action"]):not([class*="overview"])>p,
+body.detail-reading .detail-article>p,
+body.detail-reading .article>p,
+body.detail-reading main article>.wrap>p{margin-bottom:20px}
+body.course-detail .detail-article h2:not(.course-title),
+body.detail-reading .detail-article h2,
+body.detail-reading .article h2,
+body.detail-reading main article>.wrap>h2{
+  font-family:inherit;
+  font-size:clamp(24px,5vw,30px);
+  line-height:1.32;
+  letter-spacing:-.025em;
+  font-weight:800;
+  margin-top:58px;
+  margin-bottom:33px;
+  padding-left:13px;
+  border-left:3px solid #5e293c;
+  color:var(--deep);
+}
+@media(max-width:719px){
+  body.course-detail .detail-article,
+  body.detail-reading .detail-article,
+  body.detail-reading .article,
+  body.detail-reading main article>.wrap{font-size:16.5px;line-height:1.82}
+  body.course-detail .detail-article>p,
+  body.course-detail .detail-article>div:not([class*="nav"]):not([class*="pager"]):not([class*="contact"]):not([class*="action"]):not([class*="overview"])>p,
+  body.detail-reading .detail-article>p,
+  body.detail-reading .article>p,
+  body.detail-reading main article>.wrap>p{margin-bottom:19px}
+  body.course-detail .detail-article h2:not(.course-title),
+  body.detail-reading .detail-article h2,
+  body.detail-reading .article h2,
+  body.detail-reading main article>.wrap>h2{margin-top:58px;margin-bottom:33px}
+}
