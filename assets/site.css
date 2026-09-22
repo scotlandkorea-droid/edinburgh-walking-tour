@@ -430,7 +430,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   grid-template-columns:minmax(0,1fr) auto!important;
   text-align:left!important;
 }
-.page-nav.greyfriars-nav-sample .nav-copy{display:block!important;min-width:0!important}
+.page-nav.greyfriars-nav-sample .nav-copy{display:block!important;min-width:0!important;text-align:left!important}
 .page-nav.greyfriars-nav-sample small{
   display:block!important;
   margin:0 0 8px!important;
@@ -442,7 +442,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.greyfriars-nav-sample strong{
   display:flex!important;
   align-items:flex-start!important;
-  gap:7px!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
   align-items:start!important;
   font-size:14px!important;
   font-weight:800!important;
