@@ -272,6 +272,9 @@ body.course-detail main,
 body.course-detail main.article{
   padding-top:0!important;
 }
+body.course-detail main>section{
+  padding-top:0!important;
+}
 body.course-detail .course-overview{
   margin:0 0 34px!important;
   padding:18px 20px!important;
