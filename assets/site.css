@@ -475,20 +475,3 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   .page-nav.greyfriars-nav-sample strong{font-size:13px!important;line-height:1.42!important;column-gap:6px!important}
 }
 
-
-/* MULTI-STORY PREV/NEXT — centered guide labels, confirmed 2026-09-22 */
-.page-nav.greyfriars-nav-sample>a{
-  position:relative!important;
-  padding-top:42px!important;
-}
-.page-nav.greyfriars-nav-sample small{
-  position:absolute!important;
-  top:14px!important;
-  left:0!important;
-  right:0!important;
-  margin:0!important;
-  text-align:center!important;
-}
-.page-nav.greyfriars-nav-sample .nav-copy{
-  display:contents!important;
-}
