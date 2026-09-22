@@ -390,3 +390,17 @@ body.course-detail .stg-story strong{grid-column:2;grid-row:1;display:block;marg
 body.course-detail .story p,
 body.course-detail .stg-story span{grid-column:2;grid-row:2;display:block;margin:6px 0 0;color:#657069;font-size:14px;line-height:1.55}
 @media(min-width:700px){body.course-detail .storygrid,body.course-detail .stg-storygrid{grid-template-columns:1fr 1fr}body.course-detail .story,body.course-detail .stg-story{padding:24px 52px 24px 24px}}
+
+
+/* MULTI-STORY PREV/NEXT — shared detail navigation */
+body.course-detail .page-nav.greyfriars-nav-sample{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin-top:18px!important}
+body.course-detail .page-nav.greyfriars-nav-sample>a{display:grid!important;align-items:center!important;min-width:0!important;min-height:78px!important;padding:12px!important;border:1px solid var(--line,#e3ded5)!important;border-radius:18px!important;background:#eef3ee!important;text-decoration:none!important;overflow:hidden!important}
+body.course-detail .page-nav.greyfriars-nav-sample .story-prev{grid-column:1;grid-template-columns:auto minmax(0,1fr)!important;text-align:left!important}
+body.course-detail .page-nav.greyfriars-nav-sample .story-next{grid-column:2;grid-template-columns:minmax(0,1fr) auto!important;text-align:left!important}
+body.course-detail .page-nav.greyfriars-nav-sample .nav-copy{display:block!important;min-width:0!important}
+body.course-detail .page-nav.greyfriars-nav-sample small{display:block!important;margin:0 0 5px!important;color:#657069!important;font-size:10.5px!important;font-weight:650!important;line-height:1.2!important}
+body.course-detail .page-nav.greyfriars-nav-sample strong{display:block!important;font-size:12.5px!important;font-weight:780!important;line-height:1.42!important;overflow-wrap:anywhere!important;word-break:keep-all!important}
+body.course-detail .page-nav.greyfriars-nav-sample .nav-num{display:inline-block!important;margin-right:7px!important;font-variant-numeric:tabular-nums!important}
+body.course-detail .page-nav.greyfriars-nav-sample .nav-arrow{display:flex!important;align-items:center!important;justify-content:center!important;width:20px!important;font-size:20px!important;line-height:1!important}
+body.course-detail .page-nav.greyfriars-nav-sample:has(.story-next:only-child) .story-next{grid-column:2!important}
+body.course-detail .page-nav.greyfriars-nav-sample:has(.story-prev:only-child) .story-prev{grid-column:1!important}
