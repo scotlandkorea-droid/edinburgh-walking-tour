@@ -697,3 +697,24 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 
 /* SCOTLAND TRAVEL WALK COMPONENTS 2026-09-23 */
 .walk-list{display:grid;gap:12px;margin:24px 0}.walk-card{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#f7f3eb}.walk-card strong{display:block;font-size:19px;margin-bottom:4px}.walk-note{color:var(--muted);font-size:.95rem}.travel-series.one-next{grid-template-columns:1fr}.travel-series.one-next .next{margin-left:auto}.travel-series.one-prev{grid-template-columns:1fr}.travel-series.one-prev .prev{margin-right:auto}
+
+
+/* TRAVEL NUMBERED SERIES — TRANSPORT VISUAL STANDARD 2026-09-23
+   Transport 01/02 is the common visual source for numbered travel hubs and story navigation. */
+.travel-detail .food-story-grid{display:grid;gap:14px;margin-top:8px}
+.travel-detail .food-story-card{
+  display:grid;grid-template-columns:44px minmax(0,1fr) 22px;gap:12px;align-items:start;
+  padding:22px 20px;border:1px solid #d9e2d9;border-radius:16px;background:#f7f5ef;text-decoration:none
+}
+.travel-detail .food-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
+.travel-detail .food-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:#315844;margin-bottom:7px}
+.travel-detail .food-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
+.travel-detail .food-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
+@media(min-width:620px){
+  .travel-detail .food-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}
+  .travel-detail .food-story-copy strong{font-size:23px}
+}
+/* Numbered previous/next boxes use the same transport palette across food, shopping and trekking. */
+.travel-detail .travel-ending .travel-series a{background:#eef3ee;border-color:#d9e2d9;color:#31483d}
+.travel-detail .travel-ending .travel-series .nav-no{color:var(--plum)}
+.travel-detail .travel-ending .travel-series .nav-label{color:#718078}
