@@ -654,3 +654,10 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .travel-detail .travel-article h3{font-size:1.12rem;line-height:1.4;margin:28px 0 10px;color:var(--ink);font-weight:750}
 @media(min-width:620px){.travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 56px))}.travel-detail .travel-hero{padding:34px 0 27px!important}}
 @media(max-width:619px){.travel-detail .travel-article{font-size:16.5px;line-height:1.82}.travel-detail .travel-article p{margin-bottom:19px}}
+
+/* SCOTLAND TRAVEL SHARED CARDS 2026-09-23 */
+.travel-detail .travel-card-grid{display:grid;gap:12px;margin:28px 0}
+.travel-detail .travel-card{display:block;padding:18px 20px;border:1px solid var(--line);border-radius:14px;text-decoration:none;background:#f7f3eb}
+.travel-detail .travel-card small{display:block;color:var(--muted);font-size:13px;font-weight:800}
+.travel-detail .travel-card strong{display:block;font-size:20px;line-height:1.35;margin-top:4px;color:var(--travel-green)}
+.travel-detail .travel-card span{display:block;margin-top:3px;color:var(--muted);font-size:15px;line-height:1.55}
