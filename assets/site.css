@@ -663,58 +663,15 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .travel-detail .travel-card span{display:block;margin-top:3px;color:var(--muted);font-size:15px;line-height:1.55}
 
 /* SCOTLAND TRAVEL FOOD COMPONENTS 2026-09-23 */
-
-
 .food-page{background:#fff}
-
-
-
-
-
-
-
-
 .food-page .food-links{display:flex;flex-wrap:wrap;gap:9px;margin:4px 0 28px}
 .food-page .food-links a{display:inline-flex;align-items:center;min-height:42px;padding:9px 14px;border:1px solid #d9d3ca;border-radius:999px;background:#fff;text-decoration:none;font-size:14px;font-weight:750;color:var(--deep)}
 .food-page .food-links a::after{content:" ↗";font-size:12px;margin-left:4px}
 .food-page .food-hub-intro{margin:0 0 26px;color:#59655f}
-.food-page .food-story-grid{display:grid;gap:14px}
-.food-page .food-story-card{display:grid;grid-template-columns:44px minmax(0,1fr) 22px;gap:12px;align-items:start;padding:22px 20px;border:1px solid #d9e2d9;border-radius:16px;background:#f7f5ef;text-decoration:none;box-shadow:none}
-.food-page .food-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
-.food-page .food-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:var(--deep);margin-bottom:7px}
-.food-page .food-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
-.food-page .food-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
-.food-page .food-series a{display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-content:center!important}
-.food-page .food-series .next{grid-template-columns:minmax(0,1fr) auto}
-.food-page .food-series .nav-label{grid-column:1/-1;display:block;margin-bottom:3px;color:#718078;font-size:11px;font-weight:650}
-.food-page .food-series .nav-no{font-size:13px;font-weight:850;color:var(--plum)}
-.food-page .food-series .nav-title{min-width:0;font-size:14px;font-weight:780}
-.food-page .food-series .next .nav-no{grid-column:2}
-.food-page .food-series .next .nav-title{grid-column:1;grid-row:2;text-align:right}
-@media(min-width:620px){.food-page .food-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}.food-page .food-story-copy strong{font-size:23px}}
-@media(max-width:719px){}
-
+/* Food numbered cards deliberately inherit the common travel-story visual standard. */
 
 /* SCOTLAND TRAVEL WALK COMPONENTS 2026-09-23 */
 .walk-list{display:grid;gap:12px;margin:24px 0}.walk-card{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#f7f3eb}.walk-card strong{display:block;font-size:19px;margin-bottom:4px}.walk-note{color:var(--muted);font-size:.95rem}.travel-series.one-next{grid-template-columns:1fr}.travel-series.one-next .next{margin-left:auto}.travel-series.one-prev{grid-template-columns:1fr}.travel-series.one-prev .prev{margin-right:auto}
 
 
-/* TRAVEL NUMBERED SERIES — TRANSPORT VISUAL STANDARD 2026-09-23
-   Transport 01/02 is the common visual source for numbered travel hubs and story navigation. */
-.travel-detail .food-story-grid{display:grid;gap:14px;margin-top:8px}
-.travel-detail .food-story-card{
-  display:grid;grid-template-columns:44px minmax(0,1fr) 22px;gap:12px;align-items:start;
-  padding:22px 20px;border:1px solid #d9e2d9;border-radius:16px;background:#f7f5ef;text-decoration:none
-}
-.travel-detail .food-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
-.travel-detail .food-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:#315844;margin-bottom:7px}
-.travel-detail .food-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
-.travel-detail .food-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
-@media(min-width:620px){
-  .travel-detail .food-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}
-  .travel-detail .food-story-copy strong{font-size:23px}
-}
-/* Numbered previous/next boxes use the same transport palette across food, shopping and trekking. */
-.travel-detail .travel-ending .travel-series a{background:#eef3ee;border-color:#d9e2d9;color:#31483d}
-.travel-detail .travel-ending .travel-series .nav-no{color:var(--plum)}
-.travel-detail .travel-ending .travel-series .nav-label{color:#718078}
+
