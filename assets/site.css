@@ -79,6 +79,106 @@ body:has(.detail-article)>footer>a{
 }
 
 
+/* TRAVEL / DETAIL COMMON SYSTEM 2026-09-23
+   One common visual system for travel hubs and travel-information story pages. */
+.travel-detail{--travel-max:900px}
+.travel-detail .travel-hero{
+  padding:30px 0 24px;
+  background:linear-gradient(180deg,#f7f3eb 0%,#fff 100%);
+  border-bottom:1px solid var(--line)
+}
+.travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 36px));margin:auto}
+.travel-detail .travel-hero .breadcrumbs{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.travel-detail .travel-hero h1{
+  font-size:clamp(30px,6.5vw,46px);
+  line-height:1.12;
+  letter-spacing:-.04em;
+  margin:0 0 9px;
+  color:var(--deep);
+  font-weight:830
+}
+.travel-detail .travel-hero .lead{
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:clamp(16px,3vw,19px);
+  line-height:1.55;
+  color:#59655f;
+  max-width:760px;
+  margin:0;
+  font-weight:600
+}
+.travel-detail .travel-article{
+  padding:38px 0 72px;
+  font-size:17px;
+  line-height:1.82;
+  letter-spacing:-.012em;
+  color:#39443f
+}
+.travel-detail .travel-article h2{
+  font-size:clamp(24px,5vw,30px);
+  line-height:1.32;
+  letter-spacing:-.025em;
+  margin:58px 0 33px;
+  color:var(--deep);
+  font-weight:800
+}
+.travel-detail .travel-article h3{
+  font-size:19px;
+  line-height:1.4;
+  margin:34px 0 14px;
+  color:var(--deep);
+  font-weight:800
+}
+.travel-detail .travel-article p{margin:0 0 20px}
+.travel-detail .travel-story-grid{display:grid;gap:14px;margin-top:8px}
+.travel-detail .travel-story-card{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 22px;
+  gap:12px;
+  align-items:start;
+  padding:22px 20px;
+  border:1px solid #d9e2d9;
+  border-radius:16px;
+  background:#f7f5ef;
+  text-decoration:none
+}
+.travel-detail .travel-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
+.travel-detail .travel-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:var(--deep);margin-bottom:7px}
+.travel-detail .travel-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
+.travel-detail .travel-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
+.travel-detail .travel-series a{
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:8px;
+  align-content:center!important
+}
+.travel-detail .travel-series .prev .nav-label,
+.travel-detail .travel-series .next .nav-label{
+  grid-column:1/-1;
+  display:block;
+  margin-bottom:3px;
+  color:#718078;
+  font-size:11px;
+  font-weight:650
+}
+.travel-detail .travel-series .nav-no{font-size:13px;font-weight:850;color:var(--plum)}
+.travel-detail .travel-series .nav-title{min-width:0;font-size:14px;font-weight:780}
+.travel-detail .travel-series .next{grid-template-columns:minmax(0,1fr) auto}
+.travel-detail .travel-series .next .nav-no{grid-column:2}
+.travel-detail .travel-series .next .nav-title{grid-column:1;grid-row:2;text-align:right}
+.travel-detail .travel-series .prev .nav-no{grid-column:1}
+.travel-detail .travel-series .prev .nav-title{grid-column:2;grid-row:2;text-align:left}
+@media(min-width:620px){
+  .travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 56px))}
+  .travel-detail .travel-hero{padding:34px 0 27px}
+  .travel-detail .travel-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}
+  .travel-detail .travel-story-copy strong{font-size:23px}
+}
+@media(max-width:719px){
+  .travel-detail .travel-article{font-size:16.5px}
+  .travel-detail .travel-article h2{margin-top:54px;margin-bottom:30px}
+  .travel-detail .travel-article p{margin-bottom:19px}
+}
+
 /* TRAVEL DETAIL ENDING 2026-09-19
    Shared ending for completed Scotland travel-information pages. */
 .travel-ending{margin-top:42px;padding-top:20px;border-top:1px solid var(--line)}
