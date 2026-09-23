@@ -694,3 +694,6 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 @media(min-width:620px){.food-page .food-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}.food-page .food-story-copy strong{font-size:23px}}
 @media(max-width:719px){}
 
+
+/* SCOTLAND TRAVEL WALK COMPONENTS 2026-09-23 */
+.walk-list{display:grid;gap:12px;margin:24px 0}.walk-card{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#f7f3eb}.walk-card strong{display:block;font-size:19px;margin-bottom:4px}.walk-note{color:var(--muted);font-size:.95rem}.travel-series.one-next{grid-template-columns:1fr}.travel-series.one-next .next{margin-left:auto}.travel-series.one-prev{grid-template-columns:1fr}.travel-series.one-prev .prev{margin-right:auto}
