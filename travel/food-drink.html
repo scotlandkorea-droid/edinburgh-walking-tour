@@ -3,22 +3,29 @@
 .food-page{--travel-max:900px;background:#fff}
 .food-page .travel-hero{padding:30px 0 24px;background:linear-gradient(180deg,#f7f3eb 0%,#fff 100%);border-bottom:1px solid var(--line)}
 .food-page .travel-wrap{width:min(var(--food-max),calc(100% - 36px));margin:auto}
-.food-page .breadcrumbs{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
-.food-page .travel-hero h1{font-size:clamp(30px,6.5vw,46px);line-height:1.12;letter-spacing:-.04em;margin:0 0 9px;color:var(--deep)}
-.food-page .travel-hero .lead{font-family:Georgia,"Noto Serif KR",Batang,serif;font-size:clamp(16px,3vw,19px);line-height:1.55;color:#59655f;max-width:760px;margin:0}
+.food-page .breadcrumbs{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.food-page .travel-hero h1{font-size:clamp(30px,6.5vw,46px);line-height:1.12;letter-spacing:-.04em;margin:0 0 9px;color:var(--deep);font-weight:830}
+.food-page .travel-hero .lead{font-family:Georgia,"Noto Serif KR",Batang,serif;font-size:clamp(16px,3vw,19px);line-height:1.55;color:#59655f;max-width:760px;margin:0;font-weight:600}
 .food-page .food-body{padding:38px 0 72px;font-size:17px;line-height:1.82;letter-spacing:-.012em;color:#39443f}
-.food-page .food-body h2{font-size:clamp(24px,5vw,30px);line-height:1.32;letter-spacing:-.025em;margin:52px 0 20px;color:var(--deep)}
-.food-page .food-body p{margin:0 0 19px}
+.food-page .food-body h2{font-size:clamp(24px,5vw,30px);line-height:1.32;letter-spacing:-.025em;margin:58px 0 33px;color:var(--deep);font-weight:800}
+.food-page .food-body p{margin:0 0 20px}
 .food-page .food-links{display:flex;flex-wrap:wrap;gap:9px;margin:4px 0 28px}
 .food-page .food-links a{display:inline-flex;align-items:center;min-height:42px;padding:9px 14px;border:1px solid #d9d3ca;border-radius:999px;background:#fff;text-decoration:none;font-size:14px;font-weight:750;color:var(--deep)}
 .food-page .food-links a::after{content:" ↗";font-size:12px;margin-left:4px}
 .food-page .food-hub-intro{margin:0 0 26px;color:#59655f}
 .food-page .food-story-grid{display:grid;gap:14px}
-.food-page .food-story-card{display:grid;grid-template-columns:44px 1fr 22px;gap:12px;align-items:start;padding:22px 20px;border:1px solid #ded8cf;border-radius:18px;background:linear-gradient(145deg,#fbf8f1,#fff);text-decoration:none;box-shadow:0 8px 24px rgba(38,55,47,.05)}
-.food-page .food-story-no{font:800 21px/1.2 Georgia,serif;color:#6f3547;padding-top:2px}
+.food-page .food-story-card{display:grid;grid-template-columns:44px minmax(0,1fr) 22px;gap:12px;align-items:start;padding:22px 20px;border:1px solid #d9e2d9;border-radius:16px;background:#f7f5ef;text-decoration:none;box-shadow:none}
+.food-page .food-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
 .food-page .food-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:var(--deep);margin-bottom:7px}
 .food-page .food-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
-.food-page .food-story-arrow{font-size:24px;line-height:1.2;color:#6f3547}
-@media(min-width:620px){.food-page .travel-wrap{width:min(var(--food-max),calc(100% - 56px))}.food-page .travel-hero{padding:34px 0 27px}.food-page .food-story-card{padding:25px 24px;grid-template-columns:50px 1fr 24px}.food-page .food-story-copy strong{font-size:23px}}
-@media(max-width:719px){.food-page .food-body{font-size:16.5px}}
+.food-page .food-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
+.food-page .food-series a{display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-content:center!important}
+.food-page .food-series .next{grid-template-columns:minmax(0,1fr) auto}
+.food-page .food-series .nav-label{grid-column:1/-1;display:block;margin-bottom:3px;color:#718078;font-size:11px;font-weight:650}
+.food-page .food-series .nav-no{font-size:13px;font-weight:850;color:var(--plum)}
+.food-page .food-series .nav-title{min-width:0;font-size:14px;font-weight:780}
+.food-page .food-series .next .nav-no{grid-column:2}
+.food-page .food-series .next .nav-title{grid-column:1;grid-row:2;text-align:right}
+@media(min-width:620px){.food-page .travel-wrap{width:min(var(--food-max),calc(100% - 56px))}.food-page .travel-hero{padding:34px 0 27px}.food-page .food-story-card{padding:24px;grid-template-columns:48px minmax(0,1fr) 24px}.food-page .food-story-copy strong{font-size:23px}}
+@media(max-width:719px){.food-page .food-body{font-size:16.5px}.food-page .food-body h2{margin-top:54px;margin-bottom:30px}.food-page .food-body p{margin-bottom:19px}}
 </style></head><body class="travel-detail food-page"><header class="site-header"><div class="wrap topbar"><a class="brand" href="/"><span class="mark">EW</span><span>에든버러 워킹투어</span></a><nav class="nav"><a href="/edinburgh/tour-guide.html">투어 안내</a><a href="/#tour">투어 코스</a><a href="/#explore">장소 · 테마 · 인물</a><a href="/#walked">함께한 분들</a><a href="/#guide">안내자 소개</a><a href="/#travel">여행 정보</a><a href="/#contact">문의</a></nav><details class="mobile-menu"><summary aria-label="메뉴 열기">≡</summary><nav><a href="/edinburgh/tour-guide.html">투어 안내</a><a href="/#tour">투어 코스</a><a href="/#explore">장소 · 테마 · 인물</a><a href="/#walked">함께한 분들</a><a href="/#guide">안내자 소개</a><a href="/#travel">여행 정보</a><a href="/#contact">문의</a></nav></details></div></header><section class="travel-hero"><div class="travel-wrap"><div class="breadcrumbs"><a href="/">홈</a> › <a href="/#travel">여행 정보</a> › 음식 · 레스토랑</div><h1>음식 · 레스토랑</h1><p class="lead">스코틀랜드에서 무엇을 먹고, 에든버러에서는 어디서 먹을까</p></div></section><main><article class="travel-wrap food-body"><p class="food-hub-intro">여행에서 한 번쯤 맛볼 스코틀랜드 음식과 에든버러에서 실제로 한 끼를 고를 때 도움이 되는 이야기를 나누어 담았습니다.</p><div class="food-story-grid"><a class="food-story-card" href="/travel/scottish-food.html"><span class="food-story-no">01</span><span class="food-story-copy"><strong>스코틀랜드에서 무엇을 먹을까</strong><span>여행에서 한 번쯤 맛볼 스코틀랜드 음식</span></span><span class="food-story-arrow">›</span></a><a class="food-story-card" href="/travel/edinburgh-restaurants.html"><span class="food-story-no">02</span><span class="food-story-copy"><strong>에든버러에서 어디서 먹을까</strong><span>여행 동선에서 찾는 식당과 한 끼</span></span><span class="food-story-arrow">›</span></a></div><div class="travel-ending"><button class="travel-share" type="button" aria-label="현재 페이지 공유하기">↗ 공유하기</button><div class="travel-hub-row"><a class="travel-hub" href="/#travel">스코틀랜드 여행정보 전체 보기</a></div><nav class="travel-series" aria-label="이전·다음 여행정보"><a class="prev" href="/travel/accommodation.html">← 숙소</a><a class="next" href="/travel/shopping.html">쇼핑 →</a></nav><div class="travel-kakao"><a href="https://open.kakao.com/o/snuaTFyg" target="_blank" rel="noopener">카카오톡 문의</a></div></div></article></main><footer class="travel-footer"><a href="/">에든버러 워킹투어</a></footer><script>(()=>{const b=document.querySelector('.travel-share');b?.addEventListener('click',async()=>{const data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);b.textContent='✓ 링크 복사됨';setTimeout(()=>b.textContent='↗ 공유하기',1800)}}catch(e){}})})();</script><script src="/assets/site-header.js" defer></script></body></html>
