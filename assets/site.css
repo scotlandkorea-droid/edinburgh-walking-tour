@@ -686,3 +686,17 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;font-weight:720;white-space:nowrap;scroll-snap-align:start}
 .place-strip>.place-pending{cursor:default}
 @media(max-width:619px){.place-strip>a,.place-strip>.place-chip{max-width:250px}}
+
+/* Place navigation: resilient across legacy and current detail markup */
+main .page-nav{
+  width:min(var(--max,900px),calc(100% - 36px));margin:38px auto 0;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px
+}
+main .page-nav a{
+  display:flex;align-items:center;min-height:70px;padding:14px 16px;
+  border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;
+  color:#31483d;text-decoration:none;font-weight:780;line-height:1.35
+}
+main .page-nav a:last-child{justify-content:flex-end;text-align:right}
+main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:right}
+main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
