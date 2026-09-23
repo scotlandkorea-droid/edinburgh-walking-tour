@@ -641,11 +641,16 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 @media(min-width:620px){body.travel-detail.transport-detail .travel-wrap{width:min(820px,calc(100% - 56px))}}
 @media(min-width:700px){body.travel-detail.transport-detail .travel-article{padding-top:50px}}
 
-/* TRANSPORT LEGACY ARTICLE BRIDGE 2026-09-23
-   Airport article still uses .content > .wrap; give it the same transport reading treatment. */
-body.travel-detail.transport-detail main.content>.wrap{width:min(820px,calc(100% - 36px));margin:auto;padding:38px 0 70px;font-size:1rem;line-height:1.75;letter-spacing:normal;color:var(--transport-ink)}
-body.travel-detail.transport-detail main.content>.wrap p{margin:0 0 16px}
-body.travel-detail.transport-detail main.content>.wrap h2{font-size:1.55rem;line-height:1.3;margin:44px 0 12px;color:var(--transport-deep);font-weight:700;letter-spacing:normal;padding-left:12px;border-left:5px solid var(--transport-sage)}
-body.travel-detail.transport-detail main.content>.wrap h3{font-size:1.12rem;line-height:1.4;margin:26px 0 8px;color:var(--transport-ink);font-weight:700;letter-spacing:normal}
-@media(min-width:620px){body.travel-detail.transport-detail main.content>.wrap{width:min(820px,calc(100% - 56px))}}
-@media(min-width:700px){body.travel-detail.transport-detail main.content>.wrap{padding-top:50px}}
+/* SCOTLAND TRAVEL COMMON FOUNDATION 2026-09-23 */
+.travel-detail{--travel-max:900px;--travel-green:#315844;--travel-sage:#9aac9f}
+.travel-detail .travel-hero{padding:30px 0 24px!important;background:linear-gradient(180deg,#f7f3eb 0%,#fff 100%)!important;border-bottom:1px solid var(--line)}
+.travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 36px));margin-left:auto;margin-right:auto}
+.travel-detail .travel-hero .breadcrumbs{margin:0 0 18px!important;font-size:13px;color:var(--muted)}
+.travel-detail .travel-hero h1{font-size:clamp(30px,6.5vw,46px)!important;line-height:1.12!important;letter-spacing:-.04em!important;margin:0 0 9px!important;color:var(--travel-green)!important}
+.travel-detail .travel-hero .lead{font-family:Georgia,"Noto Serif KR",Batang,serif!important;font-size:clamp(16px,3vw,19px)!important;line-height:1.55!important;color:#59655f!important;max-width:760px!important;margin:0!important;font-weight:600}
+.travel-detail .travel-article{padding:38px 0 72px;font-size:17px;line-height:1.82;letter-spacing:-.012em;color:#39443f}
+.travel-detail .travel-article p{margin-top:0;margin-bottom:20px}
+.travel-detail .travel-article h2{font-size:clamp(24px,5vw,30px);line-height:1.32;letter-spacing:-.025em;margin:58px 0 33px;color:var(--travel-green);font-weight:800;padding-left:12px;border-left:5px solid var(--travel-sage)}
+.travel-detail .travel-article h3{font-size:1.12rem;line-height:1.4;margin:28px 0 10px;color:var(--ink);font-weight:750}
+@media(min-width:620px){.travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 56px))}.travel-detail .travel-hero{padding:34px 0 27px!important}}
+@media(max-width:619px){.travel-detail .travel-article{font-size:16.5px;line-height:1.82}.travel-detail .travel-article p{margin-bottom:19px}}
