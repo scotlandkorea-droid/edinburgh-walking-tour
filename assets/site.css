@@ -49,6 +49,8 @@
 .detail-article>.page-nav a:last-child{justify-content:flex-end!important;text-align:right!important}
 .detail-article>.page-nav.single{grid-template-columns:1fr!important}
 .detail-article>.page-nav.single a{justify-content:center!important;text-align:center!important}
+.detail-article>.page-nav.next-only a{grid-column:2!important;justify-content:flex-end!important;text-align:right!important}
+.detail-article>.page-nav.prev-only a{grid-column:1!important;justify-content:flex-start!important;text-align:left!important}
 .detail-article>.kakao-action{
   display:flex!important;justify-content:center!important;margin:0!important;
   padding:110px 0 0!important;border:0!important
