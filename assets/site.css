@@ -722,3 +722,41 @@ main .page-nav.place-card-nav a.place-nav-card.next{align-items:flex-end;text-al
 main .page-nav.place-card-nav .nav-direction{font-size:12px;font-weight:700;color:#718078;line-height:1.2}
 main .page-nav.place-card-nav .nav-title{font-size:15px;font-weight:800;color:#31483d;line-height:1.35}
 @media(max-width:520px){main .page-nav.place-card-nav{gap:9px}main .page-nav.place-card-nav a.place-nav-card{min-height:82px;padding:12px 13px}main .page-nav.place-card-nav .nav-title{font-size:14px}}
+
+/* FINALIZED DETAIL ENDING MODEL — Balmoral verification only.
+   Reuses the previously finalized 2026-09-19 detail ending values without redesign. */
+.footer-model-test .detail-article>.action-buttons{
+ display:grid!important;grid-template-columns:1fr!important;justify-items:center!important;gap:0!important;
+ margin:40px 0 0!important;padding:20px 0 0!important;border-top:1px solid var(--line)!important
+}
+.footer-model-test .detail-article>.action-buttons .share-btn{
+ position:static!important;justify-self:start!important;margin:0 0 34px!important;padding:0!important;min-height:auto!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#657069!important;
+ font:inherit!important;font-size:13px!important;font-weight:720!important
+}
+.footer-model-test .detail-article>.action-buttons .course-hub{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:0!important;min-height:40px!important;
+ padding:0 16px!important;border:1px solid #e3ded5!important;border-radius:999px!important;background:#f7f5ef!important;
+ color:var(--plum)!important;font-size:13px!important;font-weight:780!important;text-decoration:none!important;box-shadow:none!important
+}
+.footer-model-test .detail-article>.page-nav{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:12px!important;margin:38px 0 0!important
+}
+.footer-model-test .detail-article>.page-nav a{
+ display:flex!important;align-items:center!important;min-height:68px!important;padding:11px 10px!important;border:1px solid #d9e2d9!important;
+ border-radius:15px!important;background:#eef3ee!important;color:#31483d!important;text-decoration:none!important;font-weight:780!important;line-height:1.35!important
+}
+.footer-model-test .detail-article>.page-nav a:last-child{justify-content:flex-end!important;text-align:right!important}
+.footer-model-test .detail-article>.kakao-action{
+ display:flex!important;justify-content:center!important;margin:0!important;padding:110px 0 0!important;border:0!important
+}
+.footer-model-test .detail-article>.kakao-action .kakao-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:0!important;min-height:36px!important;padding:0 16px!important;
+ border:1px solid rgba(53,47,27,.05)!important;border-radius:999px!important;background:#fbf0b9!important;color:#393424!important;
+ font-size:13px!important;font-weight:760!important;text-decoration:none!important;box-shadow:none!important
+}
+@media(min-width:720px){
+ .footer-model-test .detail-article>.action-buttons{margin-top:48px!important;padding-top:24px!important}
+ .footer-model-test .detail-article>.page-nav a{min-height:70px!important;padding:14px 16px!important}
+ .footer-model-test .detail-article>.kakao-action{padding-top:118px!important}
+}
