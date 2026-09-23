@@ -88,7 +88,7 @@ body:has(.detail-article)>footer>a{
   border-bottom:1px solid var(--line)
 }
 .travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 36px));margin:auto}
-.travel-detail .travel-hero .breadcrumbs{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.travel-detail .travel-hero .breadcrumbs{margin:0 0 18px;font-size:13px;color:var(--muted)}
 .travel-detail .travel-hero h1{
   font-size:clamp(2.15rem,7vw,3.35rem);
   line-height:1.14;
