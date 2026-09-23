@@ -90,12 +90,11 @@ body:has(.detail-article)>footer>a{
 .travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 36px));margin:auto}
 .travel-detail .travel-hero .breadcrumbs{margin:0 0 10px;font-size:13px;color:var(--muted)}
 .travel-detail .travel-hero h1{
-  font-size:clamp(30px,6.5vw,46px);
-  line-height:1.12;
-  letter-spacing:-.04em;
-  margin:0 0 9px;
-  color:#315844;
-  font-weight:830
+  font-size:clamp(2.15rem,7vw,3.35rem);
+  line-height:1.14;
+  letter-spacing:-.035em;
+  margin:0 0 18px;
+  color:#315844
 }
 .travel-detail .travel-hero .lead{
   font-family:Georgia,"Noto Serif KR",Batang,serif;
