@@ -1,33 +1,5 @@
 (()=>{
-function setupWalkedGallery(){
-  const gallery=document.getElementById('tourGallery');
-  if(!gallery)return;
-  if(!document.querySelector('style[data-walked-gallery]')){const s=document.createElement('style');s.dataset.walkedGallery='1';s.textContent='#walked .photo-card{aspect-ratio:4/3!important;background:#f3f1eb!important;overflow:hidden!important}#walked .photo-card img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;background:#f3f1eb}#walked .photo-card:nth-child(2) img,#walked .photo-card:nth-child(4) img,#walked .photo-card:nth-child(6) img,#walked .photo-card:nth-child(9) img,#walked .photo-card:nth-child(12) img,#walked .photo-card:nth-child(14) img{object-position:center 38%!important}#walked .walked-consent{margin:12px 0 0;font-size:.82rem;line-height:1.35;color:#68756e;white-space:nowrap}@media(max-width:420px){#walked .walked-consent{font-size:.76rem;letter-spacing:-.02em}}@media(max-width:619px){#walked .photo-card{flex-basis:82%!important;max-width:360px!important}}@media(min-width:620px){#walked .photo-card{flex-basis:calc((100% - 32px)/3)!important;max-width:none!important}}';document.head.appendChild(s)}
-  const photos=[
-    '/assets/1280＿20250828＿084545.jpg',
-    '/assets/1280＿20250821＿113352.jpg',
-    '/assets/1754396924726.jpg',
-    '/assets/1280＿20250821＿110052.jpg',
-    '/assets/1280＿1754399052815.jpg',
-    '/assets/1280＿20250815＿155115.jpg',
-    '/assets/externalFile.jpg',
-    '/assets/1280＿1755036285208.jpg',
-    '/assets/1754403534267.jpg',
-    '/assets/1280＿1754399052345.jpg',
-    '/assets/externalFile%20(1).jpg',
-    '/assets/1280＿1755072289623.jpg',
-    '/assets/1754403534399.jpg',
-    '/assets/1280＿1754399052952.jpg',
-    '/assets/patrick-hamilton-ph.jpg'
-  ];
-  gallery.innerHTML=photos.map((src,i)=>`<figure class="photo-card"><img src="${src}" loading="${i<3?'eager':'lazy'}" decoding="async" alt="함께 걸은 에든버러 워킹투어 사진 ${i+1}"></figure>`).join('');
-  let note=document.querySelector('#walked .walked-consent');
 
-  const lb=document.getElementById('lightbox');
-  const li=lb?.querySelector('img');
-  if(lb&&li){gallery.querySelectorAll('.photo-card img').forEach(img=>{img.onclick=()=>{li.src=img.src;li.alt=img.alt;lb.classList.add('open');lb.setAttribute('aria-hidden','false')}})}
-}
-setupWalkedGallery();
 const stops=[
   {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326,start:true},
   {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
