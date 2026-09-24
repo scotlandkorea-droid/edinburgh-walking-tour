@@ -131,7 +131,7 @@ body:has(.detail-article)>footer>a{
   color:var(--ink);
   font-weight:750
 }
-.travel-detail .travel-article p{margin:0 0 20px}
+.travel-detail .travel-article p{margin-bottom:20px}
 .travel-detail .travel-story-grid{display:grid;gap:14px;margin-top:8px}
 .travel-detail .travel-story-card{
   display:grid;
