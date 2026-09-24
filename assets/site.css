@@ -858,3 +858,15 @@ body:where(.simple-place-detail){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.simple-place-detail) .links a{padding:10px 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:650}
 :where(body.simple-place-detail) footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
 :where(body.simple-place-detail) .cta{display:inline-flex;margin-top:18px;padding:13px 18px;border-radius:999px;background:#fee500;color:#191600;text-decoration:none;font-weight:800}
+
+
+/* TOUR GUIDE DETAIL */
+:where(body.tour-guide-detail) .detail-single{max-width:860px}
+:where(body.tour-guide-detail) .tour-guide-hero h1{color:#17271f;font-weight:850}
+:where(body.tour-guide-detail) .tour-guide-hero .hero-intro{max-width:820px}
+:where(body.tour-guide-detail) .guide-kicker{font-size:11px;letter-spacing:.14em;font-weight:820;color:#8a8176;margin:0 0 7px;text-transform:uppercase}
+:where(body.tour-guide-detail) .placeholder-section{scroll-margin-top:92px}
+:where(body.tour-guide-detail) .placeholder-section h2{color:#17271f!important;font-weight:830;letter-spacing:-.035em;margin-top:0}
+:where(body.tour-guide-detail) .placeholder-section p{font-size:16.5px;line-height:1.78}
+:where(body.tour-guide-detail) .guide-related{margin-top:10px}
+:where(body.tour-guide-detail) .guide-related a{color:#6f3547;font-weight:800}
