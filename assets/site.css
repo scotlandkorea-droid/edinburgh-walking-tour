@@ -226,7 +226,6 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 
 /* THEME DETAIL PAGES — 2026-09-20 */
 .theme-detail-intro{background:linear-gradient(180deg,#f7f3eb 0%,#fff 100%)!important;border-bottom:1px solid var(--line)}
-.theme-detail-intro .eyebrow{margin:12px 0 7px!important;color:var(--plum)!important}
 .theme-detail-intro h1{max-width:880px}
 .theme-detail-intro .lead{max-width:850px!important;font-family:Georgia,"Noto Serif KR",Batang,serif!important;font-size:clamp(18px,3.8vw,24px)!important;line-height:1.55!important;color:#4e5b54!important}
 .theme-article{width:min(820px,calc(100% - 36px));font-size:17px;line-height:1.82;padding-bottom:0}
