@@ -677,7 +677,7 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .place-scope-section{scroll-margin-top:78px}
 .place-scope-section>.wrap>.section-head{border-left-color:#5e293c}
 .place-scope-section>.wrap>.section-head>h2{color:#5e293c}
-.place-scope-section .area>h2{color:var(--latest-deep,#0f2119);border-left-color:var(--latest-sage-line,#6f8979)}
+.place-scope-section .area>h2{color:#0f2119;border-left-color:#6f8979}
 .place-strip>a,.place-strip>.place-chip{background:#f1f5f0;border:1px solid #d9e3da;color:#263a30}
 .place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;font-weight:720;white-space:nowrap;scroll-snap-align:start}
 .place-strip>.place-pending{cursor:default}
