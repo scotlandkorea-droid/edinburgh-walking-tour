@@ -700,3 +700,12 @@ main .page-nav a{
 main .page-nav a:last-child{justify-content:flex-end;text-align:right}
 main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:right}
 main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
+
+/* Canonical walked-gallery presentation */
+#walked .photo-card{aspect-ratio:4/3;background:#f3f1eb;overflow:hidden}
+#walked .photo-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;image-rendering:auto;background:#f3f1eb}
+#walked .photo-card:nth-child(2) img,#walked .photo-card:nth-child(4) img,#walked .photo-card:nth-child(6) img,#walked .photo-card:nth-child(9) img,#walked .photo-card:nth-child(12) img,#walked .photo-card:nth-child(14) img{object-position:center 38%}
+.photo-consent{margin:13px 2px 0;color:#6c766f;font-size:12.5px;line-height:1.55}
+@media(max-width:619px){#walked .photo-card{flex-basis:82%;max-width:360px}}
+@media(min-width:620px){#walked .photo-card{flex-basis:calc((100% - 32px)/3);max-width:none}}
+@media(max-width:420px){.photo-consent{font-size:12px;margin-top:11px}}
