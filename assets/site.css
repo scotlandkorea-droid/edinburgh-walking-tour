@@ -703,3 +703,14 @@ main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:l
 @media(max-width:619px){#walked .photo-card{flex-basis:82%;max-width:360px}}
 @media(min-width:620px){#walked .photo-card{flex-basis:calc((100% - 32px)/3);max-width:none}}
 @media(max-width:420px){.photo-consent{font-size:12px;margin-top:11px}}
+
+
+/* EXPLORE HUB SWITCHER — restored from the approved shared navigation system */
+.explore-tabs,.location-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.location-tabs{margin-top:10px}
+.explore-tab,.location-tab{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 14px;border-radius:999px;border:1px solid #ccd8cf;background:#fff;color:#31453a;font-weight:780;text-decoration:none;transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.explore-tab.active,.location-tab.active{background:#dce8df;border-color:#8ea494;color:#14291f;cursor:default}
+.explore-tab:not(.active):hover,.explore-tab:not(.active):focus-visible,.location-tab:not(.active):hover,.location-tab:not(.active):focus-visible{background:#f7faf7;border-color:#9eb2a4}
+
+/* Keep Korean theme titles from leaving a single character stranded on its own line. */
+.theme-detail-intro .course-title,.theme-list .story-card strong{word-break:keep-all;text-wrap:balance}
