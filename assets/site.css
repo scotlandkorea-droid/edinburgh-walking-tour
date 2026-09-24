@@ -213,12 +213,12 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .detail-article .page-nav.page-nav-prev-only .prev{grid-column:1;justify-content:flex-start;text-align:left}
 
 /* STORY SERIES NAV */
-.greyfriars-story-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
-.greyfriars-story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
-.greyfriars-story-tab span{font-weight:800}
-.greyfriars-story-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
-.greyfriars-story-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
-@media(min-width:900px){.greyfriars-story-tabs{flex-wrap:wrap;overflow:visible;gap:7px}.greyfriars-story-tab{font-size:12px;padding:7px 8px}}
+.story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
+.story-series-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
+.story-series-tab span{font-weight:800}
+.story-series-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
+.story-series-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
+@media(min-width:900px){.story-series-tabs{flex-wrap:wrap;overflow:visible;gap:7px}.story-series-tab{font-size:12px;padding:7px 8px}}
 
 /* Detail page section heading standard */
 .detail-article h2{font-size:clamp(25px,5vw,31px);line-height:1.25;letter-spacing:-.03em;margin:42px 0 14px;color:var(--deep);font-weight:810;padding-left:13px;border-left:3px solid #5e293c}
@@ -253,7 +253,7 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .detail-article>.action-buttons,
 .detail-article>.page-nav,
 .detail-article>.kakao-action,
-.greyfriars-story-tabs{
+.story-series-tabs{
   position:relative!important;
   z-index:20!important;
   pointer-events:auto!important;
@@ -262,7 +262,7 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .detail-article>.action-buttons button,
 .detail-article>.page-nav a,
 .detail-article>.kakao-action a,
-.greyfriars-story-tabs a{
+.story-series-tabs a{
   position:relative!important;
   z-index:21!important;
   pointer-events:auto!important;
