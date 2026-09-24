@@ -325,8 +325,8 @@ body.course-detail .crumbs span{margin:0 6px!important}
 body.course-detail .course-title,
 .theme-detail-intro .course-title{
   margin:24px 0 2px!important;
-  font-size:clamp(28px,7.8vw,56px)!important;
-  line-height:1.04!important;
+  font-size:clamp(37px,8.6vw,58px)!important;
+  line-height:1.02!important;
   letter-spacing:-.045em!important;
   color:var(--deep,#17271f)!important;
   font-weight:850!important;
