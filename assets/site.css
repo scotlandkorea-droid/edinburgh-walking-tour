@@ -266,7 +266,7 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
   position:relative!important;
   z-index:21!important;
   pointer-events:auto!important;
-  touch-action:manipulation!important;
+  touch-action:auto!important;
 }
 
 
