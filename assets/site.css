@@ -731,3 +731,28 @@ main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:l
   .castle-story-detail .castle-story-tabs{flex-wrap:wrap;overflow:visible}
   .castle-story-detail .castle-story-tab{font-size:12px;padding:7px 8px}
 }
+
+
+/* ST GILES STORY DETAIL COMMON */
+body.stg-story-detail{--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage:#edf2ed;--plum:#6f3547;--line:#e3ded5;--max:900px;margin:0;font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.72}
+body.stg-story-detail *{box-sizing:border-box}
+body.stg-story-detail a{color:inherit}
+body.stg-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
+body.stg-story-detail header{border-bottom:1px solid var(--line);background:#faf8f3}
+body.stg-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+body.stg-story-detail .brand{font-weight:800;text-decoration:none}
+body.stg-story-detail .toplink{font-size:14px;color:var(--muted);text-decoration:none}
+body.stg-story-detail .detail-intro{padding:30px 0 34px;background:linear-gradient(180deg,var(--cream),#fff)}
+body.stg-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
+body.stg-story-detail .breadcrumbs a{text-decoration:none}
+body.stg-story-detail .eyebrow{margin:14px 0 3px;font-size:12px;font-weight:850;letter-spacing:.08em;color:var(--plum)}
+body.stg-story-detail h1{font-size:clamp(32px,7vw,52px);line-height:1.12;letter-spacing:-.04em;margin:0 0 10px}
+body.stg-story-detail .lead{font-size:18px;color:var(--muted);margin:0;max-width:760px}
+body.stg-story-detail main article{padding:42px 0 76px}
+body.stg-story-detail h2{font-size:25px;letter-spacing:-.025em;margin:34px 0 10px;padding-left:12px;border-left:3px solid var(--plum)}
+body.stg-story-detail p{margin:0 0 15px}
+body.stg-story-detail .note{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage);color:#46534c}
+body.stg-story-detail .story-series{margin:38px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+body.stg-story-detail .story-series a{font-weight:750;text-decoration:none}
+body.stg-story-detail .page-nav{margin-top:18px}
+body.stg-story-detail footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
