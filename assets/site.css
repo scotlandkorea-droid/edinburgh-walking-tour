@@ -916,10 +916,10 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 /* Princes Street: only differences that remain intentional after the shared course-detail system. */
 :where(body.princes-street-page) .story-photo{margin:34px 0;border-radius:18px;overflow:hidden;background:#f3f1eb}
 :where(body.princes-street-page) .story-photo img{width:100%;height:auto}
-:where(body.princes-street-page) .detail-article>.princes-overview-test{margin-bottom:48px!important}
+:where(body.princes-street-page) .detail-article>.princes-overview{margin-bottom:48px!important}
 @media(max-width:719px){
-  :where(body.princes-street-page) .detail-article>.princes-overview-test{margin-bottom:44px!important}
-  :where(body.princes-street-page) .princes-body-test>h2{margin-top:58px!important;margin-bottom:33px!important}
+  :where(body.princes-street-page) .detail-article>.princes-overview{margin-bottom:44px!important}
+  :where(body.princes-street-page) .princes-body>h2{margin-top:58px!important;margin-bottom:33px!important}
 }
 
 /* Scott Monument: page-only story components retained from the approved live presentation. */
