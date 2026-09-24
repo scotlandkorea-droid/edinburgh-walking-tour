@@ -30,7 +30,7 @@
       }
     }catch(e){}
   };
-  document.querySelectorAll('.travel-share,.share-btn:not([onclick])').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
+  document.querySelectorAll('.travel-share,.share-btn').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
 
   requestAnimationFrame(fitTitles);
   let timer;
