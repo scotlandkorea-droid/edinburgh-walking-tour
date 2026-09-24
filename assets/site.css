@@ -690,7 +690,7 @@ main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:rig
 main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
 
 /* Canonical walked-gallery presentation */
-#walked .photo-card{flex:0 0 auto;aspect-ratio:4/3;background:#f3f1eb;overflow:hidden;scroll-snap-align:center;border-radius:18px;cursor:zoom-in;margin:0}
+#walked .photo-card{flex-shrink:0;aspect-ratio:4/3;background:#f3f1eb;overflow:hidden;scroll-snap-align:center;border-radius:18px;cursor:zoom-in;margin:0}
 #walked .photo-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;image-rendering:auto;background:#f3f1eb}
 #walked .photo-card:nth-child(2) img,#walked .photo-card:nth-child(4) img,#walked .photo-card:nth-child(6) img,#walked .photo-card:nth-child(9) img,#walked .photo-card:nth-child(12) img,#walked .photo-card:nth-child(14) img{object-position:center 38%}
 .photo-consent{margin:13px 2px 0;color:#6c766f;font-size:12.5px;line-height:1.55}
