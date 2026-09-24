@@ -870,3 +870,22 @@ body:where(.simple-place-detail){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.tour-guide-detail) .placeholder-section p{font-size:16.5px;line-height:1.78}
 :where(body.tour-guide-detail) .guide-related{margin-top:10px}
 :where(body.tour-guide-detail) .guide-related a{color:#6f3547;font-weight:800}
+
+
+/* STORY HUB DETAIL — Grassmarket + National Museum */
+body:where(.story-hub-detail){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage:#e8eee8;--deep:#17231d;--line:#e3ded5;--max:900px;margin:0;font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.72}
+:where(body.story-hub-detail) *{box-sizing:border-box}
+:where(body.story-hub-detail) a{color:inherit}
+:where(body.story-hub-detail) .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
+:where(body.story-hub-detail) header{border-bottom:1px solid var(--line)}
+:where(body.story-hub-detail) header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+:where(body.story-hub-detail) .brand,:where(body.story-hub-detail) .toplink{text-decoration:none}
+:where(body.story-hub-detail) .brand{font-weight:800}
+:where(body.story-hub-detail) .toplink,:where(body.story-hub-detail) .breadcrumbs{font-size:14px;color:var(--muted)}
+:where(body.story-hub-detail) .breadcrumbs a{text-decoration:none}
+:where(body.story-hub-detail) h1{font-size:clamp(34px,8vw,58px);line-height:1.08;letter-spacing:-.045em;margin:0 0 8px}
+:where(body.story-hub-detail) .lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
+:where(body.story-hub-detail) main{padding:40px 0 76px}
+:where(body.story-hub-detail) .section-title{font-size:28px;letter-spacing:-.03em;margin:0 0 8px}
+:where(body.story-hub-detail) .intro{margin:0;color:var(--muted);max-width:760px}
+:where(body.story-hub-detail) footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
