@@ -145,7 +145,7 @@ body:has(.detail-article)>footer>a{
   text-decoration:none
 }
 .travel-detail .travel-story-no{font-size:15px;line-height:1.35;font-weight:850;color:var(--plum);padding-top:4px}
-.travel-detail .travel-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:#315844;margin-bottom:7px}
+.travel-detail .travel-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:var(--travel-green);margin-bottom:7px}
 .travel-detail .travel-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
 .travel-detail .travel-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
 .travel-detail .travel-series a{
@@ -178,7 +178,7 @@ body:has(.detail-article)>footer>a{
 }
 @media(max-width:719px){
   .travel-detail .travel-article{font-size:16.5px}
-  .travel-detail .travel-article h2{margin-top:54px;margin-bottom:30px}
+  .travel-detail .travel-article h2{margin:54px 0 30px}
   .travel-detail .travel-article p{margin-bottom:19px}
 }
 
