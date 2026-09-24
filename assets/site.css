@@ -212,7 +212,7 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 .detail-article .page-nav.page-nav-next-only .next{grid-column:2;justify-content:flex-end;text-align:right}
 .detail-article .page-nav.page-nav-prev-only .prev{grid-column:1;justify-content:flex-start;text-align:left}
 
-/* GREYFRIARS STORY SERIES NAV 2026-09-19 */
+/* STORY SERIES NAV */
 .greyfriars-story-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
 .greyfriars-story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 .greyfriars-story-tab span{font-weight:800}
@@ -508,13 +508,13 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 
 /* MULTI-STORY PREV/NEXT — shared detail navigation
    One common rule for every multi-story detail page. */
-.page-nav.greyfriars-nav-sample{
+.page-nav.story-series-nav{
   display:grid!important;
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
   gap:12px!important;
   margin-top:18px!important;
 }
-.page-nav.greyfriars-nav-sample>a{
+.page-nav.story-series-nav>a{
   display:grid!important;
   align-items:center!important;
   min-width:0!important;
@@ -526,18 +526,18 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   text-decoration:none!important;
   overflow:hidden!important;
 }
-.page-nav.greyfriars-nav-sample .story-prev{
+.page-nav.story-series-nav .story-prev{
   grid-column:1;
   grid-template-columns:auto minmax(0,1fr)!important;
   text-align:left!important;
 }
-.page-nav.greyfriars-nav-sample .story-next{
+.page-nav.story-series-nav .story-next{
   grid-column:2;
   grid-template-columns:minmax(0,1fr) auto!important;
   text-align:left!important;
 }
-.page-nav.greyfriars-nav-sample .nav-copy{display:block!important;min-width:0!important;text-align:left!important}
-.page-nav.greyfriars-nav-sample small{
+.page-nav.story-series-nav .nav-copy{display:block!important;min-width:0!important;text-align:left!important}
+.page-nav.story-series-nav small{
   display:block!important;
   margin:0 0 8px!important;
   color:#657069!important;
@@ -545,7 +545,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   font-weight:700!important;
   line-height:1.2!important;
 }
-.page-nav.greyfriars-nav-sample strong{
+.page-nav.story-series-nav strong{
   display:flex!important;
   justify-content:flex-start!important;
   gap:4px!important;
@@ -555,7 +555,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1.4!important;
   word-break:keep-all!important;
 }
-.page-nav.greyfriars-nav-sample .nav-num{
+.page-nav.story-series-nav .nav-num{
   display:inline-block!important;
   flex:0 0 auto!important;
   margin:0!important;
@@ -563,7 +563,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   white-space:nowrap!important;
   color:#5e293c!important;
 }
-.page-nav.greyfriars-nav-sample .nav-arrow{
+.page-nav.story-series-nav .nav-arrow{
   display:flex!important;
   align-items:center!important;
   justify-content:center!important;
@@ -571,13 +571,13 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   font-size:20px!important;
   line-height:1!important;
 }
-.page-nav.greyfriars-nav-sample:has(.story-next:only-child) .story-next{grid-column:2!important}
-.page-nav.greyfriars-nav-sample:has(.story-prev:only-child) .story-prev{grid-column:1!important}
+.page-nav.story-series-nav:has(.story-next:only-child) .story-next{grid-column:2!important}
+.page-nav.story-series-nav:has(.story-prev:only-child) .story-prev{grid-column:1!important}
 @media(max-width:520px){
-  .page-nav.greyfriars-nav-sample{gap:10px!important}
-  .page-nav.greyfriars-nav-sample>a{min-height:96px!important;padding:14px 12px!important}
-  .page-nav.greyfriars-nav-sample small{font-size:11px!important;margin-bottom:8px!important}
-  .page-nav.greyfriars-nav-sample strong{font-size:13px!important;line-height:1.42!important;column-gap:6px!important}
+  .page-nav.story-series-nav{gap:10px!important}
+  .page-nav.story-series-nav>a{min-height:96px!important;padding:14px 12px!important}
+  .page-nav.story-series-nav small{font-size:11px!important;margin-bottom:8px!important}
+  .page-nav.story-series-nav strong{font-size:13px!important;line-height:1.42!important;column-gap:6px!important}
 }
 
 
