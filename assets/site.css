@@ -911,3 +911,29 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.narrative-place-hub) .person strong{font-weight:800}
 :where(body.narrative-place-hub) .story-intro{margin:0 0 22px;color:var(--muted);max-width:760px}
 :where(body.narrative-place-hub) footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
+
+
+/* PAGE-SPECIFIC REMAINDERS — extracted from legacy inline styles 2026-09-24 */
+/* Princes Street: only differences that remain intentional after the shared course-detail system. */
+:where(body.princes-street-page) .story-photo{margin:34px 0;border-radius:18px;overflow:hidden;background:#f3f1eb}
+:where(body.princes-street-page) .story-photo img{width:100%;height:auto}
+:where(body.princes-street-page) .detail-article>.princes-overview-test{margin-bottom:48px!important}
+@media(max-width:719px){
+  :where(body.princes-street-page) .detail-article>.princes-overview-test{margin-bottom:44px!important}
+  :where(body.princes-street-page) .princes-body-test>h2{margin-top:58px!important;margin-bottom:33px!important}
+}
+
+/* Scott Monument: page-only story components retained from the approved live presentation. */
+:where(body.scott-monument-page) .site-header .topbar{min-height:62px}
+:where(body.scott-monument-page) main.article{padding-bottom:70px}
+:where(body.scott-monument-page) .photo{border-radius:22px;overflow:hidden;background:#ddd}
+:where(body.scott-monument-page) .photo img,
+:where(body.scott-monument-page) .story-photo img{object-fit:contain}
+:where(body.scott-monument-page) .section{margin-bottom:42px}
+:where(body.scott-monument-page) .question{font-size:21px;font-weight:800;line-height:1.5;margin:24px 0;padding:18px 20px;background:var(--sage);border-radius:16px}
+:where(body.scott-monument-page) .highlight{padding:20px;border-left:4px solid #7d9284;background:#f7f9f7;border-radius:0 14px 14px 0;font-weight:700}
+:where(body.scott-monument-page) .more{display:inline-block;margin-top:4px;padding:11px 15px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:750;background:#fff}
+@media(max-width:560px){
+  :where(body.scott-monument-page) .section{margin-bottom:36px}
+  :where(body.scott-monument-page) .question{font-size:19px;padding:16px}
+}
