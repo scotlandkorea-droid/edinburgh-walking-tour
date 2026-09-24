@@ -712,5 +712,6 @@ main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:l
 .explore-tab.active,.location-tab.active{background:#dce8df;border-color:#8ea494;color:#14291f;cursor:default}
 .explore-tab:not(.active):hover,.explore-tab:not(.active):focus-visible,.location-tab:not(.active):hover,.location-tab:not(.active):focus-visible{background:#f7faf7;border-color:#9eb2a4}
 
-/* Keep Korean theme titles from leaving a single character stranded on its own line. */
-.theme-detail-intro .course-title,.theme-list .story-card strong{word-break:keep-all;text-wrap:balance}
+/* Keep Korean theme titles compact without forcing a balanced two-line wrap. */
+.theme-detail-intro .course-title{word-break:keep-all;font-size:clamp(35px,8vw,54px)!important}
+.theme-list .story-card strong{word-break:keep-all}
