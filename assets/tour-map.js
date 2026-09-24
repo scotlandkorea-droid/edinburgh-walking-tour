@@ -1,7 +1,7 @@
 (()=>{
 
 const stops=[
-  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326,start:true},
+  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326},
   {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
   {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95218,lng:-3.19570},
   {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
@@ -19,7 +19,7 @@ const stops=[
   {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
   {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
   {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948,end:true}
+  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948}
 ];
 // 장소 마커와 실제 걷는 선을 분리한다. 스콧 기념탑에서 가든으로 들어간 뒤 정원 안을 서쪽으로 걸어 로스 분수 부근까지 간 다음,
 // 북쪽 프린스 스트리트 쪽으로 올라와 동쪽으로 돌아 The Mound/국립미술관 방향으로 이어지는 실제 투어 흐름을 표현한다.
