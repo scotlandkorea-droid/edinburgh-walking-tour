@@ -5,7 +5,7 @@
       el.style.removeProperty('white-space');
       el.style.removeProperty('text-wrap');
       const base=parseFloat(getComputedStyle(el).fontSize)||37;
-      const min=28;
+      const min=22;
       let size=base;
       el.style.setProperty('white-space','nowrap');
       while(el.scrollWidth>el.clientWidth+1&&size>min){
