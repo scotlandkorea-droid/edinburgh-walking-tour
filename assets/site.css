@@ -371,10 +371,14 @@ body.course-detail main.article>.course-overview:first-child{
 body.course-detail .detail-article{
   padding-top:0!important;
   max-width:760px!important;
+  font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
   font-size:17px;
   line-height:1.82;
   letter-spacing:-.012em;
-  color:var(--ink);
+  color:#39443f;
+  font-weight:420;
+  word-break:keep-all;
+  overflow-wrap:break-word;
 }
 body.course-detail main,
 body.course-detail main.article{
@@ -427,11 +431,12 @@ body.course-detail .detail-article h2{
   margin:48px 0 16px!important;
   padding-left:13px;
   border-left:3px solid #5e293c;
+  font-family:inherit;
   font-size:clamp(24px,5vw,30px);
-  line-height:1.3;
-  letter-spacing:-.03em;
+  line-height:1.32;
+  letter-spacing:-.025em;
   color:var(--deep);
-  font-weight:810;
+  font-weight:800;
 }
 body.course-detail .detail-article h3{
   margin:34px 0 12px;
@@ -471,8 +476,8 @@ body.course-detail .detail-article figcaption{
   color:var(--muted);
 }
 @media(max-width:719px){
-  body.course-detail .detail-article{font-size:16.5px;line-height:1.8}
-  body.course-detail .detail-article>p,
+  body.course-detail .detail-article{font-size:16.5px;line-height:1.82}
+  body.course-detail .detail-article>p{margin-bottom:19px}
   body.course-detail .detail-article>section>p{margin-bottom:18px}
   body.course-detail .detail-article h2{margin-top:42px!important}
   body.course-detail .detail-article blockquote{margin:26px 0;padding:15px 17px}
@@ -581,7 +586,6 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 /* V18 2026-09-22 shared detail reading system
    Princes Street trial promoted to completed story/detail pages.
    Structural series labels (01/02/03...), quotes, epitaphs, notes, photos and special cards keep their own component styling. */
-body.course-detail .detail-article,
 body.detail-reading .detail-article,
 body.detail-reading .article,
 body.detail-reading main article>.wrap{
@@ -594,12 +598,10 @@ body.detail-reading main article>.wrap{
   word-break:keep-all;
   overflow-wrap:break-word;
 }
-body.course-detail .detail-article>p,
 body.course-detail .detail-article>div:not([class*="nav"]):not([class*="pager"]):not([class*="contact"]):not([class*="action"]):not([class*="overview"])>p,
 body.detail-reading .detail-article>p,
 body.detail-reading .article>p,
 body.detail-reading main article>.wrap>p{margin-bottom:20px}
-body.course-detail .detail-article h2:not(.course-title),
 body.detail-reading .detail-article h2,
 body.detail-reading .article h2,
 body.detail-reading main article>.wrap>h2{
@@ -615,16 +617,13 @@ body.detail-reading main article>.wrap>h2{
   color:var(--deep);
 }
 @media(max-width:719px){
-  body.course-detail .detail-article,
   body.detail-reading .detail-article,
   body.detail-reading .article,
   body.detail-reading main article>.wrap{font-size:16.5px;line-height:1.82}
-  body.course-detail .detail-article>p,
   body.course-detail .detail-article>div:not([class*="nav"]):not([class*="pager"]):not([class*="contact"]):not([class*="action"]):not([class*="overview"])>p,
   body.detail-reading .detail-article>p,
   body.detail-reading .article>p,
   body.detail-reading main article>.wrap>p{margin-bottom:19px}
-  body.course-detail .detail-article h2:not(.course-title),
   body.detail-reading .detail-article h2,
   body.detail-reading .article h2,
   body.detail-reading main article>.wrap>h2{margin-top:58px;margin-bottom:33px}
