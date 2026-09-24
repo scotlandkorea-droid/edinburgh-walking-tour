@@ -783,3 +783,28 @@ body.grassmarket-story-detail .detail-article h2{margin-top:42px}
 body.grassmarket-story-detail .placeholder{padding:22px;border-radius:16px;background:var(--sage);color:var(--muted)}
 body.grassmarket-story-detail footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
 @media(min-width:900px){body.grassmarket-story-detail .story-tabs{flex-wrap:wrap;overflow:visible}}
+
+
+/* GREYFRIARS STORY DETAIL COMMON */
+body.greyfriars-story-detail{--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage:#e8eee8;--line:#e3ded5;--max:900px;margin:0;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink);line-height:1.75}
+body.greyfriars-story-detail *{box-sizing:border-box}
+body.greyfriars-story-detail a{color:inherit}
+body.greyfriars-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
+body.greyfriars-story-detail header{border-bottom:1px solid var(--line)}
+body.greyfriars-story-detail header .wrap{min-height:64px;display:flex;justify-content:space-between;align-items:center}
+body.greyfriars-story-detail .brand,body.greyfriars-story-detail .top{text-decoration:none}
+body.greyfriars-story-detail .brand{font-weight:800}
+body.greyfriars-story-detail .top,body.greyfriars-story-detail .crumbs{font-size:14px;color:var(--muted)}
+body.greyfriars-story-detail .greyfriars-intro{background:var(--cream);padding:30px 0 38px}
+body.greyfriars-story-detail .crumbs a{text-decoration:none}
+body.greyfriars-story-detail .crumbs span{margin:0 6px}
+body.greyfriars-story-detail h1{font-size:clamp(32px,7vw,54px);line-height:1.1;letter-spacing:-.04em;margin:12px 0}
+body.greyfriars-story-detail.greyfriars-title-large h1{font-size:clamp(34px,8vw,58px);line-height:1.08;letter-spacing:-.045em}
+body.greyfriars-story-detail .lead{font-size:18px;color:var(--muted);margin:0}
+body.greyfriars-story-detail main{padding:44px 0 76px}
+body.greyfriars-story-detail .article{max-width:760px}
+body.greyfriars-story-detail .article p{margin:0 0 16px}
+body.greyfriars-story-detail .article h2{font-size:25px;letter-spacing:-.03em;margin:38px 0 12px}
+body.greyfriars-story-detail .quote{padding:18px 20px;background:var(--cream);border-radius:16px;margin:22px 0}
+body.greyfriars-story-detail.greyfriars-preline-quote .quote{white-space:pre-line}
+body.greyfriars-story-detail footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
