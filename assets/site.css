@@ -729,7 +729,6 @@ body.stg-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.stg-story-detail header{border-bottom:1px solid var(--line);background:#faf8f3}
 body.stg-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 body.stg-story-detail .brand{font-weight:800;text-decoration:none}
-body.stg-story-detail .toplink{font-size:14px;color:var(--muted);text-decoration:none}
 body.stg-story-detail .detail-intro{padding:30px 0 34px;background:linear-gradient(180deg,var(--cream),#fff)}
 body.stg-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
 body.stg-story-detail .breadcrumbs a{text-decoration:none}
@@ -740,8 +739,6 @@ body.stg-story-detail main article{padding:42px 0 76px}
 body.stg-story-detail h2{font-size:25px;letter-spacing:-.025em;margin:34px 0 10px;padding-left:12px;border-left:3px solid var(--plum)}
 body.stg-story-detail p{margin:0 0 15px}
 body.stg-story-detail .note{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage);color:#46534c}
-body.stg-story-detail .story-series{margin:38px 0 0;padding-top:24px;border-top:1px solid var(--line)}
-body.stg-story-detail .story-series a{font-weight:750;text-decoration:none}
 body.stg-story-detail .page-nav{margin-top:18px}
 body.stg-story-detail footer{border-top:1px solid var(--line);padding:26px 0 38px;color:var(--muted);font-size:13px}
 
@@ -753,9 +750,8 @@ body.grassmarket-story-detail a{color:inherit}
 body.grassmarket-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.grassmarket-story-detail header{border-bottom:1px solid var(--line)}
 body.grassmarket-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-body.grassmarket-story-detail .brand,body.grassmarket-story-detail .top{text-decoration:none}
+body.grassmarket-story-detail .brand{text-decoration:none}
 body.grassmarket-story-detail .brand{font-weight:800}
-body.grassmarket-story-detail .top{margin-left:auto;font-size:14px;color:var(--muted);white-space:nowrap}
 body.grassmarket-story-detail .detail-intro{padding:30px 0 34px;background:var(--cream)}
 body.grassmarket-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
 body.grassmarket-story-detail .breadcrumbs a{text-decoration:none}
@@ -780,9 +776,9 @@ body.greyfriars-story-detail a{color:inherit}
 body.greyfriars-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.greyfriars-story-detail header{border-bottom:1px solid var(--line)}
 body.greyfriars-story-detail header .wrap{min-height:64px;display:flex;justify-content:space-between;align-items:center}
-body.greyfriars-story-detail .brand,body.greyfriars-story-detail .top{text-decoration:none}
+body.greyfriars-story-detail .brand{text-decoration:none}
 body.greyfriars-story-detail .brand{font-weight:800}
-body.greyfriars-story-detail .top,body.greyfriars-story-detail .crumbs{font-size:14px;color:var(--muted)}
+body.greyfriars-story-detail .crumbs{font-size:14px;color:var(--muted)}
 body.greyfriars-story-detail .greyfriars-intro{background:var(--cream);padding:30px 0 38px}
 body.greyfriars-story-detail .crumbs a{text-decoration:none}
 body.greyfriars-story-detail .crumbs span{margin:0 6px}
@@ -805,9 +801,9 @@ body.museum-story-detail a{color:inherit}
 body.museum-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.museum-story-detail header{border-bottom:1px solid var(--line)}
 body.museum-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-body.museum-story-detail .brand,body.museum-story-detail .toplink{text-decoration:none}
+body.museum-story-detail .brand{text-decoration:none}
 body.museum-story-detail .brand{font-weight:800}
-body.museum-story-detail .toplink,body.museum-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
+body.museum-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
 body.museum-story-detail .detail-intro{padding:30px 0 34px;background:var(--cream)}
 body.museum-story-detail .breadcrumbs a{text-decoration:none}
 body.museum-story-detail .eyebrow{margin:14px 0 2px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6f3547}
