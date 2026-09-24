@@ -283,7 +283,7 @@ body>footer.travel-footer>a{display:block;width:min(900px,calc(100% - 36px));mar
 
 /* Place-list horizontal touch scrolling — mobile */
 .place-strip{display:flex;flex-wrap:nowrap;gap:8px;width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;padding:2px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;overscroll-behavior-x:contain}
-.place-strip>a{display:block;flex:0 0 auto;padding:10px 12px;border-radius:10px;background:var(--cream);font-weight:680;white-space:nowrap}
+.place-strip>a{display:block;flex:0 0 auto;white-space:nowrap}
 
 /* Keep horizontal place strips from widening the mobile page itself */
 html,body{max-width:100%;overflow-x:hidden}
@@ -681,8 +681,7 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .place-scope-section>.wrap>.section-head{border-left-color:#5e293c}
 .place-scope-section>.wrap>.section-head>h2{color:#5e293c}
 .place-scope-section .area>h2{color:var(--deep-current);border-left-color:var(--sage-line)}
-.place-strip>a,.place-strip>.place-chip{background:#f1f5f0;border:1px solid #d9e3da;color:#263a30}
-.place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;font-weight:720;white-space:nowrap;scroll-snap-align:start}
+.place-strip>a,.place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;background:#f1f5f0;border:1px solid #d9e3da;color:#263a30;font-weight:720;white-space:nowrap;scroll-snap-align:start}
 .place-strip>.place-pending{cursor:default}
 @media(max-width:619px){.place-strip>a,.place-strip>.place-chip{max-width:250px}}
 
@@ -724,4 +723,4 @@ body .sage{background:var(--sage-current)}body .section-head h2,body .page-hero 
 @media(min-width:620px){.page-hero .explore-tabs{width:auto!important;min-width:430px}.page-hero .location-tabs{width:auto!important}}
 
 /* V17 2026-09-14 bilingual place labels + Scotland regional hierarchy */
-.place-en{font-size:.84em;font-weight:500;color:#7b857f;white-space:nowrap}.place-strip .place-chip{flex:0 0 auto;max-width:250px;padding:11px 14px;border-radius:12px;background:#f1f5f0;border:1px solid #d9e3da;font-weight:720;scroll-snap-align:start;color:#263a30}.place-subtopics{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:3px 0 0 14px;color:#68746d;font-size:13px}.place-subtopics strong{color:#405149;font-size:12px;font-weight:800}.place-subtopics span:not(.place-en){padding-left:10px;border-left:1px solid #d7ddd8}.place-strip a{max-width:270px}@media(max-width:619px){.place-en{font-size:.8em}.place-strip a,.place-strip .place-chip{max-width:250px}.place-subtopics{margin-left:12px;font-size:12.5px}}
+.place-en{font-size:.84em;font-weight:500;color:#7b857f;white-space:nowrap}.place-subtopics{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:3px 0 0 14px;color:#68746d;font-size:13px}.place-subtopics strong{color:#405149;font-size:12px;font-weight:800}.place-subtopics span:not(.place-en){padding-left:10px;border-left:1px solid #d7ddd8}.place-strip a{max-width:270px}@media(max-width:619px){.place-en{font-size:.8em}.place-strip a,.place-strip .place-chip{max-width:250px}.place-subtopics{margin-left:12px;font-size:12.5px}}
