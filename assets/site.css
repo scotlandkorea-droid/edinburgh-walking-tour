@@ -325,11 +325,13 @@ body.course-detail .crumbs span{margin:0 6px!important}
 body.course-detail .course-title,
 .theme-detail-intro .course-title{
   margin:24px 0 2px!important;
-  font-size:clamp(37px,8.6vw,58px)!important;
-  line-height:1.02!important;
+  font-size:clamp(28px,7.8vw,56px)!important;
+  line-height:1.04!important;
   letter-spacing:-.045em!important;
   color:var(--deep,#17271f)!important;
   font-weight:850!important;
+  word-break:keep-all!important;
+  text-wrap:pretty;
 }
 body.course-detail .course-title-en,
 .theme-detail-intro .course-title-en{
@@ -712,6 +714,5 @@ main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:l
 .explore-tab.active,.location-tab.active{background:#dce8df;border-color:#8ea494;color:#14291f;cursor:default}
 .explore-tab:not(.active):hover,.explore-tab:not(.active):focus-visible,.location-tab:not(.active):hover,.location-tab:not(.active):focus-visible{background:#f7faf7;border-color:#9eb2a4}
 
-/* Keep Korean theme titles compact without forcing a balanced two-line wrap. */
-.theme-detail-intro .course-title{word-break:keep-all;font-size:clamp(35px,8vw,54px)!important}
+/* Keep Korean card titles from breaking inside words. */
 .theme-list .story-card strong{word-break:keep-all}
