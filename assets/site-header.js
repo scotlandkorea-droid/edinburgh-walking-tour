@@ -1,4 +1,4 @@
-(()=>{
+(async()=>{
   const fitTitles=()=>{
     document.querySelectorAll('.course-title').forEach(el=>{
       el.style.removeProperty('font-size');
@@ -19,11 +19,11 @@
     });
   };
   const sharePage=async(button)=>{
-    const data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:location.href};
+    const data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:cleanPageUrl};
     try{
       if(navigator.share) await navigator.share(data);
       else if(navigator.clipboard){
-        await navigator.clipboard.writeText(location.href);
+        await navigator.clipboard.writeText(cleanPageUrl);
         const original=button.textContent;
         button.textContent='✓ 링크 복사됨';
         setTimeout(()=>button.textContent=original,1800);
@@ -33,33 +33,109 @@
   document.querySelectorAll('.travel-share,.share-btn').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
 
   const normalizePath=path=>path.replace(/\/+$/,'')||'/';
+  const NAV_TOUR='#tour-nav';
+  const NAV_PLACE='#place-nav';
+  const withContext=(url,context)=>url+(context==='tour'?NAV_TOUR:NAV_PLACE);
+  const cleanPageUrl=location.origin+location.pathname+location.search;
+
+  const setCourseBreadcrumb=(label)=>{
+    const breadcrumbs=document.querySelector('.breadcrumbs');
+    const crumbs=document.querySelector('.crumbs');
+    if(breadcrumbs)breadcrumbs.innerHTML=`<a href="/">홈</a> › <a href="/#tour">에든버러 워킹투어 코스</a> › ${label}`;
+    if(crumbs)crumbs.innerHTML=`<a href="/">홈</a><span>›</span><a href="/#tour">에든버러 워킹투어 코스</a><span>›</span>${label}`;
+  };
+
+  const setPlaceBreadcrumb=(area)=>{
+    const breadcrumbs=document.querySelector('.breadcrumbs');
+    const crumbs=document.querySelector('.crumbs');
+    if(breadcrumbs)breadcrumbs.innerHTML=`<a href="/">홈</a> › <a href="/edinburgh/places.html#edinburgh">장소로 보기</a> › ${area}`;
+    if(crumbs)crumbs.innerHTML=`<a href="/">홈</a><span>›</span><a href="/edinburgh/places.html#edinburgh">장소로 보기</a><span>›</span>${area}`;
+  };
+
+  const renderNav=(items,index,context,label)=>{
+    const nav=document.querySelector('.page-nav:not(.story-series-nav)');
+    if(!nav)return;
+    nav.className='page-nav '+(context==='tour'?'tour-course-nav':'place-browse-nav');
+    if(index===0)nav.classList.add('next-only');
+    if(index===items.length-1)nav.classList.add('prev-only');
+    nav.setAttribute('aria-label',label);
+    const links=[];
+    if(index>0){
+      const prev=items[index-1];
+      links.push(`<a href="${withContext(prev.url,context)}">← ${prev.name}</a>`);
+    }
+    if(index<items.length-1){
+      const next=items[index+1];
+      links.push(`<a href="${withContext(next.url,context)}">${next.name} →</a>`);
+    }
+    nav.innerHTML=links.join('');
+  };
+
   const syncTourCourseNav=()=>{
     const stops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
-    if(!stops.length)return;
+    if(!stops.length)return false;
     const current=normalizePath(location.pathname);
     const index=stops.findIndex(stop=>normalizePath(stop.url)===current);
-    if(index<0)return;
-    const nav=document.querySelector('.page-nav:not(.story-series-nav)');
-    if(nav){
-      nav.className='page-nav tour-course-nav';
-      if(index===0)nav.classList.add('next-only');
-      if(index===stops.length-1)nav.classList.add('prev-only');
-      nav.setAttribute('aria-label','워킹투어 코스 이전·다음');
-      const links=[];
-      if(index>0){
-        const prev=stops[index-1];
-        links.push(`<a href="${prev.url}">← ${prev.name}</a>`);
-      }
-      if(index<stops.length-1){
-        const next=stops[index+1];
-        links.push(`<a href="${next.url}">${next.name} →</a>`);
-      }
-      nav.innerHTML=links.join('');
-    }
+    if(index<0)return false;
+    renderNav(stops,index,'tour','워킹투어 코스 이전·다음');
     const hub=document.querySelector('.course-hub');
     if(hub){hub.href='/#tour';hub.textContent='워킹투어 코스 전체 보기'}
+    setCourseBreadcrumb(stops[index].name);
+    return true;
   };
-  syncTourCourseNav();
+
+  const getPlaceArea=async()=>{
+    const current=normalizePath(location.pathname);
+    try{
+      const response=await fetch('/edinburgh/places.html',{credentials:'same-origin'});
+      if(!response.ok)return null;
+      const markup=await response.text();
+      const doc=new DOMParser().parseFromString(markup,'text/html');
+      for(const area of doc.querySelectorAll('#edinburgh .area')){
+        const title=area.querySelector('h2')?.textContent.trim()||'에든버러';
+        const items=[...area.querySelectorAll('.place-strip a[href]')].map(link=>{
+          const href=link.getAttribute('href');
+          const url=new URL(href,location.origin);
+          return {name:link.textContent.replace(/\([^)]*\)/g,'').replace(/\s+/g,' ').trim(),url:url.pathname};
+        });
+        const index=items.findIndex(item=>normalizePath(item.url)===current);
+        if(index>=0)return {title,items,index};
+      }
+    }catch(e){}
+    return null;
+  };
+
+  const syncPlaceBrowseNav=async()=>{
+    const area=await getPlaceArea();
+    if(!area)return false;
+    renderNav(area.items,area.index,'place','장소로 보기 이전·다음');
+    const hub=document.querySelector('.course-hub');
+    if(hub){hub.href='/edinburgh/places.html#edinburgh';hub.textContent='장소 전체 보기'}
+    setPlaceBreadcrumb(area.title);
+    return true;
+  };
+
+  const tourStops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
+  const isTourPage=tourStops.some(stop=>normalizePath(stop.url)===normalizePath(location.pathname));
+  const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
+  const context=requestedContext||(isTourPage?'tour':'place');
+
+  if(context==='place')await syncPlaceBrowseNav();
+  else syncTourCourseNav();
+
+  if(document.querySelector('#edinburgh.place-scope-section')){
+    document.querySelectorAll('#edinburgh .place-strip a[href]').forEach(link=>{
+      const url=new URL(link.getAttribute('href'),location.origin);
+      if(url.origin===location.origin)link.setAttribute('href',url.pathname+NAV_PLACE);
+    });
+  }
+
+  if(document.querySelector('#tour')){
+    document.querySelectorAll('#tour .route-card[href]').forEach(link=>{
+      const url=new URL(link.getAttribute('href'),location.origin);
+      link.setAttribute('href',url.pathname+NAV_TOUR);
+    });
+  }
 
   const normalizePlaceNav=()=>{
     document.querySelectorAll('.page-nav:not(.story-series-nav)').forEach(nav=>{
@@ -67,6 +143,10 @@
     });
     document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
       if(link.querySelector('.place-nav-label'))return;
+      if(link.closest('.place-browse-nav')){
+        const url=new URL(link.getAttribute('href'),location.origin);
+        link.setAttribute('href',url.pathname+NAV_PLACE);
+      }
       const raw=link.textContent.replace(/\s+/g,' ').trim();
       let direction='';
       let label=raw;
