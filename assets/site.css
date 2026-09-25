@@ -963,37 +963,37 @@ body.greyfriars-bobby-place{--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage
 
 
 /* FIFE FEATURED HUB — St Andrews stays inside the Fife region, but reads as a deeper city/tour hub */
-.fife-featured-list{display:block!important;margin:0 0 12px!important}
+.fife-featured-list{display:block;margin:0 0 12px}
 .fife-featured-hub{
-  position:relative!important;display:block!important;min-height:126px!important;
-  padding:20px 48px 20px 20px!important;border:1px solid #cfd9d1!important;
-  border-radius:18px!important;background:linear-gradient(180deg,#f7f5ef 0%,#eef3ed 100%)!important;
-  text-decoration:none!important;box-shadow:0 8px 20px rgba(37,54,45,.06)!important
+  position:relative;display:block;min-height:126px;
+  padding:20px 48px 20px 20px;border:1px solid #cfd9d1;
+  border-radius:18px;background:linear-gradient(180deg,#f7f5ef 0%,#eef3ed 100%);
+  text-decoration:none;box-shadow:0 8px 20px rgba(37,54,45,.06)
 }
 .fife-featured-hub .fife-featured-kicker{
-  display:block!important;margin:0 0 8px!important;color:var(--plum)!important;
-  font-size:11px!important;font-weight:850!important;letter-spacing:.09em!important;line-height:1.2!important
+  display:block;margin:0 0 8px;color:var(--plum);
+  font-size:11px;font-weight:850;letter-spacing:.09em;line-height:1.2
 }
 .fife-featured-hub>strong{
-  display:block!important;margin:0 0 8px!important;color:var(--deep)!important;
-  font-size:21px!important;font-weight:850!important;line-height:1.25!important;letter-spacing:-.02em!important
+  display:block;margin:0 0 8px;color:var(--deep);
+  font-size:21px;font-weight:850;line-height:1.25;letter-spacing:-.02em
 }
-.fife-featured-hub .place-en{font-size:.72em!important;font-weight:700!important;color:var(--muted)!important}
+.fife-featured-hub .place-en{font-size:.72em;font-weight:700;color:var(--muted)}
 .fife-featured-hub .fife-featured-summary{
-  display:block!important;max-width:680px!important;color:#53635b!important;
-  font-size:13px!important;font-weight:680!important;line-height:1.55!important;word-break:keep-all!important
+  display:block;max-width:680px;color:#53635b;
+  font-size:13px;font-weight:680;line-height:1.55;word-break:keep-all
 }
 .fife-featured-hub .fife-featured-arrow{
-  position:absolute!important;right:18px!important;top:50%!important;transform:translateY(-50%)!important;
-  color:var(--plum)!important;font-size:26px!important;font-weight:500!important;line-height:1!important
+  position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  color:var(--plum);font-size:26px;font-weight:500;line-height:1
 }
 .fife-featured-hub:hover,.fife-featured-hub:focus-visible{
-  border-color:#b9c8bc!important;background:linear-gradient(180deg,#f5f3ec 0%,#e8efe8 100%)!important;
-  box-shadow:0 10px 24px rgba(37,54,45,.09)!important
+  border-color:#b9c8bc;background:linear-gradient(180deg,#f5f3ec 0%,#e8efe8 100%);
+  box-shadow:0 10px 24px rgba(37,54,45,.09)
 }
-.fife-featured-hub:focus-visible{outline:2px solid rgba(111,53,71,.2)!important;outline-offset:2px!important}
+.fife-featured-hub:focus-visible{outline:2px solid rgba(111,53,71,.2);outline-offset:2px}
 @media(min-width:620px){
-  .fife-featured-hub{min-height:138px!important;padding:24px 58px 24px 24px!important}
-  .fife-featured-hub>strong{font-size:24px!important}
-  .fife-featured-hub .fife-featured-summary{font-size:14px!important}
+  .fife-featured-hub{min-height:138px;padding:24px 58px 24px 24px}
+  .fife-featured-hub>strong{font-size:24px}
+  .fife-featured-hub .fife-featured-summary{font-size:14px}
 }
