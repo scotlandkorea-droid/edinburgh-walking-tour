@@ -75,6 +75,28 @@ function loadLeaflet(){
   });return leafletPromise;
 }
 function arrowAngle(a,b){const lat=(a[0]+b[0])/2*Math.PI/180;const dx=(b[1]-a[1])*Math.cos(lat),dy=-(b[0]-a[0]);return Math.atan2(dy,dx)*180/Math.PI}
+function bindInteractiveLabel(marker,label,tooltipOptions={}){
+  marker.bindTooltip(label,{permanent:true,interactive:true,...tooltipOptions,className:'route-map-label'});
+  const setup=()=>{
+    const tooltip=marker.getTooltip(),el=tooltip&&tooltip.getElement();
+    if(!el||el.dataset.routeInteractive==='1')return;
+    el.dataset.routeInteractive='1';
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label',label+' 자세히 보기 열기');
+    const open=e=>{
+      if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;
+      if(e.type==='keydown')e.preventDefault();
+      if(window.L&&L.DomEvent)L.DomEvent.stopPropagation(e);
+      marker.openPopup();
+    };
+    el.addEventListener('click',open);
+    el.addEventListener('keydown',open);
+  };
+  marker.on('tooltipopen',setup);
+  requestAnimationFrame(setup);
+  return marker;
+}
 function initMap(){
   if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(mapBounds,{padding:[28,28]})},80);return}
   map=L.map(mapEl,{zoomControl:true,scrollWheelZoom:true});
@@ -82,7 +104,9 @@ function initMap(){
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
   L.polyline([optionalFrom,[optionalStop.lat,optionalStop.lng]],{color:'#6f8477',weight:3,opacity:.85,dashArray:'6 7'}).addTo(map);
   const optionalIcon=L.divIcon({className:'route-map-optional-wrap',html:'<span class="route-map-optional">별도</span>',iconSize:[34,24],iconAnchor:[17,12]});
-  L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon}).addTo(map).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
+  const optionalMarker=L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon,title:optionalStop.n}).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
+  bindInteractiveLabel(optionalMarker,optionalStop.n,{direction:'top',offset:[0,-10]});
+  optionalMarker.addTo(map);
   arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
   stops.forEach((s,i)=>{
     const isStart=i===0,isEnd=i===stops.length-1,number=i+1;
@@ -94,8 +118,9 @@ function initMap(){
     const storyIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
     const mapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
     const popup=`<div class="route-popup"><strong>${number}. ${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
-    const m=L.marker([s.lat,s.lng],{icon,title:`${number}. ${s.n}`}).addTo(map).bindPopup(popup);
-    m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,14]:(isEnd?[0,14]:[0,-10]),className:'route-map-label'});
+    const m=L.marker([s.lat,s.lng],{icon,title:`${number}. ${s.n}`}).bindPopup(popup);
+    bindInteractiveLabel(m,s.n,{direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,14]:(isEnd?[0,14]:[0,-10])});
+    m.addTo(map);
   });
   map.fitBounds(mapBounds,{padding:[28,28]});
 }
