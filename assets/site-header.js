@@ -45,15 +45,28 @@
     if(crumbs)crumbs.innerHTML=`<a href="/">홈</a><span>›</span><a href="/#tour">에든버러 워킹투어 코스</a><span>›</span>${label}`;
   };
 
-  const setPlaceBreadcrumb=(area)=>{
+  const setPlaceBreadcrumb=(area,scope)=>{
     const breadcrumbs=document.querySelector('.breadcrumbs');
     const crumbs=document.querySelector('.crumbs');
-    if(breadcrumbs)breadcrumbs.innerHTML=`<a href="/">홈</a> › <a href="/edinburgh/places.html#edinburgh">장소로 보기</a> › ${area}`;
-    if(crumbs)crumbs.innerHTML=`<a href="/">홈</a><span>›</span><a href="/edinburgh/places.html#edinburgh">장소로 보기</a><span>›</span>${area}`;
+    const scopeHash=scope==='scotland'?'#scotland':'#edinburgh';
+    const scopeLabel=scope==='scotland'?'스코틀랜드 전역':'에든버러';
+    if(breadcrumbs)breadcrumbs.innerHTML=`<a href="/">홈</a> › <a href="/edinburgh/places.html${scopeHash}">장소로 보기</a> › ${scopeLabel} › ${area}`;
+    if(crumbs)crumbs.innerHTML=`<a href="/">홈</a><span>›</span><a href="/edinburgh/places.html${scopeHash}">장소로 보기</a><span>›</span>${scopeLabel}<span>›</span>${area}`;
   };
 
   const renderNav=(items,index,context,label)=>{
-    const nav=document.querySelector('.page-nav:not(.story-series-nav)');
+    let nav=document.querySelector('.page-nav:not(.story-series-nav)');
+    if(context==='place'&&items.length<=1){
+      if(nav)nav.remove();
+      return;
+    }
+    if(!nav&&context==='place'){
+      nav=document.createElement('nav');
+      const actions=document.querySelector('.action-buttons');
+      const kakao=document.querySelector('.kakao-action');
+      if(actions)actions.insertAdjacentElement('afterend',nav);
+      else if(kakao)kakao.insertAdjacentElement('beforebegin',nav);
+    }
     if(!nav)return;
     nav.className='page-nav '+(context==='tour'?'tour-course-nav':'place-browse-nav');
     if(index===0)nav.classList.add('next-only');
@@ -91,15 +104,18 @@
       if(!response.ok)return null;
       const markup=await response.text();
       const doc=new DOMParser().parseFromString(markup,'text/html');
-      for(const area of doc.querySelectorAll('#edinburgh .area')){
-        const title=area.querySelector('h2')?.textContent.trim()||'에든버러';
-        const items=[...area.querySelectorAll('.place-strip a[href]')].map(link=>{
-          const href=link.getAttribute('href');
-          const url=new URL(href,location.origin);
-          return {name:link.textContent.replace(/\([^)]*\)/g,'').replace(/\s+/g,' ').trim(),url:url.pathname};
-        });
-        const index=items.findIndex(item=>normalizePath(item.url)===current);
-        if(index>=0)return {title,items,index};
+      for(const scope of ['edinburgh','scotland']){
+        for(const area of doc.querySelectorAll('#'+scope+' .area')){
+          const title=area.querySelector('h2')?.textContent.trim()||(scope==='scotland'?'스코틀랜드 전역':'에든버러');
+          const items=[...area.querySelectorAll('a[href]')].map(link=>{
+            const href=link.getAttribute('href');
+            const url=new URL(href,location.origin);
+            const labelSource=link.querySelector('strong')||link;
+            return {name:labelSource.textContent.replace(/\([^)]*\)/g,'').replace(/\s+/g,' ').trim(),url:url.pathname};
+          }).filter(item=>item.url&&item.url!=='/edinburgh/places.html');
+          const index=items.findIndex(item=>normalizePath(item.url)===current);
+          if(index>=0)return {title,items,index,scope};
+        }
       }
     }catch(e){}
     return null;
@@ -110,23 +126,25 @@
     if(!area)return false;
     renderNav(area.items,area.index,'place','장소로 보기 이전·다음');
     const hub=document.querySelector('.course-hub');
-    if(hub){hub.href='/edinburgh/places.html#edinburgh';hub.textContent='장소 전체 보기'}
-    setPlaceBreadcrumb(area.title);
+    if(hub){
+      hub.href='/edinburgh/places.html#'+area.scope;
+      hub.textContent=area.scope==='scotland'?'스코틀랜드 전역 장소 보기':'장소 전체 보기';
+    }
+    setPlaceBreadcrumb(area.title,area.scope);
     return true;
   };
 
   const tourStops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
   const currentPath=normalizePath(location.pathname);
   const isTourPage=tourStops.some(stop=>normalizePath(stop.url)===currentPath);
-  const isEdinburghPlaceDetail=/^\/places\/[^/]+\.html$/.test(currentPath)||/^\/edinburgh\/places\/[^/]+\.html$/.test(currentPath);
   const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
   const context=requestedContext||(isTourPage?'tour':'place');
 
-  const placeContextMatched=context==='place'&&isEdinburghPlaceDetail?await syncPlaceBrowseNav():false;
+  const placeContextMatched=context==='place'?await syncPlaceBrowseNav():false;
   if(context==='tour'&&isTourPage)syncTourCourseNav();
 
-  if(document.querySelector('#edinburgh.place-scope-section')){
-    document.querySelectorAll('#edinburgh .place-strip a[href]').forEach(link=>{
+  if(document.querySelector('.place-scope-section')){
+    document.querySelectorAll('#edinburgh .area a[href],#scotland .area a[href]').forEach(link=>{
       const url=new URL(link.getAttribute('href'),location.origin);
       if(url.origin===location.origin)link.setAttribute('href',url.pathname+NAV_PLACE);
     });
@@ -140,9 +158,11 @@
   }
 
   const normalizePlaceNav=()=>{
-    document.querySelectorAll('.page-nav:not(.story-series-nav)').forEach(nav=>{
-      if(!nav.classList.contains('tour-course-nav'))nav.classList.add('place-browse-nav');
-    });
+    if(placeContextMatched){
+      document.querySelectorAll('.page-nav:not(.story-series-nav)').forEach(nav=>{
+        if(!nav.classList.contains('tour-course-nav'))nav.classList.add('place-browse-nav');
+      });
+    }
     document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
       if(link.querySelector('.place-nav-label'))return;
       if(placeContextMatched&&link.closest('.place-browse-nav')){
