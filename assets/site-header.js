@@ -139,8 +139,11 @@
   const isTourPage=tourStops.some(stop=>normalizePath(stop.url)===currentPath);
   const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
   const context=requestedContext||(isTourPage?'tour':'place');
+  const hasRegionalNavSurface=!!document.querySelector('.page-nav:not(.story-series-nav)');
+  const isScotlandPlaceHub=/^\/scotland\/places\/[^/]+\.html$/.test(currentPath)||currentPath==='/st-andrews';
+  const shouldResolvePlaceContext=context==='place'&&(requestedContext==='place'||hasRegionalNavSurface||isScotlandPlaceHub);
 
-  const placeContextMatched=context==='place'?await syncPlaceBrowseNav():false;
+  const placeContextMatched=shouldResolvePlaceContext?await syncPlaceBrowseNav():false;
   if(context==='tour'&&isTourPage)syncTourCourseNav();
 
   if(document.querySelector('.place-scope-section')){
