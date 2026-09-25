@@ -120,8 +120,8 @@
   const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
   const context=requestedContext||(isTourPage?'tour':'place');
 
-  if(context==='place')await syncPlaceBrowseNav();
-  else syncTourCourseNav();
+  const placeContextMatched=context==='place'?await syncPlaceBrowseNav():false;
+  if(context==='tour')syncTourCourseNav();
 
   if(document.querySelector('#edinburgh.place-scope-section')){
     document.querySelectorAll('#edinburgh .place-strip a[href]').forEach(link=>{
@@ -143,7 +143,7 @@
     });
     document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
       if(link.querySelector('.place-nav-label'))return;
-      if(link.closest('.place-browse-nav')){
+      if(placeContextMatched&&link.closest('.place-browse-nav')){
         const url=new URL(link.getAttribute('href'),location.origin);
         link.setAttribute('href',url.pathname+NAV_PLACE);
       }
