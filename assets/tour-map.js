@@ -85,7 +85,7 @@ function initMap(){
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
   L.polyline([optionalFrom,[optionalStop.lat,optionalStop.lng]],{color:'#6f8477',weight:3,opacity:.85,dashArray:'6 7'}).addTo(map);
   const optionalIcon=L.divIcon({className:'route-map-optional-wrap',html:'<span class="route-map-optional">별도</span>',iconSize:[34,24],iconAnchor:[17,12]});
-  const optionalMarker=L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon,title:optionalStop.n}).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
+  const optionalMarker=L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon,title:optionalStop.n}).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}#place-nav">자세히 보기 ›</a>`);
   bindInteractiveLabel(optionalMarker,optionalStop.n,{direction:'top',offset:[0,-10]});
   optionalMarker.addTo(map);
   arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
