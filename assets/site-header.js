@@ -116,12 +116,14 @@
   };
 
   const tourStops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
-  const isTourPage=tourStops.some(stop=>normalizePath(stop.url)===normalizePath(location.pathname));
+  const currentPath=normalizePath(location.pathname);
+  const isTourPage=tourStops.some(stop=>normalizePath(stop.url)===currentPath);
+  const isEdinburghPlaceDetail=/^\/places\/[^/]+\.html$/.test(currentPath)||/^\/edinburgh\/places\/[^/]+\.html$/.test(currentPath);
   const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
   const context=requestedContext||(isTourPage?'tour':'place');
 
-  const placeContextMatched=context==='place'?await syncPlaceBrowseNav():false;
-  if(context==='tour')syncTourCourseNav();
+  const placeContextMatched=context==='place'&&isEdinburghPlaceDetail?await syncPlaceBrowseNav():false;
+  if(context==='tour'&&isTourPage)syncTourCourseNav();
 
   if(document.querySelector('#edinburgh.place-scope-section')){
     document.querySelectorAll('#edinburgh .place-strip a[href]').forEach(link=>{
