@@ -32,7 +32,39 @@
   };
   document.querySelectorAll('.travel-share,.share-btn').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
 
+  const normalizePath=path=>path.replace(/\/+$/,'')||'/';
+  const syncTourCourseNav=()=>{
+    const stops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
+    if(!stops.length)return;
+    const current=normalizePath(location.pathname);
+    const index=stops.findIndex(stop=>normalizePath(stop.url)===current);
+    if(index<0)return;
+    const nav=document.querySelector('.page-nav:not(.story-series-nav)');
+    if(nav){
+      nav.className='page-nav tour-course-nav';
+      if(index===0)nav.classList.add('next-only');
+      if(index===stops.length-1)nav.classList.add('prev-only');
+      nav.setAttribute('aria-label','워킹투어 코스 이전·다음');
+      const links=[];
+      if(index>0){
+        const prev=stops[index-1];
+        links.push(`<a href="${prev.url}">← ${prev.name}</a>`);
+      }
+      if(index<stops.length-1){
+        const next=stops[index+1];
+        links.push(`<a href="${next.url}">${next.name} →</a>`);
+      }
+      nav.innerHTML=links.join('');
+    }
+    const hub=document.querySelector('.course-hub');
+    if(hub){hub.href='/#tour';hub.textContent='워킹투어 코스 전체 보기'}
+  };
+  syncTourCourseNav();
+
   const normalizePlaceNav=()=>{
+    document.querySelectorAll('.page-nav:not(.story-series-nav)').forEach(nav=>{
+      if(!nav.classList.contains('tour-course-nav'))nav.classList.add('place-browse-nav');
+    });
     document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
       if(link.querySelector('.place-nav-label'))return;
       const raw=link.textContent.replace(/\s+/g,' ').trim();
