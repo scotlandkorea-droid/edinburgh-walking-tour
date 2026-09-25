@@ -140,7 +140,8 @@
   const requestedContext=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
   const context=requestedContext||(isTourPage?'tour':'place');
   const hasRegionalNavSurface=!!document.querySelector('.page-nav:not(.story-series-nav)');
-  const isScotlandPlaceHub=/^\/scotland\/places\/[^/]+\.html$/.test(currentPath)||currentPath==='/st-andrews';
+  const isStorySeriesPage=!!document.querySelector('.story-series-nav');
+  const isScotlandPlaceHub=currentPath==='/st-andrews'||(/^\/scotland\/places\/[^/]+\.html$/.test(currentPath)&&!isStorySeriesPage);
   const shouldResolvePlaceContext=context==='place'&&(requestedContext==='place'||hasRegionalNavSurface||isScotlandPlaceHub);
 
   const placeContextMatched=shouldResolvePlaceContext?await syncPlaceBrowseNav():false;
