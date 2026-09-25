@@ -98,7 +98,7 @@ function initMap(){
     const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.lat+','+s.lng)}`;
     const storyIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
     const mapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
-    const popup=`<div class="route-popup"><strong>${number}. ${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
+    const popup=`<div class="route-popup"><strong>${number}. ${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}#tour-nav">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
     const m=L.marker([s.lat,s.lng],{icon,title:`${number}. ${s.n}`}).bindPopup(popup);
     bindInteractiveLabel(m,s.n,{direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,14]:(isEnd?[0,14]:[0,-10])});
     m.addTo(map);
