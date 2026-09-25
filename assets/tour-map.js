@@ -61,8 +61,8 @@ function renderPreview(){
   const [ex,ey]=project([stops[stops.length-1].lat,stops[stops.length-1].lng]);
   const [ox,oy]=project([optionalStop.lat,optionalStop.lng]);
   const [ofx,ofy]=project(optionalFrom);
-  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 선택 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 선택</text>`;
-  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 선택 방문 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
+  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 별도 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 별도</text>`;
+  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 별도 방문 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
 }
 renderPreview();
 let map=null,lastFocus=null,leafletPromise=null;
@@ -82,7 +82,7 @@ function initMap(){
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
   L.polyline([optionalFrom,[optionalStop.lat,optionalStop.lng]],{color:'#6f8477',weight:3,opacity:.85,dashArray:'6 7'}).addTo(map);
   const optionalIcon=L.divIcon({className:'route-map-optional-wrap',html:'<span class="route-map-optional">선택</span>',iconSize:[34,24],iconAnchor:[17,12]});
-  L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon}).addTo(map).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 선택 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
+  L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon}).addTo(map).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
   arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
   stops.forEach((s,i)=>{
     const isStart=i===0,isEnd=i===stops.length-1;
