@@ -149,6 +149,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/arthurs-seat.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/calton-hill.html</loc>
     <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -378,22 +384,20 @@
   </url>
 
   <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/itineraries.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/st-andrews.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/edinburgh-castle-esplanade.html</loc>
     <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/edinburgh-castle-argyle-battery.html</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/edinburgh-castle-st-margarets-chapel.html</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/edinburgh-castle-half-moon-battery.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-harry-potter.html</loc>
@@ -411,6 +415,130 @@
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/greyfriars-alexander-henderson.html</loc>
     <lastmod>2026-09-22</lastmod>
   </url>
-  <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/</loc><lastmod>2026-09-22</lastmod></url>
-  <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/</loc><lastmod>2026-09-22</lastmod></url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/arthur-conan-doyle.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/conan-doyle-pub.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/forth-bridge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/rosslyn.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/sherlock-holmes-statue.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/canongate-overview.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile-deacon-brodie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile-gladstones-land.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile-heart-midlothian.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile-overview.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/royal-mile.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/andrew-carnegie-birthplace-museum.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/dunnottar-castle.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/cashmere.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/edinburgh-restaurants.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/festivals.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/rental-car.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/scottish-food.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/transport.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/whisky.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/glencoe.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/glencoe-three-ways.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/glencoe-massacre.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

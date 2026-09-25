@@ -1,7 +1,7 @@
 (()=>{
 
 const stops=[
-  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326,start:true},
+  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326},
   {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
   {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95218,lng:-3.19570},
   {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
@@ -19,7 +19,7 @@ const stops=[
   {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
   {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
   {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948,end:true}
+  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948}
 ];
 // 장소 마커와 실제 걷는 선을 분리한다. 스콧 기념탑에서 가든으로 들어간 뒤 정원 안을 서쪽으로 걸어 로스 분수 부근까지 간 다음,
 // 북쪽 프린스 스트리트 쪽으로 올라와 동쪽으로 돌아 The Mound/국립미술관 방향으로 이어지는 실제 투어 흐름을 표현한다.
@@ -42,13 +42,16 @@ const path=[
   [55.95316,-3.18718],[55.95328,-3.18948]
 ];
 const arrowSegments=[2,6,10,13,16,19,22,25,28,31,34,37];
+const optionalStop={n:'아서스 시트',u:'/places/arthurs-seat.html',lat:55.94410,lng:-3.16180};
+const optionalFrom=[55.95270,-3.17229];
+const mapBounds=[...path,[optionalStop.lat,optionalStop.lng]];
 const preview=document.querySelector('[data-route-preview]');
 const openBtn=document.querySelector('[data-route-map-open]');
 const modal=document.getElementById('routeMapModal');
 const mapEl=document.getElementById('routeMap');
 if(!preview||!openBtn||!modal||!mapEl)return;
 function renderPreview(){
-  const lats=path.map(p=>p[0]),lngs=path.map(p=>p[1]);
+  const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const project=([lat,lng])=>{const x=45+(lng-minLng)/(maxLng-minLng)*910;const y=185-(lat-minLat)/(maxLat-minLat)*145;return [x,y]};
   const pts=path.map(p=>project(p).join(',')).join(' ');
@@ -56,7 +59,10 @@ function renderPreview(){
   const arrows=arrowSegments.filter(i=>i<path.length-1).map(i=>{const a=project(path[i]),b=project(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<text class="preview-arrow" x="${x.toFixed(1)}" y="${y.toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})">›</text>`}).join('');
   const [sx,sy]=project([stops[0].lat,stops[0].lng]);
   const [ex,ey]=project([stops[stops.length-1].lat,stops[stops.length-1].lng]);
-  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소의 대표 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
+  const [ox,oy]=project([optionalStop.lat,optionalStop.lng]);
+  const [ofx,ofy]=project(optionalFrom);
+  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 별도 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 별도</text>`;
+  preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 별도 방문 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
 }
 renderPreview();
 let map=null,lastFocus=null,leafletPromise=null;
@@ -70,10 +76,13 @@ function loadLeaflet(){
 }
 function arrowAngle(a,b){const lat=(a[0]+b[0])/2*Math.PI/180;const dx=(b[1]-a[1])*Math.cos(lat),dy=-(b[0]-a[0]);return Math.atan2(dy,dx)*180/Math.PI}
 function initMap(){
-  if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(path,{padding:[28,28]})},80);return}
+  if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(mapBounds,{padding:[28,28]})},80);return}
   map=L.map(mapEl,{zoomControl:true,scrollWheelZoom:true});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
+  L.polyline([optionalFrom,[optionalStop.lat,optionalStop.lng]],{color:'#6f8477',weight:3,opacity:.85,dashArray:'6 7'}).addTo(map);
+  const optionalIcon=L.divIcon({className:'route-map-optional-wrap',html:'<span class="route-map-optional">별도</span>',iconSize:[34,24],iconAnchor:[17,12]});
+  L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon}).addTo(map).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
   arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
   stops.forEach((s,i)=>{
     const isStart=i===0,isEnd=i===stops.length-1;
@@ -86,7 +95,7 @@ function initMap(){
     const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(popup);
     m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,10]:(isEnd?[0,10]:[0,-8]),className:'route-map-label'});
   });
-  map.fitBounds(path,{padding:[28,28]});
+  map.fitBounds(mapBounds,{padding:[28,28]});
 }
 async function openMap(){
   lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('map-open');modal.querySelector('.route-map-close').focus();

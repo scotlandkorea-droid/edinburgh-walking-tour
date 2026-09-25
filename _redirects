@@ -1,0 +1,11 @@
+# St Andrews canonical migration
+/st-andrews/index.html /st-andrews/ 301
+/st-andrews /st-andrews/ 301
+/travel/st-andrews.html /st-andrews/ 301
+/travel/st-andrews /st-andrews/ 301
+/travel/st-andrews/ /st-andrews/ 301
+
+# Scotland places helper route
+/scotland/index.html /edinburgh/places.html#scotland 301
+/scotland /edinburgh/places.html#scotland 301
+/scotland/ /edinburgh/places.html#scotland 301

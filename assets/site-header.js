@@ -18,6 +18,79 @@
       }
     });
   };
+  const sharePage=async(button)=>{
+    const data={title:document.title,text:document.querySelector('meta[name="description"]')?.content||document.title,url:location.href};
+    try{
+      if(navigator.share) await navigator.share(data);
+      else if(navigator.clipboard){
+        await navigator.clipboard.writeText(location.href);
+        const original=button.textContent;
+        button.textContent='✓ 링크 복사됨';
+        setTimeout(()=>button.textContent=original,1800);
+      }
+    }catch(e){}
+  };
+  document.querySelectorAll('.travel-share,.share-btn').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
+
+  const normalizePlaceNav=()=>{
+    document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
+      if(link.querySelector('.place-nav-label'))return;
+      const raw=link.textContent.replace(/\s+/g,' ').trim();
+      let direction='';
+      let label=raw;
+      if(raw.startsWith('←')){
+        direction='prev';
+        label=raw.replace(/^←\s*/,'');
+      }else if(raw.endsWith('→')){
+        direction='next';
+        label=raw.replace(/\s*→$/,'');
+      }else return;
+      link.classList.add('place-'+direction);
+      link.textContent='';
+      const arrow=document.createElement('span');
+      arrow.className='place-nav-arrow';
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent=direction==='prev'?'←':'→';
+      const copy=document.createElement('span');
+      copy.className='place-nav-label';
+      copy.textContent=label;
+      if(direction==='prev')link.append(arrow,copy);
+      else link.append(copy,arrow);
+    });
+  };
+  normalizePlaceNav();
+
+  const gallery=document.getElementById('tourGallery');
+  const lightbox=document.getElementById('lightbox');
+  if(gallery&&lightbox){
+    const prev=document.querySelector('.gallery-arrow.prev');
+    const next=document.querySelector('.gallery-arrow.next');
+    const image=lightbox.querySelector('img');
+    const closeButton=lightbox.querySelector('button');
+    const closeLightbox=()=>{
+      lightbox.classList.remove('open','zooming');
+      lightbox.setAttribute('aria-hidden','true');
+    };
+    const openLightbox=async(photo)=>{
+      lightbox.classList.remove('open','zooming');
+      image.src=photo.currentSrc||photo.src;
+      image.alt=photo.alt;
+      try{if(image.decode)await image.decode()}catch(e){}
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      requestAnimationFrame(()=>{
+        void image.offsetWidth;
+        lightbox.classList.add('zooming');
+      });
+    };
+    prev?.addEventListener('click',()=>gallery.scrollBy({left:-gallery.clientWidth*.78,behavior:'smooth'}));
+    next?.addEventListener('click',()=>gallery.scrollBy({left:gallery.clientWidth*.78,behavior:'smooth'}));
+    gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>openLightbox(photo)));
+    closeButton?.addEventListener('click',closeLightbox);
+    lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});
+  }
+
   requestAnimationFrame(fitTitles);
   let timer;
   addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(fitTitles,80)});
