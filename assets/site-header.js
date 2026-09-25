@@ -68,17 +68,24 @@
     const image=lightbox.querySelector('img');
     const closeButton=lightbox.querySelector('button');
     const closeLightbox=()=>{
-      lightbox.classList.remove('open');
+      lightbox.classList.remove('open','zooming');
       lightbox.setAttribute('aria-hidden','true');
+    };
+    const openLightbox=async(photo)=>{
+      lightbox.classList.remove('open','zooming');
+      image.src=photo.currentSrc||photo.src;
+      image.alt=photo.alt;
+      try{if(image.decode)await image.decode()}catch(e){}
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      requestAnimationFrame(()=>{
+        void image.offsetWidth;
+        lightbox.classList.add('zooming');
+      });
     };
     prev?.addEventListener('click',()=>gallery.scrollBy({left:-gallery.clientWidth*.78,behavior:'smooth'}));
     next?.addEventListener('click',()=>gallery.scrollBy({left:gallery.clientWidth*.78,behavior:'smooth'}));
-    gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>{
-      image.src=photo.src;
-      image.alt=photo.alt;
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-    }));
+    gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>openLightbox(photo)));
     closeButton?.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});
