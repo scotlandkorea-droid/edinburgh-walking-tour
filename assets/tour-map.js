@@ -1,26 +1,7 @@
 (()=>{
 
-const stops=[
-  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326},
-  {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
-  {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95218,lng:-3.19570},
-  {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
-  {n:'에든버러 성',u:'/places/edinburgh-castle.html',lat:55.94868,lng:-3.20041},
-  {n:'그래스마켓',u:'/places/grassmarket.html',lat:55.94757,lng:-3.19600},
-  {n:'그레이프라이어스',u:'/places/greyfriars.html',lat:55.94700,lng:-3.19272},
-  {n:'바비 동상',u:'/places/greyfriars-bobby.html',lat:55.94692,lng:-3.19130},
-  {n:'국립박물관',u:'/places/national-museum.html',lat:55.94694,lng:-3.18889},
-  {n:'엘리펀트 하우스',u:'/places/elephant-house.html',lat:55.94750,lng:-3.19167},
-  {n:'데이비드 흄 동상',u:'/places/david-hume.html',lat:55.94956,lng:-3.19263},
-  {n:'세인트 자일스',u:'/places/st-giles.html',lat:55.94944,lng:-3.19083},
-  {n:'로열마일',u:'/places/royal-mile.html',lat:55.95056,lng:-3.18556},
-  {n:'존 녹스 하우스',u:'/places/john-knox-house.html',lat:55.95067,lng:-3.18510},
-  {n:'캐넌게이트',u:'/places/canongate.html',lat:55.95158,lng:-3.17899},
-  {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
-  {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
-  {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948}
-];
+const stops=(Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[]).map(stop=>({n:stop.name,u:stop.url,lat:stop.lat,lng:stop.lng}));
+if(!stops.length)return;
 // 장소 마커와 실제 걷는 선을 분리한다. 스콧 기념탑에서 가든으로 들어간 뒤 정원 안을 서쪽으로 걸어 로스 분수 부근까지 간 다음,
 // 북쪽 프린스 스트리트 쪽으로 올라와 동쪽으로 돌아 The Mound/국립미술관 방향으로 이어지는 실제 투어 흐름을 표현한다.
 const path=[
