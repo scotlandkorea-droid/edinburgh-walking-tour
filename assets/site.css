@@ -688,6 +688,24 @@ main .page-nav a{
 main .page-nav a:last-child{justify-content:flex-end;text-align:right}
 main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:right}
 main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
+main .page-nav:not(.story-series-nav) a.place-prev,
+main .page-nav:not(.story-series-nav) a.place-next{
+  display:grid!important;align-items:center!important;column-gap:8px!important;
+  justify-content:stretch!important
+}
+main .page-nav:not(.story-series-nav) a.place-prev{
+  grid-template-columns:auto minmax(0,1fr)!important;text-align:left!important
+}
+main .page-nav:not(.story-series-nav) a.place-next{
+  grid-template-columns:minmax(0,1fr) auto!important;text-align:right!important
+}
+main .page-nav:not(.story-series-nav) .place-nav-label{
+  min-width:0!important;word-break:keep-all!important;overflow-wrap:normal!important;text-wrap:balance
+}
+main .page-nav:not(.story-series-nav) .place-nav-arrow{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:20px!important;font-size:21px!important;line-height:1!important
+}
 
 /* Canonical walked-gallery presentation */
 #walked .photo-card{flex-shrink:0;aspect-ratio:4/3;background:#f3f1eb;overflow:hidden;scroll-snap-align:center;border-radius:18px;cursor:zoom-in;margin:0}

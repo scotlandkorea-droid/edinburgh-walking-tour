@@ -32,6 +32,34 @@
   };
   document.querySelectorAll('.travel-share,.share-btn').forEach(button=>button.addEventListener('click',()=>sharePage(button)));
 
+  const normalizePlaceNav=()=>{
+    document.querySelectorAll('.page-nav:not(.story-series-nav) a').forEach(link=>{
+      if(link.querySelector('.place-nav-label'))return;
+      const raw=link.textContent.replace(/\s+/g,' ').trim();
+      let direction='';
+      let label=raw;
+      if(raw.startsWith('←')){
+        direction='prev';
+        label=raw.replace(/^←\s*/,'');
+      }else if(raw.endsWith('→')){
+        direction='next';
+        label=raw.replace(/\s*→$/,'');
+      }else return;
+      link.classList.add('place-'+direction);
+      link.textContent='';
+      const arrow=document.createElement('span');
+      arrow.className='place-nav-arrow';
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent=direction==='prev'?'←':'→';
+      const copy=document.createElement('span');
+      copy.className='place-nav-label';
+      copy.textContent=label;
+      if(direction==='prev')link.append(arrow,copy);
+      else link.append(copy,arrow);
+    });
+  };
+  normalizePlaceNav();
+
   const gallery=document.getElementById('tourGallery');
   const lightbox=document.getElementById('lightbox');
   if(gallery&&lightbox){
