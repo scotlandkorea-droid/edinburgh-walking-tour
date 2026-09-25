@@ -1,3 +1,6 @@
 # St Andrews canonical migration
+/st-andrews/index.html /st-andrews/ 301
+/st-andrews /st-andrews/ 301
 /travel/st-andrews.html /st-andrews/ 301
 /travel/st-andrews /st-andrews/ 301
+/travel/st-andrews/ /st-andrews/ 301
