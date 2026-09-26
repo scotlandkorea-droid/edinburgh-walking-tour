@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260926-4';
+  const VERSION='20260926-5';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -52,7 +52,8 @@
     hub.textContent=label;
   };
 
-  const legacyPageNavs=()=>[...document.querySelectorAll('.page-nav')].filter(nav=>!nav.closest('.story-card,.story-list'));
+  const legacyPageNavs=()=>[...document.querySelectorAll('.page-nav')].filter(nav=>!nav.closest('.story-card,.story-list')&&!nav.dataset.navSystem);
+  const existingContextNav=context=>document.querySelector('.page-nav[data-nav-system="'+context+'"]');
 
   const insertionPoint=()=>{
     const legacy=legacyPageNavs()[0];
@@ -72,7 +73,7 @@
     const list=Array.isArray(nodes)?nodes.filter(Boolean):[nodes].filter(Boolean);
     const point=insertionPoint();
     if(point){
-      list.forEach(node=>point.target.insertAdjacentElement(point.where,node));
+      list.filter(node=>!node.isConnected).forEach(node=>point.target.insertAdjacentElement(point.where,node));
     }
     legacyPageNavs().forEach(nav=>{if(!list.includes(nav))nav.remove()});
   };
@@ -145,10 +146,10 @@
     if(context==='place'&&!regionMatch&&tourMatch)context='tour';
 
     const tourNav=tourMatch
-      ?makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음')
+      ?(existingContextNav('tour')||makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음'))
       :null;
     const placeNav=regionMatch
-      ?makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소')
+      ?(existingContextNav('place')||makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소'))
       :null;
 
     if(tourNav)tourNav.hidden=context!=='tour';
