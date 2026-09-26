@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260926-5';
+  const VERSION='20260926-6';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -263,7 +263,7 @@
     try{
       await Promise.all([
         loadScript('/assets/navigation-data.js?v='+VERSION,()=>!!window.EW_NAV_DATA),
-        loadScript('/assets/tour-course-data.js?v=20260925-1',()=>Array.isArray(window.EW_TOUR_STOPS))
+        loadScript('/assets/tour-course-data.js?v=20260926-6',()=>Array.isArray(window.EW_TOUR_STOPS))
       ]);
     }catch(e){return;}
 
