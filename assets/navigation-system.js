@@ -57,12 +57,12 @@
   const insertionPoint=()=>{
     const legacy=legacyPageNavs()[0];
     if(legacy)return {target:legacy,where:'beforebegin'};
-    const hub=document.querySelector('.course-hub');
-    if(hub)return {target:hub,where:'beforebegin'};
     const actions=document.querySelector('.action-buttons');
     if(actions)return {target:actions,where:'afterend'};
     const kakao=document.querySelector('.kakao-action');
     if(kakao)return {target:kakao,where:'beforebegin'};
+    const hub=document.querySelector('.course-hub');
+    if(hub)return {target:hub,where:'beforebegin'};
     const article=document.querySelector('article');
     if(article)return {target:article,where:'beforeend'};
     return null;
@@ -218,7 +218,6 @@
   const renderSeriesNavigation=(match)=>{
     const {series,index}=match;
     document.querySelectorAll('.context-nav-host').forEach(node=>node.remove());
-    removeLegacyNavs();
 
     const nav=document.createElement('nav');
     const story=series.kind==='이야기';
