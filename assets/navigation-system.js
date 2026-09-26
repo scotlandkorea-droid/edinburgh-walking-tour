@@ -152,8 +152,14 @@
       ?(existingContextNav('place')||makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소'))
       :null;
 
-    if(tourNav)tourNav.hidden=context!=='tour';
-    if(placeNav)placeNav.hidden=context!=='place';
+    const setNavVisible=(nav,visible)=>{
+      if(!nav)return;
+      nav.hidden=!visible;
+      if(visible)nav.style.removeProperty('display');
+      else nav.style.setProperty('display','none','important');
+    };
+    setNavVisible(tourNav,context==='tour');
+    setNavVisible(placeNav,context==='place');
 
     const contextNavs=[tourNav,placeNav].filter(Boolean);
     if(contextNavs.length)replaceLegacyNavsWith(contextNavs);
