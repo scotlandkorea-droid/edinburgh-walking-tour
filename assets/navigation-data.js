@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-26-2",
+  "version": "2026-09-26-3",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -374,6 +374,37 @@ window.EW_NAV_DATA={
           "number": "08",
           "name": "서쪽 성벽과 에든버러 서쪽 전망",
           "url": "/places/edinburgh-castle-western-view.html"
+        }
+      ]
+    },
+    {
+      "id": "grassmarket",
+      "name": "그래스마켓",
+      "hub": "/places/grassmarket.html",
+      "hubLabel": "그래스마켓 전체",
+      "kind": "이야기",
+      "includeHubPrev": false,
+      "hubPrevName": null,
+      "items": [
+        {
+          "number": "01",
+          "name": "그래스마켓의 역사와 시장",
+          "url": "/places/grassmarket-history-market.html"
+        },
+        {
+          "number": "02",
+          "name": "처형장과 커버넌터",
+          "url": "/places/grassmarket-executions-covenanters.html"
+        },
+        {
+          "number": "03",
+          "name": "버크와 헤어",
+          "url": "/places/grassmarket-burke-hare.html"
+        },
+        {
+          "number": "04",
+          "name": "그래스마켓의 펍 이름들",
+          "url": "/places/grassmarket-pub-names.html"
         }
       ]
     },
