@@ -1,26 +1,7 @@
 (()=>{
 
-const stops=[
-  {n:'스콧 기념탑',u:'/places/scott-monument.html',lat:55.95236,lng:-3.19326},
-  {n:'프린스 스트리트 가든',u:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
-  {n:'에든버러 뉴타운',u:'/places/new-town.html',lat:55.95218,lng:-3.19570},
-  {n:'뉴 칼리지',u:'/places/new-college.html',lat:55.94972,lng:-3.19528},
-  {n:'에든버러 성',u:'/places/edinburgh-castle.html',lat:55.94868,lng:-3.20041},
-  {n:'그래스마켓',u:'/places/grassmarket.html',lat:55.94757,lng:-3.19600},
-  {n:'그레이프라이어스',u:'/places/greyfriars.html',lat:55.94700,lng:-3.19272},
-  {n:'바비 동상',u:'/places/greyfriars-bobby.html',lat:55.94692,lng:-3.19130},
-  {n:'국립박물관',u:'/places/national-museum.html',lat:55.94694,lng:-3.18889},
-  {n:'엘리펀트 하우스',u:'/places/elephant-house.html',lat:55.94750,lng:-3.19167},
-  {n:'데이비드 흄 동상',u:'/places/david-hume.html',lat:55.94956,lng:-3.19263},
-  {n:'세인트 자일스',u:'/places/st-giles.html',lat:55.94944,lng:-3.19083},
-  {n:'로열마일',u:'/places/royal-mile.html',lat:55.95056,lng:-3.18556},
-  {n:'존 녹스 하우스',u:'/places/john-knox-house.html',lat:55.95067,lng:-3.18510},
-  {n:'캐넌게이트',u:'/places/canongate.html',lat:55.95158,lng:-3.17899},
-  {n:'스코틀랜드 의회',u:'/places/scottish-parliament.html',lat:55.95189,lng:-3.17502},
-  {n:'홀리루드 궁전',u:'/places/holyrood-palace.html',lat:55.95270,lng:-3.17229},
-  {n:'칼튼 힐',u:'/places/calton-hill.html',lat:55.95474,lng:-3.18191},
-  {n:'발모럴 호텔',u:'/places/balmoral-hotel.html',lat:55.95328,lng:-3.18948}
-];
+const stops=(Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[]).map(stop=>({n:stop.name,u:stop.url,lat:stop.lat,lng:stop.lng}));
+if(!stops.length)return;
 // 장소 마커와 실제 걷는 선을 분리한다. 스콧 기념탑에서 가든으로 들어간 뒤 정원 안을 서쪽으로 걸어 로스 분수 부근까지 간 다음,
 // 북쪽 프린스 스트리트 쪽으로 올라와 동쪽으로 돌아 The Mound/국립미술관 방향으로 이어지는 실제 투어 흐름을 표현한다.
 const path=[
@@ -61,7 +42,7 @@ function renderPreview(){
   const [ex,ey]=project([stops[stops.length-1].lat,stops[stops.length-1].lng]);
   const [ox,oy]=project([optionalStop.lat,optionalStop.lng]);
   const [ofx,ofy]=project(optionalFrom);
-  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 별도 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 별도</text>`;
+  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 별도 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 별도 방문</text>`;
   preview.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 별도 방문 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g><text class="preview-label" x="50" y="207">에든버러 워킹투어 코스</text></svg>`;
 }
 renderPreview();
@@ -75,6 +56,28 @@ function loadLeaflet(){
   });return leafletPromise;
 }
 function arrowAngle(a,b){const lat=(a[0]+b[0])/2*Math.PI/180;const dx=(b[1]-a[1])*Math.cos(lat),dy=-(b[0]-a[0]);return Math.atan2(dy,dx)*180/Math.PI}
+function bindInteractiveLabel(marker,label,tooltipOptions={}){
+  marker.bindTooltip(label,{permanent:true,interactive:true,...tooltipOptions,className:'route-map-label'});
+  const setup=()=>{
+    const tooltip=marker.getTooltip(),el=tooltip&&tooltip.getElement();
+    if(!el||el.dataset.routeInteractive==='1')return;
+    el.dataset.routeInteractive='1';
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label',label+' 자세히 보기 열기');
+    const open=e=>{
+      if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;
+      if(e.type==='keydown')e.preventDefault();
+      if(window.L&&L.DomEvent)L.DomEvent.stopPropagation(e);
+      marker.openPopup();
+    };
+    el.addEventListener('click',open);
+    el.addEventListener('keydown',open);
+  };
+  marker.on('tooltipopen',setup);
+  requestAnimationFrame(setup);
+  return marker;
+}
 function initMap(){
   if(map){setTimeout(()=>{map.invalidateSize();map.fitBounds(mapBounds,{padding:[28,28]})},80);return}
   map=L.map(mapEl,{zoomControl:true,scrollWheelZoom:true});
@@ -82,18 +85,27 @@ function initMap(){
   L.polyline(path,{color:'#27473a',weight:4,opacity:.9,lineJoin:'round'}).addTo(map);
   L.polyline([optionalFrom,[optionalStop.lat,optionalStop.lng]],{color:'#6f8477',weight:3,opacity:.85,dashArray:'6 7'}).addTo(map);
   const optionalIcon=L.divIcon({className:'route-map-optional-wrap',html:'<span class="route-map-optional">별도</span>',iconSize:[34,24],iconAnchor:[17,12]});
-  L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon}).addTo(map).bindPopup(`<strong>${optionalStop.n}</strong><br><span>기본 코스 외 별도 방문</span><br><a href="${optionalStop.u}">자세히 보기 ›</a>`);
+  const optionalMapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(optionalStop.lat+','+optionalStop.lng)}`;
+  const optionalStoryIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
+  const optionalMapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
+  const optionalPopup=`<div class="route-popup"><strong>${optionalStop.n} · 별도 방문</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${optionalStop.u}#place-nav">${optionalStoryIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${optionalMapsUrl}" target="_blank" rel="noopener">${optionalMapIcon}<span>지도 보기</span></a></div></div>`;
+  const optionalMarker=L.marker([optionalStop.lat,optionalStop.lng],{icon:optionalIcon,title:optionalStop.n+' · 별도 방문'}).bindPopup(optionalPopup);
+  bindInteractiveLabel(optionalMarker,optionalStop.n+' · 별도 방문',{direction:'top',offset:[0,-10]});
+  optionalMarker.addTo(map);
   arrowSegments.filter(i=>i<path.length-1).forEach(i=>{const a=path[i],b=path[i+1],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],deg=arrowAngle(a,b);const icon=L.divIcon({className:'route-map-arrow-wrap',html:`<span class="route-map-arrow" style="transform:rotate(${deg.toFixed(1)}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]});L.marker(mid,{icon,interactive:false}).addTo(map)});
   stops.forEach((s,i)=>{
-    const isStart=i===0,isEnd=i===stops.length-1;
-    const html=isStart?'<span class="route-map-marker start">⚑ START</span>':(isEnd?'<span class="route-map-marker end">END</span>':'<span class="route-map-marker"></span>');
-    const icon=L.divIcon({className:'route-map-marker-wrap',html,iconSize:isStart?[62,24]:(isEnd?[48,24]:[18,18]),iconAnchor:isStart?[31,12]:(isEnd?[24,12]:[9,9])});
+    const isStart=i===0,isEnd=i===stops.length-1,number=i+1;
+    const status=isStart?'<span class="route-map-status start">⚑ START</span>':(isEnd?'<span class="route-map-status end">END</span>':'');
+    const stateClass=isStart?' start':(isEnd?' end':'');
+    const markerHtml=`<span class="route-map-marker-stack"><span class="route-map-marker${stateClass}">${number}</span>${status}</span>`;
+    const icon=L.divIcon({className:'route-map-marker-wrap',html:markerHtml,iconSize:[28,28],iconAnchor:[14,14]});
     const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.lat+','+s.lng)}`;
     const storyIcon='<svg class="route-popup-icon story" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 3h7M8 11h7M8 15h5"/></svg>';
     const mapIcon='<svg class="route-popup-icon map" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>';
-    const popup=`<div class="route-popup"><strong>${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
-    const m=L.marker([s.lat,s.lng],{icon,title:s.n}).addTo(map).bindPopup(popup);
-    m.bindTooltip(s.n,{permanent:true,direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,10]:(isEnd?[0,10]:[0,-8]),className:'route-map-label'});
+    const popup=`<div class="route-popup"><strong>${number}. ${s.n}</strong><div class="route-popup-actions"><a class="route-popup-action story" href="${s.u}#tour-nav">${storyIcon}<span>자세히 보기 ›</span></a><a class="route-popup-action map" href="${mapsUrl}" target="_blank" rel="noopener">${mapIcon}<span>지도 보기</span></a></div></div>`;
+    const m=L.marker([s.lat,s.lng],{icon,title:`${number}. ${s.n}`}).bindPopup(popup);
+    bindInteractiveLabel(m,s.n,{direction:isStart?'bottom':(isEnd?'bottom':'top'),offset:isStart?[0,14]:(isEnd?[0,14]:[0,-10])});
+    m.addTo(map);
   });
   map.fitBounds(mapBounds,{padding:[28,28]});
 }
