@@ -230,6 +230,8 @@
       insertNavHost(nav);
     }
     nav.className='page-nav story-series-nav';
+    nav.classList.toggle('next-only',index===0);
+    nav.classList.toggle('prev-only',index===series.items.length-1);
     nav.setAttribute('aria-label',series.name+' 이전·다음 이야기');
     const links=[];
     if(index>0){
