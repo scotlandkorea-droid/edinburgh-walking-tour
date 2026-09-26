@@ -911,6 +911,18 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 
 
 
+/* DETAIL STORY PHOTO BASE — shared by all detail articles */
+:where(.detail-article>figure.story-photo){
+  width:100%;
+  margin:32px 0;
+}
+:where(.detail-article>figure.story-photo>img){
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:14px;
+}
+
 /* PAGE-SPECIFIC REMAINDERS — retained page-specific styles */
 /* Princes Street: only differences that remain intentional after the shared course-detail system. */
 :where(body.princes-street-page) .story-photo{margin:34px 0;border-radius:18px;overflow:hidden;background:#f3f1eb}
