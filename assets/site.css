@@ -670,6 +670,7 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 @media(max-width:619px){.place-strip>a,.place-strip>.place-chip{max-width:250px}}
 
 /* Place navigation: shared detail markup */
+.page-nav.context-nav[hidden]{display:none!important}
 main .page-nav{
   width:min(var(--max,900px),calc(100% - 36px));margin:38px auto 0;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px
