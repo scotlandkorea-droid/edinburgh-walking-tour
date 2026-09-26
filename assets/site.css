@@ -918,7 +918,7 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.princes-street-page) .detail-article>.princes-overview{margin-bottom:48px!important}
 @media(max-width:719px){
   :where(body.princes-street-page) .detail-article>.princes-overview{margin-bottom:44px!important}
-  :where(body.princes-street-page) .princes-body>h2{margin-top:58px!important;margin-bottom:33px!important}
+  :where(body.princes-street-page) .princes-body>h2{margin-top:58px!important;margin-bottom:39px!important}
 }
 
 /* Scott Monument: page-only story components retained from the approved live presentation. */
