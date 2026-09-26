@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>에든버러 워킹투어 · 최신 작업 미리보기</title>
+<style>
+html,body{margin:0;min-height:100%;background:#fff}
+#preview-loading{position:fixed;inset:0;display:grid;place-items:center;background:#f5f2eb;color:#18211d;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;z-index:99999}
+#preview-loading div{padding:22px 26px;border-radius:14px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.12);font-weight:700;text-align:center}
+#preview-error{display:none;max-width:760px;margin:60px auto;padding:24px;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;line-height:1.7}
+</style>
+</head>
+<body>
+<div id="preview-loading"><div>최신 작업 브랜치를 불러오는 중입니다…</div></div>
+<div id="preview-error"></div>
+<div id="app"></div>
+<script>
+(async()=>{
+ const OWNER='scotlandkorea-droid',REPO='edinburgh-walking-tour',BRANCH='work/route-map-numbered-markers-2026-09-25';
+ const CDN='https://cdn.jsdelivr.net/gh/'+OWNER+'/'+REPO+'@'+BRANCH;
+ const VIRTUAL_ORIGIN='https://edinburgh-preview.local';
+ const qs=new URLSearchParams(location.hash.slice(1));
+ window.__previewPath=qs.get('p')||'/index.html';
+ if(window.__previewPath==='/')window.__previewPath='/index.html';
+ window.__previewHash=qs.get('h')?'#'+qs.get('h'):'';
+ window.__previewOrigin=VIRTUAL_ORIGIN;
+ window.__previewSearch='';
+
+ const nativeFetch=window.fetch.bind(window);
+ window.fetch=(input,init)=>{
+   let u=typeof input==='string'?input:input.url;
+   if(u&&u.startsWith('/')) return nativeFetch(CDN+u,init);
+   return nativeFetch(input,init);
+ };
+ const esc=s=>String(s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+ const get=async u=>{const r=await nativeFetch(u,{cache:'no-store'});if(!r.ok)throw new Error(r.status+' '+r.statusText+' '+u);return r.text()};
+ const abs=(u,page)=>{
+   if(!u||/^(?:data:|blob:|mailto:|tel:|javascript:|https?:)/i.test(u))return u;
+   const base=new URL(page,CDN+'/');
+   return new URL(u,base).href.replace(base.origin,CDN);
+ };
+ const routeHref=(href)=>{
+   if(!href||/^(?:https?:|mailto:|tel:|javascript:)/i.test(href)||href.startsWith('#'))return null;
+   const u=new URL(href,VIRTUAL_ORIGIN+window.__previewPath);
+   let p=u.pathname==='/'?'/index.html':u.pathname;
+   return '#p='+encodeURIComponent(p)+(u.hash?'&h='+encodeURIComponent(u.hash.slice(1)):'');
+ };
+ const patchCode=code=>code
+   .replaceAll('location.pathname','window.__previewPath')
+   .replaceAll('location.hash','window.__previewHash')
+   .replaceAll('location.origin','window.__previewOrigin')
+   .replaceAll('location.search','window.__previewSearch');
+
+ try{
+   const source=await get(CDN+window.__previewPath);
+   const doc=new DOMParser().parseFromString(source,'text/html');
+   document.title=(doc.querySelector('title')?.textContent||'에든버러 워킹투어')+' · 최신 미리보기';
+
+   for(const link of [...doc.querySelectorAll('link[rel="stylesheet"][href]')]){
+     const href=link.getAttribute('href');
+     if(href.startsWith('/assets/')){
+       let css=await get(CDN+href);
+       css=css.replace(/url\((['"]?)(\/[^)'"]+)\1\)/g,(m,q,u)=>'url('+q+CDN+u+q+')');
+       const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+     }else{
+       const nl=document.createElement('link');nl.rel='stylesheet';nl.href=abs(href,window.__previewPath);document.head.appendChild(nl);
+     }
+   }
+   doc.querySelectorAll('head style').forEach(x=>{const st=document.createElement('style');st.textContent=x.textContent;document.head.appendChild(st)});
+
+   const scripts=[...doc.querySelectorAll('script')].map(x=>({src:x.getAttribute('src'),text:x.textContent||''}));
+   doc.querySelectorAll('script,link[rel="stylesheet"]').forEach(x=>x.remove());
+   const app=document.getElementById('app');app.innerHTML=doc.body.innerHTML;
+
+   app.querySelectorAll('[src]').forEach(el=>{const v=el.getAttribute('src');if(v)el.setAttribute('src',abs(v,window.__previewPath))});
+   app.querySelectorAll('[poster]').forEach(el=>{const v=el.getAttribute('poster');if(v)el.setAttribute('poster',abs(v,window.__previewPath))});
+   app.querySelectorAll('[srcset]').forEach(el=>{
+     const v=el.getAttribute('srcset');if(!v)return;
+     el.setAttribute('srcset',v.split(',').map(part=>{const bits=part.trim().split(/\s+/);bits[0]=abs(bits[0],window.__previewPath);return bits.join(' ')}).join(', '));
+   });
+
+   app.addEventListener('click',e=>{
+     const a=e.target.closest('a[href]');if(!a)return;
+     const h=routeHref(a.getAttribute('href'));if(!h)return;
+     e.preventDefault();location.hash=h;location.reload();
+   },true);
+
+   for(const spec of scripts){
+     if(spec.src && !spec.src.startsWith('/')){
+       const n=document.createElement('script');n.src=abs(spec.src,window.__previewPath);document.body.appendChild(n);
+       await new Promise((ok,bad)=>{n.onload=ok;n.onerror=bad});
+       continue;
+     }
+     let code=spec.src?await get(CDN+spec.src):spec.text;
+     if(!code.trim())continue;
+     const n=document.createElement('script');n.textContent=patchCode(code);document.body.appendChild(n);
+   }
+   document.getElementById('preview-loading').style.display='none';
+ }catch(err){
+   document.getElementById('preview-loading').style.display='none';
+   const box=document.getElementById('preview-error');box.style.display='block';
+   box.innerHTML='<h2>미리보기를 불러오지 못했습니다</h2><p>'+esc(err)+'</p>';
+ }
+})();
+</script>
+</body>
+</html>
