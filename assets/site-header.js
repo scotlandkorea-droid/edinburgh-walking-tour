@@ -37,7 +37,7 @@
   // Navigation is handled by one shared system. Header/share/gallery logic stays here.
   if(!window.EW_NAV_SYSTEM&&!document.querySelector('script[data-ew-nav-system]')){
     const navScript=document.createElement('script');
-    navScript.src='/assets/navigation-system.js?v=20260926-2';
+    navScript.src='/assets/navigation-system.js?v=20260926-3';
     navScript.dataset.ewNavSystem='true';
     document.head.appendChild(navScript);
   }
