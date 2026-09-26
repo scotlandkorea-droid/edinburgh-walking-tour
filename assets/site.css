@@ -997,3 +997,10 @@ body.greyfriars-bobby-place{--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage
   .fife-featured-hub>strong{font-size:24px}
   .fife-featured-hub .fife-featured-summary{font-size:14px}
 }
+
+
+/* UNIFIED NAVIGATION SYSTEM — 2026-09-26 */
+.context-nav-host:empty{display:none}
+.context-nav[hidden]{display:none!important}
+.context-nav-host>.page-nav{margin-top:0}
+.detail-series-nav{width:100%}
