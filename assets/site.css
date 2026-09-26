@@ -927,12 +927,13 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.scott-monument-page) .photo{border-radius:22px;overflow:hidden;background:#ddd}
 :where(body.scott-monument-page) .photo img,
 :where(body.scott-monument-page) .story-photo img{object-fit:contain}
-:where(body.scott-monument-page) .section{margin-bottom:42px}
+:where(body.scott-monument-page) .detail-article>.section{padding:0!important;margin:0!important}
+:where(body.scott-monument-page) .detail-article>.section>h2{margin-top:58px!important;margin-bottom:39px!important}
+:where(body.scott-monument-page) .detail-article figure{margin:34px 0}
 :where(body.scott-monument-page) .question{font-size:21px;font-weight:800;line-height:1.5;margin:24px 0;padding:18px 20px;background:var(--sage);border-radius:16px}
 :where(body.scott-monument-page) .highlight{padding:20px;border-left:4px solid #7d9284;background:#f7f9f7;border-radius:0 14px 14px 0;font-weight:700}
 :where(body.scott-monument-page) .more{display:inline-block;margin-top:4px;padding:11px 15px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:750;background:#fff}
 @media(max-width:560px){
-  :where(body.scott-monument-page) .section{margin-bottom:36px}
   :where(body.scott-monument-page) .question{font-size:19px;padding:16px}
 }
 
