@@ -567,6 +567,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 }
 .page-nav.story-series-nav:has(.story-next:only-child) .story-next{grid-column:2!important}
 .page-nav.story-series-nav:has(.story-prev:only-child) .story-prev{grid-column:1!important}
+.page-nav.story-series-nav.next-only .story-next{grid-column:2!important}
+.page-nav.story-series-nav.prev-only .story-prev{grid-column:1!important}
 @media(max-width:520px){
   .page-nav.story-series-nav{gap:10px!important}
   .page-nav.story-series-nav>a{min-height:96px!important;padding:14px 12px!important}
