@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-26-3",
+  "version": "2026-09-26-4",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -389,22 +389,26 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "그래스마켓의 역사와 시장",
-          "url": "/places/grassmarket-history-market.html"
+          "url": "/places/grassmarket-history-market.html",
+          "tabName": "역사와 시장"
         },
         {
           "number": "02",
           "name": "처형장과 커버넌터",
-          "url": "/places/grassmarket-executions-covenanters.html"
+          "url": "/places/grassmarket-executions-covenanters.html",
+          "tabName": "처형장과 커버넌터"
         },
         {
           "number": "03",
           "name": "버크와 헤어",
-          "url": "/places/grassmarket-burke-hare.html"
+          "url": "/places/grassmarket-burke-hare.html",
+          "tabName": "버크와 헤어"
         },
         {
           "number": "04",
           "name": "그래스마켓의 펍 이름들",
-          "url": "/places/grassmarket-pub-names.html"
+          "url": "/places/grassmarket-pub-names.html",
+          "tabName": "펍 이름들"
         }
       ]
     },

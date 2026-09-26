@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260926-3';
+  const VERSION='20260926-4';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -197,17 +197,22 @@
   };
 
   const syncSeriesTabs=(series,index)=>{
-    let tabs=document.querySelector('.story-series-tabs');
+    const tabs=document.querySelector('.story-series-tabs, .story-tabs');
     if(series.kind!=='이야기'||!tabs)return;
+    const legacy=tabs.classList.contains('story-tabs');
     tabs.setAttribute('aria-label',series.name+' 이야기 목록');
     tabs.replaceChildren(...series.items.map((item,i)=>{
       const a=document.createElement('a');
-      a.className='story-series-tab'+(i===index?' active':'');
+      a.className=(legacy?'story-tab':'story-series-tab')+(i===index?' active':'');
       if(i===index)a.setAttribute('aria-current','page');
       a.href=item.url;
-      const num=document.createElement('span');
-      num.textContent=item.number;
-      a.append(num,document.createTextNode(' '+item.name));
+      if(legacy){
+        a.textContent=item.number+' '+(item.tabName||item.name);
+      }else{
+        const num=document.createElement('span');
+        num.textContent=item.number;
+        a.append(num,document.createTextNode(' '+(item.tabName||item.name)));
+      }
       return a;
     }));
   };
