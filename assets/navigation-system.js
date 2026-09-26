@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260926-5';
+  const VERSION='20260926-6';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -152,8 +152,14 @@
       ?(existingContextNav('place')||makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소'))
       :null;
 
-    if(tourNav)tourNav.hidden=context!=='tour';
-    if(placeNav)placeNav.hidden=context!=='place';
+    const setNavVisible=(nav,visible)=>{
+      if(!nav)return;
+      nav.hidden=!visible;
+      if(visible)nav.style.removeProperty('display');
+      else nav.style.setProperty('display','none','important');
+    };
+    setNavVisible(tourNav,context==='tour');
+    setNavVisible(placeNav,context==='place');
 
     const contextNavs=[tourNav,placeNav].filter(Boolean);
     if(contextNavs.length)replaceLegacyNavsWith(contextNavs);
@@ -263,7 +269,7 @@
     try{
       await Promise.all([
         loadScript('/assets/navigation-data.js?v='+VERSION,()=>!!window.EW_NAV_DATA),
-        loadScript('/assets/tour-course-data.js?v=20260925-1',()=>Array.isArray(window.EW_TOUR_STOPS))
+        loadScript('/assets/tour-course-data.js?v=20260926-6',()=>Array.isArray(window.EW_TOUR_STOPS))
       ]);
     }catch(e){return;}
 
