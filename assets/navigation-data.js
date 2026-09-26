@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-26-6",
+  "version": "2026-09-26-7",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -253,6 +253,10 @@ window.EW_NAV_DATA={
           "url": "/st-andrews/"
         },
         {
+          "name": "포클랜드",
+          "url": "/scotland/places/falkland.html"
+        },
+        {
           "name": "앤드루 카네기 생가 박물관",
           "url": "/scotland/places/andrew-carnegie-birthplace-museum.html"
         }
@@ -268,6 +272,10 @@ window.EW_NAV_DATA={
         {
           "name": "던노타 성",
           "url": "/scotland/places/dunnottar-castle.html"
+        },
+        {
+          "name": "피터헤드",
+          "url": "/scotland/places/peterhead.html"
         }
       ]
     },
@@ -277,7 +285,16 @@ window.EW_NAV_DATA={
       "name": "중부",
       "hub": "/edinburgh/places.html#scotland",
       "hubLabel": "스코틀랜드 전역 장소 보기",
-      "items": []
+      "items": [
+        {
+          "name": "스털링",
+          "url": "/scotland/places/stirling.html"
+        },
+        {
+          "name": "피틀로크리",
+          "url": "/scotland/places/pitlochry.html"
+        }
+      ]
     },
     {
       "id": "scotland-4",
@@ -289,6 +306,14 @@ window.EW_NAV_DATA={
         {
           "name": "글렌코",
           "url": "/scotland/places/glencoe.html"
+        },
+        {
+          "name": "네스호",
+          "url": "/scotland/places/loch-ness.html"
+        },
+        {
+          "name": "인버네스",
+          "url": "/scotland/places/inverness.html"
         }
       ]
     },
@@ -298,7 +323,16 @@ window.EW_NAV_DATA={
       "name": "스카이 · 섬",
       "hub": "/edinburgh/places.html#scotland",
       "hubLabel": "스코틀랜드 전역 장소 보기",
-      "items": []
+      "items": [
+        {
+          "name": "스카이섬",
+          "url": "/scotland/places/isle-of-skye.html"
+        },
+        {
+          "name": "아이오나",
+          "url": "/scotland/places/iona.html"
+        }
+      ]
     },
     {
       "id": "scotland-6",
@@ -306,7 +340,12 @@ window.EW_NAV_DATA={
       "name": "서부",
       "hub": "/edinburgh/places.html#scotland",
       "hubLabel": "스코틀랜드 전역 장소 보기",
-      "items": []
+      "items": [
+        {
+          "name": "글래스고",
+          "url": "/scotland/places/glasgow.html"
+        }
+      ]
     },
     {
       "id": "scotland-7",
@@ -314,7 +353,16 @@ window.EW_NAV_DATA={
       "name": "남서부",
       "hub": "/edinburgh/places.html#scotland",
       "hubLabel": "스코틀랜드 전역 장소 보기",
-      "items": []
+      "items": [
+        {
+          "name": "덤프리스",
+          "url": "/scotland/places/dumfries.html"
+        },
+        {
+          "name": "스트란라",
+          "url": "/scotland/places/stranraer.html"
+        }
+      ]
     },
     {
       "id": "scotland-8",
@@ -322,7 +370,20 @@ window.EW_NAV_DATA={
       "name": "스코티시 보더스",
       "hub": "/edinburgh/places.html#scotland",
       "hubLabel": "스코틀랜드 전역 장소 보기",
-      "items": []
+      "items": [
+        {
+          "name": "멜로즈",
+          "url": "/scotland/places/melrose.html"
+        },
+        {
+          "name": "멜로즈 사원",
+          "url": "/scotland/places/melrose-abbey.html"
+        },
+        {
+          "name": "하윅",
+          "url": "/scotland/places/hawick.html"
+        }
+      ]
     }
   ],
   "series": [
