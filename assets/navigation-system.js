@@ -68,10 +68,13 @@
     return null;
   };
 
-  const replaceLegacyNavsWith=node=>{
+  const replaceLegacyNavsWith=nodes=>{
+    const list=Array.isArray(nodes)?nodes.filter(Boolean):[nodes].filter(Boolean);
     const point=insertionPoint();
-    if(point)point.target.insertAdjacentElement(point.where,node);
-    legacyPageNavs().forEach(nav=>{if(nav!==node&&!node.contains(nav))nav.remove()});
+    if(point){
+      list.forEach(node=>point.target.insertAdjacentElement(point.where,node));
+    }
+    legacyPageNavs().forEach(nav=>{if(!list.includes(nav))nav.remove()});
   };
 
   const removeLegacyNavs=()=>legacyPageNavs().forEach(nav=>nav.remove());
@@ -141,10 +144,6 @@
     if(context==='tour'&&!tourMatch)context='place';
     if(context==='place'&&!regionMatch&&tourMatch)context='tour';
 
-    const host=document.createElement('div');
-    host.className='context-nav-host';
-    host.dataset.navSystem='context';
-
     const tourNav=tourMatch
       ?makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음')
       :null;
@@ -152,13 +151,11 @@
       ?makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소')
       :null;
 
-    if(tourNav)host.append(tourNav);
-    if(placeNav)host.append(placeNav);
-
     if(tourNav)tourNav.hidden=context!=='tour';
     if(placeNav)placeNav.hidden=context!=='place';
 
-    if(host.children.length)replaceLegacyNavsWith(host);
+    const contextNavs=[tourNav,placeNav].filter(Boolean);
+    if(contextNavs.length)replaceLegacyNavsWith(contextNavs);
     else removeLegacyNavs();
 
     if(context==='tour'&&tourMatch){
@@ -217,8 +214,6 @@
 
   const renderSeriesNavigation=(match)=>{
     const {series,index}=match;
-    document.querySelectorAll('.context-nav-host').forEach(node=>node.remove());
-
     const nav=document.createElement('nav');
     const story=series.kind==='이야기';
     nav.className='page-nav '+(story?'story-series-nav':'detail-series-nav');
@@ -236,7 +231,7 @@
     else if(prevIsHub)nav.append(makeSeriesLink(series,null,'prev',{isHub:true}));
     if(next)nav.append(makeSeriesLink(series,next,'next'));
 
-    replaceLegacyNavsWith(nav);
+    replaceLegacyNavsWith([nav]);
     syncSeriesTabs(series,index);
     setHub(series.hub,series.hubLabel);
     document.documentElement.dataset.navContext='series';
