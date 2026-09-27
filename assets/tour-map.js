@@ -23,7 +23,7 @@ const path=[
   [55.95316,-3.18718],[55.95328,-3.18948]
 ];
 const arrowSegments=[2,6,10,13,16,19,22,25,28,31,34,37];
-const previewArrowSegments=[6,13,20,27,34,37];
+const previewArrowSegments=[4,9,14,19,24,29,34,37];
 const optionalStop={n:'아서스 시트',u:'/places/arthurs-seat.html',lat:55.94410,lng:-3.16180};
 const optionalFrom=[55.95270,-3.17229];
 const mapBounds=[...path,[optionalStop.lat,optionalStop.lng]];
@@ -34,23 +34,20 @@ const mapEl=document.getElementById('routeMap');
 if(!preview||!previewCanvas||!modal||!mapEl)return;
 function renderPreview(){
   const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
-  const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
-  const canvasW=previewCanvas.clientWidth||1000,canvasH=previewCanvas.clientHeight||150;
-  const viewH=Math.max(120,Math.min(380,1000*canvasH/canvasW));
+  const minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const projectX=lng=>12+(lng-minLng)/(maxLng-minLng)*976;
   const mainLats=path.map(p=>p[0]),mainMinLat=Math.min(...mainLats),mainMaxLat=Math.max(...mainLats);
-  const mainTop=10,mainBottom=viewH-8;
+  const viewH=220,mainTop=28,mainBottom=211;
   const projectMain=([lat,lng])=>[projectX(lng),mainTop+(mainMaxLat-lat)/(mainMaxLat-mainMinLat)*(mainBottom-mainTop)];
   const pts=path.map(p=>projectMain(p).join(',')).join(' ');
   const dots=stops.slice(1,-1).map(s=>{const [x,y]=projectMain([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
-  const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=projectMain(path[i]),b=projectMain(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+7).toFixed(1)},${y.toFixed(1)} ${(x-6).toFixed(1)},${(y-5).toFixed(1)} ${(x-6).toFixed(1)},${(y+5).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
+  const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=projectMain(path[i]),b=projectMain(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+9).toFixed(1)},${y.toFixed(1)} ${(x-7).toFixed(1)},${(y-6).toFixed(1)} ${(x-7).toFixed(1)},${(y+6).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
   const [sx,sy]=projectMain([stops[0].lat,stops[0].lng]);
   const [ex,ey]=projectMain([stops[stops.length-1].lat,stops[stops.length-1].lng]);
-  const ox=projectX(optionalStop.lng),oy=viewH-12;
+  const ox=projectX(optionalStop.lng),oy=198;
   const [ofx,ofy]=projectMain(optionalFrom);
-  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${(oy-3).toFixed(1)}"></line><g class="preview-optional-mountain" transform="translate(${ox.toFixed(1)} ${(oy-2).toFixed(1)})"><title>아서스 시트</title><path d="M-15 7 -6 -7 0 1 6 -5 15 7Z"></path><path class="ridge" d="M-9 2 -6 -2 -3 2M3 2 6 -1 9 3"></path></g>`;
-  const road1=(viewH*.24).toFixed(1),road2=(viewH*.67).toFixed(1),road1b=(viewH*.17).toFixed(1),road2b=(viewH*.57).toFixed(1);
-  previewCanvas.innerHTML=`<svg viewBox="0 0 1000 ${viewH.toFixed(1)}" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 방향을 보여주는 코스 미리보기"><path class="map-context" d="M35 ${road1} C180 ${road1b} 280 ${road1} 390 ${road1b} S620 ${road1b} 760 ${road1} 920 ${road1b} 978 ${road1b}M45 ${road2} C185 ${road2b} 285 ${road2} 410 ${road2b} S665 ${road2b} 790 ${road2} 910 ${road2b} 970 ${road2b}"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g></svg>`;
+  const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${(oy-4).toFixed(1)}"></line><g class="preview-optional-mountain" transform="translate(${ox.toFixed(1)} ${oy.toFixed(1)})"><title>아서스 시트</title><path d="M-18 8 -8 -9 0 1 7 -7 18 8Z"></path><path class="ridge" d="M-11 3 -8 -2 -4 3M3 3 7 -2 11 4"></path></g>`;
+  previewCanvas.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 방향을 보여주는 코스 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g></svg>`;
 }
 renderPreview();
 let map=null,lastFocus=null,leafletPromise=null;
