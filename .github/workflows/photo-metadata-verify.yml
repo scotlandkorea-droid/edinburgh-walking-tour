@@ -1,0 +1,146 @@
+name: Temporary verify photo cleanup
+
+on:
+  push:
+    branches:
+      - photo-metadata-cleanup-20260927
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install ExifTool
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libimage-exiftool-perl
+
+      - name: Verify visual payload and privacy metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, subprocess, json, hashlib, struct, sys
+          BASE="530623cb6c9ee6c64521d94dd7561805352e8876"
+          exts=(".jpg",".jpeg",".png",".webp")
+          files=subprocess.check_output(["git","ls-tree","-r","--name-only","HEAD"],text=True).splitlines()
+          files=[p for p in files if p.lower().endswith(exts)]
+          sensitive_keys={
+            "GPSLatitude","GPSLongitude","GPSPosition","GPSCoordinates","GPSAltitude","GPSDateTime","GPSDateStamp",
+            "Make","Model","Software","SerialNumber","InternalSerialNumber","BodySerialNumber","LensSerialNumber",
+            "DateTimeOriginal","CreateDate","ModifyDate","DateTimeDigitized","Artist","Creator","OwnerName"
+          }
+          def base_bytes(path):
+            return subprocess.check_output(["git","show",f"{BASE}:{path}"])
+          def jpeg_norm(b):
+            if not b.startswith(b"\xff\xd8"): return hashlib.sha256(b).hexdigest()
+            out=bytearray(b[:2]); i=2
+            while i<len(b):
+              if b[i]!=0xff:
+                out.extend(b[i:]); break
+              j=i
+              while j<len(b) and b[j]==0xff: j+=1
+              if j>=len(b): break
+              m=b[j]; start=i
+              if m in (0xd8,0xd9) or 0xd0<=m<=0xd7 or m==0x01:
+                seg=b[start:j+1]; i=j+1
+              else:
+                if j+2>=len(b): out.extend(b[start:]); break
+                ln=int.from_bytes(b[j+1:j+3],"big")
+                end=j+1+ln
+                if end>len(b): out.extend(b[start:]); break
+                seg=b[start:end]; i=end
+              if m==0xda:
+                out.extend(seg); out.extend(b[i:]); break
+              if 0xe0<=m<=0xef or m==0xfe:
+                continue
+              out.extend(seg)
+            return hashlib.sha256(out).hexdigest()
+          def jpeg_critical_app(b):
+            vals=[]
+            i=2
+            while b.startswith(b"\xff\xd8") and i+3<len(b):
+              while i<len(b) and b[i]==0xff: i+=1
+              if i>=len(b): break
+              m=b[i]; i+=1
+              if m in (0xd9,0xda): break
+              if m==0x01 or 0xd0<=m<=0xd7: continue
+              if i+1>=len(b): break
+              ln=int.from_bytes(b[i:i+2],"big")
+              s=i-1; e=i+ln
+              if e>len(b): break
+              if m in (0xe2,0xee): vals.append(b[s:e])
+              i=e
+            return hashlib.sha256(b"".join(vals)).hexdigest()
+          def png_parts(b):
+            if not b.startswith(b"\x89PNG\r\n\x1a\n"): return (hashlib.sha256(b).hexdigest(),"")
+            p=8; critical=[]; color=[]
+            while p+12<=len(b):
+              ln=int.from_bytes(b[p:p+4],"big"); typ=b[p+4:p+8]; e=p+12+ln
+              if e>len(b): break
+              chunk=b[p:e]
+              if typ in (b"IHDR",b"PLTE",b"IDAT",b"IEND",b"tRNS"): critical.append(chunk)
+              if typ in (b"iCCP",b"sRGB",b"gAMA",b"cHRM"): color.append(chunk)
+              p=e
+              if typ==b"IEND": break
+            return hashlib.sha256(b"".join(critical)).hexdigest(),hashlib.sha256(b"".join(color)).hexdigest()
+          def meta_bytes(path, from_git=False):
+            if from_git:
+              data=base_bytes(path); tmp="/tmp/before_image"
+              open(tmp,"wb").write(data); src=tmp
+            else: src=path
+            raw=subprocess.check_output(["exiftool","-j","-Orientation","-GPS*","-Make","-Model","-Software","-SerialNumber","-InternalSerialNumber","-BodySerialNumber","-LensSerialNumber","-DateTimeOriginal","-CreateDate","-ModifyDate","-Artist","-Creator","-OwnerName",src],text=True)
+            d=json.loads(raw)[0]
+            d.pop("SourceFile",None)
+            return d
+          problems=[]; sensitive_before=[]; changed=[]
+          for path in files:
+            before=base_bytes(path); after=open(path,"rb").read()
+            if before!=after: changed.append(path)
+            low=path.lower()
+            if low.endswith((".jpg",".jpeg")):
+              if jpeg_norm(before)!=jpeg_norm(after): problems.append(f"JPEG visual payload changed: {path}")
+              if jpeg_critical_app(before)!=jpeg_critical_app(after): problems.append(f"JPEG ICC/Adobe color segment changed: {path}")
+            elif low.endswith(".png"):
+              bp,bc=png_parts(before); ap,ac=png_parts(after)
+              if bp!=ap: problems.append(f"PNG pixel payload changed: {path}")
+              if bc!=ac: problems.append(f"PNG color chunks changed: {path}")
+            bm=meta_bytes(path,True); am=meta_bytes(path,False)
+            if bm.get("Orientation")!=am.get("Orientation"):
+              problems.append(f"Orientation changed: {path}: {bm.get('Orientation')} -> {am.get('Orientation')}")
+            sb={k:v for k,v in bm.items() if k in sensitive_keys or k.startswith("GPS")}
+            sa={k:v for k,v in am.items() if k in sensitive_keys or k.startswith("GPS")}
+            if sb: sensitive_before.append((path,sb))
+            if sa: problems.append(f"Sensitive metadata remains: {path}: {sa}")
+          print("IMAGE_COUNT",len(files))
+          print("CHANGED_IMAGE_COUNT",len(changed))
+          print("SENSITIVE_BEFORE_COUNT",len(sensitive_before))
+          for p,m in sensitive_before:
+            print("SENSITIVE_BEFORE",p,json.dumps(m,ensure_ascii=False,sort_keys=True))
+          if problems:
+            print("VERIFY_FAILED")
+            for x in problems: print(x)
+            sys.exit(1)
+          print("VERIFY_OK")
+          PY
+
+      - name: Remove temporary verification workflow
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/photo-metadata-verify.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Remove temporary metadata verification workflow"
+            git push origin HEAD:photo-metadata-cleanup-20260927
+          fi
