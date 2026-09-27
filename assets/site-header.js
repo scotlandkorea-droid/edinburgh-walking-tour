@@ -69,7 +69,7 @@
           <input id="site-search-input" class="site-search-input" type="search" inputmode="search" autocomplete="off" placeholder="장소 · 인물 · 이야기 · 여행정보 검색">
           <button class="site-search-close" type="button" aria-label="검색 닫기">✕</button>
         </form>
-        <div class="site-search-status" aria-live="polite">검색어를 입력하세요.</div>
+        <div class="site-search-status" aria-live="polite"></div>
         <div class="site-search-results"></div>
       </div>`;
     searchHeader.appendChild(searchPanel);
@@ -106,7 +106,7 @@
       const query=normalize(value);
       results.replaceChildren();
       if(!query){
-        status.textContent='검색어를 입력하면 장소·인물·이야기·여행정보를 찾을 수 있습니다.';
+        status.textContent='';
         return;
       }
       let data=[];
