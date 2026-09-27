@@ -1011,3 +1011,24 @@ body.greyfriars-bobby-place{--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sage
   .fife-featured-hub>strong{font-size:24px}
   .fife-featured-hub .fife-featured-summary{font-size:14px}
 }
+
+
+/* WALKED TOGETHER PHOTO SAVE-DETERRENCE */
+#walked .photo-card{
+  position:relative;
+  cursor:zoom-in;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+#walked .photo-card img,
+#lightbox img{
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+#walked .photo-card img,
+#lightbox img{
+  pointer-events:none;
+}

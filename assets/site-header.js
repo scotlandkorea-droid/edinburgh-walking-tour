@@ -67,9 +67,26 @@
     };
     prev?.addEventListener('click',()=>gallery.scrollBy({left:-gallery.clientWidth*.78,behavior:'smooth'}));
     next?.addEventListener('click',()=>gallery.scrollBy({left:gallery.clientWidth*.78,behavior:'smooth'}));
-    gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>openLightbox(photo)));
+    gallery.querySelectorAll('.photo-card').forEach(card=>{
+      const photo=card.querySelector('img');
+      if(!photo)return;
+      photo.draggable=false;
+      photo.setAttribute('draggable','false');
+      card.addEventListener('click',()=>openLightbox(photo));
+      card.addEventListener('contextmenu',event=>event.preventDefault());
+      card.addEventListener('dragstart',event=>event.preventDefault());
+    });
+    image.draggable=false;
+    image.setAttribute('draggable','false');
     closeButton?.addEventListener('click',closeLightbox);
-    lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
+    lightbox.addEventListener('contextmenu',event=>event.preventDefault());
+    lightbox.addEventListener('dragstart',event=>event.preventDefault());
+    lightbox.addEventListener('click',event=>{
+      if(event.target!==lightbox)return;
+      const rect=image.getBoundingClientRect();
+      const inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;
+      if(!inside)closeLightbox();
+    });
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});
   }
 
