@@ -36,13 +36,14 @@ function renderPreview(){
   const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const project=([lat,lng])=>{const x=12+(lng-minLng)/(maxLng-minLng)*976;const y=199-(lat-minLat)/(maxLat-minLat)*173;return [x,y]};
-  const pts=path.map(p=>project(p).join(',')).join(' ');
-  const dots=stops.slice(1,-1).map(s=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
-  const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=project(path[i]),b=project(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+7).toFixed(1)},${y.toFixed(1)} ${(x-6).toFixed(1)},${(y-5).toFixed(1)} ${(x-6).toFixed(1)},${(y+5).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
-  const [sx,sy]=project([stops[0].lat,stops[0].lng]);
-  const [ex,ey]=project([stops[stops.length-1].lat,stops[stops.length-1].lng]);
+  const projectMain=([lat,lng])=>{const [x,y]=project([lat,lng]);return [x,26+(y-26)*1.09]};
+  const pts=path.map(p=>projectMain(p).join(',')).join(' ');
+  const dots=stops.slice(1,-1).map(s=>{const [x,y]=projectMain([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
+  const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=projectMain(path[i]),b=projectMain(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+7).toFixed(1)},${y.toFixed(1)} ${(x-6).toFixed(1)},${(y-5).toFixed(1)} ${(x-6).toFixed(1)},${(y+5).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
+  const [sx,sy]=projectMain([stops[0].lat,stops[0].lng]);
+  const [ex,ey]=projectMain([stops[stops.length-1].lat,stops[stops.length-1].lng]);
   const [ox,oy]=project([optionalStop.lat,optionalStop.lng]);
-  const [ofx,ofy]=project(optionalFrom);
+  const [ofx,ofy]=projectMain(optionalFrom);
   const optionalBranch=`<line class="preview-optional-line" x1="${ofx.toFixed(1)}" y1="${ofy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}"></line><circle cx="${ox.toFixed(1)}" cy="${oy.toFixed(1)}" r="6" class="preview-optional-dot"><title>아서스 시트 · 별도 방문</title></circle><text class="preview-optional-label" x="${(ox-8).toFixed(1)}" y="${(oy-10).toFixed(1)}" text-anchor="end">아서스 시트 · 별도 방문</text>`;
   previewCanvas.innerHTML=`<svg viewBox="0 0 1000 220" role="img" aria-label="에든버러 워킹투어 19개 장소와 아서스 시트 별도 방문 동선 미리보기"><path class="map-context" d="M35 72 C180 48 280 64 390 45 S620 34 760 62 920 50 978 32M45 155 C185 130 285 148 410 126 S665 118 790 141 910 128 970 105"></path><polyline class="preview-route" points="${pts}"></polyline>${optionalBranch}${arrows}${dots}<g class="preview-start" transform="translate(${(sx-12).toFixed(1)} ${(sy-14).toFixed(1)})"><path d="M0 20V0m2 2h28l-6 7 6 7H2"/><text x="2" y="-5">START</text></g><g class="preview-end" transform="translate(${(ex-8).toFixed(1)} ${(ey-12).toFixed(1)})"><text x="0" y="0">END</text></g></svg>`;
 }
