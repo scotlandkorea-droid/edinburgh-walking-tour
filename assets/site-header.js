@@ -84,22 +84,96 @@
     const normalize=value=>String(value||'')
       .toLocaleLowerCase('ko-KR')
       .normalize('NFKC')
-      .replace(/[·•—–_\/\\.(),"'’‘:;!?]+/g,' ')
+      .replace(/[·•—–_\/\\.(),"\'’‘:;!?]+/g,' ')
       .replace(/\s+/g,' ')
       .trim();
+    const compact=value=>normalize(value).replace(/\s+/g,'');
+
+    const editDistance=(a,b)=>{
+      const left=compact(a),right=compact(b);
+      if(left===right)return 0;
+      if(!left)return right.length;
+      if(!right)return left.length;
+      let prev=Array.from({length:right.length+1},(_,i)=>i);
+      for(let i=1;i<=left.length;i++){
+        const next=[i];
+        for(let j=1;j<=right.length;j++){
+          const cost=left[i-1]===right[j-1]?0:1;
+          next[j]=Math.min(next[j-1]+1,prev[j]+1,prev[j-1]+cost);
+        }
+        prev=next;
+      }
+      return prev[right.length];
+    };
+
+    const fuzzyScore=(query,record)=>{
+      const q=compact(query);
+      if(q.length<2)return null;
+      const candidates=[record.title,...(Array.isArray(record.aliases)?record.aliases:[])].filter(Boolean);
+      let best=null;
+      for(const candidate of candidates){
+        const c=compact(candidate);
+        if(!c)continue;
+        const maxLen=Math.max(q.length,c.length);
+        const lengthGap=Math.abs(q.length-c.length);
+        const allowed=maxLen<=3?1:maxLen<=6?2:Math.max(2,Math.floor(maxLen*.22));
+        if(lengthGap>allowed)continue;
+        const distance=editDistance(q,c);
+        if(distance>allowed)continue;
+        const similarity=1-distance/maxLen;
+        if(similarity<.62)continue;
+        const score=Math.round(similarity*100)-distance*5+(c.startsWith(q)||q.startsWith(c)?8:0);
+        if(best===null||score>best)best=score;
+      }
+      return best;
+    };
 
     const loadSearchData=()=>{
       if(Array.isArray(window.EW_SEARCH_INDEX))return Promise.resolve(window.EW_SEARCH_INDEX);
       if(searchDataPromise)return searchDataPromise;
       searchDataPromise=new Promise((resolve,reject)=>{
         const script=document.createElement('script');
-        script.src='/assets/search-data.js?v=20260927-1';
+        script.src='/assets/search-data.js?v=20260927-2';
         script.dataset.ewSearchData='true';
         script.onload=()=>resolve(Array.isArray(window.EW_SEARCH_INDEX)?window.EW_SEARCH_INDEX:[]);
         script.onerror=reject;
         document.head.appendChild(script);
       });
       return searchDataPromise;
+    };
+
+    const directMatches=(query,data)=>{
+      const terms=query.split(' ').filter(Boolean);
+      return data.map(record=>{
+        const title=normalize(record.title);
+        const description=normalize(record.description);
+        const keywords=normalize(record.keywords);
+        const aliases=(Array.isArray(record.aliases)?record.aliases:[]).map(normalize);
+        const aliasText=aliases.join(' ');
+        const haystack=`${title} ${description} ${keywords} ${aliasText}`;
+        if(!terms.every(term=>haystack.includes(term)))return null;
+        let score=0;
+        if(title===query)score+=220;
+        else if(aliases.includes(query))score+=200;
+        else if(title.startsWith(query))score+=130;
+        else if(aliases.some(alias=>alias.startsWith(query)))score+=115;
+        else if(title.includes(query))score+=90;
+        else if(aliasText.includes(query))score+=80;
+        for(const term of terms){
+          if(title.includes(term))score+=36;
+          if(aliases.some(alias=>alias.includes(term)))score+=30;
+          if(description.includes(term))score+=12;
+          if(keywords.includes(term))score+=9;
+        }
+        return {record,score};
+      }).filter(Boolean).sort((a,b)=>b.score-a.score||a.record.title.localeCompare(b.record.title,'ko'));
+    };
+
+    const fuzzyMatches=(query,data)=>{
+      return data.map(record=>{
+        const score=fuzzyScore(query,record);
+        return score===null?null:{record,score};
+      }).filter(Boolean).sort((a,b)=>b.score-a.score||a.record.title.localeCompare(b.record.title,'ko'));
     };
 
     const renderResults=async value=>{
@@ -112,26 +186,14 @@
       let data=[];
       try{data=await loadSearchData()}
       catch(e){status.textContent='검색 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';return}
-      const terms=query.split(' ').filter(Boolean);
-      const matches=data.map(record=>{
-        const title=normalize(record.title);
-        const description=normalize(record.description);
-        const keywords=normalize(record.keywords);
-        const haystack=`${title} ${description} ${keywords}`;
-        if(!terms.every(term=>haystack.includes(term)))return null;
-        let score=0;
-        if(title===query)score+=180;
-        else if(title.startsWith(query))score+=110;
-        else if(title.includes(query))score+=75;
-        for(const term of terms){
-          if(title.includes(term))score+=32;
-          if(description.includes(term))score+=12;
-          if(keywords.includes(term))score+=9;
-        }
-        return {record,score};
-      }).filter(Boolean).sort((a,b)=>b.score-a.score||a.record.title.localeCompare(b.record.title,'ko'));
+      let matches=directMatches(query,data);
+      let similar=false;
+      if(!matches.length){
+        matches=fuzzyMatches(query,data);
+        similar=matches.length>0;
+      }
       const visible=matches.slice(0,8);
-      status.textContent=matches.length?`검색 결과 ${matches.length}개`:'검색 결과가 없습니다.';
+      status.textContent=matches.length?(similar?`비슷한 검색 결과 ${matches.length}개`:`검색 결과 ${matches.length}개`):'검색 결과가 없습니다.';
       for(const {record} of visible){
         const link=document.createElement('a');
         link.className='site-search-result';
