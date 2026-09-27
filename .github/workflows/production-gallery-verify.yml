@@ -21,15 +21,15 @@ jobs:
           set -euo pipefail
           base="https://edinburgh-walking-tour.scotlandkorea.workers.dev"
           html="$(curl -fsSL --retry 3 --retry-delay 2 "$base/")"
-          printf '%s' "$html" | grep -Fq 'site.css?v=20260927-1'
-          printf '%s' "$html" | grep -Fq 'site-header.js?v=20260927-1'
           css="$(curl -fsSL --retry 3 --retry-delay 2 "$base/assets/site.css?v=20260927-1")"
           js="$(curl -fsSL --retry 3 --retry-delay 2 "$base/assets/site-header.js?v=20260927-1")"
-          printf '%s' "$css" | grep -Fq '#walked .photo-card img,#lightbox img{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none'
-          printf '%s' "$js" | grep -Fq "gallery.addEventListener('contextmenu',blockImageSave)"
-          printf '%s' "$js" | grep -Fq "lightbox.addEventListener('contextmenu',blockImageSave)"
-          printf '%s' "$js" | grep -Fq "gallery.addEventListener('dragstart',blockImageSave)"
-          printf '%s' "$js" | grep -Fq "photo.draggable=false"
+          [[ "$html" == *'site.css?v=20260927-1'* ]]
+          [[ "$html" == *'site-header.js?v=20260927-1'* ]]
+          [[ "$css" == *'#walked .photo-card img,#lightbox img{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none'* ]]
+          [[ "$js" == *"gallery.addEventListener('contextmenu',blockImageSave)"* ]]
+          [[ "$js" == *"lightbox.addEventListener('contextmenu',blockImageSave)"* ]]
+          [[ "$js" == *"gallery.addEventListener('dragstart',blockImageSave)"* ]]
+          [[ "$js" == *"photo.draggable=false"* ]]
           echo "LIVE_GALLERY_PROTECTION=PASS"
 
       - name: Remove temporary verification workflow
