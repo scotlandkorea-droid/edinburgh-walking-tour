@@ -36,7 +36,8 @@ function renderPreview(){
   const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const project=([lat,lng])=>{const x=12+(lng-minLng)/(maxLng-minLng)*976;const y=199-(lat-minLat)/(maxLat-minLat)*173;return [x,y]};
-  const projectMain=([lat,lng])=>{const [x,y]=project([lat,lng]);return [x,24+(y-24)*1.28]};
+  const mainLats=path.map(p=>p[0]),mainMinLat=Math.min(...mainLats),mainMaxLat=Math.max(...mainLats);
+  const projectMain=([lat,lng])=>{const [x]=project([lat,lng]);const y=12+(mainMaxLat-lat)/(mainMaxLat-mainMinLat)*196;return [x,y]};
   const pts=path.map(p=>projectMain(p).join(',')).join(' ');
   const dots=stops.slice(1,-1).map(s=>{const [x,y]=projectMain([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
   const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=projectMain(path[i]),b=projectMain(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+7).toFixed(1)},${y.toFixed(1)} ${(x-6).toFixed(1)},${(y-5).toFixed(1)} ${(x-6).toFixed(1)},${(y+5).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
