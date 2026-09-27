@@ -42,6 +42,150 @@
     document.head.appendChild(navScript);
   }
 
+
+  // Shared site search: compact header trigger, overlay panel, lazy-loaded index.
+  let closeSearch=()=>{};
+  const searchHeader=document.querySelector('.site-header');
+  const searchTopbar=searchHeader?.querySelector('.topbar');
+  if(searchHeader&&searchTopbar&&!searchTopbar.querySelector('.site-search-toggle')){
+    const searchToggle=document.createElement('button');
+    searchToggle.type='button';
+    searchToggle.className='site-search-toggle';
+    searchToggle.setAttribute('aria-label','검색 열기');
+    searchToggle.setAttribute('aria-expanded','false');
+    searchToggle.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.6"></circle><path d="m16 16 4.2 4.2"></path></svg>';
+
+    const mobileMenu=searchTopbar.querySelector('.mobile-menu');
+    searchTopbar.insertBefore(searchToggle,mobileMenu||null);
+
+    const searchPanel=document.createElement('div');
+    searchPanel.className='site-search-panel';
+    searchPanel.hidden=true;
+    searchPanel.innerHTML=`
+      <div class="wrap site-search-inner">
+        <form class="site-search-form" role="search">
+          <svg class="site-search-field-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.6"></circle><path d="m16 16 4.2 4.2"></path></svg>
+          <label class="site-search-label" for="site-search-input">사이트 검색</label>
+          <input id="site-search-input" class="site-search-input" type="search" inputmode="search" autocomplete="off" placeholder="장소 · 인물 · 이야기 · 여행정보 검색">
+          <button class="site-search-close" type="button" aria-label="검색 닫기">✕</button>
+        </form>
+        <div class="site-search-status" aria-live="polite">검색어를 입력하세요.</div>
+        <div class="site-search-results"></div>
+      </div>`;
+    searchHeader.appendChild(searchPanel);
+
+    const form=searchPanel.querySelector('.site-search-form');
+    const input=searchPanel.querySelector('.site-search-input');
+    const status=searchPanel.querySelector('.site-search-status');
+    const results=searchPanel.querySelector('.site-search-results');
+    const closeButton=searchPanel.querySelector('.site-search-close');
+    let searchDataPromise=null;
+
+    const normalize=value=>String(value||'')
+      .toLocaleLowerCase('ko-KR')
+      .normalize('NFKC')
+      .replace(/[·•—–_\/\\.(),"'’‘:;!?]+/g,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+
+    const loadSearchData=()=>{
+      if(Array.isArray(window.EW_SEARCH_INDEX))return Promise.resolve(window.EW_SEARCH_INDEX);
+      if(searchDataPromise)return searchDataPromise;
+      searchDataPromise=new Promise((resolve,reject)=>{
+        const script=document.createElement('script');
+        script.src='/assets/search-data.js?v=20260927-1';
+        script.dataset.ewSearchData='true';
+        script.onload=()=>resolve(Array.isArray(window.EW_SEARCH_INDEX)?window.EW_SEARCH_INDEX:[]);
+        script.onerror=reject;
+        document.head.appendChild(script);
+      });
+      return searchDataPromise;
+    };
+
+    const renderResults=async value=>{
+      const query=normalize(value);
+      results.replaceChildren();
+      if(!query){
+        status.textContent='검색어를 입력하면 장소·인물·이야기·여행정보를 찾을 수 있습니다.';
+        return;
+      }
+      let data=[];
+      try{data=await loadSearchData()}
+      catch(e){status.textContent='검색 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';return}
+      const terms=query.split(' ').filter(Boolean);
+      const matches=data.map(record=>{
+        const title=normalize(record.title);
+        const description=normalize(record.description);
+        const keywords=normalize(record.keywords);
+        const haystack=`${title} ${description} ${keywords}`;
+        if(!terms.every(term=>haystack.includes(term)))return null;
+        let score=0;
+        if(title===query)score+=180;
+        else if(title.startsWith(query))score+=110;
+        else if(title.includes(query))score+=75;
+        for(const term of terms){
+          if(title.includes(term))score+=32;
+          if(description.includes(term))score+=12;
+          if(keywords.includes(term))score+=9;
+        }
+        return {record,score};
+      }).filter(Boolean).sort((a,b)=>b.score-a.score||a.record.title.localeCompare(b.record.title,'ko'));
+      const visible=matches.slice(0,8);
+      status.textContent=matches.length?`검색 결과 ${matches.length}개`:'검색 결과가 없습니다.';
+      for(const {record} of visible){
+        const link=document.createElement('a');
+        link.className='site-search-result';
+        link.href=record.url;
+        const type=document.createElement('span');
+        type.className='site-search-result-type';
+        type.textContent=record.type||'페이지';
+        const copy=document.createElement('span');
+        copy.className='site-search-result-copy';
+        const title=document.createElement('strong');
+        title.textContent=record.title;
+        const description=document.createElement('small');
+        description.textContent=record.description||'';
+        copy.append(title,description);
+        const arrow=document.createElement('span');
+        arrow.className='site-search-result-arrow';
+        arrow.setAttribute('aria-hidden','true');
+        arrow.textContent='›';
+        link.append(type,copy,arrow);
+        results.appendChild(link);
+      }
+    };
+
+    const openSearch=async()=>{
+      if(mobileMenu?.hasAttribute('open'))mobileMenu.removeAttribute('open');
+      searchPanel.hidden=false;
+      searchToggle.setAttribute('aria-expanded','true');
+      searchToggle.setAttribute('aria-label','검색 닫기');
+      await loadSearchData().catch(()=>{});
+      requestAnimationFrame(()=>input.focus({preventScroll:true}));
+      renderResults(input.value);
+    };
+    closeSearch=()=>{
+      searchPanel.hidden=true;
+      searchToggle.setAttribute('aria-expanded','false');
+      searchToggle.setAttribute('aria-label','검색 열기');
+    };
+
+    searchToggle.addEventListener('click',()=>searchPanel.hidden?openSearch():closeSearch());
+    closeButton.addEventListener('click',closeSearch);
+    input.addEventListener('input',()=>renderResults(input.value));
+    form.addEventListener('submit',event=>{
+      event.preventDefault();
+      const first=results.querySelector('.site-search-result');
+      if(first)location.href=first.href;
+    });
+    document.addEventListener('click',event=>{
+      if(!searchPanel.hidden&&!searchHeader.contains(event.target))closeSearch();
+    });
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&!searchPanel.hidden)closeSearch();
+    });
+  }
+
   const gallery=document.getElementById('tourGallery');
   const lightbox=document.getElementById('lightbox');
   if(gallery&&lightbox){
@@ -93,9 +237,11 @@
   addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(fitTitles,80)});
 
   const menu=document.querySelector('.mobile-menu');
-  if(!menu)return;
-  const close=()=>menu.removeAttribute('open');
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-  document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  if(menu){
+    const close=()=>menu.removeAttribute('open');
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    menu.addEventListener('toggle',()=>{if(menu.hasAttribute('open'))closeSearch()});
+    document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  }
 })();
