@@ -1,0 +1,53 @@
+name: Temporary image metadata audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/metadata-audit-temp.yml"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ExifTool
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libimage-exiftool-perl >/dev/null
+      - name: Audit and prepare cleaned copies
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            "1280＿1756577756454.jpg"
+            "assets/1280＿1754399052815.jpg"
+            "assets/1280＿1755072289623.jpg"
+            "assets/ab75b4d57bc76a4b8ce8d532e05cf08119800cc3381112669064a9110390bfc7 (1).png"
+            "assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png"
+            "assets/princes-street-gardens/20160602_142956.jpg"
+            "assets/princes-street-gardens/20160602_143215.jpg"
+            "assets/princes-street-gardens/20180626_152029.jpg"
+          )
+          mkdir -p audit/report audit/original audit/clean
+          printf "path\tbefore_sha256\tafter_sha256\n" > audit/checksums.tsv
+          for f in "${files[@]}"; do
+            safe=$(printf '%s' "$f" | tr '/ ' '__')
+            mkdir -p "audit/original/$(dirname "$f")" "audit/clean/$(dirname "$f")"
+            cp "$f" "audit/original/$f"
+            cp "$f" "audit/clean/$f"
+            exiftool -j -G1 -a -s "$f" > "audit/report/$safe.before.json"
+            # Remove privacy-bearing metadata while preserving display-critical orientation and ICC profile.
+            exiftool -overwrite_original               -XMP:all= -IPTC:all= -GPS:all= -MakerNotes:all=               -EXIF:Make= -EXIF:Model= -EXIF:Software=               -EXIF:DateTimeOriginal= -EXIF:CreateDate= -IFD0:ModifyDate=               -EXIF:CameraOwnerName= -EXIF:BodySerialNumber= -EXIF:LensSerialNumber=               -IFD0:Artist= -IFD0:Copyright=               "audit/clean/$f" >/dev/null || true
+            exiftool -j -G1 -a -s "audit/clean/$f" > "audit/report/$safe.after.json"
+            before=$(sha256sum "$f" | awk '{print $1}')
+            after=$(sha256sum "audit/clean/$f" | awk '{print $1}')
+            printf "%s\t%s\t%s\n" "$f" "$before" "$after" >> audit/checksums.tsv
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-metadata-audit
+          path: audit
+          retention-days: 1
