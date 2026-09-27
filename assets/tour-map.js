@@ -35,7 +35,7 @@ if(!preview||!previewCanvas||!modal||!mapEl)return;
 function renderPreview(){
   const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
   const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
-  const project=([lat,lng])=>{const x=28+(lng-minLng)/(maxLng-minLng)*944;const y=195-(lat-minLat)/(maxLat-minLat)*165;return [x,y]};
+  const project=([lat,lng])=>{const x=12+(lng-minLng)/(maxLng-minLng)*976;const y=199-(lat-minLat)/(maxLat-minLat)*173;return [x,y]};
   const pts=path.map(p=>project(p).join(',')).join(' ');
   const dots=stops.slice(1,-1).map(s=>{const [x,y]=project([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
   const arrows=previewArrowSegments.filter(i=>i<path.length-1).map(i=>{const a=project(path[i]),b=project(path[i+1]);const x=(a[0]+b[0])/2,y=(a[1]+b[1])/2;const deg=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;return `<polygon class="preview-arrow" points="${(x+7).toFixed(1)},${y.toFixed(1)} ${(x-6).toFixed(1)},${(y-5).toFixed(1)} ${(x-6).toFixed(1)},${(y+5).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"></polygon>`}).join('');
