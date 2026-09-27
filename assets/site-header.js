@@ -49,6 +49,21 @@
     const next=document.querySelector('.gallery-arrow.next');
     const image=lightbox.querySelector('img');
     const closeButton=lightbox.querySelector('button');
+    const protectedImages=[...gallery.querySelectorAll('.photo-card img'),image];
+    protectedImages.forEach(photo=>{
+      photo.draggable=false;
+      photo.setAttribute('draggable','false');
+    });
+    const blockImageSave=event=>{
+      const target=event.target;
+      if(target instanceof HTMLImageElement&&(gallery.contains(target)||lightbox.contains(target))){
+        event.preventDefault();
+      }
+    };
+    gallery.addEventListener('contextmenu',blockImageSave);
+    lightbox.addEventListener('contextmenu',blockImageSave);
+    gallery.addEventListener('dragstart',blockImageSave);
+    lightbox.addEventListener('dragstart',blockImageSave);
     const closeLightbox=()=>{
       lightbox.classList.remove('open','zooming');
       lightbox.setAttribute('aria-hidden','true');
