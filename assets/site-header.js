@@ -197,7 +197,7 @@
       for(const {record} of visible){
         const link=document.createElement('a');
         link.className='site-search-result';
-        link.href=((record.type==='장소'||record.type==='스코틀랜드')&&!String(record.url).includes('#'))?record.url+'#place-nav':record.url;
+        link.href=(record.type==='장소'&&!String(record.url).includes('#'))?record.url+'#place-nav':record.url;
         const type=document.createElement('span');
         type.className='site-search-result-type';
         type.textContent=record.type||'페이지';
