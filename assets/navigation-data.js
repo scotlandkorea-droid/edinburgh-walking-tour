@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-26-7",
+  "version": "2026-09-28-1",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -119,29 +119,37 @@ window.EW_NAV_DATA={
     {
       "id": "edinburgh-4",
       "scope": "edinburgh",
-      "name": "로열마일 중심",
+      "name": "로열마일 주변",
       "hub": "/edinburgh/places.html#edinburgh",
       "hubLabel": "장소 전체 보기",
       "items": [
         {
-          "name": "로열마일",
-          "url": "/places/royal-mile.html"
+          "name": "글래드스톤스 랜드",
+          "url": "/places/royal-mile-gladstones-land.html"
         },
         {
-          "name": "데이비드 흄 동상",
-          "url": "/places/david-hume.html"
+          "name": "디컨 브로디",
+          "url": "/places/royal-mile-deacon-brodie.html"
         },
         {
-          "name": "세인트 자일스",
-          "url": "/places/st-giles.html"
+          "name": "하트 오브 미들로디언",
+          "url": "/places/royal-mile-heart-midlothian.html"
         },
         {
           "name": "머캣 크로스",
-          "url": "/edinburgh/places/mercat-cross.html"
+          "url": "/places/royal-mile-mercat-cross.html"
         },
         {
           "name": "시티 챔버스",
-          "url": "/edinburgh/places/city-chambers.html"
+          "url": "/places/royal-mile-city-chambers.html"
+        },
+        {
+          "name": "메리 킹스 클로즈",
+          "url": "/places/royal-mile-mary-kings-close.html"
+        },
+        {
+          "name": "아담 스미스 동상",
+          "url": "/places/royal-mile-adam-smith.html"
         },
         {
           "name": "존 녹스 하우스",
