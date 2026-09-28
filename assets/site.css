@@ -1091,9 +1091,10 @@ body.tour-guide-detail .guide-kicker{
   text-transform:uppercase;
 }
 body.tour-guide-detail .guide-section-kicker{
-  margin:0 0 8px 18px;
-  color:#718078;
-  font-size:12px;
+  margin:0 0 5px;
+  color:#8b5969;
+  font-size:13px;
+  line-height:1.35;
   letter-spacing:.14em;
   font-weight:760;
 }
@@ -1117,7 +1118,7 @@ body.tour-guide-detail .tour-guide-hero .guide-core-value{
   font-size:21px;
   line-height:1.55;
   letter-spacing:-.022em;
-  font-weight:760;
+  font-weight:800;
 }
 body.tour-guide-detail .guide-together{
   margin:12px 0 0!important;
@@ -1179,9 +1180,9 @@ body.tour-guide-detail .guide-section+.guide-section{
   margin-top:58px;
 }
 body.tour-guide-detail .guide-section h2{
-  margin:0 0 7px;
-  padding-left:13px;
-  border-left:5px solid var(--guide-sage);
+  margin:0 0 26px;
+  padding:0;
+  border:0;
   color:var(--guide-green);
   font-size:clamp(26px,5vw,32px);
   line-height:1.28;
@@ -1201,14 +1202,14 @@ body.tour-guide-detail .guide-section>p:not(.guide-kicker):not(.guide-highlight)
   margin:0 0 20px;
 }
 body.tour-guide-detail .guide-highlight{
-  margin:27px 0 30px;
+  margin:28px 0 31px;
   padding:0;
   border:0;
-  color:#2f3a34;
-  font-size:17.6px;
-  line-height:1.7;
+  color:#2b342f;
+  font-size:17.7px;
+  line-height:1.68;
   letter-spacing:-.015em;
-  font-weight:690;
+  font-weight:770;
   word-break:keep-all;
 }
 body.tour-guide-detail .guide-inline-link,
@@ -1304,7 +1305,7 @@ body.tour-guide-detail .guide-kakao-button{
   body.tour-guide-detail .tour-guide-hero .guide-core-value{
     font-size:19px;
     line-height:1.58;
-    font-weight:750;
+    font-weight:790;
   }
   body.tour-guide-detail .guide-together{
     margin-top:10px!important;
@@ -1336,14 +1337,15 @@ body.tour-guide-detail .guide-kakao-button{
     margin-top:50px;
   }
   body.tour-guide-detail .guide-section h2{
+    margin-bottom:23px;
+    padding:0;
+    border:0;
     font-size:25px;
     line-height:1.3;
-    padding-left:11px;
-    border-left-width:4px;
   }
   body.tour-guide-detail .guide-section-kicker{
-    margin:0 0 7px 15px;
-    font-size:11.5px;
+    margin:0 0 5px;
+    font-size:12.5px;
   }
   body.tour-guide-detail .guide-section>p:not(.guide-kicker):not(.guide-highlight){
     margin-bottom:19px;
@@ -1351,10 +1353,11 @@ body.tour-guide-detail .guide-kakao-button{
     line-height:1.82;
   }
   body.tour-guide-detail .guide-highlight{
-    margin:25px 0 27px;
+    margin:26px 0 28px;
     padding:0;
-    font-size:16.8px;
+    font-size:17px;
     line-height:1.68;
+    font-weight:760;
   }
   body.tour-guide-detail .guide-notice{
     margin-top:29px;
