@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-28-1",
+  "version": "2026-09-28-2",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -227,16 +227,20 @@ window.EW_NAV_DATA={
       "hubLabel": "장소 전체 보기",
       "items": [
         {
+          "name": "뉴 칼튼 묘지",
+          "url": "/edinburgh/places/new-calton-burial-ground.html"
+        },
+        {
+          "name": "번스 기념비",
+          "url": "/edinburgh/places/burns-monument.html"
+        },
+        {
           "name": "칼튼 힐",
           "url": "/places/calton-hill.html"
         },
         {
           "name": "올드 칼튼 묘지",
           "url": "/edinburgh/places/old-calton-burial-ground.html"
-        },
-        {
-          "name": "번스 기념비",
-          "url": "/edinburgh/places/burns-monument.html"
         },
         {
           "name": "코난 도일 펍",
