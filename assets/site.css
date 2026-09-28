@@ -1145,17 +1145,6 @@ body.tour-guide-detail .guide-facts small{
   line-height:1.45;
   font-weight:620;
 }
-body.tour-guide-detail .guide-hero-note{
-  max-width:800px;
-  margin:24px 0 0;
-  padding:2px 0 2px 16px;
-  border-left:3px solid var(--guide-sage);
-  color:#415048;
-  font-size:16.5px;
-  line-height:1.72;
-  font-weight:650;
-  word-break:keep-all;
-}
 body.tour-guide-detail .tour-guide-content{
   padding:52px 0 78px;
 }
@@ -1312,10 +1301,6 @@ body.tour-guide-detail .guide-kakao-button{
   }
   body.tour-guide-detail .guide-facts span:nth-child(n+3){
     border-top:1px solid var(--guide-line);
-  }
-  body.tour-guide-detail .guide-hero-note{
-    font-size:15.8px;
-    line-height:1.72;
   }
   body.tour-guide-detail .tour-guide-content{
     padding:44px 0 66px;
