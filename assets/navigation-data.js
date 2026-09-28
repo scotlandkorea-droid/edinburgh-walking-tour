@@ -731,6 +731,42 @@ window.EW_NAV_DATA={
       ]
     },
     {
+      "id": "isle-of-skye",
+      "name": "스카이섬",
+      "hub": "/scotland/places/isle-of-skye.html",
+      "hubLabel": "스카이섬 전체 보기",
+      "kind": "지역",
+      "includeHubPrev": false,
+      "hubPrevName": null,
+      "items": [
+        {
+          "number": "01",
+          "name": "스카이로 들어가는 길",
+          "url": "/scotland/places/isle-of-skye-arrival.html"
+        },
+        {
+          "number": "02",
+          "name": "퀴린과 페어리 풀스",
+          "url": "/scotland/places/isle-of-skye-cuillin-fairy-pools.html"
+        },
+        {
+          "number": "03",
+          "name": "북쪽 트로터니시",
+          "url": "/scotland/places/isle-of-skye-trotternish.html"
+        },
+        {
+          "number": "04",
+          "name": "서쪽·북서쪽 스카이",
+          "url": "/scotland/places/isle-of-skye-west.html"
+        },
+        {
+          "number": "05",
+          "name": "남쪽 슬리트",
+          "url": "/scotland/places/isle-of-skye-sleat.html"
+        }
+      ]
+    },
+    {
       "id": "glencoe",
       "name": "글렌코",
       "hub": "/scotland/places/glencoe.html",
