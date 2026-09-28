@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-26-7",
+  "version": "2026-09-28-3",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -119,7 +119,7 @@ window.EW_NAV_DATA={
     {
       "id": "edinburgh-4",
       "scope": "edinburgh",
-      "name": "로열마일 중심",
+      "name": "로열마일 주변",
       "hub": "/edinburgh/places.html#edinburgh",
       "hubLabel": "장소 전체 보기",
       "items": [
@@ -128,20 +128,32 @@ window.EW_NAV_DATA={
           "url": "/places/royal-mile.html"
         },
         {
-          "name": "데이비드 흄 동상",
-          "url": "/places/david-hume.html"
+          "name": "글래드스톤스 랜드",
+          "url": "/places/royal-mile-gladstones-land.html"
         },
         {
-          "name": "세인트 자일스",
-          "url": "/places/st-giles.html"
+          "name": "디컨 브로디",
+          "url": "/places/royal-mile-deacon-brodie.html"
+        },
+        {
+          "name": "하트 오브 미들로디언",
+          "url": "/places/royal-mile-heart-midlothian.html"
         },
         {
           "name": "머캣 크로스",
-          "url": "/edinburgh/places/mercat-cross.html"
+          "url": "/places/royal-mile-mercat-cross.html"
         },
         {
           "name": "시티 챔버스",
-          "url": "/edinburgh/places/city-chambers.html"
+          "url": "/places/royal-mile-city-chambers.html"
+        },
+        {
+          "name": "메리 킹스 클로즈",
+          "url": "/places/royal-mile-mary-kings-close.html"
+        },
+        {
+          "name": "아담 스미스 동상",
+          "url": "/places/royal-mile-adam-smith.html"
         },
         {
           "name": "존 녹스 하우스",
@@ -161,12 +173,28 @@ window.EW_NAV_DATA={
           "url": "/places/canongate.html"
         },
         {
-          "name": "에든버러 박물관",
-          "url": "/edinburgh/places/museum-of-edinburgh.html"
+          "name": "World’s End",
+          "url": "/places/canongate-worlds-end.html"
         },
         {
-          "name": "애덤 스미스 무덤",
-          "url": "/edinburgh/places/adam-smith-grave.html"
+          "name": "캐넌게이트 커크",
+          "url": "/places/canongate-kirk-stories.html"
+        },
+        {
+          "name": "아담 스미스 무덤",
+          "url": "/places/canongate-adam-smith.html"
+        },
+        {
+          "name": "캐넌게이트 묘지",
+          "url": "/places/canongate-kirkyard-stories.html"
+        },
+        {
+          "name": "로버트 퍼거슨 동상",
+          "url": "/places/canongate-robert-fergusson.html"
+        },
+        {
+          "name": "에든버러 박물관",
+          "url": "/edinburgh/places/museum-of-edinburgh.html"
         }
       ]
     },
@@ -199,16 +227,20 @@ window.EW_NAV_DATA={
       "hubLabel": "장소 전체 보기",
       "items": [
         {
+          "name": "뉴 칼튼 묘지",
+          "url": "/edinburgh/places/new-calton-burial-ground.html"
+        },
+        {
+          "name": "번스 기념비",
+          "url": "/edinburgh/places/burns-monument.html"
+        },
+        {
           "name": "칼튼 힐",
           "url": "/places/calton-hill.html"
         },
         {
           "name": "올드 칼튼 묘지",
           "url": "/edinburgh/places/old-calton-burial-ground.html"
-        },
-        {
-          "name": "번스 기념비",
-          "url": "/edinburgh/places/burns-monument.html"
         },
         {
           "name": "코난 도일 펍",
@@ -614,97 +646,87 @@ window.EW_NAV_DATA={
     {
       "id": "royal-mile",
       "name": "로열마일",
-      "hub": "/places/royal-mile.html",
-      "hubLabel": "로열마일 이야기 전체 보기",
+      "hub": "/places/royal-mile.html#tour-nav",
+      "hubLabel": "로열마일 전체 보기",
       "kind": "이야기",
       "includeHubPrev": false,
       "hubPrevName": null,
       "items": [
         {
           "number": "01",
-          "name": "로열마일 전체 이야기",
-          "url": "/places/royal-mile-overview.html"
-        },
-        {
-          "number": "02",
           "name": "글래드스톤스 랜드",
           "url": "/places/royal-mile-gladstones-land.html"
         },
         {
-          "number": "03",
+          "number": "02",
           "name": "디컨 브로디",
           "url": "/places/royal-mile-deacon-brodie.html"
         },
         {
-          "number": "04",
+          "number": "03",
           "name": "하트 오브 미들로디언",
           "url": "/places/royal-mile-heart-midlothian.html"
         },
         {
-          "number": "05",
+          "number": "04",
           "name": "머캣 크로스",
           "url": "/places/royal-mile-mercat-cross.html"
         },
         {
-          "number": "06",
+          "number": "05",
           "name": "시티 챔버스",
           "url": "/places/royal-mile-city-chambers.html"
         },
         {
-          "number": "07",
+          "number": "06",
           "name": "메리 킹스 클로즈",
           "url": "/places/royal-mile-mary-kings-close.html"
+        },
+        {
+          "number": "07",
+          "name": "아담 스미스 동상",
+          "url": "/places/royal-mile-adam-smith.html"
         }
       ]
     },
     {
       "id": "canongate",
       "name": "캐넌게이트",
-      "hub": "/places/canongate.html",
-      "hubLabel": "캐넌게이트 이야기 전체 보기",
+      "hub": "/places/canongate.html#tour-nav",
+      "hubLabel": "캐넌게이트 전체 보기",
       "kind": "이야기",
       "includeHubPrev": false,
       "hubPrevName": null,
       "items": [
         {
           "number": "01",
-          "name": "캐넌게이트 전체 이야기",
-          "url": "/places/canongate-overview.html"
-        },
-        {
-          "number": "02",
-          "name": "World’s End — 정말 ‘세상의 끝’이었던 곳",
+          "name": "World’s End",
           "url": "/places/canongate-worlds-end.html"
         },
         {
-          "number": "03",
-          "name": "캐넌게이트 커크 — 왕실의 교회와 작은 묘지",
+          "number": "02",
+          "name": "캐넌게이트 커크",
           "url": "/places/canongate-kirk-stories.html"
         },
         {
-          "number": "04",
-          "name": "로버트 퍼거슨 — 길 위에 서 있는 젊은 시인",
-          "url": "/places/canongate-robert-fergusson.html"
-        },
-        {
-          "number": "05",
-          "name": "아담 스미스 — 《국부론》의 저자가 잠든 곳",
+          "number": "03",
+          "name": "아담 스미스 무덤",
           "url": "/places/canongate-adam-smith.html"
         },
         {
+          "number": "04",
+          "name": "캐넌게이트 묘지 이야기",
+          "url": "/places/canongate-kirkyard-stories.html"
+        },
+        {
+          "number": "05",
+          "name": "로버트 퍼거슨 동상",
+          "url": "/places/canongate-robert-fergusson.html"
+        },
+        {
           "number": "06",
-          "name": "스크루지는 이 묘지에서 태어났을까?",
-          "url": "/places/canongate-scrooge.html"
-        },
-        {
-          "number": "07",
-          "name": "호레이셔스 보나 — 한국에서도 부르는 찬송가",
-          "url": "/places/canongate-horatius-bonar.html"
-        },
-        {
-          "number": "08",
-          "name": "900년 길 끝에서 만나는 현재",
-          "url": "/places/canongate-holyrood-end.html"
+          "name": "에든버러 박물관",
+          "url": "/edinburgh/places/museum-of-edinburgh.html"
         }
       ]
     },
