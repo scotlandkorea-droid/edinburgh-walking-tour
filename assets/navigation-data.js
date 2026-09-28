@@ -672,51 +672,41 @@ window.EW_NAV_DATA={
     {
       "id": "canongate",
       "name": "캐넌게이트",
-      "hub": "/places/canongate.html",
-      "hubLabel": "캐넌게이트 이야기 전체 보기",
+      "hub": "/places/canongate.html#tour-nav",
+      "hubLabel": "캐넌게이트 전체 보기",
       "kind": "이야기",
       "includeHubPrev": false,
       "hubPrevName": null,
       "items": [
         {
           "number": "01",
-          "name": "캐넌게이트 전체 이야기",
-          "url": "/places/canongate-overview.html"
-        },
-        {
-          "number": "02",
-          "name": "World’s End — 정말 ‘세상의 끝’이었던 곳",
+          "name": "World’s End",
           "url": "/places/canongate-worlds-end.html"
         },
         {
-          "number": "03",
-          "name": "캐넌게이트 커크 — 왕실의 교회와 작은 묘지",
+          "number": "02",
+          "name": "캐넌게이트 커크",
           "url": "/places/canongate-kirk-stories.html"
         },
         {
-          "number": "04",
-          "name": "로버트 퍼거슨 — 길 위에 서 있는 젊은 시인",
-          "url": "/places/canongate-robert-fergusson.html"
-        },
-        {
-          "number": "05",
-          "name": "아담 스미스 — 《국부론》의 저자가 잠든 곳",
+          "number": "03",
+          "name": "아담 스미스 무덤",
           "url": "/places/canongate-adam-smith.html"
         },
         {
+          "number": "04",
+          "name": "캐넌게이트 묘지 이야기",
+          "url": "/places/canongate-kirkyard-stories.html"
+        },
+        {
+          "number": "05",
+          "name": "로버트 퍼거슨 동상",
+          "url": "/places/canongate-robert-fergusson.html"
+        },
+        {
           "number": "06",
-          "name": "스크루지는 이 묘지에서 태어났을까?",
-          "url": "/places/canongate-scrooge.html"
-        },
-        {
-          "number": "07",
-          "name": "호레이셔스 보나 — 한국에서도 부르는 찬송가",
-          "url": "/places/canongate-horatius-bonar.html"
-        },
-        {
-          "number": "08",
-          "name": "900년 길 끝에서 만나는 현재",
-          "url": "/places/canongate-holyrood-end.html"
+          "name": "에든버러 박물관",
+          "url": "/edinburgh/places/museum-of-edinburgh.html"
         }
       ]
     },
