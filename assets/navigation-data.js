@@ -173,12 +173,28 @@ window.EW_NAV_DATA={
           "url": "/places/canongate.html"
         },
         {
-          "name": "에든버러 박물관",
-          "url": "/edinburgh/places/museum-of-edinburgh.html"
+          "name": "World’s End",
+          "url": "/places/canongate-worlds-end.html"
         },
         {
-          "name": "애덤 스미스 무덤",
-          "url": "/edinburgh/places/adam-smith-grave.html"
+          "name": "캐넌게이트 커크",
+          "url": "/places/canongate-kirk-stories.html"
+        },
+        {
+          "name": "아담 스미스 무덤",
+          "url": "/places/canongate-adam-smith.html"
+        },
+        {
+          "name": "캐넌게이트 묘지",
+          "url": "/places/canongate-kirkyard-stories.html"
+        },
+        {
+          "name": "로버트 퍼거슨 동상",
+          "url": "/places/canongate-robert-fergusson.html"
+        },
+        {
+          "name": "에든버러 박물관",
+          "url": "/edinburgh/places/museum-of-edinburgh.html"
         }
       ]
     },
