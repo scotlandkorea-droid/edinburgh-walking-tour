@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260928-1';
+  const VERSION='20260928-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -145,12 +145,17 @@
     if(context==='tour'&&!tourMatch)context='place';
     if(context==='place'&&!regionMatch&&tourMatch)context='tour';
 
+    // navigation-data.js / tour-course-data.js are the single source of truth.
+    // Rebuild context navigation every time so stale links embedded in old HTML
+    // can never override the current shared order.
+    const staleContextNavs=[...document.querySelectorAll('.page-nav[data-nav-system="tour"],.page-nav[data-nav-system="place"]')];
     const tourNav=tourMatch
-      ?(existingContextNav('tour')||makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음'))
+      ?makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음')
       :null;
     const placeNav=regionMatch
-      ?(existingContextNav('place')||makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소'))
+      ?makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소')
       :null;
+    staleContextNavs.forEach(nav=>nav.remove());
 
     const setNavVisible=(nav,visible)=>{
       if(!nav)return;
