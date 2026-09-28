@@ -861,15 +861,6 @@ body:where(.simple-place-detail){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 
 
 /* TOUR GUIDE DETAIL */
-:where(body.tour-guide-detail) .detail-single{max-width:860px}
-:where(body.tour-guide-detail) .tour-guide-hero h1{color:#17271f;font-weight:850}
-:where(body.tour-guide-detail) .tour-guide-hero .hero-intro{max-width:820px}
-:where(body.tour-guide-detail) .guide-kicker{font-size:11px;letter-spacing:.14em;font-weight:820;color:#8a8176;margin:0 0 7px;text-transform:uppercase}
-:where(body.tour-guide-detail) .placeholder-section{scroll-margin-top:92px}
-:where(body.tour-guide-detail) .placeholder-section h2{color:#17271f!important;font-weight:830;letter-spacing:-.035em;margin-top:0}
-:where(body.tour-guide-detail) .placeholder-section p{font-size:16.5px;line-height:1.78}
-:where(body.tour-guide-detail) .guide-related{margin-top:10px}
-:where(body.tour-guide-detail) .guide-related a{color:#6f3547;font-weight:800}
 
 
 /* STORY HUB DETAIL — Grassmarket + National Museum */
@@ -1062,3 +1053,299 @@ html[data-nav-context="place"] body.royal-mile-story-detail .eyebrow{display:non
 /* Canongate shared pages: hide tour numbering when entered from Place view */
 html[data-nav-context="place"] body.canongate-story-detail .story-series-tabs,
 html[data-nav-context="place"] body.canongate-story-detail .eyebrow{display:none!important}
+
+/* ===== Core decision page: Edinburgh Walking Tour Guide ===== */
+body.tour-guide-detail{
+  --guide-green:#315844;
+  --guide-sage:#9aac9f;
+  --guide-cream:#f7f5ef;
+  --guide-soft:#fbfaf7;
+  --guide-line:#dce3dc;
+}
+body.tour-guide-detail .tour-guide-hero{
+  padding:38px 0 44px;
+  background:linear-gradient(180deg,#f7f3eb 0%,#fff 100%);
+  border-bottom:1px solid var(--line);
+}
+body.tour-guide-detail .tour-guide-hero .breadcrumbs{
+  margin:0 0 20px;
+  font-size:13px;
+  color:var(--muted);
+}
+body.tour-guide-detail .tour-guide-hero h1{
+  max-width:900px;
+  margin:0;
+  color:var(--guide-green);
+  font-size:clamp(34px,6.8vw,52px);
+  line-height:1.08;
+  letter-spacing:-.045em;
+  font-weight:850;
+}
+body.tour-guide-detail .guide-kicker{
+  margin:0 0 24px 18px;
+  color:#8a8176;
+  font-size:11px;
+  line-height:1.35;
+  letter-spacing:.14em;
+  font-weight:820;
+  text-transform:uppercase;
+}
+body.tour-guide-detail .guide-kicker-hero{
+  margin:8px 0 22px;
+}
+body.tour-guide-detail .tour-guide-hero .hero-intro{
+  max-width:800px;
+  color:#39443f;
+  font-size:17.5px;
+  line-height:1.82;
+  letter-spacing:-.012em;
+  word-break:keep-all;
+}
+body.tour-guide-detail .tour-guide-hero .hero-intro p{
+  margin:0 0 18px;
+}
+body.tour-guide-detail .guide-facts{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  max-width:820px;
+  margin:28px 0 0;
+  border:1px solid var(--guide-line);
+  border-radius:16px;
+  background:var(--guide-soft);
+  overflow:hidden;
+}
+body.tour-guide-detail .guide-facts span{
+  min-width:0;
+  padding:17px 16px 16px;
+  text-align:center;
+}
+body.tour-guide-detail .guide-facts span+span{
+  border-left:1px solid var(--guide-line);
+}
+body.tour-guide-detail .guide-facts strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--guide-green);
+  font-size:15.5px;
+  line-height:1.35;
+  font-weight:850;
+}
+body.tour-guide-detail .guide-facts small{
+  display:block;
+  color:#68736d;
+  font-size:12.5px;
+  line-height:1.45;
+  font-weight:620;
+}
+body.tour-guide-detail .guide-hero-note{
+  max-width:800px;
+  margin:24px 0 0;
+  padding:2px 0 2px 16px;
+  border-left:3px solid var(--guide-sage);
+  color:#415048;
+  font-size:16.5px;
+  line-height:1.72;
+  font-weight:650;
+  word-break:keep-all;
+}
+body.tour-guide-detail .tour-guide-content{
+  padding:52px 0 78px;
+}
+body.tour-guide-detail .detail-single{
+  width:min(820px,calc(100% - 36px));
+  margin:auto;
+}
+body.tour-guide-detail .guide-section{
+  scroll-margin-top:92px;
+}
+body.tour-guide-detail .guide-section+.guide-section{
+  margin-top:72px;
+}
+body.tour-guide-detail .guide-section h2{
+  margin:0 0 7px;
+  padding-left:13px;
+  border-left:5px solid var(--guide-sage);
+  color:var(--guide-green);
+  font-size:clamp(26px,5vw,32px);
+  line-height:1.28;
+  letter-spacing:-.035em;
+  font-weight:830;
+  word-break:keep-all;
+}
+body.tour-guide-detail .guide-section>p:not(.guide-kicker):not(.guide-highlight),
+body.tour-guide-detail .guide-notice p{
+  color:#39443f;
+  font-size:17.2px;
+  line-height:1.84;
+  letter-spacing:-.012em;
+  word-break:keep-all;
+}
+body.tour-guide-detail .guide-section>p:not(.guide-kicker):not(.guide-highlight){
+  margin:0 0 20px;
+}
+body.tour-guide-detail .guide-highlight{
+  margin:28px 0 30px;
+  padding:2px 0 2px 17px;
+  border-left:3px solid var(--guide-sage);
+  color:#263a30;
+  font-size:18px;
+  line-height:1.68;
+  letter-spacing:-.018em;
+  font-weight:760;
+  word-break:keep-all;
+}
+body.tour-guide-detail .guide-inline-link,
+body.tour-guide-detail .guide-related a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#6f3547;
+  font-size:15px;
+  font-weight:800;
+  text-decoration:none;
+}
+body.tour-guide-detail .guide-inline-link{
+  margin-top:4px;
+}
+body.tour-guide-detail .guide-related{
+  margin-top:8px!important;
+}
+body.tour-guide-detail .guide-notice{
+  margin:34px 0 0;
+  padding:20px 22px 21px;
+  border:1px solid var(--guide-line);
+  border-radius:14px;
+  background:var(--guide-cream);
+}
+body.tour-guide-detail .guide-notice strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--guide-green);
+  font-size:16px;
+  line-height:1.4;
+  font-weight:850;
+}
+body.tour-guide-detail .guide-notice p{
+  margin:0;
+  font-size:15.8px;
+  line-height:1.75;
+}
+body.tour-guide-detail .guide-ending{
+  margin-top:78px;
+  padding-top:25px;
+  border-top:1px solid var(--line);
+}
+body.tour-guide-detail .guide-share{
+  display:block;
+  margin:0 0 34px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  font-size:13px;
+  font-weight:720;
+  cursor:pointer;
+}
+body.tour-guide-detail .guide-next-actions{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  max-width:620px;
+  margin:0 auto;
+}
+body.tour-guide-detail .guide-next-actions a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 18px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:800;
+  text-align:center;
+  text-decoration:none;
+}
+body.tour-guide-detail .guide-course-button{
+  border:1px solid #d9e2d9;
+  background:var(--guide-cream);
+  color:var(--guide-green);
+}
+body.tour-guide-detail .guide-kakao-button{
+  border:1px solid rgba(53,47,27,.05);
+  background:#fbf0b9;
+  color:#393424;
+}
+@media (max-width:700px){
+  body.tour-guide-detail .tour-guide-hero{
+    padding:30px 0 34px;
+  }
+  body.tour-guide-detail .tour-guide-hero .hero-intro{
+    font-size:16.5px;
+    line-height:1.82;
+  }
+  body.tour-guide-detail .guide-facts{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    margin-top:24px;
+  }
+  body.tour-guide-detail .guide-facts span{
+    padding:15px 12px 14px;
+  }
+  body.tour-guide-detail .guide-facts span+span{
+    border-left:0;
+  }
+  body.tour-guide-detail .guide-facts span:nth-child(even){
+    border-left:1px solid var(--guide-line);
+  }
+  body.tour-guide-detail .guide-facts span:nth-child(n+3){
+    border-top:1px solid var(--guide-line);
+  }
+  body.tour-guide-detail .guide-hero-note{
+    font-size:15.8px;
+    line-height:1.72;
+  }
+  body.tour-guide-detail .tour-guide-content{
+    padding:44px 0 66px;
+  }
+  body.tour-guide-detail .detail-single{
+    width:min(820px,calc(100% - 32px));
+  }
+  body.tour-guide-detail .guide-section+.guide-section{
+    margin-top:60px;
+  }
+  body.tour-guide-detail .guide-section h2{
+    font-size:25px;
+    line-height:1.3;
+    padding-left:11px;
+    border-left-width:4px;
+  }
+  body.tour-guide-detail .guide-kicker{
+    margin:0 0 22px 15px;
+  }
+  body.tour-guide-detail .guide-section>p:not(.guide-kicker):not(.guide-highlight){
+    margin-bottom:19px;
+    font-size:16.5px;
+    line-height:1.82;
+  }
+  body.tour-guide-detail .guide-highlight{
+    margin:25px 0 27px;
+    padding-left:15px;
+    font-size:17px;
+    line-height:1.66;
+  }
+  body.tour-guide-detail .guide-notice{
+    margin-top:29px;
+    padding:18px 18px 19px;
+  }
+  body.tour-guide-detail .guide-notice p{
+    font-size:15.5px;
+  }
+  body.tour-guide-detail .guide-ending{
+    margin-top:66px;
+  }
+  body.tour-guide-detail .guide-next-actions{
+    grid-template-columns:1fr;
+    max-width:420px;
+  }
+}
+
