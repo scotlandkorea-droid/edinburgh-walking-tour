@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260926-7';
+  const VERSION='20260928-1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -275,6 +275,12 @@
 
     const data=window.EW_NAV_DATA||{placeRegions:[],series:[]};
     markEntryLinks();
+
+    const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
+    if(requested==='place'&&findRegion(data,currentPath)){
+      renderContextNavigation(data);
+      return;
+    }
 
     const seriesMatch=findSeries(data,currentPath);
     if(seriesMatch){
