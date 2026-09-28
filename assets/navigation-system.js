@@ -53,7 +53,6 @@
   };
 
   const legacyPageNavs=()=>[...document.querySelectorAll('.page-nav')].filter(nav=>!nav.closest('.story-card,.story-list')&&!nav.dataset.navSystem);
-  const existingContextNav=context=>document.querySelector('.page-nav[data-nav-system="'+context+'"]');
 
   const insertionPoint=()=>{
     const legacy=legacyPageNavs()[0];
