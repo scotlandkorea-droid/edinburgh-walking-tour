@@ -1049,3 +1049,7 @@ body .site-header .site-search-panel .site-search-inner{display:block;width:min(
 @media(min-width:900px){.site-search-toggle{margin-left:0;margin-right:0}.site-search-panel .site-search-inner{padding-top:16px;padding-bottom:20px}.site-search-form{max-width:760px;margin:0 auto}.site-search-status,.site-search-results{max-width:760px;margin-left:auto;margin-right:auto}}
 @media(prefers-reduced-motion:reduce){.site-search-toggle,.site-search-form,.site-search-field-icon{transition:none}.site-search-toggle[aria-expanded="true"],.site-search-form:focus-within{transform:none}}
 
+
+
+/* TOUR-CONTEXT-ONLY DETAIL CARDS — composite route hubs */
+html[data-nav-context="place"] .tour-context-only{display:none!important}
