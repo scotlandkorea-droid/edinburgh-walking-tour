@@ -124,6 +124,10 @@ window.EW_NAV_DATA={
       "hubLabel": "장소 전체 보기",
       "items": [
         {
+          "name": "로열마일",
+          "url": "/places/royal-mile.html"
+        },
+        {
           "name": "글래드스톤스 랜드",
           "url": "/places/royal-mile-gladstones-land.html"
         },
