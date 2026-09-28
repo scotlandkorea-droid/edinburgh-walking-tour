@@ -1104,6 +1104,14 @@ body.tour-guide-detail .tour-guide-hero .hero-intro{
 body.tour-guide-detail .tour-guide-hero .hero-intro p{
   margin:0 0 18px;
 }
+body.tour-guide-detail .tour-guide-hero .guide-core-value{
+  margin:0 0 14px;
+  color:var(--guide-green);
+  font-size:21px;
+  line-height:1.55;
+  letter-spacing:-.022em;
+  font-weight:850;
+}
 body.tour-guide-detail .guide-facts{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -1156,10 +1164,11 @@ body.tour-guide-detail .detail-single{
   margin:auto;
 }
 body.tour-guide-detail .guide-section{
+  padding:0;
   scroll-margin-top:92px;
 }
 body.tour-guide-detail .guide-section+.guide-section{
-  margin-top:72px;
+  margin-top:58px;
 }
 body.tour-guide-detail .guide-section h2{
   margin:0 0 7px;
@@ -1284,6 +1293,10 @@ body.tour-guide-detail .guide-kakao-button{
     font-size:16.5px;
     line-height:1.82;
   }
+  body.tour-guide-detail .tour-guide-hero .guide-core-value{
+    font-size:19px;
+    line-height:1.58;
+  }
   body.tour-guide-detail .guide-facts{
     grid-template-columns:repeat(2,minmax(0,1fr));
     margin-top:24px;
@@ -1311,7 +1324,7 @@ body.tour-guide-detail .guide-kakao-button{
     width:min(820px,calc(100% - 32px));
   }
   body.tour-guide-detail .guide-section+.guide-section{
-    margin-top:60px;
+    margin-top:50px;
   }
   body.tour-guide-detail .guide-section h2{
     font-size:25px;
