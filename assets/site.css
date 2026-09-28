@@ -1058,3 +1058,7 @@ html[data-nav-context="place"] .tour-context-only{display:none!important}
 /* Royal Mile shared pages: hide tour numbering when entered from Place view */
 html[data-nav-context="place"] body.royal-mile-story-detail .story-series-tabs,
 html[data-nav-context="place"] body.royal-mile-story-detail .eyebrow{display:none!important}
+
+/* Canongate shared pages: hide tour numbering when entered from Place view */
+html[data-nav-context="place"] body.canongate-story-detail .story-series-tabs,
+html[data-nav-context="place"] body.canongate-story-detail .eyebrow{display:none!important}
