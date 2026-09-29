@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-29-2",
+  "version": "2026-09-29-3",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -673,7 +673,7 @@ window.EW_NAV_DATA={
         {
           "number": "03",
           "name": "데이비드 흄 동상",
-          "url": "/places/david-hume.html"
+          "url": "/places/david-hume.html#place-nav"
         },
         {
           "number": "04",
@@ -683,7 +683,7 @@ window.EW_NAV_DATA={
         {
           "number": "05",
           "name": "세인트 자일스",
-          "url": "/places/st-giles.html"
+          "url": "/places/st-giles.html#place-nav"
         },
         {
           "number": "06",
@@ -708,7 +708,7 @@ window.EW_NAV_DATA={
         {
           "number": "10",
           "name": "존 녹스 하우스",
-          "url": "/places/john-knox-house.html"
+          "url": "/places/john-knox-house.html#place-nav"
         }
       ]
     },
