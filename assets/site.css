@@ -1044,6 +1044,8 @@ body .site-header .site-search-panel .site-search-inner{display:block;width:min(
 
 /* TOUR-CONTEXT-ONLY DETAIL CARDS — composite route hubs */
 html[data-nav-context="place"] .tour-context-only{display:none!important}
+html[data-nav-context="tour"] .place-context-only{display:none!important}
+html:not([data-nav-context]) .place-context-only{display:none!important}
 
 
 /* Royal Mile shared pages: hide tour numbering when entered from Place view */
