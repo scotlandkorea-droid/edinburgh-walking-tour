@@ -45,7 +45,8 @@ export default {
         "/places/royal-mile-overview.html": "/places/royal-mile.html",
         "/places/canongate-horatius-bonar.html": "/places/canongate-kirkyard-stories.html",
         "/places/canongate-scrooge.html": "/places/canongate-kirkyard-stories.html",
-        "/places/canongate-holyrood-end.html": "/places/canongate.html"
+        "/places/canongate-holyrood-end.html": "/places/canongate.html",
+        "/scotland/places/melrose-abbey.html": "/scotland/places/melrose.html"
       };
       if (legacyPlaceRedirects[url.pathname]) {
         const redirectUrl = new URL(url);
