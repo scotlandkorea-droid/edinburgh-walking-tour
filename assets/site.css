@@ -480,6 +480,26 @@ body.course-detail .detail-article figcaption{
   body.course-detail .detail-article blockquote{margin:26px 0;padding:15px 17px}
 }
 
+
+/* NARRATIVE PLACE HUB RHYTHM — shared compact spacing for Royal Mile / Canongate style hubs.
+   St Giles keeps its separately approved overview exception. */
+body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>p,
+body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>section>p{
+  margin:0 0 16px;
+}
+body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article h2{
+  margin:38px 0 12px!important;
+}
+@media(max-width:719px){
+  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>p,
+  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>section>p{
+    margin-bottom:16px;
+  }
+  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article h2{
+    margin:36px 0 12px!important;
+  }
+}
+
 /* NUMBERED STORY CARDS — shared hub layout */
 body.course-detail .storygrid,
 body.course-detail .stg-storygrid{display:grid;gap:12px}
