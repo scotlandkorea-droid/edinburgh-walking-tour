@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-29-6",
+  "version": "2026-09-29-7",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -417,16 +417,28 @@ window.EW_NAV_DATA={
       "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
+          "name": "피블스",
+          "url": "/scotland/places/peebles.html"
+        },
+        {
+          "name": "갈라시엘스",
+          "url": "/scotland/places/galashiels.html"
+        },
+        {
           "name": "멜로즈",
           "url": "/scotland/places/melrose.html"
         },
         {
-          "name": "멜로즈 사원",
-          "url": "/scotland/places/melrose-abbey.html"
-        },
-        {
           "name": "하윅",
           "url": "/scotland/places/hawick.html"
+        },
+        {
+          "name": "제드버러",
+          "url": "/scotland/places/jedburgh.html"
+        },
+        {
+          "name": "버릭어폰트위드",
+          "url": "/scotland/places/berwick-upon-tweed.html"
         }
       ]
     }
