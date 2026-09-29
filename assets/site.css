@@ -1072,10 +1072,6 @@ html:not([data-nav-context]) .place-context-only{display:none!important}
 html[data-nav-context="place"] body.composite-story-detail .story-series-tabs,
 html[data-nav-context="place"] body.composite-story-detail .eyebrow{display:none!important}
 
-/* Canongate shared pages: hide tour numbering when entered from Place view */
-html[data-nav-context="place"] body.canongate-story-detail .story-series-tabs,
-html[data-nav-context="place"] body.canongate-story-detail .eyebrow{display:none!important}
-
 /* ===== Core decision page: Edinburgh Walking Tour Guide ===== */
 body.tour-guide-detail{
   --guide-green:#315844;

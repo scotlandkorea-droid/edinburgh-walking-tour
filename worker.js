@@ -38,6 +38,18 @@ export default {
         return Response.redirect(redirectUrl.toString(), 301);
       }
 
+      const legacyPlaceRedirects = {
+        "/edinburgh/places/city-chambers.html": "/places/royal-mile-city-chambers.html",
+        "/edinburgh/places/mercat-cross.html": "/places/royal-mile-mercat-cross.html",
+        "/places/canongate-overview.html": "/places/canongate.html"
+      };
+      if (legacyPlaceRedirects[url.pathname]) {
+        const redirectUrl = new URL(url);
+        redirectUrl.pathname = legacyPlaceRedirects[url.pathname];
+        redirectUrl.hash = "";
+        return Response.redirect(redirectUrl.toString(), 301);
+      }
+
       if (
         url.pathname === "/scotland" ||
         url.pathname === "/scotland/" ||
