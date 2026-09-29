@@ -231,7 +231,7 @@ body:has(.detail-article) main>section{padding-bottom:0!important}
 .theme-list .story-card strong{font-size:20px;color:var(--deep);word-break:keep-all}
 .theme-list .story-card:hover,.theme-list .story-card:focus-visible{border-color:#c8d4cb;background:#fafbf8}
 @media(min-width:620px){.theme-article{width:min(820px,calc(100% - 56px))}.theme-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(min-width:900px){.theme-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.theme-list .story-card{padding:24px}}
+@media(min-width:900px){.theme-list .story-card{padding:24px}}
 @media(max-width:560px){.theme-article{font-size:16px;line-height:1.78}.theme-article>h2{margin-top:42px}.theme-detail-intro .lead{font-size:18px!important}}
 
 
@@ -483,19 +483,15 @@ body.course-detail .detail-article figcaption{
 
 /* NARRATIVE PLACE HUB RHYTHM — shared compact spacing for Royal Mile / Canongate style hubs.
    St Giles keeps its separately approved overview exception. */
-body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>p,
-body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>section>p{
+body.course-detail.narrative-place-hub .detail-article>p,
+body.course-detail.narrative-place-hub .detail-article>section>p{
   margin:0 0 16px;
 }
-body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article h2{
+body.course-detail.narrative-place-hub .detail-article h2{
   margin:38px 0 12px!important;
 }
 @media(max-width:719px){
-  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>p,
-  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article>section>p{
-    margin-bottom:16px;
-  }
-  body.course-detail.narrative-place-hub:not(.st-giles-overview-page) .detail-article h2{
+  body.course-detail.narrative-place-hub .detail-article h2{
     margin:36px 0 12px!important;
   }
 }
@@ -593,7 +589,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 @media(max-width:520px){
   .page-nav.story-series-nav{gap:10px!important}
   .page-nav.story-series-nav>a{min-height:96px!important;padding:14px 12px!important}
-  .page-nav.story-series-nav small{font-size:11px!important;margin-bottom:8px!important}
+  .page-nav.story-series-nav small{font-size:11px!important}
   .page-nav.story-series-nav strong{font-size:13px!important;line-height:1.42!important;column-gap:6px!important}
 }
 
@@ -635,14 +631,11 @@ body.detail-reading main article>.wrap>h2{
 @media(max-width:719px){
   body.detail-reading .detail-article,
   body.detail-reading .article,
-  body.detail-reading main article>.wrap{font-size:16.5px;line-height:1.82}
+  body.detail-reading main article>.wrap{font-size:16.5px}
   body.course-detail .detail-article>div:not([class*="nav"]):not([class*="pager"]):not([class*="contact"]):not([class*="action"]):not([class*="overview"])>p,
   body.detail-reading .detail-article>p,
   body.detail-reading .article>p,
   body.detail-reading main article>.wrap>p{margin-bottom:19px}
-  body.detail-reading .detail-article h2,
-  body.detail-reading .article h2,
-  body.detail-reading main article>.wrap>h2{margin-top:58px;margin-bottom:33px}
 }
 
 
@@ -787,8 +780,7 @@ body.grassmarket-story-detail a{color:inherit}
 body.grassmarket-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.grassmarket-story-detail header{border-bottom:1px solid var(--line)}
 body.grassmarket-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-body.grassmarket-story-detail .brand{text-decoration:none}
-body.grassmarket-story-detail .brand{font-weight:800}
+body.grassmarket-story-detail .brand{text-decoration:none;font-weight:800}
 body.grassmarket-story-detail .detail-intro{padding:30px 0 34px;background:var(--cream)}
 body.grassmarket-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
 body.grassmarket-story-detail .breadcrumbs a{text-decoration:none}
@@ -813,8 +805,7 @@ body.greyfriars-story-detail a{color:inherit}
 body.greyfriars-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.greyfriars-story-detail header{border-bottom:1px solid var(--line)}
 body.greyfriars-story-detail header .wrap{min-height:64px;display:flex;justify-content:space-between;align-items:center}
-body.greyfriars-story-detail .brand{text-decoration:none}
-body.greyfriars-story-detail .brand{font-weight:800}
+body.greyfriars-story-detail .brand{text-decoration:none;font-weight:800}
 body.greyfriars-story-detail .crumbs{font-size:14px;color:var(--muted)}
 body.greyfriars-story-detail .greyfriars-intro{background:var(--cream);padding:30px 0 38px}
 body.greyfriars-story-detail .crumbs a{text-decoration:none}
@@ -838,8 +829,7 @@ body.museum-story-detail a{color:inherit}
 body.museum-story-detail .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 body.museum-story-detail header{border-bottom:1px solid var(--line)}
 body.museum-story-detail header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-body.museum-story-detail .brand{text-decoration:none}
-body.museum-story-detail .brand{font-weight:800}
+body.museum-story-detail .brand{text-decoration:none;font-weight:800}
 body.museum-story-detail .breadcrumbs{font-size:14px;color:var(--muted)}
 body.museum-story-detail .detail-intro{padding:30px 0 34px;background:var(--cream)}
 body.museum-story-detail .breadcrumbs a{text-decoration:none}
@@ -851,7 +841,6 @@ body.museum-story-detail .quicklook{margin:0 0 38px;padding:20px 22px;border-rad
 body.museum-story-detail .quicklook strong{display:block;margin-bottom:6px;font-size:14px}
 body.museum-story-detail .quicklook p{margin:0;color:#46534c}
 body.museum-story-detail .location{font-weight:700}
-body.museum-story-detail .draft-note{margin:30px 0;padding-top:24px;border-top:1px solid var(--line);color:var(--muted)}
 body.museum-story-detail h2{font-size:27px;letter-spacing:-.03em;margin:38px 0 12px}
 body.museum-story-detail .detail-article>p{margin:0 0 16px}
 body.museum-story-detail .closing{font-size:18px;margin-top:26px}
@@ -891,8 +880,7 @@ body:where(.story-hub-detail){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;--sa
 :where(body.story-hub-detail) .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 :where(body.story-hub-detail) header{border-bottom:1px solid var(--line)}
 :where(body.story-hub-detail) header .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-:where(body.story-hub-detail) .brand{text-decoration:none}
-:where(body.story-hub-detail) .brand{font-weight:800}
+:where(body.story-hub-detail) .brand{text-decoration:none;font-weight:800}
 :where(body.story-hub-detail) .breadcrumbs{font-size:14px;color:var(--muted)}
 :where(body.story-hub-detail) .breadcrumbs a{text-decoration:none}
 :where(body.story-hub-detail) h1{font-size:clamp(34px,8vw,58px);line-height:1.08;letter-spacing:-.045em;margin:0 0 8px}
