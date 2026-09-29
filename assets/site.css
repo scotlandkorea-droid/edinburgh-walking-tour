@@ -420,6 +420,13 @@ body.course-detail .course-overview + *{margin-top:0}
 /* COURSE DETAIL BODY SYSTEM — unified 2026-09-21
    Presentation only: preserves all course prose and page structure. */
 
+/* Sections nested directly inside a detail article are content groups, not full page sections.
+   Neutralize the global page-section padding here instead of patching individual pages. */
+body.course-detail .detail-article>section{
+  padding-top:0;
+  padding-bottom:0;
+}
+
 body.course-detail .detail-article>p,
 body.course-detail .detail-article>section>p{
   margin:0 0 20px;
@@ -483,12 +490,6 @@ body.course-detail .detail-article figcaption{
 
 /* NARRATIVE PLACE HUB RHYTHM — shared compact spacing for Royal Mile / Canongate style hubs.
    St Giles keeps its separately approved overview exception. */
-/* Nested sections inside narrative articles are content groups, not full page sections.
-   Prevent the homepage-wide section padding from creating large blank gaps between story stops. */
-body.course-detail.narrative-place-hub .detail-article>section{
-  padding-top:0;
-  padding-bottom:0;
-}
 body.course-detail.narrative-place-hub .detail-article>p,
 body.course-detail.narrative-place-hub .detail-article>section>p{
   margin:0 0 16px;
@@ -950,7 +951,6 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
 :where(body.scott-monument-page) .photo{border-radius:22px;overflow:hidden;background:#ddd}
 :where(body.scott-monument-page) .photo img,
 :where(body.scott-monument-page) .story-photo img{object-fit:contain}
-:where(body.scott-monument-page) .detail-article>.section{padding:0!important;margin:0!important}
 :where(body.scott-monument-page) .detail-article>.section>h2{margin-top:58px!important;margin-bottom:39px!important}
 :where(body.scott-monument-page) .detail-article figure{margin:34px 0}
 :where(body.scott-monument-page) .question{font-size:21px;font-weight:800;line-height:1.5;margin:24px 0;padding:18px 20px;background:var(--sage);border-radius:16px}
