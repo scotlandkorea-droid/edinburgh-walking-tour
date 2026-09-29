@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-29-5",
+  "version": "2026-09-29-6",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -167,7 +167,12 @@ window.EW_NAV_DATA={
           "name": "존 녹스 하우스",
           "url": "/places/john-knox-house.html"
         }
-      ]
+      ],
+      "childHub": {
+        "fromIndex": 1,
+        "hub": "/places/royal-mile.html#place-nav",
+        "hubLabel": "로열마일 전체 보기"
+      }
     },
     {
       "id": "edinburgh-5",

@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260929-5';
+  const VERSION='20260929-6';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -128,6 +128,15 @@
     return null;
   };
 
+  const placeHubFor=(region,index)=>{
+    const child=region&&region.childHub;
+    const from=child&&Number.isInteger(child.fromIndex)?child.fromIndex:1;
+    if(child&&index>=from&&child.hub&&child.hubLabel){
+      return {href:child.hub,label:child.hubLabel};
+    }
+    return {href:region.hub,label:region.hubLabel};
+  };
+
   const findTour=path=>{
     const stops=Array.isArray(window.EW_TOUR_STOPS)?window.EW_TOUR_STOPS:[];
     const index=stops.findIndex(item=>normalizePath(item.url)===path);
@@ -173,7 +182,8 @@
       setHub('/#tour','워킹투어 코스 전체 보기');
       setCourseBreadcrumb(tourMatch.items[tourMatch.index].name);
     }else if(context==='place'&&regionMatch){
-      setHub(regionMatch.region.hub,regionMatch.region.hubLabel);
+      const parentHub=placeHubFor(regionMatch.region,regionMatch.index);
+      setHub(parentHub.href,parentHub.label);
       setPlaceBreadcrumb(regionMatch.region);
     }
 
