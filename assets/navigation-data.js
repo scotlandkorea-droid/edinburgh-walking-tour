@@ -855,9 +855,9 @@ window.EW_NAV_DATA={
     },
     {
       "id": "glasgow-walk",
-      "name": "글래스고 도보 안내",
+      "name": "글래스고 걷기 안내",
       "hub": "/scotland/places/glasgow.html",
-      "hubLabel": "글래스고 도보 안내 전체 보기",
+      "hubLabel": "글래스고 걷기 안내 전체 보기",
       "kind": "장소",
       "includeHubPrev": true,
       "hubPrevName": "전체 개요",
