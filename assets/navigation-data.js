@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-28-3",
+  "version": "2026-09-29-1",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -850,6 +850,72 @@ window.EW_NAV_DATA={
           "number": "10",
           "name": "사우스 스트리트",
           "url": "/st-andrews/south-street.html"
+        }
+      ]
+    },
+    {
+      "id": "glasgow-walk",
+      "name": "글래스고 도보 안내",
+      "hub": "/scotland/places/glasgow.html",
+      "hubLabel": "글래스고 도보 안내 전체 보기",
+      "kind": "장소",
+      "includeHubPrev": true,
+      "hubPrevName": "전체 개요",
+      "items": [
+        {
+          "number": "01",
+          "name": "George Square",
+          "url": "/scotland/places/glasgow/george-square.html"
+        },
+        {
+          "number": "02",
+          "name": "Glasgow Cathedral",
+          "url": "/scotland/places/glasgow/glasgow-cathedral.html"
+        },
+        {
+          "number": "03",
+          "name": "Glasgow Necropolis",
+          "url": "/scotland/places/glasgow/glasgow-necropolis.html"
+        },
+        {
+          "number": "04",
+          "name": "High Street · Glasgow Cross",
+          "url": "/scotland/places/glasgow/high-street-glasgow-cross.html"
+        },
+        {
+          "number": "05",
+          "name": "Merchant City",
+          "url": "/scotland/places/glasgow/merchant-city.html"
+        },
+        {
+          "number": "06",
+          "name": "City Halls · Old Fruitmarket",
+          "url": "/scotland/places/glasgow/city-halls-old-fruitmarket.html"
+        },
+        {
+          "number": "07",
+          "name": "Royal Exchange Square · GoMA",
+          "url": "/scotland/places/glasgow/royal-exchange-square-goma.html"
+        },
+        {
+          "number": "08",
+          "name": "Buchanan Street",
+          "url": "/scotland/places/glasgow/buchanan-street.html"
+        },
+        {
+          "number": "09",
+          "name": "St Enoch · Clyde 강변",
+          "url": "/scotland/places/glasgow/st-enoch-clyde.html"
+        },
+        {
+          "number": "10",
+          "name": "Glasgow University",
+          "url": "/scotland/places/glasgow/glasgow-university.html"
+        },
+        {
+          "number": "11",
+          "name": "Kelvingrove Park · Kelvingrove Art Gallery and Museum",
+          "url": "/scotland/places/glasgow/kelvingrove.html"
         }
       ]
     }
