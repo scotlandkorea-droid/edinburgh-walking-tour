@@ -483,6 +483,12 @@ body.course-detail .detail-article figcaption{
 
 /* NARRATIVE PLACE HUB RHYTHM — shared compact spacing for Royal Mile / Canongate style hubs.
    St Giles keeps its separately approved overview exception. */
+/* Nested sections inside narrative articles are content groups, not full page sections.
+   Prevent the homepage-wide section padding from creating large blank gaps between story stops. */
+body.course-detail.narrative-place-hub .detail-article>section{
+  padding-top:0;
+  padding-bottom:0;
+}
 body.course-detail.narrative-place-hub .detail-article>p,
 body.course-detail.narrative-place-hub .detail-article>section>p{
   margin:0 0 16px;
