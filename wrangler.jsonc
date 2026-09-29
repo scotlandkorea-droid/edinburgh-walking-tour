@@ -20,7 +20,11 @@
       "/scotland/index.html",
       "/edinburgh/places/city-chambers.html",
       "/edinburgh/places/mercat-cross.html",
-      "/places/canongate-overview.html"
+      "/places/canongate-overview.html",
+      "/places/royal-mile-overview.html",
+      "/places/canongate-horatius-bonar.html",
+      "/places/canongate-scrooge.html",
+      "/places/canongate-holyrood-end.html"
     ]
   }
 }

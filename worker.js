@@ -41,7 +41,11 @@ export default {
       const legacyPlaceRedirects = {
         "/edinburgh/places/city-chambers.html": "/places/royal-mile-city-chambers.html",
         "/edinburgh/places/mercat-cross.html": "/places/royal-mile-mercat-cross.html",
-        "/places/canongate-overview.html": "/places/canongate.html"
+        "/places/canongate-overview.html": "/places/canongate.html",
+        "/places/royal-mile-overview.html": "/places/royal-mile.html",
+        "/places/canongate-horatius-bonar.html": "/places/canongate-kirkyard-stories.html",
+        "/places/canongate-scrooge.html": "/places/canongate-kirkyard-stories.html",
+        "/places/canongate-holyrood-end.html": "/places/canongate.html"
       };
       if (legacyPlaceRedirects[url.pathname]) {
         const redirectUrl = new URL(url);
