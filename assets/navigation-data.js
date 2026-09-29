@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-29-4",
+  "version": "2026-09-29-5",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -648,6 +648,52 @@ window.EW_NAV_DATA={
           "number": "10",
           "name": "존 녹스의 무덤",
           "url": "/places/john-knox-grave.html"
+        }
+      ]
+    },
+    {
+      "id": "royal-mile",
+      "name": "로열마일 상세 보기",
+      "hub": "/places/royal-mile.html#tour-nav",
+      "hubLabel": "로열마일 전체 보기",
+      "kind": "이야기",
+      "includeHubPrev": false,
+      "hubPrevName": null,
+      "items": [
+        {
+          "number": "01",
+          "name": "글래드스톤스 랜드",
+          "url": "/places/royal-mile-gladstones-land.html"
+        },
+        {
+          "number": "02",
+          "name": "디컨 브로디",
+          "url": "/places/royal-mile-deacon-brodie.html"
+        },
+        {
+          "number": "03",
+          "name": "하트 오브 미들로디언",
+          "url": "/places/royal-mile-heart-midlothian.html"
+        },
+        {
+          "number": "04",
+          "name": "메리 킹스 클로즈",
+          "url": "/places/royal-mile-mary-kings-close.html"
+        },
+        {
+          "number": "05",
+          "name": "시티 챔버스",
+          "url": "/places/royal-mile-city-chambers.html"
+        },
+        {
+          "number": "06",
+          "name": "머캣 크로스",
+          "url": "/places/royal-mile-mercat-cross.html"
+        },
+        {
+          "number": "07",
+          "name": "아담 스미스 동상",
+          "url": "/places/royal-mile-adam-smith.html"
         }
       ]
     },
