@@ -251,19 +251,19 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .detail-article>.page-nav,
 .detail-article>.kakao-action,
 .story-series-tabs{
-  position:relative!important;
-  z-index:20!important;
-  pointer-events:auto!important;
+  position:relative;
+  z-index:20;
+  pointer-events:auto;
 }
 .detail-article>.action-buttons a,
 .detail-article>.action-buttons button,
 .detail-article>.page-nav a,
 .detail-article>.kakao-action a,
 .story-series-tabs a{
-  position:relative!important;
-  z-index:21!important;
-  pointer-events:auto!important;
-  touch-action:auto!important;
+  position:relative;
+  z-index:21;
+  pointer-events:auto;
+  touch-action:auto;
 }
 
 
