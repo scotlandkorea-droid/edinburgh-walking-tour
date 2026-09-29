@@ -31,6 +31,13 @@ export default {
         return Response.redirect(redirectUrl.toString(), 301);
       }
 
+      if (url.pathname === "/edinburgh/places/adam-smith-grave.html") {
+        const redirectUrl = new URL(url);
+        redirectUrl.pathname = "/places/canongate-adam-smith.html";
+        redirectUrl.hash = "";
+        return Response.redirect(redirectUrl.toString(), 301);
+      }
+
       if (
         url.pathname === "/scotland" ||
         url.pathname === "/scotland/" ||
