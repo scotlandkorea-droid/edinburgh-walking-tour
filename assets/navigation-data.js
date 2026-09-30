@@ -294,7 +294,7 @@ window.EW_NAV_DATA={
       "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
-          "name": "앤드루 카네기 생가 박물관",
+          "name": "카네기 생가 박물관",
           "url": "/scotland/places/andrew-carnegie-birthplace-museum.html"
         },
         {
