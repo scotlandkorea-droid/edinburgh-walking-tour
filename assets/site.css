@@ -48,20 +48,20 @@
   color:var(--plum);font-size:13px;font-weight:780;
   text-decoration:none;box-shadow:none
 }
-.detail-article>.page-nav:not(.story-series-nav){
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav){
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   gap:12px;margin:38px 0 0
 }
-.detail-article>.page-nav:not(.story-series-nav) a{
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a{
   display:flex;align-items:center;min-height:68px;padding:11px 10px;
   border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;
   color:#31483d;text-decoration:none;font-weight:780;line-height:1.35
 }
-.detail-article>.page-nav:not(.story-series-nav) a:last-child{justify-content:flex-end;text-align:right}
-.detail-article>.page-nav:not(.story-series-nav).single{grid-template-columns:1fr}
-.detail-article>.page-nav:not(.story-series-nav).single a{justify-content:center;text-align:center}
-.detail-article>.page-nav:not(.story-series-nav).next-only a{grid-column:2;justify-content:flex-end;text-align:right}
-.detail-article>.page-nav:not(.story-series-nav).prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a:last-child{justify-content:flex-end;text-align:right}
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav).single{grid-template-columns:1fr}
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav).single a{justify-content:center;text-align:center}
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav).next-only a{grid-column:2;justify-content:flex-end;text-align:right}
+.detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav).prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
 .detail-article>.kakao-action{
   display:flex;justify-content:center;margin:0;
   padding:110px 0 0;border:0
@@ -76,7 +76,7 @@
 body:has(.detail-article) main>section{padding-bottom:0}
 @media(min-width:720px){
   .detail-article>.action-buttons{margin-top:48px;padding-top:24px}
-  .detail-article>.page-nav:not(.story-series-nav) a{min-height:70px;padding:14px 16px}
+  .detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a{min-height:70px;padding:14px 16px}
   .detail-article>.kakao-action{padding-top:118px}
 }
 
@@ -603,6 +603,85 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   .page-nav.story-series-nav strong{font-size:13px;line-height:1.42;column-gap:6px}
 }
 
+/* NUMBERED PLACE / REGION PREV-NEXT — same visual system as story series.
+   Used by Glasgow, St Andrews and Isle of Skye detail sequences. */
+.page-nav.detail-series-nav{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0 0;
+}
+.page-nav.detail-series-nav>a{
+  display:grid;
+  align-items:center;
+  justify-content:stretch;
+  min-width:0;
+  min-height:92px;
+  padding:16px 14px;
+  border:1px solid var(--line,#e3ded5);
+  border-radius:18px;
+  background:#eef3ee;
+  color:#31483d;
+  text-decoration:none;
+  font-weight:780;
+  line-height:1.35;
+  overflow:hidden;
+}
+.page-nav.detail-series-nav .story-prev{
+  grid-column:1;
+  grid-template-columns:auto minmax(0,1fr);
+  text-align:left;
+}
+.page-nav.detail-series-nav .story-next{
+  grid-column:2;
+  grid-template-columns:minmax(0,1fr) auto;
+  text-align:left;
+}
+.page-nav.detail-series-nav .nav-copy{display:block;min-width:0;text-align:left}
+.page-nav.detail-series-nav small{
+  display:block;
+  margin:0 0 8px;
+  color:#657069;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.2;
+}
+.page-nav.detail-series-nav strong{
+  display:flex;
+  justify-content:flex-start;
+  gap:4px;
+  align-items:start;
+  min-width:0;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.4;
+  word-break:keep-all;
+}
+.page-nav.detail-series-nav .nav-num{
+  display:inline-block;
+  flex:0 0 auto;
+  margin:0;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  color:#5e293c;
+}
+.page-nav.detail-series-nav .nav-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  font-size:20px;
+  line-height:1;
+}
+.page-nav.detail-series-nav.next-only .story-next{grid-column:2}
+.page-nav.detail-series-nav.prev-only .story-prev{grid-column:1}
+@media(max-width:520px){
+  .page-nav.detail-series-nav{gap:10px}
+  .page-nav.detail-series-nav>a{min-height:96px;padding:14px 12px}
+  .page-nav.detail-series-nav small{font-size:11px}
+  .page-nav.detail-series-nav strong{font-size:13px;line-height:1.42;column-gap:6px}
+}
+
 
 
 /* SHARED DETAIL READING SYSTEM
@@ -709,21 +788,21 @@ main .page-nav a{
 main .page-nav a:last-child{justify-content:flex-end;text-align:right}
 main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:right}
 main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
-main .page-nav:not(.story-series-nav) a.place-prev,
-main .page-nav:not(.story-series-nav) a.place-next{
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-prev,
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-next{
   display:grid;align-items:center;column-gap:8px;
   justify-content:stretch
 }
-main .page-nav:not(.story-series-nav) a.place-prev{
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-prev{
   grid-template-columns:auto minmax(0,1fr);text-align:left
 }
-main .page-nav:not(.story-series-nav) a.place-next{
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-next{
   grid-template-columns:minmax(0,1fr) auto;text-align:right
 }
-main .page-nav:not(.story-series-nav) .place-nav-label{
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) .place-nav-label{
   min-width:0;word-break:keep-all;overflow-wrap:normal;text-wrap:balance
 }
-main .page-nav:not(.story-series-nav) .place-nav-arrow{
+main .page-nav:not(.story-series-nav):not(.detail-series-nav) .place-nav-arrow{
   display:flex;align-items:center;justify-content:center;
   width:20px;font-size:21px;line-height:1
 }
