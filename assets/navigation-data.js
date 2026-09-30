@@ -943,49 +943,49 @@ window.EW_NAV_DATA={
         },
         {
           "number": "04",
-          "name": "High Street · Glasgow Cross",
+          "name": "하이 스트리트 · 글래스고 크로스",
           "url": "/scotland/places/glasgow/high-street-glasgow-cross.html",
           "description": "중세 글래스고의 오래된 중심축을 따라 남쪽으로 내려갑니다."
         },
         {
           "number": "05",
-          "name": "Merchant City",
+          "name": "머천트 시티",
           "url": "/scotland/places/glasgow/merchant-city.html",
           "description": "무역과 상업으로 성장한 글래스고의 거리와 건물을 따라갑니다."
         },
         {
           "number": "06",
-          "name": "City Halls · Old Fruitmarket",
+          "name": "시티 홀스 · 올드 프루트마켓",
           "url": "/scotland/places/glasgow/city-halls-old-fruitmarket.html",
           "description": "오래된 시장과 상업 공간이 음악과 공연의 장소로 이어진 모습을 살펴봅니다."
         },
         {
           "number": "07",
-          "name": "Royal Exchange Square · GoMA",
+          "name": "로열 익스체인지 스퀘어 · GoMA",
           "url": "/scotland/places/glasgow/royal-exchange-square-goma.html",
           "description": "상업도시의 중심에서 오늘날의 문화도시로 이어지는 모습을 만나고, GoMA 앞 웰링턴 공작 기마상의 주황색 교통 고깔도 살펴봅니다."
         },
         {
           "number": "08",
-          "name": "Buchanan Street",
+          "name": "뷰캐넌 스트리트",
           "url": "/scotland/places/glasgow/buchanan-street.html",
           "description": "상점과 거리 공연, 오래된 건물이 이어지는 글래스고의 대표적인 보행자 거리를 걷습니다."
         },
         {
           "number": "09",
-          "name": "St Enoch · Clyde 강변",
+          "name": "세인트 이녹 · 클라이드 강변",
           "url": "/scotland/places/glasgow/st-enoch-clyde.html",
           "description": "클라이드강에 닿으며 무역과 산업도시로 성장한 글래스고의 이야기를 살펴봅니다."
         },
         {
           "number": "10",
-          "name": "Glasgow University",
+          "name": "글래스고 대학교",
           "url": "/scotland/places/glasgow/glasgow-university.html",
           "description": "West End에서 다시 걷기 시작해 오래된 대학 건물과 회랑을 둘러봅니다."
         },
         {
           "number": "11",
-          "name": "Kelvingrove Park · Kelvingrove Art Gallery and Museum",
+          "name": "켈빈그로브 공원 · 켈빈그로브 미술관·박물관",
           "url": "/scotland/places/glasgow/kelvingrove.html",
           "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
         }
