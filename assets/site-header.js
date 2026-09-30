@@ -133,7 +133,7 @@
       if(searchDataPromise)return searchDataPromise;
       searchDataPromise=new Promise((resolve,reject)=>{
         const script=document.createElement('script');
-        script.src='/assets/search-data.js?v=20260930-3';
+        script.src='/assets/search-data.js?v=20260930-4';
         script.dataset.ewSearchData='true';
         script.onload=()=>resolve(Array.isArray(window.EW_SEARCH_INDEX)?window.EW_SEARCH_INDEX:[]);
         script.onerror=reject;
