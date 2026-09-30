@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-6';
+  const VERSION='20260930-7';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -29,21 +29,55 @@
 
   const contextualUrl=(url,context)=>url+(context==='tour'?NAV_TOUR:NAV_PLACE);
 
-  const setCourseBreadcrumb=label=>{
-    const breadcrumbs=document.querySelector('.breadcrumbs');
-    const crumbs=document.querySelector('.crumbs');
-    if(breadcrumbs)breadcrumbs.innerHTML='<a href="/">홈</a> › <a href="/#tour">에든버러 워킹투어 코스</a> › '+label;
-    if(crumbs)crumbs.innerHTML='<a href="/">홈</a><span>›</span><a href="/#tour">에든버러 워킹투어 코스</a><span>›</span>'+label;
+  const setBreadcrumb=parts=>{
+    const render=(node,spaced)=>{
+      if(!node)return;
+      node.replaceChildren();
+      parts.forEach((part,index)=>{
+        if(index){
+          const sep=document.createElement('span');
+          sep.className='breadcrumb-separator';
+          sep.setAttribute('aria-hidden','true');
+          sep.textContent='›';
+          if(spaced)sep.style.margin='0 6px';
+          node.append(sep);
+        }
+        if(part.href){
+          const a=document.createElement('a');
+          a.href=part.href;
+          a.textContent=part.label;
+          node.append(a);
+        }else{
+          const span=document.createElement('span');
+          span.textContent=part.label;
+          node.append(span);
+        }
+      });
+    };
+    render(document.querySelector('.breadcrumbs'),false);
+    render(document.querySelector('.crumbs'),true);
   };
 
-  const setPlaceBreadcrumb=region=>{
-    const scopeHash=region.scope==='scotland'?'#scotland':'#edinburgh';
-    const scopeLabel=region.scope==='scotland'?'스코틀랜드 전역':'에든버러';
-    const breadcrumbs=document.querySelector('.breadcrumbs');
-    const crumbs=document.querySelector('.crumbs');
-    if(breadcrumbs)breadcrumbs.innerHTML='<a href="/">홈</a> › <a href="/edinburgh/places.html'+scopeHash+'">장소로 보기</a> › '+scopeLabel+' › '+region.name;
-    if(crumbs)crumbs.innerHTML='<a href="/">홈</a><span>›</span><a href="/edinburgh/places.html'+scopeHash+'">장소로 보기</a><span>›</span>'+scopeLabel+'<span>›</span>'+region.name;
-  };
+  const setCourseBreadcrumb=label=>setBreadcrumb([
+    {label:'홈',href:'/'},
+    {label:'워킹투어 코스',href:'/#tour'},
+    {label}
+  ]);
+
+  const setPlaceBreadcrumb=label=>setBreadcrumb([
+    {label:'홈',href:'/'},
+    {label:'장소로 보기',href:'/edinburgh/places.html'},
+    {label}
+  ]);
+
+  const setSeriesBreadcrumb=(series,item,context)=>setBreadcrumb([
+    {label:'홈',href:'/'},
+    context==='tour'
+      ?{label:'워킹투어 코스',href:'/#tour'}
+      :{label:'장소로 보기',href:'/edinburgh/places.html'},
+    {label:series.name,href:contextualUrl(series.hub,context)},
+    {label:item.number}
+  ]);
 
   const setHub=(href,label)=>{
     const hub=document.querySelector('.course-hub');
@@ -128,13 +162,32 @@
     return null;
   };
 
-  const placeHubFor=(region,index)=>{
-    const child=region&&region.childHub;
-    const from=child&&Number.isInteger(child.fromIndex)?child.fromIndex:1;
-    if(child&&index>=from&&child.hub&&child.hubLabel){
-      return {href:child.hub,label:child.hubLabel};
-    }
-    return {href:region.hub,label:region.hubLabel};
+  const placeHubFor=region=>region&&region.scope==='scotland'
+    ?{href:'/edinburgh/places.html#scotland',label:'스코틀랜드 전역 장소 보기'}
+    :{href:'/edinburgh/places.html#edinburgh',label:'에든버러 장소 보기'};
+
+  const seriesContext=(data,series)=>{
+    const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
+    const hubPath=normalizePath(series.hub);
+    const canTour=!!findTour(hubPath);
+    const canPlace=!!findRegion(data,hubPath);
+    if(requested==='tour'&&canTour)return 'tour';
+    if(requested==='place'&&canPlace)return 'place';
+    return canTour?'tour':'place';
+  };
+
+  const markSeriesEntryLinks=(data,context)=>{
+    if(context!=='tour'&&context!=='place')return;
+    const series=(data.series||[]).find(item=>normalizePath(item.hub)===currentPath);
+    if(!series)return;
+    const itemPaths=new Set((series.items||[]).map(item=>normalizePath(item.url)));
+    document.querySelectorAll('a[href]').forEach(link=>{
+      const raw=link.getAttribute('href');
+      if(!raw)return;
+      const url=new URL(raw,location.origin);
+      if(url.origin!==location.origin||!itemPaths.has(normalizePath(url.pathname)))return;
+      link.setAttribute('href',contextualUrl(url.pathname,context));
+    });
   };
 
   const findTour=path=>{
@@ -182,19 +235,20 @@
       setHub('/#tour','워킹투어 코스 전체 보기');
       setCourseBreadcrumb(tourMatch.items[tourMatch.index].name);
     }else if(context==='place'&&regionMatch){
-      const parentHub=placeHubFor(regionMatch.region,regionMatch.index);
+      const parentHub=placeHubFor(regionMatch.region);
       setHub(parentHub.href,parentHub.label);
-      setPlaceBreadcrumb(regionMatch.region);
+      setPlaceBreadcrumb(regionMatch.region.items[regionMatch.index].name);
     }
 
     document.documentElement.dataset.navContext=context;
+    markSeriesEntryLinks(data,context);
     return true;
   };
 
-  const makeSeriesLink=(series,item,direction,{isHub=false}={})=>{
+  const makeSeriesLink=(series,item,direction,context,{isHub=false}={})=>{
     const a=document.createElement('a');
     a.className=direction==='prev'?'story-prev':'story-next';
-    a.href=isHub?series.hub:item.url;
+    a.href=contextualUrl(isHub?series.hub:item.url,context);
 
     const arrow=document.createElement('span');
     arrow.className='nav-arrow';
@@ -217,7 +271,7 @@
     return a;
   };
 
-  const syncSeriesTabs=(series,index)=>{
+  const syncSeriesTabs=(series,index,context)=>{
     const tabs=document.querySelector('.story-series-tabs, .story-tabs');
     if(series.kind!=='이야기'||!tabs)return;
     const legacy=tabs.classList.contains('story-tabs');
@@ -226,7 +280,7 @@
       const a=document.createElement('a');
       a.className=(legacy?'story-tab':'story-series-tab')+(i===index?' active':'');
       if(i===index)a.setAttribute('aria-current','page');
-      a.href=item.url;
+      a.href=contextualUrl(item.url,context);
       if(legacy){
         a.textContent=item.number+' '+(item.tabName||item.name);
       }else{
@@ -238,8 +292,9 @@
     }));
   };
 
-  const renderSeriesNavigation=(match)=>{
+  const renderSeriesNavigation=(data,match)=>{
     const {series,index}=match;
+    const context=seriesContext(data,series);
     const nav=document.createElement('nav');
     const story=series.kind==='이야기';
     nav.className='page-nav '+(story?'story-series-nav':'detail-series-nav');
@@ -253,14 +308,15 @@
     if(!prev&&!prevIsHub)nav.classList.add('next-only');
     if(!next)nav.classList.add('prev-only');
 
-    if(prev)nav.append(makeSeriesLink(series,prev,'prev'));
-    else if(prevIsHub)nav.append(makeSeriesLink(series,null,'prev',{isHub:true}));
-    if(next)nav.append(makeSeriesLink(series,next,'next'));
+    if(prev)nav.append(makeSeriesLink(series,prev,'prev',context));
+    else if(prevIsHub)nav.append(makeSeriesLink(series,null,'prev',context,{isHub:true}));
+    if(next)nav.append(makeSeriesLink(series,next,'next',context));
 
     replaceLegacyNavsWith([nav]);
-    syncSeriesTabs(series,index);
-    setHub(series.hub,series.hubLabel);
-    document.documentElement.dataset.navContext='series';
+    syncSeriesTabs(series,index,context);
+    setHub(contextualUrl(series.hub,context),series.hubLabel);
+    setSeriesBreadcrumb(series,series.items[index],context);
+    document.documentElement.dataset.navContext=context;
     return true;
   };
 
@@ -348,7 +404,7 @@
 
     const seriesMatch=findSeries(data,currentPath);
     if(seriesMatch){
-      renderSeriesNavigation(seriesMatch);
+      renderSeriesNavigation(data,seriesMatch);
       return;
     }
 

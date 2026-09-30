@@ -1,12 +1,12 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-3",
+  "version": "2026-09-30-4",
   "placeRegions": [
     {
       "id": "edinburgh-1",
       "scope": "edinburgh",
       "name": "뉴타운 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "스콧 기념탑",
@@ -47,7 +47,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "에든버러 성 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "뉴 칼리지",
@@ -80,7 +80,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "그레이프라이어스 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "그레이프라이어스",
@@ -121,7 +121,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "로열마일 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "로열마일",
@@ -167,19 +167,14 @@ window.EW_NAV_DATA={
           "name": "존 녹스 하우스",
           "url": "/places/john-knox-house.html"
         }
-      ],
-      "childHub": {
-        "fromIndex": 1,
-        "hub": "/places/royal-mile.html#place-nav",
-        "hubLabel": "로열마일 전체 보기"
-      }
+      ]
     },
     {
       "id": "edinburgh-5",
       "scope": "edinburgh",
       "name": "캐넌게이트 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "캐넌게이트",
@@ -216,7 +211,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "홀리루드 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "스코틀랜드 의회",
@@ -237,7 +232,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "칼튼 힐 주변",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "뉴 칼튼 묘지",
@@ -270,7 +265,7 @@ window.EW_NAV_DATA={
       "scope": "edinburgh",
       "name": "에든버러 근교",
       "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "장소 전체 보기",
+      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "포스 브리지",

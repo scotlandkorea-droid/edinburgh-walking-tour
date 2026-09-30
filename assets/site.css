@@ -1546,3 +1546,20 @@ body.course-detail.detail-reading .detail-article>h2:first-child{
     margin-top:20px;
   }
 }
+
+
+/* BREADCRUMB ONE-LINE SYSTEM — shared navigation path */
+.breadcrumbs,.crumbs{
+  max-width:100%;
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.breadcrumbs::-webkit-scrollbar,.crumbs::-webkit-scrollbar{display:none}
+.breadcrumb-separator{display:inline-block;margin:0 6px;color:inherit}
+@media(max-width:719px){
+  .breadcrumbs,.crumbs{font-size:13px!important}
+  .breadcrumb-separator{margin:0 4px!important}
+}
