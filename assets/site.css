@@ -1535,3 +1535,14 @@ body.st-andrews-guide .st-andrews-edinburgh-link a{
   }
 }
 
+
+
+/* DETAIL READING FIRST-SECTION RHYTHM — keep only the first heading close to the intro */
+body.course-detail.detail-reading .detail-article>h2:first-child{
+  margin-top:24px;
+}
+@media(max-width:719px){
+  body.course-detail.detail-reading .detail-article>h2:first-child{
+    margin-top:20px;
+  }
+}
