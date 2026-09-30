@@ -1,10 +1,11 @@
 (()=>{
-  const VERSION='20260930-8';
+  const VERSION='20260930-9';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
   const normalizePath=path=>{
-    const clean=(path||'/').replace(/\/+$/,'')||'/';
+    const raw=(path||'/').split(/[?#]/)[0];
+    const clean=raw.replace(/\/+$/,'')||'/';
     return clean==='/st-andrews/index.html'?'/st-andrews':clean;
   };
   const currentPath=normalizePath(location.pathname);
@@ -27,7 +28,7 @@
     document.head.appendChild(script);
   });
 
-  const contextualUrl=(url,context)=>url+(context==='tour'?NAV_TOUR:NAV_PLACE);
+  const contextualUrl=(url,context)=>normalizePath(url)+(context==='tour'?NAV_TOUR:NAV_PLACE);
 
   const setBreadcrumb=parts=>{
     const render=node=>{
