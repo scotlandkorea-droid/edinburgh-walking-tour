@@ -925,17 +925,17 @@ window.EW_NAV_DATA={
       "items": [
         {
           "number": "01",
-          "name": "George Square",
+          "name": "조지 스퀘어",
           "url": "/scotland/places/glasgow/george-square.html"
         },
         {
           "number": "02",
-          "name": "Glasgow Cathedral",
+          "name": "글래스고 대성당",
           "url": "/scotland/places/glasgow/glasgow-cathedral.html"
         },
         {
           "number": "03",
-          "name": "Glasgow Necropolis",
+          "name": "글래스고 네크로폴리스",
           "url": "/scotland/places/glasgow/glasgow-necropolis.html"
         },
         {
