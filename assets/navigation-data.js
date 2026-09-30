@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-7",
+  "version": "2026-09-30-8",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -823,8 +823,8 @@ window.EW_NAV_DATA={
       "hub": "/st-andrews/",
       "hubLabel": "세인트앤드루스 워킹투어 전체 보기",
       "kind": "장소",
-      "includeHubPrev": true,
-      "hubPrevName": "00 전체 개요",
+      "includeHubPrev": false,
+      "hubPrevName": null,
       "items": [
         {
           "number": "01",
@@ -885,8 +885,8 @@ window.EW_NAV_DATA={
       "hub": "/scotland/places/glasgow.html",
       "hubLabel": "글래스고 걷기 안내 전체 보기",
       "kind": "장소",
-      "includeHubPrev": true,
-      "hubPrevName": "전체 개요",
+      "includeHubPrev": false,
+      "hubPrevName": null,
       "items": [
         {
           "number": "01",
