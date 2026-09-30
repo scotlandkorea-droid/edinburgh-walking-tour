@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-4';
+  const VERSION='20260930-5';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -288,6 +288,30 @@
     });
   };
 
+  const syncSeriesHubCards=(data)=>{
+    const series=(data.series||[]).find(item=>normalizePath(item.hub)===currentPath);
+    if(!series)return;
+    const links=[...document.querySelectorAll('a.story[href]')];
+    const byUrl=new Map(links.map(link=>[normalizePath(new URL(link.getAttribute('href'),location.origin).pathname),link]));
+    (series.items||[]).forEach(item=>{
+      const link=byUrl.get(normalizePath(item.url));
+      if(!link)return;
+      const num=link.querySelector('.num');
+      const title=link.querySelector('h3');
+      const desc=link.querySelector('p');
+      if(num)num.textContent=item.number;
+      if(title)title.textContent=item.name;
+      if(desc&&item.description)desc.textContent=item.description;
+    });
+    const parent=links.find(link=>byUrl.get(normalizePath(new URL(link.getAttribute('href'),location.origin).pathname))===link)?.parentElement;
+    if(parent){
+      (series.items||[]).forEach(item=>{
+        const link=byUrl.get(normalizePath(item.url));
+        if(link&&link.parentElement===parent)parent.appendChild(link);
+      });
+    }
+  };
+
   const markEntryLinks=()=>{
     if(document.querySelector('.place-scope-section')){
       document.querySelectorAll('#edinburgh .area a[href],#scotland .area a[href]').forEach(link=>{
@@ -313,6 +337,7 @@
 
     const data=window.EW_NAV_DATA||{placeRegions:[],series:[]};
     syncPlaceDirectoryOrder(data);
+    syncSeriesHubCards(data);
     markEntryLinks();
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
