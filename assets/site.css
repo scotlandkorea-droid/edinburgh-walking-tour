@@ -693,7 +693,7 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .place-strip>a,.place-strip>.place-chip{background:#f1f5f0;border:1px solid #d9e3da;color:#263a30}
 .place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;font-weight:720;white-space:nowrap;scroll-snap-align:start}
 .place-strip>.place-pending{cursor:default}
-@media(max-width:619px){.place-strip>.place-chip{max-width:250px}}
+@media(max-width:619px){.place-strip>a{max-width:calc(100vw - 48px);overflow:hidden;text-overflow:ellipsis}.place-strip>.place-chip{max-width:250px}}
 
 /* Place navigation: shared detail markup */
 .page-nav.context-nav[hidden]{display:none!important}
