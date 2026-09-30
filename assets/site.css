@@ -1642,3 +1642,36 @@ body.course-detail.detail-reading .detail-article>h2:first-child{
   .breadcrumbs,.crumbs{font-size:13px!important}
   .breadcrumb-separator{margin:0 4px!important}
 }
+
+
+/* RESTORED PLACE / COMPOSITE DETAIL INTRO RHYTHM 2026-09-30
+   Prevent global section padding from creating oversized gaps between subtitle and first content. */
+body.composite-story-detail .detail-intro{
+  padding:30px 0 24px;
+}
+body.composite-story-detail main{
+  padding-top:0;
+}
+body.composite-story-detail .detail-article>h2:first-child{
+  margin-top:24px;
+}
+body.place-detail-reading .page-hero{
+  padding:30px 0 24px;
+}
+body.place-detail-reading main>.page-hero+section{
+  padding:24px 0 0;
+}
+@media(max-width:719px){
+  body.composite-story-detail .detail-intro{
+    padding:24px 0 20px;
+  }
+  body.composite-story-detail .detail-article>h2:first-child{
+    margin-top:20px;
+  }
+  body.place-detail-reading .page-hero{
+    padding:24px 0 20px;
+  }
+  body.place-detail-reading main>.page-hero+section{
+    padding-top:20px;
+  }
+}
