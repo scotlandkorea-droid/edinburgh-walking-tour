@@ -30,7 +30,7 @@
   const contextualUrl=(url,context)=>url+(context==='tour'?NAV_TOUR:NAV_PLACE);
 
   const setBreadcrumb=parts=>{
-    const render=(node,spaced)=>{
+    const render=node=>{
       if(!node)return;
       node.replaceChildren();
       parts.forEach((part,index)=>{
@@ -39,7 +39,6 @@
           sep.className='breadcrumb-separator';
           sep.setAttribute('aria-hidden','true');
           sep.textContent='›';
-          if(spaced)sep.style.margin='0 6px';
           node.append(sep);
         }
         if(part.href){
@@ -48,14 +47,12 @@
           a.textContent=part.label;
           node.append(a);
         }else{
-          const span=document.createElement('span');
-          span.textContent=part.label;
-          node.append(span);
+          node.append(document.createTextNode(part.label));
         }
       });
     };
-    render(document.querySelector('.breadcrumbs'),false);
-    render(document.querySelector('.crumbs'),true);
+    render(document.querySelector('.breadcrumbs'));
+    render(document.querySelector('.crumbs'));
   };
 
   const setCourseBreadcrumb=label=>setBreadcrumb([
