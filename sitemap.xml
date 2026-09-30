@@ -749,46 +749,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/patrick-hamilton.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/george-wishart.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/st-andrews-castle.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/st-andrews-cathedral.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/st-marys-college.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/blackfriars-chapel.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/st-andrews/south-street.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
 </urlset>
