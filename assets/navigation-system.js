@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260929-6';
+  const VERSION='20260930-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -264,6 +264,30 @@
     return true;
   };
 
+  const syncPlaceDirectoryOrder=(data)=>{
+    const scope=document.querySelector('.place-scope-section');
+    if(!scope)return;
+    const normalizeHref=href=>{
+      try{return normalizePath(new URL(href,location.origin).pathname)}catch(e){return normalizePath(href)}
+    };
+    document.querySelectorAll('#edinburgh article.area,#scotland article.area').forEach(area=>{
+      const name=area.querySelector(':scope > h2')?.textContent?.trim();
+      const region=(data.placeRegions||[]).find(item=>item.name===name);
+      if(!region)return;
+      const order=new Map((region.items||[]).map((item,index)=>[normalizePath(item.url),index]));
+      const containers=[...area.querySelectorAll(':scope > .place-strip,:scope > .story-list')];
+      containers.forEach(container=>{
+        const links=[...container.querySelectorAll(':scope > a[href]')];
+        links.sort((a,b)=>(order.get(normalizeHref(a.getAttribute('href')))??999)-(order.get(normalizeHref(b.getAttribute('href')))??999));
+        links.forEach(link=>container.appendChild(link));
+      });
+      containers.sort((a,b)=>{
+        const firstIndex=container=>Math.min(...[...container.querySelectorAll(':scope > a[href]')].map(link=>order.get(normalizeHref(link.getAttribute('href')))??999));
+        return firstIndex(a)-firstIndex(b);
+      }).forEach(container=>area.appendChild(container));
+    });
+  };
+
   const markEntryLinks=()=>{
     if(document.querySelector('.place-scope-section')){
       document.querySelectorAll('#edinburgh .area a[href],#scotland .area a[href]').forEach(link=>{
@@ -288,6 +312,7 @@
     }catch(e){return;}
 
     const data=window.EW_NAV_DATA||{placeRegions:[],series:[]};
+    syncPlaceDirectoryOrder(data);
     markEntryLinks();
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);

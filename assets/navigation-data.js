@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-1",
+  "version": "2026-09-30-2",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -294,16 +294,16 @@ window.EW_NAV_DATA={
       "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
-          "name": "세인트앤드루스 (St Andrews)",
-          "url": "/st-andrews/"
-        },
-        {
           "name": "앤드루 카네기 생가 박물관",
           "url": "/scotland/places/andrew-carnegie-birthplace-museum.html"
         },
         {
           "name": "포클랜드",
           "url": "/scotland/places/falkland.html"
+        },
+        {
+          "name": "세인트앤드루스 (St Andrews)",
+          "url": "/st-andrews/"
         }
       ]
     },
