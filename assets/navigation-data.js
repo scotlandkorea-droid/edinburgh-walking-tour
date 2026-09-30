@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-8",
+  "version": "2026-09-30-9",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -953,6 +953,30 @@ window.EW_NAV_DATA={
           "name": "켈빈그로브 공원 · 켈빈그로브 미술관·박물관",
           "url": "/scotland/places/glasgow/kelvingrove.html",
           "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
+        }
+      ]
+    },
+    {
+      "id": "balmoral-waverley",
+      "name": "발모럴 호텔 · 웨이벌리역",
+      "breadcrumbLabel": "발모럴 호텔",
+      "hub": "/places/balmoral-hotel.html",
+      "hubLabel": "발모럴 호텔 · 웨이벌리역 전체 보기",
+      "kind": "이야기",
+      "includeHubPrev": false,
+      "hubPrevName": null,
+      "items": [
+        {
+          "number": "01",
+          "name": "발모럴 호텔",
+          "url": "/places/balmoral-hotel-story.html",
+          "description": "3분 빠른 시계와 J.K. 롤링이 해리 포터 마지막 책을 완성한 552호실 이야기."
+        },
+        {
+          "number": "02",
+          "name": "에든버러 웨이벌리역",
+          "url": "/places/waverley-station.html",
+          "description": "올드타운과 뉴타운 사이 옛 노스 로크 골짜기에 들어선 기차역과 이름의 이야기."
         }
       ]
     }
