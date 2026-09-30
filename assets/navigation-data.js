@@ -666,6 +666,7 @@ window.EW_NAV_DATA={
     {
       "id": "royal-mile",
       "name": "로열마일 상세 보기",
+      "breadcrumbLabel": "로열마일",
       "hub": "/places/royal-mile.html",
       "hubLabel": "로열마일 전체 보기",
       "kind": "이야기",
