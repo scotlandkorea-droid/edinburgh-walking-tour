@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-5",
+  "version": "2026-09-30-6",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -666,7 +666,7 @@ window.EW_NAV_DATA={
     {
       "id": "royal-mile",
       "name": "로열마일 상세 보기",
-      "hub": "/places/royal-mile.html#tour-nav",
+      "hub": "/places/royal-mile.html",
       "hubLabel": "로열마일 전체 보기",
       "kind": "이야기",
       "includeHubPrev": false,
@@ -712,7 +712,7 @@ window.EW_NAV_DATA={
     {
       "id": "canongate",
       "name": "캐넌게이트",
-      "hub": "/places/canongate.html#tour-nav",
+      "hub": "/places/canongate.html",
       "hubLabel": "캐넌게이트 전체 보기",
       "kind": "이야기",
       "includeHubPrev": false,
