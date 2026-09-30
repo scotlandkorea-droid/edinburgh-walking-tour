@@ -926,57 +926,68 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "조지 스퀘어",
-          "url": "/scotland/places/glasgow/george-square.html"
+          "url": "/scotland/places/glasgow/george-square.html",
+          "description": "산업혁명이 돌에 새긴 광장, 글래스고의 자신감이 담긴 공간"
         },
         {
           "number": "02",
           "name": "글래스고 대성당",
-          "url": "/scotland/places/glasgow/glasgow-cathedral.html"
+          "url": "/scotland/places/glasgow/glasgow-cathedral.html",
+          "description": "모든 것이 파괴된 시대에, 유일하게 살아남은 중세 대성당의 비밀"
         },
         {
           "number": "03",
           "name": "글래스고 네크로폴리스",
-          "url": "/scotland/places/glasgow/glasgow-necropolis.html"
+          "url": "/scotland/places/glasgow/glasgow-necropolis.html",
+          "description": "죽음의 도시, 그 아래에 묻힌 생명의 기록"
         },
         {
           "number": "04",
           "name": "High Street · Glasgow Cross",
-          "url": "/scotland/places/glasgow/high-street-glasgow-cross.html"
+          "url": "/scotland/places/glasgow/high-street-glasgow-cross.html",
+          "description": "중세 글래스고의 오래된 중심축을 따라 남쪽으로 내려갑니다."
         },
         {
           "number": "05",
           "name": "Merchant City",
-          "url": "/scotland/places/glasgow/merchant-city.html"
+          "url": "/scotland/places/glasgow/merchant-city.html",
+          "description": "무역과 상업으로 성장한 글래스고의 거리와 건물을 따라갑니다."
         },
         {
           "number": "06",
           "name": "City Halls · Old Fruitmarket",
-          "url": "/scotland/places/glasgow/city-halls-old-fruitmarket.html"
+          "url": "/scotland/places/glasgow/city-halls-old-fruitmarket.html",
+          "description": "오래된 시장과 상업 공간이 음악과 공연의 장소로 이어진 모습을 살펴봅니다."
         },
         {
           "number": "07",
           "name": "Royal Exchange Square · GoMA",
-          "url": "/scotland/places/glasgow/royal-exchange-square-goma.html"
+          "url": "/scotland/places/glasgow/royal-exchange-square-goma.html",
+          "description": "상업도시의 중심에서 오늘날의 문화도시로 이어지는 모습을 만나고, GoMA 앞 웰링턴 공작 기마상의 주황색 교통 고깔도 살펴봅니다."
         },
         {
           "number": "08",
           "name": "Buchanan Street",
-          "url": "/scotland/places/glasgow/buchanan-street.html"
+          "url": "/scotland/places/glasgow/buchanan-street.html",
+          "description": "상점과 거리 공연, 오래된 건물이 이어지는 글래스고의 대표적인 보행자 거리를 걷습니다."
         },
         {
           "number": "09",
           "name": "St Enoch · Clyde 강변",
-          "url": "/scotland/places/glasgow/st-enoch-clyde.html"
+          "url": "/scotland/places/glasgow/st-enoch-clyde.html",
+          "description": "클라이드강에 닿으며 무역과 산업도시로 성장한 글래스고의 이야기를 살펴봅니다."
         },
         {
           "number": "10",
           "name": "Glasgow University",
-          "url": "/scotland/places/glasgow/glasgow-university.html"
+          "url": "/scotland/places/glasgow/glasgow-university.html",
+          "description": "West End에서 다시 걷기 시작해 오래된 대학 건물과 회랑을 둘러봅니다."
         },
         {
           "number": "11",
           "name": "Kelvingrove Park · Kelvingrove Art Gallery and Museum",
-          "url": "/scotland/places/glasgow/kelvingrove.html"
+          "url": "/scotland/places/glasgow/kelvingrove.html",
+          "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
         }
       ]
     }
