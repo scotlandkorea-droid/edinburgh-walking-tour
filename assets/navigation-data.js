@@ -792,6 +792,42 @@ window.EW_NAV_DATA={
       ]
     },
     {
+      "id": "falkland",
+      "name": "포클랜드",
+      "hub": "/scotland/places/falkland.html",
+      "hubLabel": "포클랜드 전체 보기",
+      "kind": "이야기",
+      "includeHubPrev": false,
+      "hubPrevName": null,
+      "items": [
+        {
+          "number": "01",
+          "name": "포클랜드 궁전",
+          "url": "/scotland/places/falkland-palace.html"
+        },
+        {
+          "number": "02",
+          "name": "굶어 죽은 왕세자?",
+          "url": "/scotland/places/falkland-david-rothesay.html"
+        },
+        {
+          "number": "03",
+          "name": "세계에서 가장 오래된 테니스장",
+          "url": "/scotland/places/falkland-real-tennis.html"
+        },
+        {
+          "number": "04",
+          "name": "“여자로 왔으니 여자로 떠나리라”",
+          "url": "/scotland/places/falkland-james-v-last-words.html"
+        },
+        {
+          "number": "05",
+          "name": "광장의 분수와 언약도 호텔",
+          "url": "/scotland/places/falkland-outlander.html"
+        }
+      ]
+    },
+    {
       "id": "glencoe",
       "name": "글렌코",
       "hub": "/scotland/places/glencoe.html",
