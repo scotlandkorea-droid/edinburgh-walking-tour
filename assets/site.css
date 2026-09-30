@@ -1675,3 +1675,29 @@ body.place-detail-reading main>.page-hero+section{
     padding-top:20px;
   }
 }
+
+
+/* LEGACY DETAIL INTRO RHYTHM — unified 2026-09-30 */
+body.detail-reading:not(.course-detail):not(.composite-story-detail):not(.stg-story-detail):not(.st-giles-overview-page) .detail-intro{
+  padding:24px 0 20px;
+}
+body.detail-reading:not(.course-detail):not(.composite-story-detail):not(.stg-story-detail):not(.st-giles-overview-page) main{
+  padding-top:0;
+}
+body.detail-reading:not(.course-detail):not(.composite-story-detail):not(.stg-story-detail):not(.st-giles-overview-page) .detail-article{
+  padding-top:20px;
+}
+main>.page-hero+section{
+  padding-top:20px;
+}
+@media(min-width:720px){
+  body.detail-reading:not(.course-detail):not(.composite-story-detail):not(.stg-story-detail):not(.st-giles-overview-page) .detail-intro{
+    padding:30px 0 24px;
+  }
+  body.detail-reading:not(.course-detail):not(.composite-story-detail):not(.stg-story-detail):not(.st-giles-overview-page) .detail-article{
+    padding-top:24px;
+  }
+  main>.page-hero+section{
+    padding-top:24px;
+  }
+}
