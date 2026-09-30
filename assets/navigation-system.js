@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-12';
+  const VERSION='20260930-13';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -401,14 +401,17 @@
     markEntryLinks();
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
-    if(requested==='place'&&findRegion(data,currentPath)){
-      renderContextNavigation(data);
-      return;
-    }
 
+    // Numbered detail pages always keep their own series navigation.
+    // This includes detail pages that are also listed as independent Places.
     const seriesMatch=findSeries(data,currentPath);
     if(seriesMatch){
       renderSeriesNavigation(data,seriesMatch);
+      return;
+    }
+
+    if(requested==='place'&&findRegion(data,currentPath)){
+      renderContextNavigation(data);
       return;
     }
 
