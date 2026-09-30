@@ -1144,8 +1144,8 @@ html[data-nav-context="tour"] .place-context-only{display:none}
 html:not([data-nav-context]) .place-context-only{display:none}
 
 
-/* Composite route details: series controls stay out of Place browsing context */
-html[data-nav-context="place"] body.composite-story-detail .story-series-tabs,
+/* Composite numbered details stay connected even in Place browsing context.
+   Keep the numbered series tabs visible; only the tour-style eyebrow is hidden. */
 html[data-nav-context="place"] body.composite-story-detail .eyebrow{display:none}
 
 /* ===== Core decision page: Edinburgh Walking Tour Guide ===== */
