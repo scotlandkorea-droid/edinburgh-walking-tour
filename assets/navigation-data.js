@@ -298,12 +298,12 @@ window.EW_NAV_DATA={
           "url": "/st-andrews/"
         },
         {
-          "name": "포클랜드",
-          "url": "/scotland/places/falkland.html"
-        },
-        {
           "name": "앤드루 카네기 생가 박물관",
           "url": "/scotland/places/andrew-carnegie-birthplace-museum.html"
+        },
+        {
+          "name": "포클랜드",
+          "url": "/scotland/places/falkland.html"
         }
       ]
     },
