@@ -1,12 +1,10 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-6",
+  "version": "2026-09-30-7",
   "placeRegions": [
     {
       "id": "edinburgh-1",
       "scope": "edinburgh",
       "name": "뉴타운 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "스콧 기념탑",
@@ -46,8 +44,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-2",
       "scope": "edinburgh",
       "name": "에든버러 성 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "뉴 칼리지",
@@ -79,8 +75,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-3",
       "scope": "edinburgh",
       "name": "그레이프라이어스 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "그레이프라이어스",
@@ -120,8 +114,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-4",
       "scope": "edinburgh",
       "name": "로열마일 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "로열마일",
@@ -173,8 +165,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-5",
       "scope": "edinburgh",
       "name": "캐넌게이트 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "캐넌게이트",
@@ -210,8 +200,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-6",
       "scope": "edinburgh",
       "name": "홀리루드 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "스코틀랜드 의회",
@@ -231,8 +219,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-7",
       "scope": "edinburgh",
       "name": "칼튼 힐 주변",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "뉴 칼튼 묘지",
@@ -264,8 +250,6 @@ window.EW_NAV_DATA={
       "id": "edinburgh-8",
       "scope": "edinburgh",
       "name": "에든버러 근교",
-      "hub": "/edinburgh/places.html#edinburgh",
-      "hubLabel": "에든버러 장소 보기",
       "items": [
         {
           "name": "포스 브리지",
@@ -285,8 +269,6 @@ window.EW_NAV_DATA={
       "id": "scotland-1",
       "scope": "scotland",
       "name": "파이프",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "카네기 생가 박물관",
@@ -306,8 +288,6 @@ window.EW_NAV_DATA={
       "id": "scotland-2",
       "scope": "scotland",
       "name": "동부 · 북동부",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "던노타 성",
@@ -323,8 +303,6 @@ window.EW_NAV_DATA={
       "id": "scotland-3",
       "scope": "scotland",
       "name": "중부",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "스털링",
@@ -340,8 +318,6 @@ window.EW_NAV_DATA={
       "id": "scotland-4",
       "scope": "scotland",
       "name": "하이랜드",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "글렌코",
@@ -361,8 +337,6 @@ window.EW_NAV_DATA={
       "id": "scotland-5",
       "scope": "scotland",
       "name": "스카이 · 섬",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "스카이섬",
@@ -378,8 +352,6 @@ window.EW_NAV_DATA={
       "id": "scotland-6",
       "scope": "scotland",
       "name": "서부",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "글래스고",
@@ -391,8 +363,6 @@ window.EW_NAV_DATA={
       "id": "scotland-7",
       "scope": "scotland",
       "name": "남서부",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "덤프리스",
@@ -408,8 +378,6 @@ window.EW_NAV_DATA={
       "id": "scotland-8",
       "scope": "scotland",
       "name": "스코티시 보더스",
-      "hub": "/edinburgh/places.html#scotland",
-      "hubLabel": "스코틀랜드 전역 장소 보기",
       "items": [
         {
           "name": "피블스",
