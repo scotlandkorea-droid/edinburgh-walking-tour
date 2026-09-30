@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-29-7",
+  "version": "2026-09-30-1",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -843,13 +843,13 @@ window.EW_NAV_DATA={
         },
         {
           "number": "04",
-          "name": "조지 위샤트",
-          "url": "/st-andrews/george-wishart.html"
+          "name": "패트릭 해밀턴",
+          "url": "/st-andrews/patrick-hamilton.html"
         },
         {
           "number": "05",
-          "name": "패트릭 해밀턴",
-          "url": "/st-andrews/patrick-hamilton.html"
+          "name": "조지 위샤트",
+          "url": "/st-andrews/george-wishart.html"
         },
         {
           "number": "06",
