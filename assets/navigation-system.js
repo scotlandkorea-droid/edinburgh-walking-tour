@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-7';
+  const VERSION='20260930-8';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -72,7 +72,7 @@
     context==='tour'
       ?{label:'워킹투어 코스',href:'/#tour'}
       :{label:'장소로 보기',href:'/edinburgh/places.html'},
-    {label:series.name,href:contextualUrl(series.hub,context)},
+    {label:series.breadcrumbLabel||series.name,href:contextualUrl(series.hub,context)},
     {label:item.number}
   ]);
 
