@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-11';
+  const VERSION='20260930-12';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -176,7 +176,13 @@
 
   const markSeriesEntryLinks=(data,context)=>{
     if(context!=='tour'&&context!=='place')return;
-    const series=(data.series||[]).find(item=>normalizePath(item.hub)===currentPath);
+    // Preserve the current browsing context not only on a series hub,
+    // but also on detail pages that are themselves independent Place entries
+    // (e.g. Gladstone's Land / Mary King's Close / Canongate stories).
+    const series=(data.series||[]).find(item=>{
+      if(normalizePath(item.hub)===currentPath)return true;
+      return (item.items||[]).some(entry=>normalizePath(entry.url)===currentPath);
+    });
     if(!series)return;
     const itemPaths=new Set((series.items||[]).map(item=>normalizePath(item.url)));
     document.querySelectorAll('a[href]').forEach(link=>{
