@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-01-2",
+  "version": "2026-10-01-3",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -167,6 +167,8 @@ window.EW_NAV_DATA={
       "id": "edinburgh-5",
       "scope": "edinburgh",
       "name": "캐넌게이트 주변",
+      "hub": "/places/canongate.html",
+      "hubLabel": "캐넌게이트 전체 보기",
       "items": [
         {
           "name": "캐넌게이트",
