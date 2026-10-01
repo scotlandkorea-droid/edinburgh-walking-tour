@@ -1752,3 +1752,19 @@ body.detail-reading .detail-article figure.story-photo figcaption{
   body.detail-reading .detail-article .inscription-original,
   body.detail-reading .detail-article .inscription-translation{font-size:14.5px}
 }
+
+
+/* ROYAL MILE NUMBERED DETAIL — shared English title line */
+.detail-intro .course-title-en{
+  margin:5px 0 0 2px;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:#8a8176;
+  text-transform:uppercase;
+}
+.detail-intro .course-title-en + .lead{
+  margin-top:16px!important;
+}
