@@ -1144,8 +1144,8 @@ html[data-nav-context="tour"] .place-context-only{display:none}
 html:not([data-nav-context]) .place-context-only{display:none}
 
 
-/* Composite numbered details keep the same numbered-series identity in both Tour and Place browsing contexts. */
-html[data-nav-context="place"] body.composite-story-detail .eyebrow{display:block}
+/* In Place browsing, composite tour-story pages are presented as normal independent places.
+   Numbered eyebrow/tabs are controlled by the shared navigation system. */
 
 /* ===== Core decision page: Edinburgh Walking Tour Guide ===== */
 body.tour-guide-detail{
@@ -1753,22 +1753,36 @@ body.detail-reading .detail-article figure.story-photo figcaption{
 }
 
 
-/* ROYAL MILE NUMBERED DETAIL — shared title rhythm */
+/* ROYAL MILE NUMBERED DETAIL — use the same title / English name / subtitle language as course details */
 body.composite-story-detail .detail-intro h1{
-  margin-bottom:0!important;
+  margin:24px 0 2px!important;
+  font-size:clamp(37px,8.6vw,58px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  color:var(--deep,#17271f);
+  font-weight:850;
+  word-break:keep-all;
+  text-wrap:pretty;
 }
 body.composite-story-detail .detail-intro .course-title-en{
-  margin:3px 0 0 1px!important;
+  margin:1px 0 0 8px!important;
   font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
   font-size:12px;
-  line-height:1.2;
+  line-height:1.25;
   font-weight:800;
   letter-spacing:.08em;
   color:#8a8176;
   text-transform:uppercase;
 }
 body.composite-story-detail .detail-intro .course-title-en + .lead{
-  margin-top:15px!important;
+  margin:18px 0 0!important;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:18px;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  font-weight:600;
+  color:#536159!important;
 }
 /* Horizontal story tabs are swipeable on mobile, but the browser scrollbar
    looked like an uneven underline under the first item. Keep scrolling, hide the bar. */
