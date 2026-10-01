@@ -136,7 +136,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
+  <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/st-andrew-square.html</loc><lastmod>2026-10-01</lastmod></url>
+<url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/surgeons-hall.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
