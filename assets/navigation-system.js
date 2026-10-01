@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261001-5';
+  const VERSION='20261001-6';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -206,7 +206,7 @@
     // (e.g. Gladstone's Land / Mary King's Close / Canongate stories).
     const series=(data.series||[]).find(item=>{
       if(normalizePath(item.hub)===currentPath)return true;
-      return (item.items||[]).some(entry=>normalizePath(entry.url)===currentPath);
+      return seriesItemsFor(item,context).some(entry=>normalizePath(entry.url)===currentPath);
     });
     if(!series)return;
     const itemPaths=new Set(seriesItemsFor(series,context).map(item=>normalizePath(item.url)));
