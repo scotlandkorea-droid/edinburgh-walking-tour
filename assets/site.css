@@ -1754,17 +1754,31 @@ body.detail-reading .detail-article figure.story-photo figcaption{
 }
 
 
-/* ROYAL MILE NUMBERED DETAIL — shared English title line */
-.detail-intro .course-title-en{
-  margin:5px 0 0 2px;
+/* ROYAL MILE NUMBERED DETAIL — shared title rhythm */
+body.composite-story-detail .detail-intro h1{
+  margin-bottom:0!important;
+}
+body.composite-story-detail .detail-intro .course-title-en{
+  margin:3px 0 0 1px!important;
   font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
   font-size:12px;
-  line-height:1.25;
+  line-height:1.2;
   font-weight:800;
   letter-spacing:.08em;
   color:#8a8176;
   text-transform:uppercase;
 }
-.detail-intro .course-title-en + .lead{
-  margin-top:16px!important;
+body.composite-story-detail .detail-intro .course-title-en + .lead{
+  margin-top:15px!important;
+}
+/* Horizontal story tabs are swipeable on mobile, but the browser scrollbar
+   looked like an uneven underline under the first item. Keep scrolling, hide the bar. */
+.story-series-tabs{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.story-series-tabs::-webkit-scrollbar{
+  display:none;
+  width:0;
+  height:0;
 }
