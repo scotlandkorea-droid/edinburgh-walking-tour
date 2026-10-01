@@ -210,7 +210,7 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .detail-article .page-nav.page-nav-prev-only .prev{grid-column:1;justify-content:flex-start;text-align:left}
 
 /* STORY SERIES NAV */
-.story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;margin:18px 0 6px;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
+.story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:18px 0 6px;padding:3px 0 6px;-webkit-overflow-scrolling:touch}
 .story-series-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 .story-series-tab span{font-weight:800}
 .story-series-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
@@ -1144,9 +1144,8 @@ html[data-nav-context="tour"] .place-context-only{display:none}
 html:not([data-nav-context]) .place-context-only{display:none}
 
 
-/* Composite numbered details stay connected even in Place browsing context.
-   Keep the numbered series tabs visible; only the tour-style eyebrow is hidden. */
-html[data-nav-context="place"] body.composite-story-detail .eyebrow{display:none}
+/* Composite numbered details keep the same numbered-series identity in both Tour and Place browsing contexts. */
+html[data-nav-context="place"] body.composite-story-detail .eyebrow{display:block}
 
 /* ===== Core decision page: Edinburgh Walking Tour Guide ===== */
 body.tour-guide-detail{
@@ -1781,4 +1780,21 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   display:none;
   width:0;
   height:0;
+}
+
+
+/* PLACE DETAIL ENGLISH TITLE — keep Korean and English names visually together */
+.page-hero .course-title-en{
+  margin:-8px 0 0 2px;
+  max-width:760px;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:#8a8176;
+  text-transform:uppercase;
+}
+.page-hero .course-title-en + .lead{
+  margin-top:16px!important;
 }
