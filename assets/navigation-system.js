@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261001-4';
+  const VERSION='20261001-5';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -373,6 +373,7 @@
     setHub(contextualUrl(series.hub,context),series.hubLabel);
     setSeriesBreadcrumb(data,series,items[index],context);
     document.documentElement.dataset.navContext=context;
+    markSeriesEntryLinks(data,context);
     return true;
   };
 
