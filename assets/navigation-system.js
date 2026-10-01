@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260930-13';
+  const VERSION='20261001-1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -402,16 +402,33 @@
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
 
-    // Numbered detail pages always keep their own series navigation.
-    // This includes detail pages that are also listed as independent Places.
     const seriesMatch=findSeries(data,currentPath);
-    if(seriesMatch){
-      renderSeriesNavigation(data,seriesMatch);
+    const regionMatch=findRegion(data,currentPath);
+
+    // When a numbered tour-story URL is also an independent entry in
+    // "장소로 보기", #place-nav must treat it as a normal place:
+    // no 01/02 breadcrumb, no series eyebrow, and no numbered story tabs.
+    // The same URL keeps the numbered series UI in #tour-nav.
+    const setSeriesChromeVisible=visible=>{
+      document.querySelectorAll('.story-series-tabs,.story-tabs').forEach(node=>{
+        if(visible)node.style.removeProperty('display');
+        else node.style.setProperty('display','none','important');
+      });
+      document.querySelectorAll('.detail-intro > .wrap > .eyebrow').forEach(node=>{
+        if(visible)node.style.removeProperty('display');
+        else node.style.setProperty('display','none','important');
+      });
+    };
+
+    if(requested==='place'&&regionMatch){
+      setSeriesChromeVisible(false);
+      renderContextNavigation(data);
       return;
     }
 
-    if(requested==='place'&&findRegion(data,currentPath)){
-      renderContextNavigation(data);
+    if(seriesMatch){
+      setSeriesChromeVisible(true);
+      renderSeriesNavigation(data,seriesMatch);
       return;
     }
 
