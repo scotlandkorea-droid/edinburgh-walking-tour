@@ -1701,3 +1701,54 @@ main>.page-hero+section{
     padding-top:24px;
   }
 }
+
+
+/* INSCRIPTION / STORY PHOTO CAPTION — shared detail component 2026-10-01 */
+body.detail-reading .detail-article .inscription-box{
+  margin:28px 0 34px;
+  padding:20px 22px;
+  border:1px solid #ded7cd;
+  border-radius:16px;
+  background:#f8f5ef;
+  color:#3f4944;
+}
+body.detail-reading .detail-article .inscription-box>strong{
+  display:block;
+  margin:0 0 14px;
+  color:#5e293c;
+  font-size:15px;
+  line-height:1.45;
+  font-weight:850;
+}
+body.detail-reading .detail-article .inscription-original{
+  margin:0 0 16px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:15px;
+  line-height:1.62;
+  letter-spacing:.01em;
+  white-space:pre-line;
+  color:#28332e;
+}
+body.detail-reading .detail-article .inscription-translation{
+  margin:0;
+  padding-top:14px;
+  border-top:1px solid #e4ddd3;
+  font-size:15px;
+  line-height:1.72;
+  white-space:pre-line;
+  color:#4b5650;
+}
+body.detail-reading .detail-article figure.story-photo figcaption{
+  margin-top:9px;
+  font-size:13px;
+  line-height:1.55;
+  color:#657069;
+}
+@media(max-width:719px){
+  body.detail-reading .detail-article .inscription-box{
+    margin:25px 0 30px;
+    padding:17px 18px;
+  }
+  body.detail-reading .detail-article .inscription-original,
+  body.detail-reading .detail-article .inscription-translation{font-size:14.5px}
+}
