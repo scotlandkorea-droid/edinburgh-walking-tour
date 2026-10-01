@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-09-30-9",
+  "version": "2026-10-01-1",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -788,6 +788,11 @@ window.EW_NAV_DATA={
           "number": "05",
           "name": "광장의 분수와 언약도 호텔",
           "url": "/scotland/places/falkland-outlander.html"
+        },
+        {
+          "number": "06",
+          "name": "리처드 카메론 생가 — ‘언약도의 사자’",
+          "url": "/scotland/places/falkland-richard-cameron.html"
         }
       ]
     },
