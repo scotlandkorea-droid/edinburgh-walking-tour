@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261001-2';
+  const VERSION='20261001-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -66,11 +66,17 @@
     ?'/edinburgh/places.html#'+region.id
     :'/edinburgh/places.html';
 
-  const setPlaceBreadcrumb=(label,region)=>setBreadcrumb([
-    {label:'홈',href:'/'},
-    {label:'장소로 보기',href:placeDirectoryHref(region)},
-    {label}
-  ]);
+  const setPlaceBreadcrumb=(label,region)=>{
+    const parts=[
+      {label:'홈',href:'/'},
+      {label:'장소로 보기',href:placeDirectoryHref(region)}
+    ];
+    if(region?.hub&&normalizePath(region.hub)!==currentPath){
+      parts.push({label:region.hubLabel?.replace(/ 전체 보기$/,'')||region.name,href:contextualUrl(region.hub,'place')});
+    }
+    parts.push({label});
+    return setBreadcrumb(parts);
+  };
 
   const setSeriesBreadcrumb=(data,series,item,context)=>{
     const parentRegion=context==='place'
@@ -153,10 +159,15 @@
     return nav;
   };
 
-  const findSeries=(data,path)=>{
+  const seriesItemsFor=(series,context)=>context==='place'&&Array.isArray(series.placeItems)&&series.placeItems.length
+    ?series.placeItems
+    :(series.items||[]);
+
+  const findSeries=(data,path,context='tour')=>{
     for(const series of data.series||[]){
-      const index=(series.items||[]).findIndex(item=>normalizePath(item.url)===path);
-      if(index>=0)return {series,index};
+      const items=seriesItemsFor(series,context);
+      const index=items.findIndex(item=>normalizePath(item.url)===path);
+      if(index>=0)return {series,index,context,items};
     }
     return null;
   };
@@ -169,9 +180,14 @@
     return null;
   };
 
-  const placeHubFor=region=>region&&region.scope==='scotland'
-    ?{href:'/edinburgh/places.html#scotland',label:'스코틀랜드 전역 장소 보기'}
-    :{href:'/edinburgh/places.html#edinburgh',label:'에든버러 장소 보기'};
+  const placeHubFor=region=>{
+    if(region?.hub&&normalizePath(region.hub)!==currentPath){
+      return {href:contextualUrl(region.hub,'place'),label:region.hubLabel||region.name+' 전체 보기'};
+    }
+    return region&&region.scope==='scotland'
+      ?{href:'/edinburgh/places.html#scotland',label:'스코틀랜드 전역 장소 보기'}
+      :{href:'/edinburgh/places.html#edinburgh',label:'에든버러 장소 보기'};
+  };
 
   const seriesContext=(data,series)=>{
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
@@ -193,7 +209,7 @@
       return (item.items||[]).some(entry=>normalizePath(entry.url)===currentPath);
     });
     if(!series)return;
-    const itemPaths=new Set((series.items||[]).map(item=>normalizePath(item.url)));
+    const itemPaths=new Set(seriesItemsFor(series,context).map(item=>normalizePath(item.url)));
     document.querySelectorAll('a[href]').forEach(link=>{
       const raw=link.getAttribute('href');
       if(!raw)return;
@@ -285,11 +301,21 @@
   };
 
   const syncSeriesTabs=(series,index,context)=>{
-    const tabs=document.querySelector('.story-series-tabs, .story-tabs');
-    if(series.kind!=='이야기'||!tabs)return;
+    if(series.kind!=='이야기')return;
+    let tabs=document.querySelector('.story-series-tabs, .story-tabs');
+    if(!tabs&&context==='place'&&Array.isArray(series.placeItems)){
+      tabs=document.createElement('nav');
+      tabs.className='story-series-tabs place-context-series-tabs';
+      const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
+      const lead=wrap?.querySelector('.lead');
+      if(lead)lead.insertAdjacentElement('afterend',tabs);
+      else wrap?.append(tabs);
+    }
+    if(!tabs)return;
+    const items=seriesItemsFor(series,context);
     const legacy=tabs.classList.contains('story-tabs');
     tabs.setAttribute('aria-label',series.name+' 이야기 목록');
-    tabs.replaceChildren(...series.items.map((item,i)=>{
+    tabs.replaceChildren(...items.map((item,i)=>{
       const a=document.createElement('a');
       a.className=(legacy?'story-tab':'story-series-tab')+(i===index?' active':'');
       if(i===index)a.setAttribute('aria-current','page');
@@ -307,15 +333,16 @@
 
   const renderSeriesNavigation=(data,match)=>{
     const {series,index}=match;
-    const context=seriesContext(data,series);
+    const context=match.context||seriesContext(data,series);
+    const items=match.items||seriesItemsFor(series,context);
     const nav=document.createElement('nav');
     const story=series.kind==='이야기';
     nav.className='page-nav '+(story?'story-series-nav':'detail-series-nav');
     nav.dataset.navSystem='series';
     nav.setAttribute('aria-label',series.name+' 이전·다음 '+series.kind);
 
-    const prev=index>0?series.items[index-1]:null;
-    const next=index<series.items.length-1?series.items[index+1]:null;
+    const prev=index>0?items[index-1]:null;
+    const next=index<items.length-1?items[index+1]:null;
     const prevIsHub=!prev&&index===0&&series.includeHubPrev;
 
     if(!prev&&!prevIsHub)nav.classList.add('next-only');
@@ -328,7 +355,7 @@
     replaceLegacyNavsWith([nav]);
     syncSeriesTabs(series,index,context);
     setHub(contextualUrl(series.hub,context),series.hubLabel);
-    setSeriesBreadcrumb(data,series,series.items[index],context);
+    setSeriesBreadcrumb(data,series,items[index],context);
     document.documentElement.dataset.navContext=context;
     return true;
   };
@@ -410,33 +437,15 @@
     markEntryLinks();
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
-
-    const seriesMatch=findSeries(data,currentPath);
     const regionMatch=findRegion(data,currentPath);
+    const tourMatch=findTour(currentPath);
 
-    // When a numbered tour-story URL is also an independent entry in
-    // "장소로 보기", #place-nav must treat it as a normal place:
-    // no 01/02 breadcrumb, no series eyebrow, and no numbered story tabs.
-    // The same URL keeps the numbered series UI in #tour-nav.
-    const setSeriesChromeVisible=visible=>{
-      document.querySelectorAll('.story-series-tabs,.story-tabs').forEach(node=>{
-        if(visible)node.style.removeProperty('display');
-        else node.style.setProperty('display','none','important');
-      });
-      document.querySelectorAll('.detail-intro > .wrap > .eyebrow').forEach(node=>{
-        if(visible)node.style.removeProperty('display');
-        else node.style.setProperty('display','none','important');
-      });
-    };
-
-    if(requested==='place'&&regionMatch){
-      setSeriesChromeVisible(false);
-      renderContextNavigation(data);
-      return;
-    }
+    let seriesMatch=null;
+    if(requested==='place')seriesMatch=findSeries(data,currentPath,'place');
+    else if(requested==='tour')seriesMatch=findSeries(data,currentPath,'tour');
+    else if(!tourMatch)seriesMatch=findSeries(data,currentPath,'tour')||findSeries(data,currentPath,'place');
 
     if(seriesMatch){
-      setSeriesChromeVisible(true);
       renderSeriesNavigation(data,seriesMatch);
       return;
     }
