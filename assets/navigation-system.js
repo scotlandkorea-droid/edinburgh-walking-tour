@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261001-3';
+  const VERSION='20261001-4';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -287,7 +287,8 @@
     const copy=document.createElement('span');
     copy.className='nav-copy';
     const small=document.createElement('small');
-    small.textContent=direction==='prev'?'이전 '+series.kind:'다음 '+series.kind;
+    const navKind=context==='place'?'장소':series.kind;
+    small.textContent=direction==='prev'?'이전 '+navKind:'다음 '+navKind;
     const strong=document.createElement('strong');
     const num=document.createElement('span');
     num.className='nav-num';
@@ -298,6 +299,20 @@
     if(direction==='prev')a.append(arrow,copy);
     else a.append(copy,arrow);
     return a;
+  };
+
+  const syncSeriesEyebrow=(series,item,context)=>{
+    const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
+    if(!wrap||!item)return;
+    let eyebrow=wrap.querySelector(':scope > .eyebrow');
+    if(!eyebrow&&context==='place'){
+      eyebrow=document.createElement('p');
+      eyebrow.className='eyebrow';
+      const title=wrap.querySelector('h1,.course-title');
+      if(title)title.insertAdjacentElement('beforebegin',eyebrow);
+      else wrap.append(eyebrow);
+    }
+    if(eyebrow)eyebrow.textContent=item.number+' · '+(series.breadcrumbLabel||series.name);
   };
 
   const syncSeriesTabs=(series,index,context)=>{
@@ -314,7 +329,7 @@
     if(!tabs)return;
     const items=seriesItemsFor(series,context);
     const legacy=tabs.classList.contains('story-tabs');
-    tabs.setAttribute('aria-label',series.name+' 이야기 목록');
+    tabs.setAttribute('aria-label',series.name+(context==='place'?' 장소 목록':' 이야기 목록'));
     tabs.replaceChildren(...items.map((item,i)=>{
       const a=document.createElement('a');
       a.className=(legacy?'story-tab':'story-series-tab')+(i===index?' active':'');
@@ -339,7 +354,7 @@
     const story=series.kind==='이야기';
     nav.className='page-nav '+(story?'story-series-nav':'detail-series-nav');
     nav.dataset.navSystem='series';
-    nav.setAttribute('aria-label',series.name+' 이전·다음 '+series.kind);
+    nav.setAttribute('aria-label',series.name+' 이전·다음 '+(context==='place'?'장소':series.kind));
 
     const prev=index>0?items[index-1]:null;
     const next=index<items.length-1?items[index+1]:null;
@@ -353,6 +368,7 @@
     if(next)nav.append(makeSeriesLink(series,next,'next',context));
 
     replaceLegacyNavsWith([nav]);
+    syncSeriesEyebrow(series,items[index],context);
     syncSeriesTabs(series,index,context);
     setHub(contextualUrl(series.hub,context),series.hubLabel);
     setSeriesBreadcrumb(data,series,items[index],context);
