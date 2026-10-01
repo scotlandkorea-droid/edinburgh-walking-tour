@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261001-1';
+  const VERSION='20261001-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -62,20 +62,29 @@
     {label}
   ]);
 
-  const setPlaceBreadcrumb=label=>setBreadcrumb([
+  const placeDirectoryHref=region=>region?.id
+    ?'/edinburgh/places.html#'+region.id
+    :'/edinburgh/places.html';
+
+  const setPlaceBreadcrumb=(label,region)=>setBreadcrumb([
     {label:'홈',href:'/'},
-    {label:'장소로 보기',href:'/edinburgh/places.html'},
+    {label:'장소로 보기',href:placeDirectoryHref(region)},
     {label}
   ]);
 
-  const setSeriesBreadcrumb=(series,item,context)=>setBreadcrumb([
-    {label:'홈',href:'/'},
-    context==='tour'
-      ?{label:'워킹투어 코스',href:'/#tour'}
-      :{label:'장소로 보기',href:'/edinburgh/places.html'},
-    {label:series.breadcrumbLabel||series.name,href:contextualUrl(series.hub,context)},
-    {label:item.number}
-  ]);
+  const setSeriesBreadcrumb=(data,series,item,context)=>{
+    const parentRegion=context==='place'
+      ?findRegion(data,normalizePath(series.hub))?.region
+      :null;
+    return setBreadcrumb([
+      {label:'홈',href:'/'},
+      context==='tour'
+        ?{label:'워킹투어 코스',href:'/#tour'}
+        :{label:'장소로 보기',href:placeDirectoryHref(parentRegion)},
+      {label:series.breadcrumbLabel||series.name,href:contextualUrl(series.hub,context)},
+      {label:item.number}
+    ]);
+  };
 
   const setHub=(href,label)=>{
     const hub=document.querySelector('.course-hub');
@@ -241,7 +250,7 @@
     }else if(context==='place'&&regionMatch){
       const parentHub=placeHubFor(regionMatch.region);
       setHub(parentHub.href,parentHub.label);
-      setPlaceBreadcrumb(regionMatch.region.items[regionMatch.index].name);
+      setPlaceBreadcrumb(regionMatch.region.items[regionMatch.index].name,regionMatch.region);
     }
 
     document.documentElement.dataset.navContext=context;
@@ -319,7 +328,7 @@
     replaceLegacyNavsWith([nav]);
     syncSeriesTabs(series,index,context);
     setHub(contextualUrl(series.hub,context),series.hubLabel);
-    setSeriesBreadcrumb(series,series.items[index],context);
+    setSeriesBreadcrumb(data,series,series.items[index],context);
     document.documentElement.dataset.navContext=context;
     return true;
   };
