@@ -816,4 +816,10 @@
     <priority>0.6</priority>
   </url>
 <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/george-street.html</loc><lastmod>2026-10-01</lastmod></url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/mcewan-hall.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
