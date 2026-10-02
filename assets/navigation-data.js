@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-02-1",
+  "version": "2026-10-02-2",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -681,18 +681,7 @@ window.EW_NAV_DATA={
           "url": "/places/royal-mile-adam-smith.html"
         }
       ],
-      "placeItems": [
-        {"number":"01","name":"글래드스톤스 랜드","url":"/places/royal-mile-gladstones-land.html"},
-        {"number":"02","name":"디컨 브로디","url":"/places/royal-mile-deacon-brodie.html"},
-        {"number":"03","name":"데이비드 흄 동상","url":"/places/david-hume.html"},
-        {"number":"04","name":"하트 오브 미들로디언","url":"/places/royal-mile-heart-midlothian.html"},
-        {"number":"05","name":"세인트 자일스","url":"/places/st-giles.html"},
-        {"number":"06","name":"메리 킹스 클로즈","url":"/places/royal-mile-mary-kings-close.html"},
-        {"number":"07","name":"시티 챔버스","url":"/places/royal-mile-city-chambers.html"},
-        {"number":"08","name":"머캣 크로스","url":"/places/royal-mile-mercat-cross.html"},
-        {"number":"09","name":"아담 스미스 동상","url":"/places/royal-mile-adam-smith.html"},
-        {"number":"10","name":"존 녹스 하우스","url":"/places/john-knox-house.html"}
-      ]
+      "placeMode": "region"
     },
     {
       "id": "canongate",
@@ -733,7 +722,8 @@ window.EW_NAV_DATA={
           "name": "에든버러 박물관",
           "url": "/edinburgh/places/museum-of-edinburgh.html"
         }
-      ]
+      ],
+      "placeMode": "region"
     },
     {
       "id": "isle-of-skye",

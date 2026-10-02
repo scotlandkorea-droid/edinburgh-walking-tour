@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261002-1';
+  const VERSION='20261002-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -162,9 +162,11 @@
   const seriesItemsFor=(series,context)=>context==='place'&&Array.isArray(series.placeItems)&&series.placeItems.length
     ?series.placeItems
     :(series.items||[]);
+  const seriesEnabledForContext=(series,context)=>!(context==='place'&&series.placeMode==='region');
 
   const findSeries=(data,path,context='tour')=>{
     for(const series of data.series||[]){
+      if(!seriesEnabledForContext(series,context))continue;
       const items=seriesItemsFor(series,context);
       const index=items.findIndex(item=>normalizePath(item.url)===path);
       if(index>=0)return {series,index,context,items};
@@ -189,6 +191,32 @@
       :{href:'/edinburgh/places.html#edinburgh',label:'에든버러 장소 보기'};
   };
 
+  const placeSequenceFor=regionMatch=>{
+    const all=regionMatch?.region?.items||[];
+    const hub=regionMatch?.region?.hub?normalizePath(regionMatch.region.hub):null;
+    if(!hub||currentPath===hub)return {items:all,index:regionMatch?.index??-1};
+    const items=all.filter(item=>normalizePath(item.url)!==hub);
+    return {items,index:items.findIndex(item=>normalizePath(item.url)===currentPath)};
+  };
+
+  const regionalSeriesForPath=(data,path)=>(data.series||[]).find(series=>
+    series.placeMode==='region'&&(series.items||[]).some(item=>normalizePath(item.url)===path)
+  );
+
+  const setRegionalSeriesChromeVisible=(data,context)=>{
+    const series=regionalSeriesForPath(data,currentPath);
+    if(!series)return;
+    const visible=context!=='place';
+    const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
+    const eyebrow=wrap?.querySelector(':scope > .eyebrow');
+    const tabs=wrap?.querySelector(':scope > .story-series-tabs,:scope > .story-tabs');
+    [eyebrow,tabs].filter(Boolean).forEach(node=>{
+      node.hidden=!visible;
+      if(visible)node.style.removeProperty('display');
+      else node.style.setProperty('display','none','important');
+    });
+  };
+
   const seriesContext=(data,series)=>{
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
     const hubPath=normalizePath(series.hub);
@@ -205,6 +233,7 @@
     // but also on detail pages that are themselves independent Place entries
     // (e.g. Gladstone's Land / Mary King's Close / Canongate stories).
     const series=(data.series||[]).find(item=>{
+      if(!seriesEnabledForContext(item,context))return false;
       if(normalizePath(item.hub)===currentPath)return true;
       return seriesItemsFor(item,context).some(entry=>normalizePath(entry.url)===currentPath);
     });
@@ -234,6 +263,7 @@
     let context=requested||(tourMatch?'tour':'place');
     if(context==='tour'&&!tourMatch)context='place';
     if(context==='place'&&!regionMatch&&tourMatch)context='tour';
+    setRegionalSeriesChromeVisible(data,context);
 
     // navigation-data.js / tour-course-data.js are the single source of truth.
     // Rebuild context navigation every time so stale links embedded in old HTML
@@ -242,8 +272,9 @@
     const tourNav=tourMatch
       ?makeLinearNav(tourMatch.items,tourMatch.index,'tour','워킹투어 코스 이전·다음')
       :null;
-    const placeNav=regionMatch
-      ?makeLinearNav(regionMatch.region.items,regionMatch.index,'place',regionMatch.region.name+' 이전·다음 장소')
+    const placeSequence=regionMatch?placeSequenceFor(regionMatch):null;
+    const placeNav=placeSequence&&placeSequence.index>=0
+      ?makeLinearNav(placeSequence.items,placeSequence.index,'place',regionMatch.region.name+' 이전·다음 장소')
       :null;
     staleContextNavs.forEach(nav=>nav.remove());
 
@@ -312,7 +343,11 @@
       if(title)title.insertAdjacentElement('beforebegin',eyebrow);
       else wrap.append(eyebrow);
     }
-    if(eyebrow)eyebrow.textContent=item.number+' · '+(series.breadcrumbLabel||series.name);
+    if(eyebrow){
+      eyebrow.hidden=false;
+      eyebrow.style.removeProperty('display');
+      eyebrow.textContent=item.number+' · '+(series.breadcrumbLabel||series.name);
+    }
   };
 
   const syncSeriesTabs=(series,index,context)=>{
@@ -327,6 +362,8 @@
       else wrap?.append(tabs);
     }
     if(!tabs)return;
+    tabs.hidden=false;
+    tabs.style.removeProperty('display');
     const items=seriesItemsFor(series,context);
     const legacy=tabs.classList.contains('story-tabs');
     tabs.setAttribute('aria-label',series.name+(context==='place'?' 장소 목록':' 이야기 목록'));
