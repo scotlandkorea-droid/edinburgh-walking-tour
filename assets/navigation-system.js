@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261002-3';
+  const VERSION='20261002-4';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -334,6 +334,10 @@
     const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
     if(!wrap||!item)return;
     let eyebrow=wrap.querySelector(':scope > .eyebrow');
+    if(series.detailEyebrow===false){
+      if(eyebrow)eyebrow.remove();
+      return;
+    }
     if(!eyebrow&&context==='place'){
       eyebrow=document.createElement('p');
       eyebrow.className='eyebrow';

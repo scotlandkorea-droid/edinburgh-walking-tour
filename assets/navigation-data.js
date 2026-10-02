@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-02-3",
+  "version": "2026-10-02-4",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -759,7 +759,8 @@ window.EW_NAV_DATA={
           "name": "남쪽 슬리트",
           "url": "/scotland/places/isle-of-skye-sleat.html"
         }
-      ]
+      ],
+      "detailEyebrow": false
     },
     {
       "id": "falkland",
@@ -800,7 +801,8 @@ window.EW_NAV_DATA={
           "name": "리처드 카메론 생가 — ‘언약도의 사자’",
           "url": "/scotland/places/falkland-richard-cameron.html"
         }
-      ]
+      ],
+      "detailEyebrow": false
     },
     {
       "id": "glencoe",
@@ -887,7 +889,8 @@ window.EW_NAV_DATA={
           "name": "사우스 스트리트",
           "url": "/st-andrews/south-street.html"
         }
-      ]
+      ],
+      "detailEyebrow": false
     },
     {
       "id": "glasgow-walk",
@@ -965,7 +968,8 @@ window.EW_NAV_DATA={
           "url": "/scotland/places/glasgow/kelvingrove.html",
           "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
         }
-      ]
+      ],
+      "detailEyebrow": false
     },
     {
       "id": "balmoral-waverley",
