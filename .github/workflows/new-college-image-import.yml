@@ -20,14 +20,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p assets/new-college
-          curl --fail --location --retry 3 'https://oaisdmntprdenmarkeast.blob.core.windows.net/files/00000000-c148-8210-ade9-cda0398a5fb9/raw?se=2026-10-02T12%3A55%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=9a9b3bf4-e3e1-40f1-87fb-f913a672fc73&skoid=34268b52-5349-4f34-9be4-e38a5fb9f231&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T02%3A40%3A16Z&ske=2026-10-03T02%3A40%3A16Z&sks=b&skv=2026-02-06&sig=6m5WCIWyz0aXJ4Wb9cmbnyM4hUK923ia9bYMiUJYfoI%3D' -o assets/new-college/new-college-exterior.png
-          curl --fail --location --retry 3 'https://oaisdmntprnortheu.blob.core.windows.net/files/00000000-7318-81f4-939e-99305a4c14bb/raw?se=2026-10-02T12%3A55%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=9a9b3bf4-e3e1-40f1-87fb-f913a672fc73&skoid=34268b52-5349-4f34-9be4-e38a5fb9f231&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T07%3A10%3A54Z&ske=2026-10-03T07%3A10%3A54Z&sks=b&skv=2026-02-06&sig=FEiSENfrMlpPP0t2FXb0Lm3NjEeU4VNqo3uyPKW0txE%3D' -o assets/new-college/new-college-courtyard.png
-          curl --fail --location --retry 3 'https://oaisdmntprnortheu.blob.core.windows.net/files/00000000-5160-81f4-ac3f-a139c7252e24/raw?se=2026-10-02T12%3A55%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=9a9b3bf4-e3e1-40f1-87fb-f913a672fc73&skoid=34268b52-5349-4f34-9be4-e38a5fb9f231&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T02%3A20%3A44Z&ske=2026-10-03T02%3A20%3A44Z&sks=b&skv=2026-02-06&sig=t9u/z0GOH1cfZcx%2BlojrkFC70pXAv4fEJeSHskHjVE8%3D' -o assets/new-college/john-knox-statue-final.png
-          curl --fail --location --retry 3 'https://oaisdmntprnortheu.blob.core.windows.net/files/00000000-3d60-81f4-a6bc-9b001d7df4e8/raw?se=2026-10-02T12%3A55%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=9a9b3bf4-e3e1-40f1-87fb-f913a672fc73&skoid=34268b52-5349-4f34-9be4-e38a5fb9f231&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T04%3A20%3A36Z&ske=2026-10-03T04%3A20%3A36Z&sks=b&skv=2026-02-06&sig=lIhZvI1dOBzdn6HpdfVZqq6OKGX0cmTPKR4aiI/Ayl8%3D' -o assets/new-college/new-college-view.png
+          curl --fail --location --retry 3 -A 'Mozilla/5.0' 'https://lh7-rt.googleusercontent.com/docsz/AD_4nXfIdYvm9maPF7ByPdTPrE2e_d1DuKEUYgWWcIcAQSLNF8Mb2lmtfJe_nHARmD80Ftt1Ydpwm2NtunLc3Z3S2v1sM04qHZZuWFfTwmmxT0QoOWNBDExT0oQ2-Ep2bRmAo6SfeDVyMYHq30SnC6W-N2coGl0xlAjxWi_54CIg3d8hNbjWFG0=s2048?key=pKTUXG_XmQ4N-mWhPkdsfQ' -o assets/new-college/new-college-exterior.png
+          curl --fail --location --retry 3 -A 'Mozilla/5.0' 'https://lh7-rt.googleusercontent.com/docsz/AD_4nXd333W_6h5CoauBPZWDZ1kOcmpZHJ1MqTKOzHNukcUgx8IwCjbRlFKWuBBQvF58oqUjx8tWDgu_RcCLv9-AZIqDOA-X6ksXpMYLxffXBi2GhQDgAs32YHUe98Pd2koRFfCFgBdhd_KfwYyGnSzjmaqCQbC-QKMNYKOvFCmA34cCu4pz=s2048?key=pKTUXG_XmQ4N-mWhPkdsfQ' -o assets/new-college/new-college-courtyard.png
+          curl --fail --location --retry 3 -A 'Mozilla/5.0' 'https://lh7-rt.googleusercontent.com/docsz/AD_4nXfPsjh6STFtOhsHD39TiglAhDmM8HHZanufgl31klZg3sp6c6YT5ZVw_Zhouow3LT_jOaGyJBkts7WNEvLIqy23c8u93xwgV6Eo2uHQkKnCug-QIH0RzOxm5zIyRXKfF250lbUF_KQXVFCs1kbYYer7S0yJa_zeNzJ6xppGi-ShHpKW4ag=s2048?key=pKTUXG_XmQ4N-mWhPkdsfQ' -o assets/new-college/john-knox-statue-final.png
+          curl --fail --location --retry 3 -A 'Mozilla/5.0' 'https://lh7-rt.googleusercontent.com/docsz/AD_4nXflwWSwp1z-I8l_ixcMsYHAV9UCq0wtkCtVmef5gF_D0YtTPINeOd-mQA1A5kAr7m5RrdPNlxcL5XwOxyzH9JcGac_mJ8AHb3NBQzJB7YFr-aqqoIfmn5yUeMZE_AfX_JbOcBgzsp6pxribnJjyGVcaH6D7QvxIJUxBFit1WJsR7awx=s2048?key=pKTUXG_XmQ4N-mWhPkdsfQ' -o assets/new-college/new-college-view.png
           test -s assets/new-college/new-college-exterior.png
           test -s assets/new-college/new-college-courtyard.png
           test -s assets/new-college/john-knox-statue-final.png
           test -s assets/new-college/new-college-view.png
+          file assets/new-college/*.png
       - name: Commit images
         shell: bash
         run: |
