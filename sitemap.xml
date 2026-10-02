@@ -53,6 +53,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/national-gallery.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/new-town.html</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
