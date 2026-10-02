@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261002-2';
+  const VERSION='20261002-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -66,17 +66,11 @@
     ?'/edinburgh/places.html#'+region.id
     :'/edinburgh/places.html';
 
-  const setPlaceBreadcrumb=(label,region)=>{
-    const parts=[
-      {label:'홈',href:'/'},
-      {label:'장소로 보기',href:placeDirectoryHref(region)}
-    ];
-    if(region?.hub&&normalizePath(region.hub)!==currentPath){
-      parts.push({label:region.hubLabel?.replace(/ 전체 보기$/,'')||region.name,href:contextualUrl(region.hub,'place')});
-    }
-    parts.push({label});
-    return setBreadcrumb(parts);
-  };
+  const setPlaceBreadcrumb=(label,region)=>setBreadcrumb([
+    {label:'홈',href:'/'},
+    {label:'장소로 보기',href:placeDirectoryHref(region)},
+    {label}
+  ]);
 
   const setSeriesBreadcrumb=(data,series,item,context)=>{
     const parentRegion=context==='place'
@@ -200,7 +194,10 @@
   };
 
   const regionalSeriesForPath=(data,path)=>(data.series||[]).find(series=>
-    series.placeMode==='region'&&(series.items||[]).some(item=>normalizePath(item.url)===path)
+    series.placeMode==='region'&&(
+      normalizePath(series.hub)===path||
+      (series.items||[]).some(item=>normalizePath(item.url)===path)
+    )
   );
 
   const setRegionalSeriesChromeVisible=(data,context)=>{
@@ -260,7 +257,8 @@
     if(!regionMatch&&!tourMatch)return false;
 
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
-    let context=requested||(tourMatch?'tour':'place');
+    const regionalPlace=!!regionalSeriesForPath(data,currentPath);
+    let context=requested||(regionalPlace?'place':(tourMatch?'tour':'place'));
     if(context==='tour'&&!tourMatch)context='place';
     if(context==='place'&&!regionMatch&&tourMatch)context='tour';
     setRegionalSeriesChromeVisible(data,context);
@@ -493,11 +491,12 @@
     const requested=location.hash===NAV_PLACE?'place':(location.hash===NAV_TOUR?'tour':null);
     const regionMatch=findRegion(data,currentPath);
     const tourMatch=findTour(currentPath);
+    const regionalPlace=!!regionalSeriesForPath(data,currentPath);
 
     let seriesMatch=null;
     if(requested==='place')seriesMatch=findSeries(data,currentPath,'place');
     else if(requested==='tour')seriesMatch=findSeries(data,currentPath,'tour');
-    else if(!tourMatch)seriesMatch=findSeries(data,currentPath,'tour')||findSeries(data,currentPath,'place');
+    else if(!tourMatch&&!regionalPlace)seriesMatch=findSeries(data,currentPath,'tour')||findSeries(data,currentPath,'place');
 
     if(seriesMatch){
       renderSeriesNavigation(data,seriesMatch);

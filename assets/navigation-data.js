@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-02-2",
+  "version": "2026-10-02-3",
   "placeRegions": [
     {
       "id": "edinburgh-1",
