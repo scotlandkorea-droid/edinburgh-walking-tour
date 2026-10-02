@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-02-4",
+  "version": "2026-10-02-5",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -89,16 +89,16 @@ window.EW_NAV_DATA={
           "url": "/places/national-museum.html"
         },
         {
+          "name": "올드 칼리지",
+          "url": "/edinburgh/places/old-college.html"
+        },
+        {
           "name": "서전스 홀",
           "url": "/edinburgh/places/surgeons-hall.html"
         },
         {
           "name": "플레전스",
           "url": "/edinburgh/places/pleasance.html"
-        },
-        {
-          "name": "올드 칼리지",
-          "url": "/edinburgh/places/old-college.html"
         },
         {
           "name": "맥이완 홀",
