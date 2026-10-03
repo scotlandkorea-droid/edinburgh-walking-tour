@@ -849,4 +849,10 @@
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/stirling.html</loc></url>
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/stirling-history.html</loc></url>
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/stirling-holy-rude.html</loc></url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/loch-ness.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
