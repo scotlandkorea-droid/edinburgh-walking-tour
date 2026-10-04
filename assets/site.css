@@ -1813,14 +1813,13 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   margin-top:16px!important;
 }
 
-
-/* PLACE MAP LINK — subtitle helper 2026-10-04 */
-.detail-intro .place-map-link-row{
+/* PLACE MAP LINK — Scotland place pages, unified 2026-10-04 */
+.scotland-map-page .detail-intro .place-map-link-row{
   display:flex;
   justify-content:flex-end;
-  margin-top:12px;
+  margin-top:10px;
 }
-.detail-intro .place-map-link{
+.scotland-map-page .detail-intro .place-map-link{
   display:inline-flex;
   align-items:center;
   padding:6px 0;
@@ -1831,30 +1830,26 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   text-decoration:none;
   white-space:nowrap;
 }
-.detail-intro .place-map-link:hover,
-.detail-intro .place-map-link:focus-visible{
+.scotland-map-page .detail-intro .place-map-link:hover,
+.scotland-map-page .detail-intro .place-map-link:focus-visible{
   text-decoration:underline;
   text-underline-offset:3px;
 }
-.detail-intro + main .detail-article{
-  padding-top:32px;
+.scotland-map-page .detail-intro + main .detail-article{
+  padding-top:30px;
 }
 @media(max-width:719px){
-  .detail-intro .place-map-link-row{
-    margin-top:10px;
+  .scotland-map-page .detail-intro .place-map-link-row{
+    margin-top:7px;
   }
-  .detail-intro .place-map-link{
+  .scotland-map-page .detail-intro{
+    padding-bottom:41px;
+  }
+  .scotland-map-page .detail-intro .place-map-link{
     font-size:13px;
   }
-  .detail-intro + main .detail-article{
-    padding-top:30px;
+  .scotland-map-page .detail-intro + main .detail-article{
+    padding-top:27px;
   }
 }
 
-
-/* DUMFRIES MAP LINK SPACING — subtle mobile adjustment 2026-10-04 */
-@media(max-width:719px){
-  body.dumfries-page .detail-intro .place-map-link-row{margin-top:7px}
-  body.dumfries-page .detail-intro{padding-bottom:41px}
-  body.dumfries-page .detail-intro + main .detail-article{padding-top:27px}
-}
