@@ -1814,87 +1814,68 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
 }
 
 
-/* PLACE LOCATION CARD — shared location orientation 2026-10-03 */
+/* PLACE LOCATION BAR — compact shared location orientation 2026-10-04 */
 .place-location-card{
-  margin:0 0 34px;
-  padding:18px 20px;
+  margin:0 0 28px;
+  padding:10px 13px;
   border:1px solid #dedbd4;
-  border-radius:16px;
-  background:#f8f7f3;
+  border-radius:12px;
+  background:#faf9f6;
 }
-.place-location-card .place-location-top{
+.place-location-line{
   display:flex;
-  align-items:flex-start;
-  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
 }
-.place-location-card .place-location-pin{
-  flex:0 0 auto;
-  width:36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:#e9eee9;
-  color:#274237;
-  font-size:18px;
-  line-height:1;
-}
-.place-location-card .place-location-kicker{
-  margin:0 0 3px;
-  font-size:11px;
-  line-height:1.25;
-  font-weight:850;
-  letter-spacing:.09em;
-  color:#80786e;
-  text-transform:uppercase;
-}
-.place-location-card .place-location-title{
-  margin:0;
-  font-size:17px;
-  line-height:1.45;
-  font-weight:800;
-  color:#27342e;
-}
-.place-location-card .place-location-meta{
-  margin:4px 0 0;
-  font-size:14px;
-  line-height:1.55;
-  color:#657069;
-}
-.place-location-card .place-location-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:14px 0 0 48px;
-}
-.place-location-card .place-location-actions a{
+.place-location-region{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  min-height:40px;
-  padding:8px 13px;
-  border:1px solid #cfd7d1;
-  border-radius:10px;
-  background:#fff;
-  color:#274237;
+  min-width:0;
+  color:#33453d;
+  font-size:14px;
+  line-height:1.35;
+  font-weight:750;
+  white-space:nowrap;
+}
+.place-location-pin{
+  display:inline-grid;
+  place-items:center;
+  width:23px;
+  height:23px;
+  margin-right:7px;
+  border-radius:50%;
+  background:#eef2ee;
+  color:#365246;
+  font-size:13px;
+  line-height:1;
+  flex:0 0 auto;
+}
+.place-location-map-link{
+  flex:0 0 auto;
+  color:#365246;
   font-size:13.5px;
   line-height:1.3;
   font-weight:800;
   text-decoration:none;
+  white-space:nowrap;
 }
-.place-location-card .place-location-actions a:hover{
-  border-color:#9fb0a5;
-  background:#f3f6f3;
+.place-location-map-link:hover,
+.place-location-map-link:focus-visible{
+  text-decoration:underline;
+  text-underline-offset:3px;
 }
-@media(max-width:719px){
+@media(max-width:380px){
   .place-location-card{
-    margin-bottom:30px;
-    padding:16px 17px;
+    padding:10px 12px;
   }
-  .place-location-card .place-location-actions{
-    margin-left:0;
+  .place-location-line{
+    gap:9px;
   }
-  .place-location-card .place-location-actions a{
-    flex:1 1 auto;
+  .place-location-region{
+    font-size:13.5px;
+  }
+  .place-location-map-link{
+    font-size:13px;
   }
 }
