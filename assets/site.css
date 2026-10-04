@@ -1814,12 +1814,12 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
 }
 
 /* PLACE MAP LINK — Scotland place pages, unified 2026-10-04 */
-.scotland-map-page .detail-intro .place-map-link-row{
+.scotland-map-page :is(.detail-intro,.page-hero) .place-map-link-row{
   display:flex;
   justify-content:flex-end;
   margin-top:10px;
 }
-.scotland-map-page .detail-intro .place-map-link{
+.scotland-map-page :is(.detail-intro,.page-hero) .place-map-link{
   display:inline-flex;
   align-items:center;
   padding:6px 0;
@@ -1830,25 +1830,25 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   text-decoration:none;
   white-space:nowrap;
 }
-.scotland-map-page .detail-intro .place-map-link:hover,
-.scotland-map-page .detail-intro .place-map-link:focus-visible{
+.scotland-map-page :is(.detail-intro,.page-hero) .place-map-link:hover,
+.scotland-map-page :is(.detail-intro,.page-hero) .place-map-link:focus-visible{
   text-decoration:underline;
   text-underline-offset:3px;
 }
-.scotland-map-page .detail-intro + main .detail-article{
+.scotland-map-page :is(.detail-intro,.page-hero) + main .detail-article{
   padding-top:30px;
 }
 @media(max-width:719px){
-  .scotland-map-page .detail-intro .place-map-link-row{
+  .scotland-map-page :is(.detail-intro,.page-hero) .place-map-link-row{
     margin-top:7px;
   }
-  .scotland-map-page .detail-intro{
+  .scotland-map-page :is(.detail-intro,.page-hero){
     padding-bottom:41px;
   }
-  .scotland-map-page .detail-intro .place-map-link{
+  .scotland-map-page :is(.detail-intro,.page-hero) .place-map-link{
     font-size:13px;
   }
-  .scotland-map-page .detail-intro + main .detail-article{
+  .scotland-map-page :is(.detail-intro,.page-hero) + main .detail-article{
     padding-top:27px;
   }
 }
