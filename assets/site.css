@@ -1854,7 +1854,7 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
 }
 
 /* MAP AFTER SERIES TABS — separate route navigation from map action, keep map closer to body */
-body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+body.map-after-series-tabs :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
   margin-top:26px;
   transform:translateY(13px);
 }
@@ -1865,7 +1865,7 @@ body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail
   padding-top:16px;
 }
 @media(max-width:719px){
-  body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+  body.map-after-series-tabs :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
     margin-top:28px;
     transform:translateY(15px);
   }
@@ -1874,6 +1874,18 @@ body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail
   }
   body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail-article{
     padding-top:14px;
+  }
+}
+
+/* Composite pages can hide their tour-only story tabs in Place browsing.
+   When the tabs are hidden, return the map action to normal intro spacing. */
+html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tour-context-only + .place-map-link-row{
+  margin-top:10px;
+  transform:none;
+}
+@media(max-width:719px){
+  html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tour-context-only + .place-map-link-row{
+    margin-top:7px;
   }
 }
 
