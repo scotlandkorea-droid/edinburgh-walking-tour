@@ -1893,11 +1893,34 @@ html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tou
 
 /* PLACE SINGLE DETAIL COMMON — confirmed 2026-10-04
    New College pilot promoted to the shared independent-place system. */
+body.place-single-detail :is(.detail-intro,.page-hero){
+  background:#fff;
+  background-image:none;
+  color:var(--ink);
+  padding:24px 0 45px;
+  min-height:0;
+  height:auto;
+}
+body.place-single-detail :is(.detail-intro,.page-hero):before,
+body.place-single-detail :is(.detail-intro,.page-hero):after{
+  display:none;
+  content:none;
+}
 body.place-single-detail .breadcrumbs,
 body.place-single-detail .crumbs{
+  margin:0;
+  padding:0;
+  font-size:14px;
+  line-height:1.5;
   color:#456b55;
   font-weight:700;
 }
+body.place-single-detail .breadcrumbs a,
+body.place-single-detail .crumbs a{
+  color:inherit;
+  text-decoration:none;
+}
+body.place-single-detail .crumbs span{margin:0 6px}
 body.place-single-detail :is(.detail-intro,.page-hero) h1{
   margin:24px 0 2px;
   font-size:clamp(37px,8.6vw,58px);
@@ -1907,6 +1930,17 @@ body.place-single-detail :is(.detail-intro,.page-hero) h1{
   font-weight:850;
   word-break:keep-all;
   text-wrap:pretty;
+}
+body.place-single-detail :is(.detail-intro,.page-hero) .course-title-en{
+  margin:1px 0 0 8px;
+  max-width:760px;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:#8a8176;
+  text-transform:uppercase;
 }
 body.place-single-detail :is(.detail-intro,.page-hero) .lead{
   margin:18px 0 0;
@@ -1944,4 +1978,8 @@ body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) 
     padding-top:14px;
   }
 }
-
+@media(min-width:720px){
+  body.place-single-detail :is(.detail-intro,.page-hero){
+    padding-top:30px;
+  }
+}
