@@ -1853,125 +1853,27 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   }
 }
 
-
-/* DETAIL TOP + SERIES NAV VISUAL STANDARD — approved 2026-10-04
-   One visual language for walking-tour and place/story detail pages.
-   Cream intro, white reading body, shared swipe tabs, and map action closer to the body. */
-body.course-detail :is(.detail-intro,.page-hero),
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro),
-body:has(.story-tabs) .detail-intro{
-  background:var(--cream,#f5f2eb)!important;
-  background-image:none!important;
+/* MAP AFTER SERIES TABS — separate route navigation from map action, keep map closer to body */
+body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+  margin-top:26px;
+  transform:translateY(13px);
 }
-
-/* Series titles and subtitles use one typography system. */
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro) h1,
-body:has(.story-tabs) .detail-intro h1{
-  font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
-  font-size:clamp(34px,8vw,58px);
-  line-height:1.08;
-  letter-spacing:-.045em;
-  font-weight:850;
-  color:var(--deep,#17231d);
-  word-break:keep-all;
-  text-wrap:pretty;
+body.map-after-series-tabs .detail-intro:has(.place-map-link-row){
+  padding-bottom:18px;
 }
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro) .lead,
-body:has(.story-tabs) .detail-intro .lead{
-  font-family:Georgia,"Noto Serif KR",Batang,serif;
-  font-size:18px;
-  line-height:1.55;
-  font-weight:600;
-  color:#536159!important;
-}
-
-/* One swipeable story-route component, including the older Grassmarket markup. */
-:is(.story-series-tabs,.story-tabs){
-  display:flex!important;
-  flex-wrap:nowrap;
-  gap:8px!important;
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  overflow-x:auto!important;
-  overflow-y:hidden;
-  margin:18px 0 6px!important;
-  padding:3px 0 6px!important;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none!important;
-  -ms-overflow-style:none;
-}
-:is(.story-series-tabs,.story-tabs)::-webkit-scrollbar{display:none;width:0;height:0}
-:is(.story-series-tab,.story-tab){
-  flex:0 0 auto!important;
-  display:inline-flex;
-  align-items:center;
-  min-height:38px;
-  padding:8px 10px!important;
-  border:1px solid transparent!important;
-  border-radius:10px!important;
-  background:transparent!important;
-  color:var(--muted,#657069)!important;
-  text-decoration:none!important;
-  white-space:nowrap;
-  font-family:system-ui,-apple-system,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
-  font-size:13px!important;
-  line-height:1.35;
-  font-weight:650!important;
-}
-:is(.story-series-tab,.story-tab) span{font-weight:800}
-:is(.story-series-tab,.story-tab):hover,
-:is(.story-series-tab,.story-tab):focus-visible{
-  border-color:var(--line,#e3ded5)!important;
-  color:var(--ink,#18211d)!important;
-}
-:is(.story-series-tab,.story-tab).active,
-:is(.story-series-tab,.story-tab)[aria-current="page"]{
-  background:var(--sage,#e8eee8)!important;
-  border-color:var(--line,#e3ded5)!important;
-  color:var(--ink,#18211d)!important;
-  font-weight:800!important;
-}
-
-/* If a series page also has a map action, the story route comes first.
-   The approved Glasgow rhythm is: route -> generous gap -> map -> short gap -> body. */
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro)>.wrap,
-body:has(.story-tabs) .detail-intro>.wrap{
-  display:flex;
-  flex-direction:column;
-}
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro) .story-series-tabs,
-body:has(.story-tabs) .detail-intro .story-tabs{order:10}
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro) .place-map-link-row,
-body:has(.story-tabs) .detail-intro .place-map-link-row{
-  order:20;
-  margin-top:38px!important;
-  transform:none!important;
-}
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro):has(.place-map-link-row),
-body:has(.story-tabs) .detail-intro:has(.place-map-link-row){
-  padding-bottom:8px!important;
-}
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro):has(.place-map-link-row)+main,
-body:has(.story-tabs) .detail-intro:has(.place-map-link-row)+main{
-  padding-top:0!important;
-}
-body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro):has(.place-map-link-row)+main>:first-child,
-body:has(.story-tabs) .detail-intro:has(.place-map-link-row)+main>:first-child{
-  padding-top:12px!important;
+body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail-article{
+  padding-top:16px;
 }
 @media(max-width:719px){
-  body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro) .place-map-link-row,
-  body:has(.story-tabs) .detail-intro .place-map-link-row{
-    margin-top:42px!important;
+  body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+    margin-top:28px;
+    transform:translateY(15px);
   }
-  body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro):has(.place-map-link-row),
-  body:has(.story-tabs) .detail-intro:has(.place-map-link-row){
-    padding-bottom:7px!important;
+  body.map-after-series-tabs .detail-intro:has(.place-map-link-row){
+    padding-bottom:16px;
   }
-  body:has(.story-series-tabs) :is(.detail-intro,.page-hero,.greyfriars-intro,.castle-intro):has(.place-map-link-row)+main>:first-child,
-  body:has(.story-tabs) .detail-intro:has(.place-map-link-row)+main>:first-child{
-    padding-top:10px!important;
+  body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail-article{
+    padding-top:14px;
   }
 }
 
