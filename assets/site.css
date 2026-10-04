@@ -1835,20 +1835,20 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   text-decoration:underline;
   text-underline-offset:3px;
 }
-:is(.detail-intro,.page-hero) + main .detail-article{
+:is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
   padding-top:30px;
 }
 @media(max-width:719px){
   :is(.detail-intro,.page-hero) .place-map-link-row{
     margin-top:7px;
   }
-  :is(.detail-intro,.page-hero){
+  :is(.detail-intro,.page-hero):has(.place-map-link-row){
     padding-bottom:41px;
   }
   :is(.detail-intro,.page-hero) .place-map-link{
     font-size:13px;
   }
-  :is(.detail-intro,.page-hero) + main .detail-article{
+  :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
     padding-top:27px;
   }
 }
