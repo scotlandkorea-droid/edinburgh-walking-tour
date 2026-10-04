@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261004-1';
+  const VERSION='20261004-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -383,17 +383,6 @@
       }
       return a;
     }));
-    // Keep the current story visible instead of leaving long series parked at 01.
-    // Center when possible; clamp naturally at the first/last item.
-    requestAnimationFrame(()=>{
-      const active=tabs.querySelector('[aria-current="page"],.active');
-      if(!active||tabs.scrollWidth<=tabs.clientWidth)return;
-      const tabRect=tabs.getBoundingClientRect();
-      const activeRect=active.getBoundingClientRect();
-      const delta=(activeRect.left-tabRect.left)-((tabRect.width-activeRect.width)/2);
-      const max=Math.max(0,tabs.scrollWidth-tabs.clientWidth);
-      tabs.scrollLeft=Math.min(max,Math.max(0,tabs.scrollLeft+delta));
-    });
   };
 
   const renderSeriesNavigation=(data,match)=>{
