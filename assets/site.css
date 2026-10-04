@@ -1895,7 +1895,7 @@ html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tou
 /* Scoped trial only. Promote to the shared detail system after visual approval. */
 body.place-single-pilot .breadcrumbs,
 body.place-single-pilot .crumbs{
-  color:#4f6758;
+  color:#456b55;
   font-weight:700;
 }
 body.place-single-pilot .course-title-en + .lead{
@@ -1903,7 +1903,10 @@ body.place-single-pilot .course-title-en + .lead{
   font-weight:600;
 }
 body.place-single-pilot .place-map-link-row{
-  margin-top:26px;
+  margin-top:27px;
+}
+body.place-single-pilot .place-map-link{
+  font-weight:700;
 }
 body.place-single-pilot .detail-intro:has(.place-map-link-row){
   padding-bottom:18px;
@@ -1913,7 +1916,7 @@ body.place-single-pilot .detail-intro:has(.place-map-link-row) + main .detail-ar
 }
 @media(max-width:719px){
   body.place-single-pilot .place-map-link-row{
-    margin-top:28px;
+    margin-top:29px;
   }
   body.place-single-pilot .detail-intro:has(.place-map-link-row){
     padding-bottom:16px;
