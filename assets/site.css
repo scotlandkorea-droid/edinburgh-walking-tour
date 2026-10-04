@@ -1853,3 +1853,25 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
   }
 }
 
+/* MAP AFTER SERIES TABS — separate route navigation from map action, keep map closer to body */
+body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+  margin-top:26px;
+}
+body.map-after-series-tabs .detail-intro:has(.place-map-link-row){
+  padding-bottom:18px;
+}
+body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail-article{
+  padding-top:16px;
+}
+@media(max-width:719px){
+  body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
+    margin-top:28px;
+  }
+  body.map-after-series-tabs .detail-intro:has(.place-map-link-row){
+    padding-bottom:16px;
+  }
+  body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail-article{
+    padding-top:14px;
+  }
+}
+
