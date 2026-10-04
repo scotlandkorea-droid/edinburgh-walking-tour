@@ -1889,3 +1889,36 @@ html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tou
   }
 }
 
+
+
+/* PLACE SINGLE PILOT — New College, 2026-10-04 */
+/* Scoped trial only. Promote to the shared detail system after visual approval. */
+body.place-single-pilot .breadcrumbs,
+body.place-single-pilot .crumbs{
+  color:#4f6758;
+  font-weight:700;
+}
+body.place-single-pilot .course-title-en + .lead{
+  color:#465a4f!important;
+  font-weight:600;
+}
+body.place-single-pilot .place-map-link-row{
+  margin-top:26px;
+}
+body.place-single-pilot .detail-intro:has(.place-map-link-row){
+  padding-bottom:18px;
+}
+body.place-single-pilot .detail-intro:has(.place-map-link-row) + main .detail-article{
+  padding-top:16px;
+}
+@media(max-width:719px){
+  body.place-single-pilot .place-map-link-row{
+    margin-top:28px;
+  }
+  body.place-single-pilot .detail-intro:has(.place-map-link-row){
+    padding-bottom:16px;
+  }
+  body.place-single-pilot .detail-intro:has(.place-map-link-row) + main .detail-article{
+    padding-top:14px;
+  }
+}
