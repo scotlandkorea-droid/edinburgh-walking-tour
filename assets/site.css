@@ -1891,37 +1891,57 @@ html[data-nav-context="place"] body.map-after-series-tabs .story-series-tabs.tou
 
 
 
-/* PLACE SINGLE PILOT — New College, 2026-10-04 */
-/* Scoped trial only. Promote to the shared detail system after visual approval. */
-body.place-single-pilot .breadcrumbs,
-body.place-single-pilot .crumbs{
+/* PLACE SINGLE DETAIL COMMON — confirmed 2026-10-04
+   New College pilot promoted to the shared independent-place system. */
+body.place-single-detail .breadcrumbs,
+body.place-single-detail .crumbs{
   color:#456b55;
   font-weight:700;
 }
-body.place-single-pilot .course-title-en + .lead{
+body.place-single-detail :is(.detail-intro,.page-hero) h1{
+  margin:24px 0 2px;
+  font-size:clamp(37px,8.6vw,58px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  color:var(--deep,#17271f);
+  font-weight:850;
+  word-break:keep-all;
+  text-wrap:pretty;
+}
+body.place-single-detail :is(.detail-intro,.page-hero) .lead{
+  margin:18px 0 0;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:18px;
+  line-height:1.55;
+  letter-spacing:-.01em;
   color:#465a4f!important;
   font-weight:600;
 }
-body.place-single-pilot .place-map-link-row{
+body.place-single-detail .place-map-link-row{
   margin-top:27px;
 }
-body.place-single-pilot .place-map-link{
+body.place-single-detail .place-map-link{
   font-weight:700;
 }
-body.place-single-pilot .detail-intro:has(.place-map-link-row){
+body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row){
   padding-bottom:18px;
 }
-body.place-single-pilot .detail-intro:has(.place-map-link-row) + main .detail-article{
+body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
   padding-top:16px;
 }
 @media(max-width:719px){
-  body.place-single-pilot .place-map-link-row{
+  body.place-single-detail :is(.detail-intro,.page-hero) h1{
+    font-size:clamp(37px,8.6vw,44px);
+  }
+  body.place-single-detail .place-map-link-row{
     margin-top:29px;
   }
-  body.place-single-pilot .detail-intro:has(.place-map-link-row){
+  body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row){
     padding-bottom:16px;
   }
-  body.place-single-pilot .detail-intro:has(.place-map-link-row) + main .detail-article{
+  body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
     padding-top:14px;
   }
 }
+
