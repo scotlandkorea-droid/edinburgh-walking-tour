@@ -1850,3 +1850,11 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
     padding-top:30px;
   }
 }
+
+
+/* DUMFRIES MAP LINK SPACING — subtle mobile adjustment 2026-10-04 */
+@media(max-width:719px){
+  body.dumfries-page .detail-intro .place-map-link-row{margin-top:7px}
+  body.dumfries-page .detail-intro{padding-bottom:41px}
+  body.dumfries-page .detail-intro + main .detail-article{padding-top:27px}
+}
