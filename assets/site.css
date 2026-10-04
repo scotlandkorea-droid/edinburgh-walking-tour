@@ -210,7 +210,7 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .detail-article .page-nav.page-nav-prev-only .prev{grid-column:1;justify-content:flex-start;text-align:left}
 
 /* STORY SERIES NAV */
-.story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:18px 0 6px;padding:3px 0 6px;-webkit-overflow-scrolling:touch}
+.story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:18px 0 6px;padding:3px 8px 6px;scroll-padding-inline:8px;-webkit-overflow-scrolling:touch}
 .story-series-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 .story-series-tab span{font-weight:800}
 .story-series-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
@@ -876,7 +876,7 @@ body.grassmarket-story-detail .breadcrumbs a{text-decoration:none}
 body.grassmarket-story-detail .eyebrow{margin:14px 0 2px;font-size:12px;font-weight:800;letter-spacing:.08em;color:#6f3547}
 body.grassmarket-story-detail h1{font-size:clamp(32px,7vw,50px);line-height:1.12;letter-spacing:-.04em;margin:0 0 9px}
 body.grassmarket-story-detail .lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
-body.grassmarket-story-detail .story-tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 0;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
+body.grassmarket-story-detail .story-tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 0;padding:3px 8px 8px;scroll-padding-inline:8px;-webkit-overflow-scrolling:touch}
 body.grassmarket-story-detail .story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:13px;font-weight:650;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 body.grassmarket-story-detail .story-tab.active{color:var(--ink);background:var(--sage);border-color:var(--line);font-weight:800}
 body.grassmarket-story-detail main{padding:42px 0 76px}
