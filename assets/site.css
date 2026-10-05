@@ -2259,12 +2259,13 @@ body.explore-hub-standard .explore-tab:not(.active){
 
 /* SHARED CONTENT CHOICE CARD COLOR SYSTEM — confirmed 2026-10-05 */
 :root{
-  --choice-card-bg:#fafbf8;
-  --choice-card-border:#dce3dc;
+  --choice-card-bg:linear-gradient(180deg,#f7f9f5,#eef3ec);
+  --choice-card-border:#ccd7ce;
   --choice-card-title:#17271f;
   --choice-card-copy:#657069;
   --choice-card-accent:#5e293c;
-  --choice-card-hover:#f5f2eb;
+  --choice-card-hover:linear-gradient(180deg,#f1f5ef,#e7eee5);
+  --choice-card-hover-border:#b8c7bb;
 }
 :is(
   body.course-detail .story,
@@ -2309,28 +2310,5 @@ body.explore-hub-standard .explore-tab:not(.active){
   .travel-detail .travel-story-card
 ):is(:hover,:focus-visible){
   background:var(--choice-card-hover);
-  border-color:#cbd4cc;
-}
-
-
-/* CHOICE CARD SAGE PILOT — four representative pages, 2026-10-05 */
-body.choice-card-sage-pilot :is(
-  .theme-list .story-card,
-  .era .story-card,
-  .storygrid .story,
-  .stg-storygrid .stg-story,
-  .travel-story-card
-){
-  background:linear-gradient(180deg,#f7f9f5,#eef3ec);
-  border-color:#ccd7ce;
-}
-body.choice-card-sage-pilot :is(
-  .theme-list .story-card,
-  .era .story-card,
-  .storygrid .story,
-  .stg-storygrid .stg-story,
-  .travel-story-card
-):is(:hover,:focus-visible){
-  background:linear-gradient(180deg,#f1f5ef,#e7eee5);
-  border-color:#b8c7bb;
+  border-color:var(--choice-card-hover-border,#b8c7bb);
 }
