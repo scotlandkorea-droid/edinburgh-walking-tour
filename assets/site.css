@@ -2178,3 +2178,41 @@ body.theme-detail-standard .theme-article{
     padding-top:32px;
   }
 }
+
+
+/* EXPLORE HUB HEADER PILOT — Places, 2026-10-05
+   Header-only trial. Preserve the existing place scope tabs, area sections and place chips. */
+body.explore-hub-header-pilot .page-hero{
+  background:linear-gradient(180deg,var(--cream),#fff);
+}
+body.explore-hub-header-pilot .page-hero .breadcrumbs{
+  color:#456b55;
+  font-weight:700;
+}
+body.explore-hub-header-pilot .page-hero h1{
+  font-size:clamp(38px,7.4vw,60px);
+  line-height:1.05;
+  letter-spacing:-.045em;
+  font-weight:850;
+}
+body.explore-hub-header-pilot .page-hero> .wrap > p,
+body.explore-hub-header-pilot .page-hero .wrap>p{
+  color:#536159;
+}
+body.explore-hub-header-pilot .explore-tabs{
+  margin-top:24px;
+}
+body.explore-hub-header-pilot .explore-tab{
+  min-height:42px;
+  font-weight:800;
+}
+body.explore-hub-header-pilot .explore-tab.active{
+  background:#dce8df;
+  border-color:#8ea494;
+  color:#14291f;
+}
+@media(max-width:719px){
+  body.explore-hub-header-pilot .page-hero h1{
+    font-size:clamp(38px,9.2vw,48px);
+  }
+}
