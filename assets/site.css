@@ -2185,10 +2185,6 @@ body.theme-detail-standard .theme-article{
 body.explore-hub-header-pilot .page-hero{
   background:linear-gradient(180deg,var(--cream),#fff);
 }
-body.explore-hub-header-pilot .page-hero .breadcrumbs{
-  color:#456b55;
-  font-weight:700;
-}
 body.explore-hub-header-pilot .page-hero h1{
   font-size:clamp(38px,7.4vw,60px);
   line-height:1.05;
@@ -2215,4 +2211,28 @@ body.explore-hub-header-pilot .explore-tab.active{
   body.explore-hub-header-pilot .page-hero h1{
     font-size:clamp(38px,9.2vw,48px);
   }
+}
+
+
+/* SITE-WIDE BREADCRUMB STANDARD — confirmed 2026-10-05 */
+.breadcrumbs,.crumbs{
+  color:#456b55!important;
+  font-size:14px!important;
+  line-height:1.5;
+  font-weight:700!important;
+  max-width:100%;
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.breadcrumbs a,.crumbs a{
+  color:inherit!important;
+  text-decoration:none;
+}
+.breadcrumbs::-webkit-scrollbar,.crumbs::-webkit-scrollbar{display:none}
+.breadcrumb-separator{color:inherit}
+@media(max-width:719px){
+  .breadcrumbs,.crumbs{font-size:13px!important}
 }
