@@ -2117,3 +2117,17 @@ body.cream-top-pilot .story-series-tab.active{
   background:#e8eee8;
   border-color:var(--line,#e3ded5);
 }
+body.cream-top-pilot:is(.place-single-detail,.place-region-hub) .place-map-link-row{
+  margin-top:20px;
+}
+body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
+  padding-bottom:11px;
+}
+@media(max-width:719px){
+  body.cream-top-pilot:is(.place-single-detail,.place-region-hub) .place-map-link-row{
+    margin-top:22px;
+  }
+  body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
+    padding-bottom:9px;
+  }
+}
