@@ -2692,6 +2692,14 @@ body.story-detail-standard > section:first-of-type :is(.story-series-tab,.story-
   font-weight:800;
 }
 
+/* STORY INTRO ORDER — shared, avoids per-page DOM rewrites */
+body.story-detail-standard > section:first-of-type > .wrap{
+  display:flex;
+  flex-direction:column;
+}
+body.story-detail-standard > section:first-of-type :is(.story-series-tabs,.story-tabs){order:10}
+body.story-detail-standard > section:first-of-type .place-map-link-row{order:11}
+
 /* STORY maps remain below title/tabs, but visually sit on their own white strip. */
 body.story-detail-standard > section:first-of-type .place-map-link-row{
   display:flex;
