@@ -2169,13 +2169,13 @@ body.theme-detail-pilot .theme-detail-intro .lead{
   font-weight:600;
 }
 body.theme-detail-pilot .theme-article{
-  padding-top:28px;
+  padding-top:32px;
 }
 @media(max-width:719px){
   body.theme-detail-pilot .theme-detail-intro{
     padding-bottom:28px;
   }
   body.theme-detail-pilot .theme-article{
-    padding-top:24px;
+    padding-top:32px;
   }
 }
