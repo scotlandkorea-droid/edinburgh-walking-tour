@@ -2311,3 +2311,26 @@ body.explore-hub-standard .explore-tab:not(.active){
   background:var(--choice-card-hover);
   border-color:#cbd4cc;
 }
+
+
+/* CHOICE CARD SAGE PILOT — four representative pages, 2026-10-05 */
+body.choice-card-sage-pilot :is(
+  .theme-list .story-card,
+  .era .story-card,
+  .storygrid .story,
+  .stg-storygrid .stg-story,
+  .travel-story-card
+){
+  background:linear-gradient(180deg,#f7f9f5,#eef3ec);
+  border-color:#ccd7ce;
+}
+body.choice-card-sage-pilot :is(
+  .theme-list .story-card,
+  .era .story-card,
+  .storygrid .story,
+  .stg-storygrid .stg-story,
+  .travel-story-card
+):is(:hover,:focus-visible){
+  background:linear-gradient(180deg,#f1f5ef,#e7eee5);
+  border-color:#b8c7bb;
+}
