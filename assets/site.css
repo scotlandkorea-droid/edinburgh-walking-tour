@@ -1983,3 +1983,38 @@ body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) 
     padding-top:30px;
   }
 }
+
+/* PLACE / REGION HUB PILOT — St Giles, 2026-10-05 */
+/* Scoped trial only. Reuse the confirmed global detail-top language without changing hub content. */
+body.place-hub-pilot .breadcrumbs,
+body.place-hub-pilot .crumbs{
+  color:#456b55;
+  font-weight:700;
+}
+body.place-hub-pilot :is(.detail-intro,.page-hero) .lead{
+  color:#465a4f!important;
+  font-weight:600;
+}
+body.place-hub-pilot .place-map-link-row{
+  margin-top:27px;
+}
+body.place-hub-pilot .place-map-link{
+  font-weight:700;
+}
+body.place-hub-pilot :is(.detail-intro,.page-hero):has(.place-map-link-row){
+  padding-bottom:18px;
+}
+body.place-hub-pilot :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
+  padding-top:16px;
+}
+@media(max-width:719px){
+  body.place-hub-pilot .place-map-link-row{
+    margin-top:29px;
+  }
+  body.place-hub-pilot :is(.detail-intro,.page-hero):has(.place-map-link-row){
+    padding-bottom:16px;
+  }
+  body.place-hub-pilot :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
+    padding-top:14px;
+  }
+}
