@@ -2874,3 +2874,44 @@ body.place-single-detail > .hero + main .detail-article{
     padding-top:24px!important;
   }
 }
+
+/* PEOPLE DETAIL FINAL SHARED STANDARD — 2026-10-05 */
+/* Formalize the already stable people-detail shell without rewriting completed manuscripts. */
+body.people-detail-standard .people-detail-intro{
+  background:#fff;
+  background-image:none;
+  color:var(--ink,#18211d);
+  border-bottom:1px solid var(--line,#e3ded5);
+  min-height:0;
+  height:auto;
+}
+body.people-detail-standard .people-detail-intro:before,
+body.people-detail-standard .people-detail-intro:after{
+  display:none;
+  content:none;
+}
+body.people-detail-standard .people-detail-intro .breadcrumbs{
+  margin:0;
+  padding:0;
+}
+body.people-detail-standard .people-detail-intro :is(h1,.course-title){
+  max-width:900px;
+}
+body.people-detail-standard .people-article{
+  width:min(820px,calc(100% - 36px));
+  padding-bottom:0;
+}
+body.people-detail-standard .people-article>.story-turn{
+  margin:25px 0;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:clamp(19px,3.5vw,23px);
+  line-height:1.6;
+  color:#4d2b38;
+  font-weight:700;
+}
+@media(min-width:620px){
+  body.people-detail-standard .people-article{
+    width:min(820px,calc(100% - 56px));
+  }
+}
+
