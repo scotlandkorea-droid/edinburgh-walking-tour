@@ -2613,7 +2613,8 @@ body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):no
 
 /* PLACE SINGLE: cream top -> first white content */
 body.place-single-detail .detail-intro + main .detail-article,
-body.place-single-detail .page-hero + main .detail-article{
+body.place-single-detail .page-hero + main .detail-article,
+body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
   padding-top:26px;
 }
 body.place-single-detail main > .page-hero + section{
@@ -2622,7 +2623,8 @@ body.place-single-detail main > .page-hero + section{
 
 /* HUB: keep a little more breathing room below the cream top */
 body.place-region-hub .detail-intro + main .detail-article,
-body.place-region-hub .page-hero + main .detail-article{
+body.place-region-hub .page-hero + main .detail-article,
+body.place-region-hub :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
   padding-top:33px;
 }
 body.place-region-hub main > .page-hero + section{
@@ -2667,7 +2669,8 @@ body.story-detail-standard > section:first-of-type .course-title-en{
   color:var(--detail-en);
   text-transform:uppercase;
 }
-body.story-detail-standard > section:first-of-type .lead{
+body.story-detail-standard > section:first-of-type .lead,
+body.story-detail-standard > section:first-of-type > .wrap .lead{
   margin:18px 0 0;
   max-width:760px;
   font-family:Georgia,"Noto Serif KR",Batang,serif;
@@ -2701,6 +2704,9 @@ body.story-detail-standard > section:first-of-type :is(.story-series-tabs,.story
 body.story-detail-standard > section:first-of-type .place-map-link-row{order:11}
 
 /* STORY maps remain below title/tabs, but visually sit on their own white strip. */
+body.story-detail-standard > section:first-of-type:has(.place-map-link-row){
+  padding-bottom:14px;
+}
 body.story-detail-standard > section:first-of-type .place-map-link-row{
   display:flex;
   justify-content:flex-end;
@@ -2715,7 +2721,8 @@ body.story-detail-standard > section:first-of-type .place-map-link-row{
 body.story-detail-standard > section:first-of-type .place-map-link{
   font-weight:700;
 }
-body.story-detail-standard main .detail-article{
+body.story-detail-standard main .detail-article,
+body.story-detail-standard > section:first-of-type:has(.place-map-link-row) + main .detail-article{
   padding-top:19px;
 }
 
@@ -2735,14 +2742,16 @@ body.story-detail-standard main .detail-article{
     padding-bottom:24px;
   }
   body.place-single-detail .detail-intro + main .detail-article,
-  body.place-single-detail .page-hero + main .detail-article{
+  body.place-single-detail .page-hero + main .detail-article,
+  body.place-single-detail :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
     padding-top:24px;
   }
   body.place-single-detail main > .page-hero + section{
     padding-top:24px;
   }
   body.place-region-hub .detail-intro + main .detail-article,
-  body.place-region-hub .page-hero + main .detail-article{
+  body.place-region-hub .page-hero + main .detail-article,
+  body.place-region-hub :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
     padding-top:31px;
   }
   body.place-region-hub main > .page-hero + section{
@@ -2757,7 +2766,8 @@ body.story-detail-standard main .detail-article{
     margin-bottom:-14px;
     padding-top:12px;
   }
-  body.story-detail-standard main .detail-article{
+  body.story-detail-standard main .detail-article,
+  body.story-detail-standard > section:first-of-type:has(.place-map-link-row) + main .detail-article{
     padding-top:17px;
   }
 }
