@@ -2124,7 +2124,7 @@ body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intr
   padding-bottom:11px;
 }
 body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
-  padding-top:21px;
+  padding-top:26px;
 }
 @media(max-width:719px){
   body.cream-top-pilot:is(.place-single-detail,.place-region-hub) .place-map-link-row{
@@ -2134,6 +2134,6 @@ body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intr
     padding-bottom:9px;
   }
   body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
-    padding-top:19px;
+    padding-top:24px;
   }
 }
