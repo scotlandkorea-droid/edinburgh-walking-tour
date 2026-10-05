@@ -2180,42 +2180,58 @@ body.theme-detail-standard .theme-article{
 }
 
 
-/* EXPLORE HUB HEADER PILOT — Places, 2026-10-05
-   Header-only trial. Preserve the existing place scope tabs, area sections and place chips. */
-body.explore-hub-header-pilot .page-hero{
-  background:linear-gradient(180deg,var(--cream),#fff);
+/* EXPLORE HUB HEADER STANDARD — confirmed from New College common top, 2026-10-05
+   Shared by Places / Themes / People hubs. Content structures below the header remain role-specific. */
+body.explore-hub-standard .page-hero{
+  background:#f5f2eb;
+  background-image:none;
+  color:var(--ink);
+  padding:24px 0 32px;
 }
-body.explore-hub-header-pilot .page-hero h1{
-  font-size:clamp(38px,7.4vw,60px);
-  line-height:1.05;
+body.explore-hub-standard .page-hero h1{
+  margin:24px 0 2px;
+  font-size:clamp(37px,8.6vw,58px);
+  line-height:1.02;
   letter-spacing:-.045em;
+  color:var(--deep,#17271f);
   font-weight:850;
+  word-break:keep-all;
+  text-wrap:pretty;
 }
-body.explore-hub-header-pilot .page-hero> .wrap > p,
-body.explore-hub-header-pilot .page-hero .wrap>p{
-  color:#536159;
+body.explore-hub-standard .page-hero .wrap>p{
+  margin:18px 0 0;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:18px;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  color:#465a4f;
+  font-weight:600;
 }
-body.explore-hub-header-pilot .explore-tabs{
+body.explore-hub-standard .explore-tabs{
   margin-top:24px;
 }
-body.explore-hub-header-pilot .explore-tab{
+body.explore-hub-standard .explore-tab{
   min-height:42px;
   font-weight:800;
 }
-body.explore-hub-header-pilot .explore-tab.active{
+body.explore-hub-standard .explore-tab.active{
   background:#cfded2;
   border-color:#78927f;
   color:#14291f;
 }
-body.explore-hub-header-pilot .explore-tab:not(.active){
+body.explore-hub-standard .explore-tab:not(.active){
   color:#31453a;
 }
 @media(max-width:719px){
-  body.explore-hub-header-pilot .page-hero h1{
-    font-size:clamp(38px,9.2vw,48px);
+  body.explore-hub-standard .page-hero{
+    padding-top:24px;
+    padding-bottom:28px;
+  }
+  body.explore-hub-standard .page-hero h1{
+    font-size:clamp(37px,8.6vw,44px);
   }
 }
-
 
 /* SITE-WIDE BREADCRUMB STANDARD — confirmed 2026-10-05 */
 .breadcrumbs,.crumbs{
