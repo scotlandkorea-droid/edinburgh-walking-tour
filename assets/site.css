@@ -2105,3 +2105,15 @@ body.story-detail-pilot main .detail-article{
     padding-top:30px;
   }
 }
+
+
+/* CREAM INTRO COMPARISON PILOT — 2026-10-05
+   Compare one Place Single, one Hub and one Story Detail before any site-wide decision. */
+body.cream-top-pilot :is(.detail-intro,.page-hero,.castle-intro){
+  background:#f5f2eb;
+  background-image:none;
+}
+body.cream-top-pilot .story-series-tab.active{
+  background:#e8eee8;
+  border-color:var(--line,#e3ded5);
+}
