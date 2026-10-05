@@ -2255,3 +2255,59 @@ body.explore-hub-standard .explore-tab:not(.active){
 @media(max-width:719px){
   .breadcrumbs,.crumbs{font-size:13px!important}
 }
+
+
+/* SHARED CONTENT CHOICE CARD COLOR SYSTEM — confirmed 2026-10-05 */
+:root{
+  --choice-card-bg:#fafbf8;
+  --choice-card-border:#dce3dc;
+  --choice-card-title:#17271f;
+  --choice-card-copy:#657069;
+  --choice-card-accent:#5e293c;
+  --choice-card-hover:#f5f2eb;
+}
+:is(
+  body.course-detail .story,
+  body.course-detail .stg-story,
+  body.explore-hub-standard .theme-list .story-card,
+  body.explore-hub-standard .era .story-card,
+  .travel-detail .travel-story-card
+){
+  background:var(--choice-card-bg);
+  border-color:var(--choice-card-border);
+}
+:is(
+  body.course-detail .story h3,
+  body.course-detail .stg-story strong,
+  body.explore-hub-standard .theme-list .story-card strong,
+  body.explore-hub-standard .era .story-card strong,
+  .travel-detail .travel-story-copy strong
+){
+  color:var(--choice-card-title);
+}
+:is(
+  body.course-detail .story p,
+  body.course-detail .stg-story span,
+  body.explore-hub-standard .theme-list .story-card span,
+  body.explore-hub-standard .era .story-card span,
+  .travel-detail .travel-story-copy span
+){
+  color:var(--choice-card-copy);
+}
+:is(
+  body.course-detail .story .num,
+  body.course-detail .stg-story small,
+  .travel-detail .travel-story-no
+){
+  color:var(--choice-card-accent);
+}
+:is(
+  body.course-detail .story,
+  body.course-detail .stg-story,
+  body.explore-hub-standard .theme-list .story-card,
+  body.explore-hub-standard .era .story-card,
+  .travel-detail .travel-story-card
+):is(:hover,:focus-visible){
+  background:var(--choice-card-hover);
+  border-color:#cbd4cc;
+}
