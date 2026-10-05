@@ -763,11 +763,11 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 
 
 /* PLACE BROWSER — one shared hierarchy for Edinburgh + Scotland */
-.place-scope-tabs .location-tab{background:#fff;border-color:#d7c9ce;color:#5e293c}
-.place-scope-tabs .location-tab:hover,.place-scope-tabs .location-tab:focus-visible{background:#f7f1f3;border-color:#b99aa6}
+.place-scope-tabs .location-tab{background:#f1f5f0;border-color:#d9e3da;color:#315844}
+.place-scope-tabs .location-tab:hover,.place-scope-tabs .location-tab:focus-visible{background:#e9f0e9;border-color:#becdc0}
 .place-scope-section{scroll-margin-top:78px}
-.place-scope-section>.wrap>.section-head{border-left-color:#5e293c}
-.place-scope-section>.wrap>.section-head>h2{color:#5e293c}
+.place-scope-section>.wrap>.section-head{border-left-color:#744154}
+.place-scope-section>.wrap>.section-head>h2{color:#744154}
 .place-scope-section .area>h2{color:#0f2119;border-left-color:#6f8979}
 .place-strip>a,.place-strip>.place-chip{background:#f1f5f0;border:1px solid #d9e3da;color:#263a30}
 .place-strip>.place-chip{display:block;flex:0 0 auto;max-width:270px;padding:11px 14px;border-radius:12px;font-weight:720;white-space:nowrap;scroll-snap-align:start}
@@ -2203,8 +2203,8 @@ body.explore-hub-header-pilot .explore-tab{
   font-weight:800;
 }
 body.explore-hub-header-pilot .explore-tab.active{
-  background:#dce8df;
-  border-color:#8ea494;
+  background:#cfded2;
+  border-color:#78927f;
   color:#14291f;
 }
 @media(max-width:719px){
