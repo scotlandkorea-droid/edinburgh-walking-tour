@@ -2149,3 +2149,19 @@ body.edinburgh-castle-hub-spacing-pilot.cream-top-pilot :is(.detail-intro,.page-
     padding-top:31px;
   }
 }
+
+
+/* THEME DETAIL PILOT — History & Royalty, 2026-10-05
+   Keep the established 820px reading body and section structure unchanged. */
+body.theme-detail-pilot .theme-detail-intro{
+  background:#f5f2eb;
+  background-image:none;
+}
+body.theme-detail-pilot .theme-detail-intro .breadcrumbs{
+  color:#456b55;
+  font-weight:700;
+}
+body.theme-detail-pilot .theme-detail-intro .lead{
+  color:#465a4f!important;
+  font-weight:600;
+}
