@@ -2152,10 +2152,13 @@ body.edinburgh-castle-hub-spacing-pilot.cream-top-pilot :is(.detail-intro,.page-
 
 
 /* THEME DETAIL PILOT — History & Royalty, 2026-10-05
-   Keep the established 820px reading body and section structure unchanged. */
+   Keep the established 820px reading body and section structure unchanged.
+   Subtitle line count is allowed to grow naturally; control only the fixed space below it
+   and the white breathing room before the article. */
 body.theme-detail-pilot .theme-detail-intro{
   background:#f5f2eb;
   background-image:none;
+  padding-bottom:32px;
 }
 body.theme-detail-pilot .theme-detail-intro .breadcrumbs{
   color:#456b55;
@@ -2164,4 +2167,15 @@ body.theme-detail-pilot .theme-detail-intro .breadcrumbs{
 body.theme-detail-pilot .theme-detail-intro .lead{
   color:#465a4f!important;
   font-weight:600;
+}
+body.theme-detail-pilot .theme-article{
+  padding-top:28px;
+}
+@media(max-width:719px){
+  body.theme-detail-pilot .theme-detail-intro{
+    padding-bottom:28px;
+  }
+  body.theme-detail-pilot .theme-article{
+    padding-top:24px;
+  }
 }
