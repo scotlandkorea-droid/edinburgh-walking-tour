@@ -2782,3 +2782,77 @@ body.story-detail-standard .story-tab{
   border:1px solid transparent;
   white-space:nowrap;
 }
+
+
+/* PLACE SINGLE LEGACY HERO ALIAS — Arthur's Seat structure, 2026-10-05 */
+/* Keep the homepage Hero untouched; only a Place Single using the old .hero shell joins the shared detail top. */
+body.place-single-detail > .hero{
+  min-height:0!important;
+  height:auto!important;
+  position:relative;
+  display:block!important;
+  align-items:initial!important;
+  isolation:auto!important;
+  overflow:visible!important;
+  color:var(--ink,#18211d)!important;
+  background:var(--detail-top-bg,#f5f2eb)!important;
+  background-image:none!important;
+  padding:30px 0 11px!important;
+}
+body.place-single-detail > .hero:before,
+body.place-single-detail > .hero:after{
+  display:none!important;
+  content:none!important;
+}
+body.place-single-detail > .hero h1{
+  margin:24px 0 2px!important;
+  font-size:clamp(37px,8.6vw,58px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+  color:var(--detail-title,#17271f)!important;
+  font-weight:850!important;
+  text-shadow:none!important;
+  transform:none!important;
+  word-break:keep-all;
+  text-wrap:pretty;
+}
+body.place-single-detail > .hero .lead{
+  margin:18px 0 0!important;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif!important;
+  font-size:18px!important;
+  line-height:1.55!important;
+  letter-spacing:-.01em!important;
+  color:var(--detail-subtitle,#465a4f)!important;
+  font-weight:600!important;
+}
+body.place-single-detail > .hero .place-map-link-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:24px!important;
+  transform:none!important;
+}
+body.place-single-detail > .hero .place-map-link{
+  color:#365246;
+  font-weight:700!important;
+}
+body.place-single-detail > .hero + main{
+  padding-top:0!important;
+}
+body.place-single-detail > .hero + main .detail-article{
+  padding-top:26px!important;
+}
+@media(max-width:719px){
+  body.place-single-detail > .hero{
+    padding:24px 0 9px!important;
+  }
+  body.place-single-detail > .hero h1{
+    font-size:clamp(37px,8.6vw,44px)!important;
+  }
+  body.place-single-detail > .hero .place-map-link-row{
+    margin-top:26px!important;
+  }
+  body.place-single-detail > .hero + main .detail-article{
+    padding-top:24px!important;
+  }
+}
