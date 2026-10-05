@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261004-2';
+  const VERSION='20261005-1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -383,6 +383,23 @@
       }
       return a;
     }));
+
+    // Mobile series tabs: keep 01 at the natural left start, but make the
+    // current item visible on later pages by bringing it near the left edge.
+    requestAnimationFrame(()=>{
+      if(index===0){
+        tabs.scrollLeft=0;
+        return;
+      }
+      if(tabs.scrollWidth<=tabs.clientWidth+1)return;
+      const active=tabs.querySelector('.active');
+      if(!active)return;
+      const tabsRect=tabs.getBoundingClientRect();
+      const activeRect=active.getBoundingClientRect();
+      const target=tabs.scrollLeft+(activeRect.left-tabsRect.left)-3;
+      const maxScroll=Math.max(0,tabs.scrollWidth-tabs.clientWidth);
+      tabs.scrollLeft=Math.max(0,Math.min(maxScroll,target));
+    });
   };
 
   const renderSeriesNavigation=(data,match)=>{
