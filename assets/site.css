@@ -2539,3 +2539,246 @@ body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro) .p
     padding-top:30px;
   }
 }
+
+
+/* DETAIL TYPES 1–3 FINAL SHARED BODY — confirmed 2026-10-05 */
+/* One-body principle: final rules live here; older pilot/legacy rules above stay isolated for later cleanup. */
+:root{
+  --detail-top-bg:#f5f2eb;
+  --detail-breadcrumb:#456b55;
+  --detail-title:#17271f;
+  --detail-subtitle:#465a4f;
+  --detail-en:#8a8176;
+  --detail-active-sage:#e8eee8;
+}
+
+/* 1. PLACE SINGLE + 2. PLACE / REGION HUB — shared top typography */
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero){
+  background:var(--detail-top-bg);
+  background-image:none;
+  color:var(--ink,#18211d);
+  min-height:0;
+  height:auto;
+  padding-top:24px;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):before,
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):after{
+  display:none;
+  content:none;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) h1{
+  margin:24px 0 2px;
+  font-size:clamp(37px,8.6vw,58px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  color:var(--detail-title);
+  font-weight:850;
+  word-break:keep-all;
+  text-wrap:pretty;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .course-title-en{
+  margin:1px 0 0 8px;
+  max-width:760px;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:var(--detail-en);
+  text-transform:uppercase;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .lead{
+  margin:18px 0 0;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:18px;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  color:var(--detail-subtitle)!important;
+  font-weight:600;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .place-map-link-row{
+  margin-top:24px;
+  transform:none;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .place-map-link{
+  font-weight:700;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
+  padding-bottom:11px;
+}
+body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):not(:has(.place-map-link-row)){
+  padding-bottom:28px;
+}
+
+/* PLACE SINGLE: cream top -> first white content */
+body.place-single-detail .detail-intro + main .detail-article,
+body.place-single-detail .page-hero + main .detail-article{
+  padding-top:26px;
+}
+body.place-single-detail main > .page-hero + section{
+  padding-top:26px;
+}
+
+/* HUB: keep a little more breathing room below the cream top */
+body.place-region-hub .detail-intro + main .detail-article,
+body.place-region-hub .page-hero + main .detail-article{
+  padding-top:33px;
+}
+body.place-region-hub main > .page-hero + section{
+  padding-top:33px;
+}
+
+/* 3. STORY DETAIL — one shared top/body system across legacy story families */
+body.story-detail-standard > section:first-of-type{
+  background:var(--detail-top-bg);
+  background-image:none;
+  color:var(--ink,#18211d);
+  min-height:0;
+  height:auto;
+  padding:24px 0 14px;
+}
+body.story-detail-standard > section:first-of-type:before,
+body.story-detail-standard > section:first-of-type:after{
+  display:none;
+  content:none;
+}
+body.story-detail-standard > section:first-of-type h1{
+  margin:24px 0 2px;
+  font-size:clamp(37px,8.6vw,58px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  color:var(--detail-title);
+  font-weight:850;
+  word-break:keep-all;
+  text-wrap:pretty;
+}
+body.story-detail-standard > section:first-of-type .eyebrow + h1{
+  margin-top:6px;
+}
+body.story-detail-standard > section:first-of-type .course-title-en{
+  margin:1px 0 0 8px;
+  max-width:760px;
+  font-family:system-ui,-apple-system,"Noto Sans",Arial,sans-serif;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:var(--detail-en);
+  text-transform:uppercase;
+}
+body.story-detail-standard > section:first-of-type .lead{
+  margin:18px 0 0;
+  max-width:760px;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:18px;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  color:var(--detail-subtitle)!important;
+  font-weight:600;
+}
+body.story-detail-standard > section:first-of-type :is(.story-series-tabs,.story-tabs){
+  margin-top:19px;
+}
+body.story-detail-standard > section:first-of-type :is(.story-series-tab,.story-tab){
+  font-size:12px;
+  line-height:1.35;
+  padding:7px 9px;
+}
+body.story-detail-standard > section:first-of-type :is(.story-series-tab,.story-tab).active{
+  background:var(--detail-active-sage);
+  border-color:var(--line,#e3ded5);
+  color:var(--ink,#18211d);
+  font-weight:800;
+}
+
+/* STORY maps remain below title/tabs, but visually sit on their own white strip. */
+body.story-detail-standard > section:first-of-type .place-map-link-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:14px;
+  margin-bottom:-14px;
+  padding:13px 0 0;
+  background:#fff;
+  box-shadow:0 0 0 100vmax #fff;
+  clip-path:inset(0 -100vmax);
+  transform:none!important;
+}
+body.story-detail-standard > section:first-of-type .place-map-link{
+  font-weight:700;
+}
+body.story-detail-standard main .detail-article{
+  padding-top:19px;
+}
+
+/* Mobile final spacing */
+@media(max-width:719px){
+  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) h1,
+  body.story-detail-standard > section:first-of-type h1{
+    font-size:clamp(37px,8.6vw,44px);
+  }
+  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .place-map-link-row{
+    margin-top:26px;
+  }
+  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
+    padding-bottom:9px;
+  }
+  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):not(:has(.place-map-link-row)){
+    padding-bottom:24px;
+  }
+  body.place-single-detail .detail-intro + main .detail-article,
+  body.place-single-detail .page-hero + main .detail-article{
+    padding-top:24px;
+  }
+  body.place-single-detail main > .page-hero + section{
+    padding-top:24px;
+  }
+  body.place-region-hub .detail-intro + main .detail-article,
+  body.place-region-hub .page-hero + main .detail-article{
+    padding-top:31px;
+  }
+  body.place-region-hub main > .page-hero + section{
+    padding-top:31px;
+  }
+  body.story-detail-standard > section:first-of-type{
+    padding-top:24px;
+    padding-bottom:14px;
+  }
+  body.story-detail-standard > section:first-of-type .place-map-link-row{
+    margin-top:13px;
+    margin-bottom:-14px;
+    padding-top:12px;
+  }
+  body.story-detail-standard main .detail-article{
+    padding-top:17px;
+  }
+}
+@media(min-width:720px){
+  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero),
+  body.story-detail-standard > section:first-of-type{
+    padding-top:30px;
+  }
+}
+
+/* Keep the already approved functional HUB core blocks intact. */
+body.place-region-hub.st-andrews-guide :is(.guide-core,.city-core,.guide-info,.city-info){
+  position:relative;
+}
+
+/* Grassmarket fallback while legacy HTML is being normalized to story-series-tabs. */
+body.story-detail-standard .story-tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding:3px 0 6px;
+  -webkit-overflow-scrolling:touch;
+}
+body.story-detail-standard .story-tab{
+  flex:0 0 auto;
+  text-decoration:none;
+  color:var(--muted,#657069);
+  border-radius:10px;
+  border:1px solid transparent;
+  white-space:nowrap;
+}
