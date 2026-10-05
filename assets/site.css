@@ -2082,6 +2082,10 @@ body.story-detail-pilot .castle-intro .lead{
 body.story-detail-pilot .castle-intro .story-series-tabs{
   margin-top:19px;
 }
+body.story-detail-pilot .castle-intro .story-series-tab{
+  font-size:12px;
+  padding:7px 9px;
+}
 body.story-detail-pilot main .detail-article{
   padding-top:14px;
 }
