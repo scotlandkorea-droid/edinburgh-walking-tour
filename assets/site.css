@@ -2151,31 +2151,30 @@ body.edinburgh-castle-hub-spacing-pilot.cream-top-pilot :is(.detail-intro,.page-
 }
 
 
-/* THEME DETAIL PILOT — History & Royalty, 2026-10-05
-   Keep the established 820px reading body and section structure unchanged.
-   Subtitle line count is allowed to grow naturally; control only the fixed space below it
-   and the white breathing room before the article. */
-body.theme-detail-pilot .theme-detail-intro{
+/* THEME DETAIL STANDARD — confirmed from History & Royalty, 2026-10-05
+   Applies only to the five Edinburgh theme-detail pages.
+   Preserve the established 820px reading body, H2 structure and completed manuscripts. */
+body.theme-detail-standard .theme-detail-intro{
   background:#f5f2eb;
   background-image:none;
   padding-bottom:32px;
 }
-body.theme-detail-pilot .theme-detail-intro .breadcrumbs{
+body.theme-detail-standard .theme-detail-intro .breadcrumbs{
   color:#456b55;
   font-weight:700;
 }
-body.theme-detail-pilot .theme-detail-intro .lead{
+body.theme-detail-standard .theme-detail-intro .lead{
   color:#465a4f!important;
   font-weight:600;
 }
-body.theme-detail-pilot .theme-article{
+body.theme-detail-standard .theme-article{
   padding-top:32px;
 }
 @media(max-width:719px){
-  body.theme-detail-pilot .theme-detail-intro{
+  body.theme-detail-standard .theme-detail-intro{
     padding-bottom:28px;
   }
-  body.theme-detail-pilot .theme-article{
+  body.theme-detail-standard .theme-article{
     padding-top:32px;
   }
 }
