@@ -2118,16 +2118,22 @@ body.cream-top-pilot .story-series-tab.active{
   border-color:var(--line,#e3ded5);
 }
 body.cream-top-pilot:is(.place-single-detail,.place-region-hub) .place-map-link-row{
-  margin-top:20px;
+  margin-top:24px;
 }
 body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
   padding-bottom:11px;
 }
+body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
+  padding-top:21px;
+}
 @media(max-width:719px){
   body.cream-top-pilot:is(.place-single-detail,.place-region-hub) .place-map-link-row{
-    margin-top:22px;
+    margin-top:26px;
   }
   body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
     padding-bottom:9px;
+  }
+  body.cream-top-pilot:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
+    padding-top:19px;
   }
 }
