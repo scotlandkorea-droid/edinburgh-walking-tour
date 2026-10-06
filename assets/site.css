@@ -3240,3 +3240,53 @@ body.story-detail-standard
 body.explore-hub-standard main > .page-hero + section{
   padding-top:90px;
 }
+
+
+/* SITE-WIDE FIRST CONTENT RHYTHM — 2026-10-06 */
+/* One-body rule:
+   - Detail header -> first content starts at 45px.
+   - If the first content is an intro/overview box, the manuscript after that box also starts 45px later.
+   - Explore hub mains keep their separate 90px rule. */
+
+/* STORY DETAIL, including no-map pages such as St Giles 09. */
+body.story-detail-standard main .detail-article{
+  padding-top:45px!important;
+}
+
+/* PLACE SINGLE direct manuscript start. */
+body.place-single-detail > .detail-intro + main .detail-article,
+body.place-single-detail > .hero + main .detail-article{
+  padding-top:45px!important;
+}
+body.place-single-detail > main > .page-hero + section{
+  padding-top:45px!important;
+}
+body.place-single-detail > main > .page-hero + section > .detail-article{
+  padding-top:0!important;
+}
+
+/* THEME / PEOPLE / TRAVEL detail roles. */
+body.theme-detail-standard .theme-article{
+  padding-top:45px!important;
+}
+body.people-detail-standard .people-article{
+  padding-top:45px!important;
+}
+body.travel-detail.travel-info-standard .travel-article{
+  padding-top:45px!important;
+}
+
+/* First intro/overview box -> manuscript rhythm. Only the first direct child is affected. */
+.detail-article > :first-child:is(
+  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,.intro-box
+){
+  margin-bottom:45px!important;
+}
+body.museum-story-detail .detail-article > .quicklook:first-child{
+  margin-bottom:45px!important;
+}
+
+/* Keep hub landing pages on their separately approved 90px rhythm. */
+body.explore-hub-standard main > .page-hero + section{
+  padding-top:90px!important;
+}
