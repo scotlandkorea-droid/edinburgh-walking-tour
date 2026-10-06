@@ -3096,3 +3096,99 @@ body.stg-story-detail.story-detail-standard
     padding-top:45px;
   }
 }
+
+
+/* DETAIL MAP + DIRECT BODY RHYTHM — generalized final standard, 2026-10-06 */
+/* 1) STORY DETAIL: tabs + Google map remain one visual header body.
+   Preserve any place-context tab visibility logic; remove the old white-strip/translated map treatment. */
+body.story-detail-standard.map-after-series-tabs
+.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+  margin-top:8px;
+  margin-bottom:0;
+  padding:0;
+  transform:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+}
+body.story-detail-standard.map-after-series-tabs
+.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
+  padding:4px 0;
+  font-size:12px;
+  line-height:1.25;
+  letter-spacing:-.01em;
+}
+body.story-detail-standard.map-after-series-tabs
+.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+  padding-bottom:12px!important;
+}
+body.story-detail-standard.map-after-series-tabs
+.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
++ main .detail-article{
+  padding-top:46px!important;
+}
+
+/* 2) PLACE SINGLE: when there is no first overview/summary box, give the direct manuscript
+   the same deliberate breathing room. Existing overview-led pages remain untouched. */
+body.place-single-detail:not(:has(.detail-article > :is(
+  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+  .intro-box,.placeholder,.placeholder-section
+))) > .detail-intro + main .detail-article,
+body.place-single-detail:not(:has(.detail-article > :is(
+  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+  .intro-box,.placeholder,.placeholder-section
+))) > .hero + main .detail-article{
+  padding-top:46px!important;
+}
+body.place-single-detail:not(:has(.detail-article > :is(
+  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+  .intro-box,.placeholder,.placeholder-section
+))) > main > .page-hero + section{
+  padding-top:46px!important;
+}
+body.place-single-detail:not(:has(.detail-article > :is(
+  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+  .intro-box,.placeholder,.placeholder-section
+))) > main > .page-hero + section > .detail-article{
+  padding-top:0!important;
+}
+
+@media(max-width:719px){
+  body.story-detail-standard.map-after-series-tabs
+  .detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+    margin-top:8px;
+  }
+  body.story-detail-standard.map-after-series-tabs
+  .detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
+    padding:4px 0;
+    font-size:12px;
+    line-height:1.25;
+    letter-spacing:-.01em;
+  }
+  body.story-detail-standard.map-after-series-tabs
+  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+    padding-bottom:10px!important;
+  }
+  body.story-detail-standard.map-after-series-tabs
+  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
+  + main .detail-article{
+    padding-top:45px!important;
+  }
+
+  body.place-single-detail:not(:has(.detail-article > :is(
+    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+    .intro-box,.placeholder,.placeholder-section
+  ))) > .detail-intro + main .detail-article,
+  body.place-single-detail:not(:has(.detail-article > :is(
+    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+    .intro-box,.placeholder,.placeholder-section
+  ))) > .hero + main .detail-article{
+    padding-top:45px!important;
+  }
+  body.place-single-detail:not(:has(.detail-article > :is(
+    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
+    .intro-box,.placeholder,.placeholder-section
+  ))) > main > .page-hero + section{
+    padding-top:45px!important;
+  }
+}
