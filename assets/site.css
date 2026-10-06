@@ -3001,3 +3001,34 @@ body.travel-detail.travel-info-standard .travel-article h3{
   }
 }
 
+
+
+/* PLACE-BROWSE COMPOSITE MAP — 2026-10-06
+   Royal Mile / Canongate subpages are STORY DETAIL in tour context,
+   but independent places in #place-nav context. When the tour-only series
+   tabs are hidden, keep the Google map action inside the cream place header. */
+html[data-nav-context="place"] body.story-detail-standard
+:is(.detail-intro,.castle-intro,.greyfriars-intro)
+.story-series-tabs.tour-context-only + .place-map-link-row{
+  margin-top:27px;
+  padding:0;
+  transform:none;
+  background:transparent;
+  box-shadow:none;
+  clip-path:none;
+}
+html[data-nav-context="place"] body.story-detail-standard
+:is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row){
+  padding-bottom:18px;
+}
+@media(max-width:719px){
+  html[data-nav-context="place"] body.story-detail-standard
+  :is(.detail-intro,.castle-intro,.greyfriars-intro)
+  .story-series-tabs.tour-context-only + .place-map-link-row{
+    margin-top:29px;
+  }
+  html[data-nav-context="place"] body.story-detail-standard
+  :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row){
+    padding-bottom:16px;
+  }
+}
