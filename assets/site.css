@@ -3093,6 +3093,6 @@ body.stg-story-detail.story-detail-standard
   body.stg-story-detail.story-detail-standard
   .detail-intro:has(.story-series-tabs + .place-map-link-row)
   + main .detail-article{
-    padding-top:43px;
+    padding-top:45px;
   }
 }
