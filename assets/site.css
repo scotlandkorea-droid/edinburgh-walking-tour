@@ -2878,7 +2878,7 @@ body.place-single-detail > .hero + main .detail-article{
 /* PEOPLE DETAIL FINAL SHARED STANDARD — 2026-10-05 */
 /* Formalize the already stable people-detail shell without rewriting completed manuscripts. */
 body.people-detail-standard .people-detail-intro{
-  background:#fff;
+  background:var(--detail-top-bg,#f5f2eb);
   background-image:none;
   color:var(--ink,#18211d);
   border-bottom:1px solid var(--line,#e3ded5);
