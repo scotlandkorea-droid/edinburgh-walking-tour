@@ -3003,32 +3003,43 @@ body.travel-detail.travel-info-standard .travel-article h3{
 
 
 
-/* PLACE-BROWSE COMPOSITE MAP — 2026-10-06
-   Royal Mile / Canongate subpages are STORY DETAIL in tour context,
-   but independent places in #place-nav context. When the tour-only series
-   tabs are hidden, keep the Google map action inside the cream place header. */
+/* PLACE-BROWSE COMPOSITE MAP — final shared context rule, 2026-10-06
+   Royal Mile / Canongate subpages keep one canonical STORY DETAIL body.
+   In #place-nav, the tour-only tabs disappear and the map adopts the same
+   cream-header rhythm as PLACE SINGLE. In #tour-nav, STORY layout is unchanged. */
 html[data-nav-context="place"] body.story-detail-standard
 :is(.detail-intro,.castle-intro,.greyfriars-intro)
 .story-series-tabs.tour-context-only + .place-map-link-row{
-  margin-top:27px;
+  margin-top:24px;
+  margin-bottom:0;
   padding:0;
-  transform:none;
+  transform:none!important;
   background:transparent;
   box-shadow:none;
   clip-path:none;
 }
 html[data-nav-context="place"] body.story-detail-standard
 :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row){
-  padding-bottom:18px;
+  padding-bottom:11px;
+}
+html[data-nav-context="place"] body.story-detail-standard
+:is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row)
++ main .detail-article{
+  padding-top:26px;
 }
 @media(max-width:719px){
   html[data-nav-context="place"] body.story-detail-standard
   :is(.detail-intro,.castle-intro,.greyfriars-intro)
   .story-series-tabs.tour-context-only + .place-map-link-row{
-    margin-top:29px;
+    margin-top:26px;
   }
   html[data-nav-context="place"] body.story-detail-standard
   :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row){
-    padding-bottom:16px;
+    padding-bottom:9px;
+  }
+  html[data-nav-context="place"] body.story-detail-standard
+  :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.story-series-tabs.tour-context-only + .place-map-link-row)
+  + main .detail-article{
+    padding-top:24px;
   }
 }
