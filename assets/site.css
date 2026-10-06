@@ -3290,3 +3290,22 @@ body.museum-story-detail .detail-article > .quicklook:first-child{
 body.explore-hub-standard main > .page-hero + section{
   padding-top:90px!important;
 }
+
+
+/* SITE-WIDE FIRST CONTENT RHYTHM EXTENSION — 2026-10-06 */
+/* Region/detail hubs follow the same 45px first-content rhythm.
+   Explore landing hubs remain separately fixed at 90px. */
+body.place-region-hub .detail-intro + main .detail-article,
+body.place-region-hub .page-hero + main .detail-article,
+body.place-region-hub :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
+  padding-top:45px!important;
+}
+body.place-region-hub main > .page-hero + section{
+  padding-top:45px!important;
+}
+
+/* Museum story pages with a first quicklook box: header -> box = 45px,
+   and the already shared first-box rule keeps box -> manuscript = 45px. */
+body.museum-story-detail main{
+  padding-top:45px!important;
+}
