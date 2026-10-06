@@ -3072,7 +3072,7 @@ body.stg-story-detail.story-detail-standard
 body.stg-story-detail.story-detail-standard
 .detail-intro:has(.story-series-tabs + .place-map-link-row)
 + main .detail-article{
-  padding-top:46px;
+  padding-top:45px;
 }
 @media(max-width:719px){
   body.stg-story-detail.story-detail-standard
@@ -3125,7 +3125,7 @@ body.story-detail-standard.map-after-series-tabs
 body.story-detail-standard.map-after-series-tabs
 .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
 + main .detail-article{
-  padding-top:46px!important;
+  padding-top:45px!important;
 }
 
 /* 2) PLACE SINGLE: when there is no first overview/summary box, give the direct manuscript
@@ -3138,13 +3138,13 @@ body.place-single-detail:not(:has(.detail-article > :is(
   .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
   .intro-box,.placeholder,.placeholder-section
 ))) > .hero + main .detail-article{
-  padding-top:46px!important;
+  padding-top:45px!important;
 }
 body.place-single-detail:not(:has(.detail-article > :is(
   .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
   .intro-box,.placeholder,.placeholder-section
 ))) > main > .page-hero + section{
-  padding-top:46px!important;
+  padding-top:45px!important;
 }
 body.place-single-detail:not(:has(.detail-article > :is(
   .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
@@ -3221,7 +3221,7 @@ body.story-detail-standard
 body.story-detail-standard
 .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
 + main .detail-article{
-  padding-top:46px!important;
+  padding-top:45px!important;
 }
 @media(max-width:719px){
   body.story-detail-standard
@@ -3304,10 +3304,12 @@ body.place-region-hub main > .page-hero + section{
   padding-top:45px!important;
 }
 
-/* Museum story pages with a first quicklook box: header -> box = 45px,
-   and the already shared first-box rule keeps box -> manuscript = 45px. */
-body.museum-story-detail main{
-  padding-top:45px!important;
+/* Museum story pages already receive the 45px header -> first-content gap
+   on .detail-article via STORY DETAIL. Zero the legacy main padding here so the
+   quicklook page does not double that gap; the first-box rule still keeps
+   quicklook -> manuscript at 45px. */
+body.museum-story-detail.story-detail-standard main{
+  padding-top:0!important;
 }
 
 
