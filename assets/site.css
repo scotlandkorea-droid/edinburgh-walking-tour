@@ -3234,3 +3234,9 @@ body.story-detail-standard
     padding-top:45px!important;
   }
 }
+
+
+/* EXPLORE HUB FIRST-CONTENT SPACING — 2026-10-06 */
+body.explore-hub-standard main > .page-hero + section{
+  padding-top:90px;
+}
