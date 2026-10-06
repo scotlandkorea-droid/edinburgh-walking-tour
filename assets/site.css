@@ -3192,3 +3192,45 @@ body.place-single-detail:not(:has(.detail-article > :is(
     padding-top:45px!important;
   }
 }
+
+
+/* DETAIL MAP HEADER FINAL GENERALIZATION — 2026-10-06
+   Any STORY DETAIL whose map action directly follows its story tabs keeps
+   tabs + map in one cream header body, regardless of legacy family class. */
+body.story-detail-standard
+.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+  margin-top:8px!important;
+  margin-bottom:0!important;
+  padding:0!important;
+  transform:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+}
+body.story-detail-standard
+.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
+  padding:4px 0!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  letter-spacing:-.01em!important;
+}
+body.story-detail-standard
+.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+  padding-bottom:12px!important;
+}
+body.story-detail-standard
+.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
++ main .detail-article{
+  padding-top:46px!important;
+}
+@media(max-width:719px){
+  body.story-detail-standard
+  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+    padding-bottom:10px!important;
+  }
+  body.story-detail-standard
+  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
+  + main .detail-article{
+    padding-top:45px!important;
+  }
+}
