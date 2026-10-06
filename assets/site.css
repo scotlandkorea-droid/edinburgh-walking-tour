@@ -3044,3 +3044,41 @@ html[data-nav-context="place"] body.story-detail-standard
     padding-top:24px;
   }
 }
+
+
+/* ST GILES STORY MAP — shared cream-header treatment, 2026-10-06
+   Keep the St Giles series tabs and any location map action in one header body. */
+body.stg-story-detail.story-detail-standard
+.detail-intro .story-series-tabs + .place-map-link-row{
+  margin-top:16px;
+  margin-bottom:0;
+  padding:0;
+  transform:none!important;
+  background:transparent;
+  box-shadow:none;
+  clip-path:none;
+}
+body.stg-story-detail.story-detail-standard
+.detail-intro:has(.story-series-tabs + .place-map-link-row){
+  padding-bottom:12px;
+}
+body.stg-story-detail.story-detail-standard
+.detail-intro:has(.story-series-tabs + .place-map-link-row)
++ main .detail-article{
+  padding-top:24px;
+}
+@media(max-width:719px){
+  body.stg-story-detail.story-detail-standard
+  .detail-intro .story-series-tabs + .place-map-link-row{
+    margin-top:17px;
+  }
+  body.stg-story-detail.story-detail-standard
+  .detail-intro:has(.story-series-tabs + .place-map-link-row){
+    padding-bottom:10px;
+  }
+  body.stg-story-detail.story-detail-standard
+  .detail-intro:has(.story-series-tabs + .place-map-link-row)
+  + main .detail-article{
+    padding-top:22px;
+  }
+}
