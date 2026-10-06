@@ -3309,3 +3309,15 @@ body.place-region-hub main > .page-hero + section{
 body.museum-story-detail main{
   padding-top:45px!important;
 }
+
+
+/* PLACE REGION HUB FIRST CONTENT — 2026-10-06 */
+body.place-region-hub > .detail-intro + main .detail-article,
+body.place-region-hub > .page-hero + main .detail-article,
+body.place-region-hub > .hero + main .detail-article,
+body.place-region-hub main > .page-hero + section{
+  padding-top:45px!important;
+}
+body.place-region-hub main > .page-hero + section > .detail-article{
+  padding-top:0!important;
+}
