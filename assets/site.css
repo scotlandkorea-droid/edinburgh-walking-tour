@@ -3050,7 +3050,7 @@ html[data-nav-context="place"] body.story-detail-standard
    Keep the St Giles series tabs and any location map action in one header body. */
 body.stg-story-detail.story-detail-standard
 .detail-intro .story-series-tabs + .place-map-link-row{
-  margin-top:10px;
+  margin-top:8px;
   margin-bottom:0;
   padding:0;
   transform:none!important;
@@ -3059,18 +3059,32 @@ body.stg-story-detail.story-detail-standard
   clip-path:none;
 }
 body.stg-story-detail.story-detail-standard
+.detail-intro .story-series-tabs + .place-map-link-row .place-map-link{
+  padding:4px 0;
+  font-size:12px;
+  line-height:1.25;
+  letter-spacing:-.01em;
+}
+body.stg-story-detail.story-detail-standard
 .detail-intro:has(.story-series-tabs + .place-map-link-row){
   padding-bottom:12px;
 }
 body.stg-story-detail.story-detail-standard
 .detail-intro:has(.story-series-tabs + .place-map-link-row)
 + main .detail-article{
-  padding-top:43px;
+  padding-top:46px;
 }
 @media(max-width:719px){
   body.stg-story-detail.story-detail-standard
   .detail-intro .story-series-tabs + .place-map-link-row{
-    margin-top:10px;
+    margin-top:8px;
+  }
+  body.stg-story-detail.story-detail-standard
+  .detail-intro .story-series-tabs + .place-map-link-row .place-map-link{
+    padding:4px 0;
+    font-size:12px;
+    line-height:1.25;
+    letter-spacing:-.01em;
   }
   body.stg-story-detail.story-detail-standard
   .detail-intro:has(.story-series-tabs + .place-map-link-row){
@@ -3079,6 +3093,6 @@ body.stg-story-detail.story-detail-standard
   body.stg-story-detail.story-detail-standard
   .detail-intro:has(.story-series-tabs + .place-map-link-row)
   + main .detail-article{
-    padding-top:40px;
+    padding-top:43px;
   }
 }
