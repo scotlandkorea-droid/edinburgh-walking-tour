@@ -77,6 +77,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/places/victoria-street.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/places/grassmarket.html</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
