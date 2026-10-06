@@ -3050,7 +3050,7 @@ html[data-nav-context="place"] body.story-detail-standard
    Keep the St Giles series tabs and any location map action in one header body. */
 body.stg-story-detail.story-detail-standard
 .detail-intro .story-series-tabs + .place-map-link-row{
-  margin-top:16px;
+  margin-top:10px;
   margin-bottom:0;
   padding:0;
   transform:none!important;
@@ -3065,12 +3065,12 @@ body.stg-story-detail.story-detail-standard
 body.stg-story-detail.story-detail-standard
 .detail-intro:has(.story-series-tabs + .place-map-link-row)
 + main .detail-article{
-  padding-top:24px;
+  padding-top:43px;
 }
 @media(max-width:719px){
   body.stg-story-detail.story-detail-standard
   .detail-intro .story-series-tabs + .place-map-link-row{
-    margin-top:17px;
+    margin-top:10px;
   }
   body.stg-story-detail.story-detail-standard
   .detail-intro:has(.story-series-tabs + .place-map-link-row){
@@ -3079,6 +3079,6 @@ body.stg-story-detail.story-detail-standard
   body.stg-story-detail.story-detail-standard
   .detail-intro:has(.story-series-tabs + .place-map-link-row)
   + main .detail-article{
-    padding-top:22px;
+    padding-top:40px;
   }
 }
