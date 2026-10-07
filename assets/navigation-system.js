@@ -139,9 +139,22 @@
       arrow.setAttribute('aria-hidden','true');
       arrow.textContent=direction==='prev'?'←':'→';
 
-      const copy=document.createElement('span');
-      copy.className='place-nav-label';
-      copy.textContent=item.name;
+      let copy;
+      if(context==='place'){
+        copy=document.createElement('span');
+        copy.className='place-nav-copy';
+        const small=document.createElement('small');
+        small.className='place-nav-kicker';
+        small.textContent=direction==='prev'?'이전 장소':'다음 장소';
+        const title=document.createElement('span');
+        title.className='place-nav-label';
+        title.textContent=item.name;
+        copy.append(small,title);
+      }else{
+        copy=document.createElement('span');
+        copy.className='place-nav-label';
+        copy.textContent=item.name;
+      }
 
       if(direction==='prev')a.append(arrow,copy);
       else a.append(copy,arrow);
