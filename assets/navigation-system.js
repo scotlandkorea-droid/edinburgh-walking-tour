@@ -323,7 +323,11 @@
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    small.append(label,num);
+    const sep=document.createElement('span');
+    sep.className='nav-kicker-sep';
+    sep.setAttribute('aria-hidden','true');
+    sep.textContent='·';
+    small.append(label,sep,num);
     const strong=document.createElement('strong');
     const title=document.createElement('span');
     title.className='nav-title ew-prevnext-title';
