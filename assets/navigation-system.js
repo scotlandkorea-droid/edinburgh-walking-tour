@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261005-1';
+  const VERSION='20261007-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -460,14 +460,14 @@
   const syncSeriesHubCards=(data)=>{
     const series=(data.series||[]).find(item=>normalizePath(item.hub)===currentPath);
     if(!series)return;
-    const links=[...document.querySelectorAll('a.story[href]')];
+    const links=[...document.querySelectorAll('a.story[href],a.stg-story[href]')];
     const byUrl=new Map(links.map(link=>[normalizePath(new URL(link.getAttribute('href'),location.origin).pathname),link]));
     (series.items||[]).forEach(item=>{
       const link=byUrl.get(normalizePath(item.url));
       if(!link)return;
-      const num=link.querySelector('.num');
-      const title=link.querySelector('h3');
-      const desc=link.querySelector('p');
+      const num=link.querySelector('.num,small');
+      const title=link.querySelector('h3,strong');
+      const desc=link.querySelector('p,span');
       if(num)num.textContent=item.number;
       if(title)title.textContent=item.name;
       if(desc&&item.description)desc.textContent=item.description;
