@@ -551,7 +551,9 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   text-align:inherit;
 }
 .page-nav:is(.story-series-nav,.detail-series-nav) small{
-  display:block;
+  display:flex;
+  align-items:center;
+  gap:4px;
   margin:0 0 8px;
   color:#657069;
   font-size:12px;
@@ -559,6 +561,9 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1.2;
   text-align:inherit;
 }
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev small{justify-content:flex-start}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next small{justify-content:flex-end}
+.page-nav:is(.story-series-nav,.detail-series-nav) .nav-kicker-sep{opacity:.72}
 .page-nav:is(.story-series-nav,.detail-series-nav) strong{
   display:flex;
   width:100%;
