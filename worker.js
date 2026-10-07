@@ -67,6 +67,29 @@ export default {
       }
     }
 
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+
+    // Shared UI assets change frequently while the site is being refined.
+    // Keep browser caches from pinning an older CSS/navigation system behind
+    // a page that still carries an earlier ?v= query string.
+    const revalidateAssets = new Set([
+      "/assets/site.css",
+      "/assets/site-header.js",
+      "/assets/navigation-system.js",
+      "/assets/navigation-data.js",
+      "/assets/tour-course-data.js",
+      "/assets/search-data.js"
+    ]);
+    if (revalidateAssets.has(url.pathname)) {
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers
+      });
+    }
+
+    return response;
   }
 };
