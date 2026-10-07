@@ -837,7 +837,7 @@ main .page-nav.tour-course-nav .place-nav-label{
   width:100%;
   word-break:keep-all;
   overflow-wrap:normal;
-  text-wrap:wrap
+  text-wrap:balance
 }
 main .page-nav.tour-course-nav .place-nav-arrow{
   display:flex;
@@ -846,6 +846,52 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   width:20px;
   font-size:21px;
   line-height:1
+}
+@media(max-width:719px){
+  main .page-nav.tour-course-nav{gap:10px}
+  main .page-nav.tour-course-nav a.place-prev,
+  main .page-nav.tour-course-nav a.place-next{
+    position:relative;
+    display:flex;
+    min-height:70px;
+    padding:12px 10px;
+    column-gap:0;
+    font-size:clamp(14px,3.9vw,15px);
+    line-height:1.35;
+    letter-spacing:-.025em
+  }
+  main .page-nav.tour-course-nav a.place-prev{
+    padding-left:28px;
+    justify-content:flex-start;
+    text-align:left
+  }
+  main .page-nav.tour-course-nav a.place-next{
+    padding-right:28px;
+    justify-content:flex-end;
+    text-align:right
+  }
+  main .page-nav.tour-course-nav .place-nav-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:16px;
+    font-size:19px
+  }
+  main .page-nav.tour-course-nav a.place-prev .place-nav-arrow{left:9px}
+  main .page-nav.tour-course-nav a.place-next .place-nav-arrow{right:9px}
+}
+@media(max-width:340px){
+  main .page-nav.tour-course-nav{gap:8px}
+  main .page-nav.tour-course-nav a.place-prev,
+  main .page-nav.tour-course-nav a.place-next{
+    padding-top:11px;
+    padding-bottom:11px;
+    font-size:13px
+  }
+  main .page-nav.tour-course-nav a.place-prev{padding-left:24px;padding-right:8px}
+  main .page-nav.tour-course-nav a.place-next{padding-left:8px;padding-right:24px}
+  main .page-nav.tour-course-nav a.place-prev .place-nav-arrow{left:7px}
+  main .page-nav.tour-course-nav a.place-next .place-nav-arrow{right:7px}
 }
 
 /* Canonical walked-gallery presentation */
