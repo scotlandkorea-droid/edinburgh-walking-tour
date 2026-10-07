@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-11';
+  const VERSION='20261007-12';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -564,16 +564,12 @@
       arrow.setAttribute('aria-hidden','true');
       arrow.textContent=direction==='prev'?'←':'→';
 
-      const copy=document.createElement('span');
-      copy.className='role-nav-copy';
-      const small=document.createElement('small');
-      small.textContent=(direction==='prev'?'이전 ':'다음 ')+(sequence.label||'항목');
-      const strong=document.createElement('strong');
-      strong.textContent=item.name;
-      copy.append(small,strong);
+      const label=document.createElement('span');
+      label.className='role-nav-label';
+      label.textContent=item.name;
 
-      if(direction==='prev')a.append(arrow,copy);
-      else a.append(copy,arrow);
+      if(direction==='prev')a.append(arrow,label);
+      else a.append(label,arrow);
       return a;
     };
 
