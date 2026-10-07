@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-3';
+  const VERSION='20261007-4';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -540,6 +540,59 @@
     return true;
   };
 
+  const normalizeTravelSeriesNav=()=>{
+    if(!currentPath.startsWith('/travel/'))return false;
+    const nav=document.querySelector('.travel-ending .travel-series');
+    if(!nav)return false;
+
+    const prev=nav.querySelector('a.prev,a[rel="prev"]');
+    const next=nav.querySelector('a.next,a[rel="next"]');
+    if(!prev&&!next)return false;
+
+    nav.classList.add('travel-series-normalized');
+    nav.querySelectorAll('.travel-nav-empty').forEach(node=>node.remove());
+    if(!prev)nav.classList.add('next-only');
+    if(!next)nav.classList.add('prev-only');
+
+    const rebuild=(a,direction)=>{
+      if(!a)return;
+      const existingTitle=a.querySelector('.nav-title')?.textContent?.trim();
+      const existingNo=a.querySelector('.nav-no')?.textContent?.trim();
+      const raw=a.textContent.replace(/[←→]/g,'').trim();
+      const title=existingTitle||raw.replace(/^\d{2}\s*/,'').trim();
+
+      a.className=direction;
+      const arrow=document.createElement('span');
+      arrow.className='travel-nav-arrow';
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent=direction==='prev'?'←':'→';
+
+      const copy=document.createElement('span');
+      copy.className='travel-nav-copy';
+      const small=document.createElement('small');
+      small.className='travel-nav-meta';
+      small.append(document.createTextNode(direction==='prev'?'이전 글':'다음 글'));
+      if(existingNo){
+        const no=document.createElement('span');
+        no.className='travel-nav-no';
+        no.textContent=existingNo;
+        small.append(document.createTextNode(' '),no);
+      }
+      const strong=document.createElement('strong');
+      strong.className='travel-nav-title';
+      strong.textContent=title;
+      copy.append(small,strong);
+
+      a.replaceChildren();
+      if(direction==='prev')a.append(arrow,copy);
+      else a.append(copy,arrow);
+    };
+
+    rebuild(prev,'prev');
+    rebuild(next,'next');
+    return true;
+  };
+
   const init=async()=>{
     try{
       await Promise.all([
@@ -569,7 +622,8 @@
     }
 
     if(renderContextNavigation(data))return;
-    normalizeRoleLinearNav();
+    if(normalizeRoleLinearNav())return;
+    normalizeTravelSeriesNav();
   };
 
   window.EW_NAV_SYSTEM={version:VERSION,init};
