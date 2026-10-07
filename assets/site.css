@@ -1154,6 +1154,90 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   }
 }
 
+/* SHARED TWO-TIER PREV/NEXT VERTICAL ALIGNMENT — 2026-10-07
+   The meta/kicker is row 1 and the destination title is row 2.
+   The arrow always belongs to row 2, so it centers against the title itself
+   whether that title wraps to one, two or three lines. */
+.page-nav.story-series-nav>a,
+.page-nav.detail-series-nav>a,
+main .page-nav.role-linear-nav a,
+.travel-ending .travel-series.travel-series-normalized a,
+main .page-nav.place-browse-nav a.place-prev,
+main .page-nav.place-browse-nav a.place-next{
+  grid-template-rows:auto auto;
+  align-content:center;
+  align-items:stretch;
+}
+.page-nav.story-series-nav .nav-copy,
+.page-nav.detail-series-nav .nav-copy,
+main .page-nav.role-linear-nav .role-nav-copy,
+.travel-ending .travel-series.travel-series-normalized .travel-nav-copy,
+main .page-nav.place-browse-nav .place-nav-copy{
+  display:contents;
+}
+.page-nav.story-series-nav small,
+.page-nav.detail-series-nav small,
+main .page-nav.role-linear-nav small,
+.travel-ending .travel-series.travel-series-normalized .travel-nav-meta,
+main .page-nav.place-browse-nav .place-nav-kicker{
+  grid-row:1;
+}
+.page-nav.story-series-nav strong,
+.page-nav.detail-series-nav strong,
+main .page-nav.role-linear-nav strong,
+.travel-ending .travel-series.travel-series-normalized .travel-nav-title,
+main .page-nav.place-browse-nav .place-nav-label{
+  grid-row:2;
+  align-self:center;
+}
+.page-nav.story-series-nav .nav-arrow,
+.page-nav.detail-series-nav .nav-arrow,
+main .page-nav.role-linear-nav .role-nav-arrow,
+.travel-ending .travel-series.travel-series-normalized .travel-nav-arrow,
+main .page-nav.place-browse-nav .place-nav-arrow{
+  grid-row:2;
+  align-self:center;
+  justify-self:center;
+}
+.page-nav.story-series-nav .story-prev .nav-arrow,
+.page-nav.detail-series-nav .story-prev .nav-arrow,
+main .page-nav.role-linear-nav .role-prev .role-nav-arrow,
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-arrow,
+main .page-nav.place-browse-nav .place-prev .place-nav-arrow{
+  grid-column:1;
+}
+.page-nav.story-series-nav .story-prev .nav-copy>small,
+.page-nav.story-series-nav .story-prev .nav-copy>strong,
+.page-nav.detail-series-nav .story-prev .nav-copy>small,
+.page-nav.detail-series-nav .story-prev .nav-copy>strong,
+main .page-nav.role-linear-nav .role-prev .role-nav-copy>small,
+main .page-nav.role-linear-nav .role-prev .role-nav-copy>strong,
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title,
+main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-kicker,
+main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-label{
+  grid-column:2;
+}
+.page-nav.story-series-nav .story-next .nav-arrow,
+.page-nav.detail-series-nav .story-next .nav-arrow,
+main .page-nav.role-linear-nav .role-next .role-nav-arrow,
+.travel-ending .travel-series.travel-series-normalized .next .travel-nav-arrow,
+main .page-nav.place-browse-nav .place-next .place-nav-arrow{
+  grid-column:2;
+}
+.page-nav.story-series-nav .story-next .nav-copy>small,
+.page-nav.story-series-nav .story-next .nav-copy>strong,
+.page-nav.detail-series-nav .story-next .nav-copy>small,
+.page-nav.detail-series-nav .story-next .nav-copy>strong,
+main .page-nav.role-linear-nav .role-next .role-nav-copy>small,
+main .page-nav.role-linear-nav .role-next .role-nav-copy>strong,
+.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-meta,
+.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-title,
+main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-kicker,
+main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-label{
+  grid-column:1;
+}
+
 /* Canonical walked-gallery presentation */
 #walked .photo-card{flex-shrink:0;aspect-ratio:4/3;background:#f3f1eb;overflow:hidden;scroll-snap-align:center;border-radius:18px;cursor:zoom-in;margin:0}
 #walked .photo-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;image-rendering:auto;background:#f3f1eb}
