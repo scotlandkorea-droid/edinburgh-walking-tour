@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-9';
+  const VERSION='20261007-10';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -177,17 +177,30 @@
 
   const auditNavigationData=data=>{
     const warnings=[];
-    for(const series of data.series||[]){
+    const auditItems=(label,items,{numbered=false}={})=>{
       const seen=new Set();
-      (series.items||[]).forEach((item,index)=>{
-        const expected=String(index+1).padStart(2,'0');
-        if(item.number!==expected)warnings.push(series.id+': expected '+expected+', got '+item.number);
-        const path=normalizePath(item.url);
-        if(seen.has(path))warnings.push(series.id+': duplicate URL '+path);
-        seen.add(path);
-        if(!item.name)warnings.push(series.id+': missing name at '+expected);
-        if('navName' in item&&!String(item.navName||'').trim())warnings.push(series.id+': empty navName at '+expected);
+      (items||[]).forEach((item,index)=>{
+        const path=normalizePath(item.url||'');
+        if(numbered){
+          const expected=String(index+1).padStart(2,'0');
+          if(item.number!==expected)warnings.push(label+': expected '+expected+', got '+item.number);
+        }
+        if(!item.name)warnings.push(label+': missing name at index '+index);
+        if(!item.url)warnings.push(label+': missing URL at index '+index);
+        if(path&&seen.has(path))warnings.push(label+': duplicate URL '+path);
+        if(path)seen.add(path);
+        if('navName' in item&&!String(item.navName||'').trim())warnings.push(label+': empty navName at index '+index);
       });
+    };
+    for(const series of data.series||[]){
+      auditItems(series.id||series.name||'series',series.items,{numbered:true});
+      if(Array.isArray(series.placeItems))auditItems((series.id||series.name||'series')+' placeItems',series.placeItems);
+    }
+    for(const region of data.placeRegions||[]){
+      auditItems('place region '+(region.name||region.id||''),region.items);
+    }
+    for(const [key,sequence] of Object.entries(data.roleSequences||{})){
+      auditItems('role '+key,sequence?.items);
     }
     if(warnings.length)console.warn('[EW navigation audit]',warnings);
     return warnings;
