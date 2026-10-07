@@ -1,7 +1,7 @@
 (()=>{
   const stops=[
     {number:1,name:'스콧 기념탑',url:'/places/scott-monument.html',lat:55.95236,lng:-3.19326},
-    {number:2,name:'프린스 스트리트 · 가든',url:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
+    {number:2,name:'프린세스 스트리트 가든',url:'/places/princes-street.html',lat:55.95178,lng:-3.19505},
     {number:3,name:'에든버러 뉴타운',url:'/places/new-town.html',lat:55.95218,lng:-3.19570},
     {number:4,name:'뉴 칼리지',url:'/places/new-college.html',lat:55.94972,lng:-3.19528},
     {number:5,name:'에든버러 성',url:'/places/edinburgh-castle.html',lat:55.94868,lng:-3.20041},
