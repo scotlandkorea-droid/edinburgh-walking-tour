@@ -597,10 +597,23 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.story-series-nav:has(.story-next:only-child) .story-next{grid-column:2}
 .page-nav.story-series-nav:has(.story-prev:only-child) .story-prev{grid-column:1}
 @media(max-width:520px){
-  .page-nav.story-series-nav{gap:10px}
-  .page-nav.story-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.story-series-nav small{font-size:11px}
-  .page-nav.story-series-nav strong{font-size:13px;line-height:1.42;column-gap:6px}
+  .page-nav.story-series-nav{
+    grid-template-columns:minmax(0,1fr);
+    gap:10px;
+  }
+  .page-nav.story-series-nav>a{
+    grid-column:1 !important;
+    min-height:76px;
+    padding:13px 14px;
+  }
+  .page-nav.story-series-nav small{font-size:11px;margin-bottom:6px}
+  .page-nav.story-series-nav strong{
+    min-width:0;
+    font-size:13px;
+    line-height:1.35;
+    column-gap:6px;
+    white-space:nowrap;
+  }
 }
 
 /* NUMBERED PLACE / REGION PREV-NEXT — same visual system as story series.
@@ -676,10 +689,23 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.detail-series-nav.next-only .story-next{grid-column:2}
 .page-nav.detail-series-nav.prev-only .story-prev{grid-column:1}
 @media(max-width:520px){
-  .page-nav.detail-series-nav{gap:10px}
-  .page-nav.detail-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.detail-series-nav small{font-size:11px}
-  .page-nav.detail-series-nav strong{font-size:13px;line-height:1.42;column-gap:6px}
+  .page-nav.detail-series-nav{
+    grid-template-columns:minmax(0,1fr);
+    gap:10px;
+  }
+  .page-nav.detail-series-nav>a{
+    grid-column:1 !important;
+    min-height:76px;
+    padding:13px 14px;
+  }
+  .page-nav.detail-series-nav small{font-size:11px;margin-bottom:6px}
+  .page-nav.detail-series-nav strong{
+    min-width:0;
+    font-size:13px;
+    line-height:1.35;
+    column-gap:6px;
+    white-space:nowrap;
+  }
 }
 
 
