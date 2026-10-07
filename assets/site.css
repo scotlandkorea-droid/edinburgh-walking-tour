@@ -851,47 +851,49 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   main .page-nav.tour-course-nav{gap:10px}
   main .page-nav.tour-course-nav a.place-prev,
   main .page-nav.tour-course-nav a.place-next{
-    position:relative;
-    display:flex;
+    display:grid;
     min-height:70px;
     padding:12px 10px;
-    column-gap:0;
+    column-gap:4px;
     font-size:clamp(14px,3.9vw,15px);
     line-height:1.35;
     letter-spacing:-.025em
   }
   main .page-nav.tour-course-nav a.place-prev{
-    padding-left:28px;
-    justify-content:flex-start;
+    grid-template-columns:16px minmax(0,1fr);
+    justify-content:stretch;
     text-align:left
   }
   main .page-nav.tour-course-nav a.place-next{
-    padding-right:28px;
-    justify-content:flex-end;
+    grid-template-columns:minmax(0,1fr) 16px;
+    justify-content:stretch;
     text-align:right
   }
   main .page-nav.tour-course-nav .place-nav-arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
+    position:static;
+    transform:none;
     width:16px;
     font-size:19px
   }
-  main .page-nav.tour-course-nav a.place-prev .place-nav-arrow{left:9px}
-  main .page-nav.tour-course-nav a.place-next .place-nav-arrow{right:9px}
 }
 @media(max-width:340px){
   main .page-nav.tour-course-nav{gap:8px}
   main .page-nav.tour-course-nav a.place-prev,
   main .page-nav.tour-course-nav a.place-next{
-    padding-top:11px;
-    padding-bottom:11px;
+    padding:11px 8px;
+    column-gap:3px;
     font-size:13px
   }
-  main .page-nav.tour-course-nav a.place-prev{padding-left:24px;padding-right:8px}
-  main .page-nav.tour-course-nav a.place-next{padding-left:8px;padding-right:24px}
-  main .page-nav.tour-course-nav a.place-prev .place-nav-arrow{left:7px}
-  main .page-nav.tour-course-nav a.place-next .place-nav-arrow{right:7px}
+  main .page-nav.tour-course-nav a.place-prev{
+    grid-template-columns:15px minmax(0,1fr)
+  }
+  main .page-nav.tour-course-nav a.place-next{
+    grid-template-columns:minmax(0,1fr) 15px
+  }
+  main .page-nav.tour-course-nav .place-nav-arrow{
+    width:15px;
+    font-size:18px
+  }
 }
 
 /* Canonical walked-gallery presentation */
