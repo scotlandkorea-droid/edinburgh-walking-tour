@@ -133,28 +133,6 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .travel-detail .travel-story-copy strong{display:block;font-size:21px;line-height:1.35;letter-spacing:-.025em;color:var(--travel-green);margin-bottom:7px}
 .travel-detail .travel-story-copy span{display:block;font-size:15px;line-height:1.6;color:#657069}
 .travel-detail .travel-story-arrow{font-size:24px;line-height:1.2;color:var(--plum)}
-.travel-detail .travel-series a{
-  display:grid!important;
-  grid-template-columns:auto minmax(0,1fr);
-  column-gap:8px;
-  align-content:center!important
-}
-.travel-detail .travel-series .prev .nav-label,
-.travel-detail .travel-series .next .nav-label{
-  grid-column:1/-1;
-  display:block;
-  margin-bottom:3px;
-  color:#718078;
-  font-size:11px;
-  font-weight:650
-}
-.travel-detail .travel-series .nav-no{font-size:13px;font-weight:850;color:var(--plum)}
-.travel-detail .travel-series .nav-title{min-width:0;font-size:14px;font-weight:780;word-break:keep-all;overflow-wrap:normal;text-wrap:balance}
-.travel-detail .travel-series .next{grid-template-columns:minmax(0,1fr) auto}
-.travel-detail .travel-series .next .nav-no{grid-column:2}
-.travel-detail .travel-series .next .nav-title{grid-column:1;grid-row:2;text-align:right}
-.travel-detail .travel-series .prev .nav-no{grid-column:1}
-.travel-detail .travel-series .prev .nav-title{grid-column:2;grid-row:2;text-align:left}
 @media(min-width:620px){
   .travel-detail .travel-wrap{width:min(var(--travel-max),calc(100% - 56px))}
   .travel-detail .travel-hero{padding:34px 0 27px}
@@ -178,9 +156,6 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .travel-ending .travel-series.single{grid-template-columns:1fr}
 .travel-ending .travel-series-next-only{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .travel-ending .travel-series-next-only .travel-nav-empty{display:block;min-width:0}
-.travel-ending .travel-series-next-only .next{grid-column:2;justify-content:flex-end;text-align:right}
-.travel-ending .travel-series .next{justify-content:flex-end;text-align:right}
-.travel-ending .travel-series.single a{justify-content:center;text-align:center}
 .travel-ending .travel-kakao{display:flex;justify-content:center;padding:110px 0 0}
 .travel-ending .travel-kakao a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 16px;border:1px solid rgba(53,47,27,.05);border-radius:999px;background:#fbf0b9;color:#393424;font-size:13px;font-weight:760;text-decoration:none;box-shadow:none}
 @media(min-width:720px){.travel-ending{margin-top:48px;padding-top:24px}.travel-ending .travel-series a{min-height:70px;padding:14px 16px}.travel-ending .travel-kakao{padding-top:118px}}
@@ -510,112 +485,49 @@ body.course-detail .story:focus-visible,
 body.course-detail .stg-story:hover,
 body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);border-color:#cbd4cc;transform:translateY(-1px)}
 
-/* NUMBERED SERIES PREV/NEXT — one shared system
-   Used by story, place and region series. Data/order comes from navigation-system.js. */
-.page-nav:is(.story-series-nav,.detail-series-nav){
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin:18px 0 0;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav)>a{
-  display:grid;
-  align-items:center;
-  min-width:0;
+/* NUMBERED SERIES PREV/NEXT — shared variant of the common prev/next component */
+.page-nav.ew-prevnext-numbered{margin:18px 0 0}
+.page-nav.ew-prevnext-numbered .ew-prevnext-link{
   min-height:92px;
   padding:16px 12px;
-  border:1px solid var(--prevnext-border);
-  border-radius:var(--prevnext-radius);
-  background:var(--prevnext-bg);
-  color:var(--prevnext-text);
-  text-decoration:none;
-  font-weight:780;
-  line-height:1.35;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.4;
+  letter-spacing:-.02em;
   overflow:hidden;
 }
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev{
-  grid-column:1;
-  grid-template-columns:auto minmax(0,1fr);
-  column-gap:5px;
-  text-align:left;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-next{
-  grid-column:2;
-  grid-template-columns:minmax(0,1fr) auto;
-  column-gap:5px;
-  text-align:right;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav) .nav-copy{
-  display:block;
-  min-width:0;
-  text-align:inherit;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav) small{
-  display:flex;
-  align-items:center;
-  gap:4px;
+.page-nav.ew-prevnext-numbered .ew-prevnext-kicker{
   margin:0 0 8px;
   color:#657069;
   font-size:12px;
   font-weight:700;
   line-height:1.2;
-  text-align:inherit;
 }
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev small{justify-content:flex-start}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-next small{justify-content:flex-end}
-.page-nav:is(.story-series-nav,.detail-series-nav) .nav-kicker-sep{opacity:.72}
-.page-nav:is(.story-series-nav,.detail-series-nav) strong{
-  display:flex;
-  width:100%;
-  min-width:0;
-  gap:4px;
-  align-items:flex-start;
-  font-size:14px;
-  font-weight:800;
-  line-height:1.4;
-  letter-spacing:-.02em;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev strong{justify-content:flex-start}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-next strong{justify-content:flex-end}
-.page-nav:is(.story-series-nav,.detail-series-nav) .nav-num{
-  display:inline-block;
-  flex:0 0 auto;
-  margin:0;
+.page-nav.ew-prevnext-numbered .ew-prevnext-number{
+  color:#5e293c;
+  font-weight:850;
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
-  color:#5e293c;
 }
-.page-nav:is(.story-series-nav,.detail-series-nav) .nav-title{
-  display:block;
-  min-width:0;
-  word-break:keep-all;
-  overflow-wrap:normal;
-  text-wrap:balance;
-}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .nav-title{text-align:right}
-.page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.page-nav.ew-prevnext-numbered .ew-prevnext-arrow{
   width:18px;
   font-size:20px;
-  line-height:1;
 }
-.page-nav:is(.story-series-nav,.detail-series-nav):has(.story-next:only-child) .story-next,
-.page-nav:is(.story-series-nav,.detail-series-nav).next-only .story-next{grid-column:2}
-.page-nav:is(.story-series-nav,.detail-series-nav):has(.story-prev:only-child) .story-prev,
-.page-nav:is(.story-series-nav,.detail-series-nav).prev-only .story-prev{grid-column:1}
+.page-nav.ew-prevnext-numbered:has(.ew-prevnext-next:only-child) .ew-prevnext-next,
+.page-nav.ew-prevnext-numbered.next-only .ew-prevnext-next{grid-column:2}
+.page-nav.ew-prevnext-numbered:has(.ew-prevnext-prev:only-child) .ew-prevnext-prev,
+.page-nav.ew-prevnext-numbered.prev-only .ew-prevnext-prev{grid-column:1}
 @media(max-width:520px){
-  .page-nav:is(.story-series-nav,.detail-series-nav){gap:10px}
-  .page-nav:is(.story-series-nav,.detail-series-nav)>a{min-height:96px;padding:14px 9px}
-  .page-nav:is(.story-series-nav,.detail-series-nav) small{font-size:11px}
-  .page-nav:is(.story-series-nav,.detail-series-nav) strong{
+  .page-nav.ew-prevnext-numbered{gap:10px}
+  .page-nav.ew-prevnext-numbered .ew-prevnext-link{
+    min-height:96px;
+    padding:14px 9px;
     font-size:13px;
     line-height:1.42;
-    gap:3px;
     letter-spacing:-.025em;
   }
-  .page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow{width:16px;font-size:19px}
+  .page-nav.ew-prevnext-numbered .ew-prevnext-kicker{font-size:11px}
+  .page-nav.ew-prevnext-numbered .ew-prevnext-arrow{width:16px;font-size:19px}
 }
 
 /* SHARED DETAIL READING SYSTEM
@@ -709,7 +621,7 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 @media(max-width:619px){.place-strip>a{max-width:calc(100vw - 48px);overflow:hidden;text-overflow:ellipsis}.place-strip>.place-chip{max-width:250px}}
 
 /* PREV/NEXT CARD SYSTEM — one shared visual body
-   Order/data may differ by context, but card color, border, alignment and wrapping are shared. */
+   Different contexts provide different data, but the card itself is one component. */
 .page-nav.context-nav[hidden]{display:none!important}
 main .page-nav,
 .travel-ending .travel-series{
@@ -721,9 +633,8 @@ main .page-nav{
   width:min(var(--max,900px),calc(100% - 36px));
   margin:38px auto 0;
 }
-main .page-nav a,
-.travel-ending .travel-series a{
-  display:flex;
+.ew-prevnext .ew-prevnext-link{
+  display:grid;
   align-items:center;
   min-width:0;
   min-height:70px;
@@ -735,55 +646,70 @@ main .page-nav a,
   text-decoration:none;
   font-weight:780;
   line-height:1.35;
-  word-break:keep-all;
-  overflow-wrap:normal;
-  text-wrap:balance;
-}
-main .page-nav a:first-child,
-.travel-ending .travel-series .prev{text-align:left}
-main .page-nav a:last-child,
-.travel-ending .travel-series .next{justify-content:flex-end;text-align:right}
-main .page-nav.single,
-.travel-ending .travel-series.single{grid-template-columns:1fr}
-main .page-nav.single a,
-.travel-ending .travel-series.single a{justify-content:center;text-align:center}
-main .page-nav.next-only a{grid-column:2;justify-content:flex-end;text-align:right}
-main .page-nav.prev-only a{grid-column:1;justify-content:flex-start;text-align:left}
-
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-prev,
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-next{
-  display:grid;
-  align-items:center;
-  column-gap:8px;
-  justify-content:stretch;
-}
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-prev{
-  grid-template-columns:auto minmax(0,1fr);
   text-align:left;
 }
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) a.place-next{
-  grid-template-columns:minmax(0,1fr) auto;
-  text-align:right;
+.ew-prevnext .ew-prevnext-prev{
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:8px;
 }
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) .place-nav-label{
+.ew-prevnext .ew-prevnext-next{
+  grid-template-columns:minmax(0,1fr) auto;
+  column-gap:8px;
+}
+.ew-prevnext .ew-prevnext-copy{
+  display:block;
+  min-width:0;
+  text-align:left;
+}
+.ew-prevnext .ew-prevnext-kicker{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:5px;
+  min-width:0;
+  margin:0 0 5px;
+  color:#657069;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.2;
+  text-align:left;
+}
+.ew-prevnext .ew-prevnext-title{
+  display:block;
   min-width:0;
   word-break:keep-all;
   overflow-wrap:normal;
-  text-wrap:balance;
+  text-align:left;
 }
-main .page-nav:not(.story-series-nav):not(.detail-series-nav) .place-nav-arrow{
+.ew-prevnext .ew-prevnext-number{
+  color:#5e293c;
+  font-weight:850;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.ew-prevnext .ew-prevnext-arrow{
   display:flex;
   align-items:center;
   justify-content:center;
+  flex:0 0 auto;
   width:20px;
   font-size:21px;
   line-height:1;
 }
+main .page-nav.single,
+.travel-ending .travel-series.single{grid-template-columns:1fr}
+main .page-nav.single .ew-prevnext-link,
+.travel-ending .travel-series.single .ew-prevnext-link{grid-column:1}
+main .page-nav.next-only .ew-prevnext-next{grid-column:2}
+main .page-nav.prev-only .ew-prevnext-prev{grid-column:1}
+.travel-ending .travel-series-next-only{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.travel-ending .travel-series-next-only .travel-nav-empty{display:block;min-width:0}
+.travel-ending .travel-series-next-only .ew-prevnext-next{grid-column:2}
+
 @media(max-width:560px){
   main .page-nav,
   .travel-ending .travel-series{gap:10px}
-  main .page-nav a,
-  .travel-ending .travel-series a{padding-left:11px;padding-right:11px}
+  .ew-prevnext .ew-prevnext-link{padding-left:11px;padding-right:11px}
 }
 
 /* Canonical walked-gallery presentation */
