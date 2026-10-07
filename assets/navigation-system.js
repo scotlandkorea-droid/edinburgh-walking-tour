@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-4';
+  const VERSION='20261007-5';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -509,28 +509,29 @@
     }
   };
 
-  const normalizeRoleLinearNav=()=>{
-    let role=null;
-    if(currentPath.startsWith('/edinburgh/themes/'))role={key:'theme',label:'테마'};
-    else if(currentPath.startsWith('/edinburgh/people/'))role={key:'people',label:'인물'};
-    if(!role)return false;
+  const normalizeRoleLinearNav=(data)=>{
+    let key=null;
+    if(currentPath.startsWith('/edinburgh/themes/'))key='theme';
+    else if(currentPath.startsWith('/edinburgh/people/'))key='people';
+    if(!key)return false;
 
-    const nav=legacyPageNavs()[0];
-    if(!nav)return false;
-    const prev=nav.querySelector('a.prev,a[rel="prev"]');
-    const next=nav.querySelector('a.next,a[rel="next"]');
-    if(!prev&&!next)return false;
+    const sequence=data.roleSequences?.[key];
+    const items=Array.isArray(sequence?.items)?sequence.items:[];
+    const index=items.findIndex(item=>normalizePath(item.url)===currentPath);
+    if(index<0)return false;
 
-    nav.classList.add('role-linear-nav',role.key+'-linear-nav');
-    nav.dataset.navSystem=role.key;
-    nav.setAttribute('aria-label',role.label+' 이전·다음');
-    if(!prev)nav.classList.add('next-only');
-    if(!next)nav.classList.add('prev-only');
+    const nav=document.createElement('nav');
+    nav.className='page-nav role-linear-nav '+key+'-linear-nav';
+    nav.dataset.navSystem=key;
+    nav.setAttribute('aria-label',(sequence.label||'항목')+' 이전·다음');
+    if(index===0)nav.classList.add('next-only');
+    if(index===items.length-1)nav.classList.add('prev-only');
 
-    const rebuild=(a,direction)=>{
-      if(!a)return;
-      const title=a.textContent.replace(/[←→]/g,'').trim();
+    const makeLink=(item,direction)=>{
+      const a=document.createElement('a');
       a.className='role-'+direction;
+      a.href=item.url;
+
       const arrow=document.createElement('span');
       arrow.className='role-nav-arrow';
       arrow.setAttribute('aria-hidden','true');
@@ -539,17 +540,22 @@
       const copy=document.createElement('span');
       copy.className='role-nav-copy';
       const small=document.createElement('small');
-      small.textContent=(direction==='prev'?'이전 ':'다음 ')+role.label;
+      small.textContent=(direction==='prev'?'이전 ':'다음 ')+(sequence.label||'항목');
       const strong=document.createElement('strong');
-      strong.textContent=title;
+      strong.textContent=item.name;
       copy.append(small,strong);
-      a.replaceChildren();
+
       if(direction==='prev')a.append(arrow,copy);
       else a.append(copy,arrow);
+      return a;
     };
 
-    rebuild(prev,'prev');
-    rebuild(next,'next');
+    if(index>0)nav.append(makeLink(items[index-1],'prev'));
+    if(index<items.length-1)nav.append(makeLink(items[index+1],'next'));
+
+    replaceLegacyNavsWith([nav]);
+    if(sequence.hub)setHub(sequence.hub,(sequence.label||'항목')+' 전체 보기');
+    document.documentElement.dataset.navContext=key;
     return true;
   };
 
@@ -635,7 +641,7 @@
     }
 
     if(renderContextNavigation(data))return;
-    if(normalizeRoleLinearNav())return;
+    if(normalizeRoleLinearNav(data))return;
     normalizeTravelSeriesNav();
   };
 
