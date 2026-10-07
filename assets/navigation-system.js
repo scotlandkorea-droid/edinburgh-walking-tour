@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-6';
+  const VERSION='20261007-7';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -164,6 +164,33 @@
     if(index>0)nav.append(makeLink(items[index-1],'prev'));
     if(index<items.length-1)nav.append(makeLink(items[index+1],'next'));
     return nav;
+  };
+
+  // Navigation-title invariant:
+  // - item.name is the canonical/full item title.
+  // - item.navName is an optional shorter label for navigation surfaces.
+  // - item.tabName is an optional tab-only override.
+  // A title edit therefore needs only one data review; tabs, hub cards and
+  // previous/next cards are all rebuilt from this shared data.
+  const itemNavName=item=>item?.navName||item?.name||'';
+  const itemTabName=item=>item?.tabName||item?.navName||item?.name||'';
+
+  const auditNavigationData=data=>{
+    const warnings=[];
+    for(const series of data.series||[]){
+      const seen=new Set();
+      (series.items||[]).forEach((item,index)=>{
+        const expected=String(index+1).padStart(2,'0');
+        if(item.number!==expected)warnings.push(series.id+': expected '+expected+', got '+item.number);
+        const path=normalizePath(item.url);
+        if(seen.has(path))warnings.push(series.id+': duplicate URL '+path);
+        seen.add(path);
+        if(!item.name)warnings.push(series.id+': missing name at '+expected);
+        if('navName' in item&&!String(item.navName||'').trim())warnings.push(series.id+': empty navName at '+expected);
+      });
+    }
+    if(warnings.length)console.warn('[EW navigation audit]',warnings);
+    return warnings;
   };
 
   const seriesItemsFor=(series,context)=>context==='place'&&Array.isArray(series.placeItems)&&series.placeItems.length
@@ -335,7 +362,7 @@
     num.textContent=isHub?'00':item.number;
     small.append(document.createTextNode((direction==='prev'?'이전 ':'다음 ')+navKind+' '),num);
     const strong=document.createElement('strong');
-    strong.textContent=isHub?(series.hubPrevName||'전체 개요'):item.name;
+    strong.textContent=isHub?(series.hubPrevName||'전체 개요'):itemNavName(item);
     copy.append(small,strong);
 
     if(direction==='prev')a.append(arrow,copy);
@@ -388,11 +415,11 @@
       if(i===index)a.setAttribute('aria-current','page');
       a.href=contextualUrl(item.url,context);
       if(legacy){
-        a.textContent=item.number+' '+(item.tabName||item.name);
+        a.textContent=item.number+' '+itemTabName(item);
       }else{
         const num=document.createElement('span');
         num.textContent=item.number;
-        a.append(num,document.createTextNode(' '+(item.tabName||item.name)));
+        a.append(num,document.createTextNode(' '+itemTabName(item)));
       }
       return a;
     }));
@@ -482,7 +509,7 @@
       const title=link.querySelector('h3');
       const desc=link.querySelector('p');
       if(num)num.textContent=item.number;
-      if(title)title.textContent=item.name;
+      if(title)title.textContent=itemNavName(item);
       if(desc&&item.description)desc.textContent=item.description;
     });
     const parent=links.find(link=>byUrl.get(normalizePath(new URL(link.getAttribute('href'),location.origin).pathname))===link)?.parentElement;
@@ -621,6 +648,7 @@
     }catch(e){return;}
 
     const data=window.EW_NAV_DATA||{placeRegions:[],series:[]};
+    auditNavigationData(data);
     syncPlaceDirectoryOrder(data);
     syncSeriesHubCards(data);
     markEntryLinks();
@@ -645,7 +673,7 @@
     normalizeTravelSeriesNav();
   };
 
-  window.EW_NAV_SYSTEM={version:VERSION,init};
+  window.EW_NAV_SYSTEM={version:VERSION,init,audit:()=>auditNavigationData(window.EW_NAV_DATA||{series:[]})};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
 
