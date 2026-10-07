@@ -15,3 +15,16 @@ This file records the operational rule for title changes and previous/next navig
 ## Automatic impact rule
 
 A title change is treated as a navigation-impacting change whenever the page belongs to a numbered series. The required review set is: page title/H1 as intended, central series record, series tabs, hub card, previous/next cards, and responsive wrapping.
+
+## Previous/next arrow visual invariant
+
+All bottom previous/next roles share the same arrow token even when their card layouts remain role-specific.
+
+- Wide screens (720px and above): arrow cell 20px, visible arrow 21px, font-weight 400.
+- Mobile/tablet-narrow (719px and below): arrow cell 16px, visible arrow 19px, font-weight 400.
+- Do not add a separate extra-small arrow size below 340px.
+- A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
+- B-series may render the visible arrow through CSS pseudo-elements, but its apparent size, weight and breakpoint must stay equal to the other roles.
+- Card height, padding, labels and information hierarchy remain role-specific; arrow unification must not flatten those differences.
+- Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
+
