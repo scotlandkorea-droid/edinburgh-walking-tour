@@ -707,7 +707,20 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.detail-series-nav .story-prev .nav-arrow::before{content:"←"}
 .page-nav.story-series-nav .story-next .nav-arrow::before,
 .page-nav.detail-series-nav .story-next .nav-arrow::before{content:"→"}
-@media(max-width:520px){
+@media(max-width:719px){
+  .page-nav.story-series-nav .story-prev,
+  .page-nav.detail-series-nav .story-prev{
+    grid-template-columns:16px minmax(0,1fr);
+  }
+  .page-nav.story-series-nav .story-next,
+  .page-nav.detail-series-nav .story-next{
+    grid-template-columns:minmax(0,1fr) 16px;
+  }
+  .page-nav.story-series-nav .nav-arrow,
+  .page-nav.detail-series-nav .nav-arrow{
+    width:16px;
+    height:16px;
+  }
   .page-nav.story-series-nav .nav-arrow::before,
   .page-nav.detail-series-nav .nav-arrow::before{font-size:19px}
 }
@@ -851,6 +864,7 @@ main .page-nav.role-linear-nav .role-nav-arrow{
   justify-content:center;
   width:20px;
   font-size:21px;
+  font-weight:400;
   line-height:1;
 }
 main .page-nav.role-linear-nav.next-only a.role-next{grid-column:2}
@@ -939,6 +953,7 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
   justify-content:center;
   width:20px;
   font-size:21px;
+  font-weight:400;
   line-height:1;
 }
 .travel-ending .travel-series.travel-series-normalized.next-only a.next{grid-column:2}
@@ -1038,6 +1053,7 @@ main .page-nav.place-browse-nav .place-nav-arrow{
   justify-content:center;
   width:20px;
   font-size:21px;
+  font-weight:400;
   line-height:1
 }
 @media(max-width:719px){
@@ -1096,6 +1112,7 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   justify-content:center;
   width:20px;
   font-size:21px;
+  font-weight:400;
   line-height:1
 }
 @media(max-width:719px){
