@@ -560,9 +560,9 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   grid-column:2;
   grid-template-columns:minmax(0,1fr) 20px;
   column-gap:8px;
-  text-align:left;
+  text-align:right;
 }
-.page-nav.story-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:left}
+.page-nav.story-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:inherit}
 .page-nav.story-series-nav small{
   display:block;
   margin:0 0 8px;
@@ -646,9 +646,9 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   grid-column:2;
   grid-template-columns:minmax(0,1fr) 20px;
   column-gap:8px;
-  text-align:left;
+  text-align:right;
 }
-.page-nav.detail-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:left}
+.page-nav.detail-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:inherit}
 .page-nav.detail-series-nav small{
   display:block;
   margin:0 0 8px;
@@ -1236,6 +1236,26 @@ main .page-nav.role-linear-nav .role-next .role-nav-copy>strong,
 main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-kicker,
 main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-label{
   grid-column:1;
+  text-align:right;
+}
+.page-nav.story-series-nav .story-prev .nav-copy>small,
+.page-nav.story-series-nav .story-prev .nav-copy>strong,
+.page-nav.detail-series-nav .story-prev .nav-copy>small,
+.page-nav.detail-series-nav .story-prev .nav-copy>strong,
+main .page-nav.role-linear-nav .role-prev .role-nav-copy>small,
+main .page-nav.role-linear-nav .role-prev .role-nav-copy>strong,
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title,
+main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-kicker,
+main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-label{
+  text-align:left;
+}
+.page-nav.story-series-nav strong,
+.page-nav.detail-series-nav strong,
+main .page-nav.role-linear-nav strong,
+.travel-ending .travel-series.travel-series-normalized .travel-nav-title,
+main .page-nav.place-browse-nav .place-nav-label{
+  white-space:normal;
 }
 
 /* Canonical walked-gallery presentation */
