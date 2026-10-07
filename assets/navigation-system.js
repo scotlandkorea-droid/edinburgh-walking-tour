@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-4';
+  const VERSION='20261007-5';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -323,11 +323,7 @@
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    const sep=document.createElement('span');
-    sep.className='nav-kicker-sep';
-    sep.setAttribute('aria-hidden','true');
-    sep.textContent='·';
-    small.append(label,sep,num);
+    small.append(label,num);
     const strong=document.createElement('strong');
     const title=document.createElement('span');
     title.className='nav-title ew-prevnext-title';
