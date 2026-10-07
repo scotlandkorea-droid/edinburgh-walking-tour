@@ -25,6 +25,7 @@ All bottom previous/next roles share the same arrow token even when their card l
 - Do not add a separate extra-small arrow size below 340px.
 - A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
 - For two-tier cards (meta/kicker above a destination title), the arrow is vertically centered on the destination-title row only, not on the combined meta + title block and not on the full card. One-, two-, and three-line titles must keep the arrow centered on the title block.
+- Previous-card text is left-aligned and next-card text is right-aligned. The copy wrapper must inherit that direction instead of forcing left alignment. Destination titles use normal white-space with `word-break: keep-all`, so multi-word Korean titles wrap only at valid spaces when needed.
 - The shared two-tier alignment applies to B numbered-series cards, C place-browse cards, theme/people role cards, and travel previous/next cards. Walking-tour cards have no separate kicker row, so their arrow remains centered on the title row.
 - B-series may render the visible arrow through CSS pseudo-elements, but its apparent size, weight and breakpoint must stay equal to the other roles.
 - Card height, padding, labels and information hierarchy remain role-specific; arrow unification must not flatten those differences.
