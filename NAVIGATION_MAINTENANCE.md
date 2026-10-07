@@ -24,6 +24,8 @@ All bottom previous/next roles share the same arrow token even when their card l
 - Mobile/tablet-narrow (719px and below): arrow cell 16px, visible arrow 19px, font-weight 400.
 - Do not add a separate extra-small arrow size below 340px.
 - A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
+- For two-tier cards (meta/kicker above a destination title), the arrow is vertically centered on the destination-title row only, not on the combined meta + title block and not on the full card. One-, two-, and three-line titles must keep the arrow centered on the title block.
+- The shared two-tier alignment applies to B numbered-series cards, C place-browse cards, theme/people role cards, and travel previous/next cards. Walking-tour cards have no separate kicker row, so their arrow remains centered on the title row.
 - B-series may render the visible arrow through CSS pseudo-elements, but its apparent size, weight and breakpoint must stay equal to the other roles.
 - Card height, padding, labels and information hierarchy remain role-specific; arrow unification must not flatten those differences.
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
