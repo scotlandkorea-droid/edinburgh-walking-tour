@@ -844,6 +844,101 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
   }
 }
 
+/* TRAVEL PREV-NEXT — normalized shared travel navigation */
+.travel-ending .travel-series.travel-series-normalized{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+}
+.travel-ending .travel-series.travel-series-normalized a{
+  display:grid;
+  align-items:center;
+  min-width:0;
+  min-height:68px;
+  padding:11px 10px;
+  column-gap:8px;
+  border:1px solid #d9e2d9;
+  border-radius:15px;
+  background:#eef3ee;
+  color:#31483d;
+  text-decoration:none;
+  font-weight:780;
+  line-height:1.35;
+}
+.travel-ending .travel-series.travel-series-normalized a.prev{
+  grid-column:1;
+  grid-template-columns:20px minmax(0,1fr);
+  text-align:left;
+}
+.travel-ending .travel-series.travel-series-normalized a.next{
+  grid-column:2;
+  grid-template-columns:minmax(0,1fr) 20px;
+  text-align:right;
+}
+.travel-ending .travel-series.travel-series-normalized .travel-nav-copy{
+  display:block;
+  min-width:0;
+  width:100%;
+}
+.travel-ending .travel-series.travel-series-normalized .travel-nav-meta{
+  display:block;
+  margin:0 0 6px;
+  color:#657069;
+  font-size:11px;
+  font-weight:700;
+  line-height:1.2;
+}
+.travel-ending .travel-series.travel-series-normalized .travel-nav-no{
+  color:#5e293c;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.travel-ending .travel-series.travel-series-normalized .travel-nav-title{
+  display:block;
+  min-width:0;
+  width:100%;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.4;
+  word-break:keep-all;
+  overflow-wrap:normal;
+  text-wrap:wrap;
+}
+.travel-ending .travel-series.travel-series-normalized .travel-nav-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  font-size:21px;
+  line-height:1;
+}
+.travel-ending .travel-series.travel-series-normalized.next-only a.next{grid-column:2}
+.travel-ending .travel-series.travel-series-normalized.prev-only a.prev{grid-column:1}
+@media(min-width:720px){
+  .travel-ending .travel-series.travel-series-normalized a{
+    min-height:70px;
+    padding:14px 16px;
+  }
+}
+@media(max-width:719px){
+  .travel-ending .travel-series.travel-series-normalized{gap:10px}
+  .travel-ending .travel-series.travel-series-normalized a{
+    min-height:60px;
+    padding:10px 11px;
+    column-gap:4px;
+  }
+  .travel-ending .travel-series.travel-series-normalized a.prev{
+    grid-template-columns:16px minmax(0,1fr);
+  }
+  .travel-ending .travel-series.travel-series-normalized a.next{
+    grid-template-columns:minmax(0,1fr) 16px;
+  }
+  .travel-ending .travel-series.travel-series-normalized .travel-nav-arrow{
+    width:16px;
+    font-size:19px;
+  }
+}
+
 /* PLACE BROWSER — one shared hierarchy for Edinburgh + Scotland */
 .place-scope-tabs .location-tab{background:#f1f5f0;border-color:#d9e3da;color:#315844}
 .place-scope-tabs .location-tab:hover,.place-scope-tabs .location-tab:focus-visible{background:#e9f0e9;border-color:#becdc0}
