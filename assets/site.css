@@ -579,7 +579,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1.4;
   word-break:keep-all;
   overflow-wrap:normal;
-  text-wrap:balance;
+  text-wrap:wrap;
 }
 .page-nav.story-series-nav .nav-num{
   display:inline-block;
@@ -662,7 +662,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1.4;
   word-break:keep-all;
   overflow-wrap:normal;
-  text-wrap:balance;
+  text-wrap:wrap;
 }
 .page-nav.detail-series-nav .nav-num{
   display:inline-block;
