@@ -3323,3 +3323,28 @@ body.place-region-hub main > .page-hero + section{
 body.place-region-hub main > .page-hero + section > .detail-article{
   padding-top:0!important;
 }
+
+
+/* STORY DETAIL QUOTE BOX — shared English inscription / quotation box */
+body.story-detail-standard .detail-article blockquote.story-quote-box{
+  margin:32px 0;
+  padding:18px 20px;
+  border:1px solid #d8d0c6;
+  border-left:4px solid #5e293c;
+  border-radius:14px;
+  background:#f7f5ef;
+  color:#3f4b45;
+}
+body.story-detail-standard .detail-article blockquote.story-quote-box p{
+  margin:0;
+  font-family:Georgia,"Noto Serif KR",Batang,serif;
+  font-size:clamp(17px,3.8vw,20px);
+  line-height:1.72;
+  font-style:italic;
+}
+@media(max-width:719px){
+  body.story-detail-standard .detail-article blockquote.story-quote-box{
+    margin:28px 0;
+    padding:16px 17px;
+  }
+}
