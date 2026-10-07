@@ -34,10 +34,21 @@
 
   const cleanPageUrl=location.origin+location.pathname+location.search;
 
+  // Keep shared CSS/navigation assets on one canonical version even when older HTML
+  // still carries an earlier cache-busting query string.
+  const sharedAssetVersion='20261007-6';
+  document.querySelectorAll('link[rel="stylesheet"][href*="/assets/site.css"]').forEach(link=>{
+    const url=new URL(link.getAttribute('href'),location.origin);
+    if(url.searchParams.get('v')!==sharedAssetVersion){
+      url.searchParams.set('v',sharedAssetVersion);
+      link.setAttribute('href',url.pathname+url.search);
+    }
+  });
+
   // Navigation is handled by one shared system. Header/share/gallery logic stays here.
   if(!window.EW_NAV_SYSTEM&&!document.querySelector('script[data-ew-nav-system]')){
     const navScript=document.createElement('script');
-    navScript.src='/assets/navigation-system.js?v=20261007-6';
+    navScript.src='/assets/navigation-system.js?v='+sharedAssetVersion;
     navScript.dataset.ewNavSystem='true';
     document.head.appendChild(navScript);
   }
