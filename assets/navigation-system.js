@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-2';
+  const VERSION='20261007-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -496,6 +496,50 @@
     }
   };
 
+  const normalizeRoleLinearNav=()=>{
+    let role=null;
+    if(currentPath.startsWith('/edinburgh/themes/'))role={key:'theme',label:'테마'};
+    else if(currentPath.startsWith('/edinburgh/people/'))role={key:'people',label:'인물'};
+    if(!role)return false;
+
+    const nav=legacyPageNavs()[0];
+    if(!nav)return false;
+    const prev=nav.querySelector('a.prev,a[rel="prev"]');
+    const next=nav.querySelector('a.next,a[rel="next"]');
+    if(!prev&&!next)return false;
+
+    nav.classList.add('role-linear-nav',role.key+'-linear-nav');
+    nav.dataset.navSystem=role.key;
+    nav.setAttribute('aria-label',role.label+' 이전·다음');
+    if(!prev)nav.classList.add('next-only');
+    if(!next)nav.classList.add('prev-only');
+
+    const rebuild=(a,direction)=>{
+      if(!a)return;
+      const title=a.textContent.replace(/[←→]/g,'').trim();
+      a.className='role-'+direction;
+      const arrow=document.createElement('span');
+      arrow.className='role-nav-arrow';
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent=direction==='prev'?'←':'→';
+
+      const copy=document.createElement('span');
+      copy.className='role-nav-copy';
+      const small=document.createElement('small');
+      small.textContent=(direction==='prev'?'이전 ':'다음 ')+role.label;
+      const strong=document.createElement('strong');
+      strong.textContent=title;
+      copy.append(small,strong);
+      a.replaceChildren();
+      if(direction==='prev')a.append(arrow,copy);
+      else a.append(copy,arrow);
+    };
+
+    rebuild(prev,'prev');
+    rebuild(next,'next');
+    return true;
+  };
+
   const init=async()=>{
     try{
       await Promise.all([
@@ -524,7 +568,8 @@
       return;
     }
 
-    renderContextNavigation(data);
+    if(renderContextNavigation(data))return;
+    normalizeRoleLinearNav();
   };
 
   window.EW_NAV_SYSTEM={version:VERSION,init};
