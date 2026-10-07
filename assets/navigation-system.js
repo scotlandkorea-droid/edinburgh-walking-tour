@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-12';
+  const VERSION='20261007-13';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -575,6 +575,13 @@
 
     if(index>0)nav.append(makeLink(items[index-1],'prev'));
     if(index<items.length-1)nav.append(makeLink(items[index+1],'next'));
+
+    // A role page keeps one static fallback for no-JS safety.
+    // Remove that same-role fallback before inserting the runtime copy,
+    // otherwise both cards appear at once.
+    document.querySelectorAll(
+      '.page-nav[data-nav-system="'+key+'"],.page-nav.role-linear-nav'
+    ).forEach(existing=>existing.remove());
 
     replaceLegacyNavsWith([nav]);
     if(sequence.hub)setHub(sequence.hub,(sequence.label||'항목')+' 전체 보기');
