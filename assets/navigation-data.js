@@ -1,3 +1,9 @@
+/* NAVIGATION TITLE SOURCE OF TRUTH
+   name: canonical/full item title.
+   navName (optional): shorter label used by hub cards and previous/next navigation.
+   tabName (optional): tab-only override; falls back to navName, then name.
+   Whenever a manuscript/page title is changed, review this one record as part of the same task.
+   Do not patch individual previous/next cards or insert page-specific line breaks. */
 window.EW_NAV_DATA={
   "version": "2026-10-07-2",
   "placeRegions": [
