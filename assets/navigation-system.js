@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261005-1';
+  const VERSION='20261007-2';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -317,12 +317,12 @@
     copy.className='nav-copy';
     const small=document.createElement('small');
     const navKind=context==='place'?'장소':series.kind;
-    small.textContent=direction==='prev'?'이전 '+navKind:'다음 '+navKind;
-    const strong=document.createElement('strong');
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    strong.append(num,document.createTextNode(' '+(isHub?(series.hubPrevName||'전체 개요'):item.name)));
+    small.append(document.createTextNode((direction==='prev'?'이전 ':'다음 ')+navKind+' '),num);
+    const strong=document.createElement('strong');
+    strong.textContent=isHub?(series.hubPrevName||'전체 개요'):item.name;
     copy.append(small,strong);
 
     if(direction==='prev')a.append(arrow,copy);
