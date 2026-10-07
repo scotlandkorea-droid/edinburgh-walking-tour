@@ -594,7 +594,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   align-items:center;
   justify-content:center;
   width:20px;
-  font-size:21px;
+  height:20px;
+  font-size:0;
   line-height:1;
 }
 .page-nav.story-series-nav:has(.story-next:only-child) .story-next{grid-column:2}
@@ -605,7 +606,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   .page-nav.story-series-nav small{font-size:11px}
   .page-nav.story-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
   .page-nav.story-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
-  .page-nav.story-series-nav .nav-arrow{width:16px;font-size:19px}
+  .page-nav.story-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
   .page-nav.story-series-nav strong{font-size:13px;line-height:1.42}
 }
 
@@ -677,18 +678,40 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   align-items:center;
   justify-content:center;
   width:20px;
-  font-size:21px;
+  height:20px;
+  font-size:0;
   line-height:1;
 }
 .page-nav.detail-series-nav.next-only .story-next{grid-column:2}
 .page-nav.detail-series-nav.prev-only .story-prev{grid-column:1}
+
+/* B-series arrows: compact CSS chevrons.
+   Keep arrows in dedicated fixed columns so title length never moves them. */
+.page-nav.story-series-nav .nav-arrow::before,
+.page-nav.detail-series-nav .nav-arrow::before{
+  content:"";
+  display:block;
+  width:8px;
+  height:8px;
+  box-sizing:border-box;
+  border:solid currentColor;
+  border-width:0 2px 2px 0;
+}
+.page-nav.story-series-nav .story-prev .nav-arrow::before,
+.page-nav.detail-series-nav .story-prev .nav-arrow::before{transform:rotate(135deg)}
+.page-nav.story-series-nav .story-next .nav-arrow::before,
+.page-nav.detail-series-nav .story-next .nav-arrow::before{transform:rotate(-45deg)}
+@media(max-width:520px){
+  .page-nav.story-series-nav .nav-arrow::before,
+  .page-nav.detail-series-nav .nav-arrow::before{width:7px;height:7px}
+}
 @media(max-width:520px){
   .page-nav.detail-series-nav{gap:10px}
   .page-nav.detail-series-nav>a{min-height:96px;padding:14px 12px}
   .page-nav.detail-series-nav small{font-size:11px}
   .page-nav.detail-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
   .page-nav.detail-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
-  .page-nav.detail-series-nav .nav-arrow{width:16px;font-size:19px}
+  .page-nav.detail-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
   .page-nav.detail-series-nav strong{font-size:13px;line-height:1.42}
 }
 
