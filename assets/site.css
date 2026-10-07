@@ -1161,9 +1161,7 @@ main .page-nav.tour-course-nav .place-nav-arrow{
 .page-nav.story-series-nav>a,
 .page-nav.detail-series-nav>a,
 main .page-nav.role-linear-nav a,
-.travel-ending .travel-series.travel-series-normalized a,
-main .page-nav.place-browse-nav a.place-prev,
-main .page-nav.place-browse-nav a.place-next{
+.travel-ending .travel-series.travel-series-normalized a{
   grid-template-rows:auto auto;
   align-content:center;
   align-items:stretch;
@@ -1171,30 +1169,26 @@ main .page-nav.place-browse-nav a.place-next{
 .page-nav.story-series-nav .nav-copy,
 .page-nav.detail-series-nav .nav-copy,
 main .page-nav.role-linear-nav .role-nav-copy,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-copy,
-main .page-nav.place-browse-nav .place-nav-copy{
+.travel-ending .travel-series.travel-series-normalized .travel-nav-copy{
   display:contents;
 }
 .page-nav.story-series-nav small,
 .page-nav.detail-series-nav small,
 main .page-nav.role-linear-nav small,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-meta,
-main .page-nav.place-browse-nav .place-nav-kicker{
+.travel-ending .travel-series.travel-series-normalized .travel-nav-meta{
   grid-row:1;
 }
 .page-nav.story-series-nav strong,
 .page-nav.detail-series-nav strong,
 main .page-nav.role-linear-nav strong,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-title,
-main .page-nav.place-browse-nav .place-nav-label{
+.travel-ending .travel-series.travel-series-normalized .travel-nav-title{
   grid-row:2;
   align-self:center;
 }
 .page-nav.story-series-nav .nav-arrow,
 .page-nav.detail-series-nav .nav-arrow,
 main .page-nav.role-linear-nav .role-nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-arrow,
-main .page-nav.place-browse-nav .place-nav-arrow{
+.travel-ending .travel-series.travel-series-normalized .travel-nav-arrow{
   grid-row:2;
   align-self:center;
   justify-self:center;
@@ -1202,8 +1196,7 @@ main .page-nav.place-browse-nav .place-nav-arrow{
 .page-nav.story-series-nav .story-prev .nav-arrow,
 .page-nav.detail-series-nav .story-prev .nav-arrow,
 main .page-nav.role-linear-nav .role-prev .role-nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-arrow,
-main .page-nav.place-browse-nav .place-prev .place-nav-arrow{
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-arrow{
   grid-column:1;
 }
 .page-nav.story-series-nav .story-prev .nav-copy>small,
@@ -1213,16 +1206,13 @@ main .page-nav.place-browse-nav .place-prev .place-nav-arrow{
 main .page-nav.role-linear-nav .role-prev .role-nav-copy>small,
 main .page-nav.role-linear-nav .role-prev .role-nav-copy>strong,
 .travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title,
-main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-kicker,
-main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-label{
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title{
   grid-column:2;
 }
 .page-nav.story-series-nav .story-next .nav-arrow,
 .page-nav.detail-series-nav .story-next .nav-arrow,
 main .page-nav.role-linear-nav .role-next .role-nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .next .travel-nav-arrow,
-main .page-nav.place-browse-nav .place-next .place-nav-arrow{
+.travel-ending .travel-series.travel-series-normalized .next .travel-nav-arrow{
   grid-column:2;
 }
 .page-nav.story-series-nav .story-next .nav-copy>small,
@@ -1232,9 +1222,7 @@ main .page-nav.place-browse-nav .place-next .place-nav-arrow{
 main .page-nav.role-linear-nav .role-next .role-nav-copy>small,
 main .page-nav.role-linear-nav .role-next .role-nav-copy>strong,
 .travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-title,
-main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-kicker,
-main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-label{
+.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-title{
   grid-column:1;
   text-align:right;
 }
@@ -1245,16 +1233,13 @@ main .page-nav.place-browse-nav .place-next .place-nav-copy>.place-nav-label{
 main .page-nav.role-linear-nav .role-prev .role-nav-copy>small,
 main .page-nav.role-linear-nav .role-prev .role-nav-copy>strong,
 .travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title,
-main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-kicker,
-main .page-nav.place-browse-nav .place-prev .place-nav-copy>.place-nav-label{
+.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title{
   text-align:left;
 }
 .page-nav.story-series-nav strong,
 .page-nav.detail-series-nav strong,
 main .page-nav.role-linear-nav strong,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-title,
-main .page-nav.place-browse-nav .place-nav-label{
+.travel-ending .travel-series.travel-series-normalized .travel-nav-title{
   white-space:normal;
 }
 

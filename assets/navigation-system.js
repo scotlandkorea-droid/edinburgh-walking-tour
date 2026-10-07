@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-10';
+  const VERSION='20261007-11';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -139,22 +139,9 @@
       arrow.setAttribute('aria-hidden','true');
       arrow.textContent=direction==='prev'?'←':'→';
 
-      let copy;
-      if(context==='place'){
-        copy=document.createElement('span');
-        copy.className='place-nav-copy';
-        const small=document.createElement('small');
-        small.className='place-nav-kicker';
-        small.textContent=direction==='prev'?'이전 장소':'다음 장소';
-        const title=document.createElement('span');
-        title.className='place-nav-label';
-        title.textContent=item.name;
-        copy.append(small,title);
-      }else{
-        copy=document.createElement('span');
-        copy.className='place-nav-label';
-        copy.textContent=item.name;
-      }
+      const copy=document.createElement('span');
+      copy.className='place-nav-label';
+      copy.textContent=item.name;
 
       if(direction==='prev')a.append(arrow,copy);
       else a.append(copy,arrow);
