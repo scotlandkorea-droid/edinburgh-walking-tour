@@ -16,19 +16,21 @@ This file records the operational rule for title changes and previous/next navig
 
 A title change is treated as a navigation-impacting change whenever the page belongs to a numbered series. The required review set is: page title/H1 as intended, central series record, series tabs, hub card, previous/next cards, and responsive wrapping.
 
-## Previous/next arrow visual invariant
+## Previous/next navigation invariant
 
-All bottom previous/next roles share the same arrow token even when their card layouts remain role-specific.
+All bottom previous/next roles use one shared one-tier reading pattern while keeping each role's sequence and labels intact.
 
+- A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
+- The visible card content is one tier only: previous is `← title`, next is `title →`. Do not add a separate `이전/다음` kicker row unless the user explicitly approves a new design.
+- B numbered-series cards keep the sequence number inline with the title, e.g. `← 01 제목` / `03 제목 →`. The number must not be moved into a separate `이전 이야기/다음 이야기` row.
+- Travel cards use the same one-tier form. If a travel sequence already has a meaningful number, keep it inline before the title; do not add `이전 글/다음 글` as a separate row.
+- C place-browse cards remain `← place name` / `place name →`.
+- Theme/people cards remain `← title` / `title →`; do not add `이전 테마/다음 테마` or `이전 인물/다음 인물`.
+- Previous-card text is left-aligned and next-card text is right-aligned. Titles use normal white-space with `word-break: keep-all`, `overflow-wrap: normal`, and `text-wrap: wrap`, so Korean titles wrap only at valid spaces.
 - Wide screens (720px and above): arrow cell 20px, visible arrow 21px, font-weight 400.
 - Mobile/tablet-narrow (719px and below): arrow cell 16px, visible arrow 19px, font-weight 400.
 - Do not add a separate extra-small arrow size below 340px.
-- A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
-- For two-tier cards (meta/kicker above a destination title), the arrow is vertically centered on the destination-title row only, not on the combined meta + title block and not on the full card. One-, two-, and three-line titles must keep the arrow centered on the title block.
-- For roles that use two-tier copy, previous-card text is left-aligned and next-card text is right-aligned. Destination titles use normal white-space with `word-break: keep-all`, so multi-word Korean titles wrap only at valid spaces when needed. One-tier roles (C place-browse and theme/people) must not gain `이전 장소/다음 장소`, `이전 테마/다음 테마`, or `이전 인물/다음 인물` labels unless the user explicitly approves that design change.
-- The shared two-tier alignment applies only to roles that actually have a kicker/meta row, currently B numbered-series and travel previous/next. C place-browse, theme/people role navigation, and walking-tour cards are one-tier and keep the original simple form `← title` / `title →` without added `이전/다음` role labels.
 - B-series may render the visible arrow through CSS pseudo-elements, but its apparent size, weight and breakpoint must stay equal to the other roles.
-- Card height, padding, labels and information hierarchy remain role-specific; arrow unification must not flatten those differences.
-- Static fallback and runtime output must never coexist as duplicate visible navigation. A page may belong to multiple contexts (for example numbered-series/tour and place browsing), so the runtime replacement step must remove every pre-existing bottom `.page-nav[data-nav-system]` that is not one of the incoming runtime nodes, even when its system key is different. Static fallbacks exist only for pre-JS/no-JS safety; after runtime selection there must be one active navigation surface.
+- Card height and padding may remain role-specific; unification must not invent new information hierarchy.
+- Static fallback and runtime output must never coexist as duplicate visible navigation. A page may belong to multiple contexts (for example numbered-series/tour and place browsing), so the runtime replacement step must remove every pre-existing bottom `.page-nav[data-nav-system]` that is not one of the incoming runtime nodes. Static fallbacks exist only for pre-JS/no-JS safety; after runtime selection there must be one active navigation surface.
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
-
