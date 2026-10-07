@@ -1152,16 +1152,6 @@ main .page-nav.tour-course-nav .place-nav-arrow{
     column-gap:3px;
     font-size:13px
   }
-  main .page-nav.tour-course-nav a.place-prev{
-    grid-template-columns:15px minmax(0,1fr)
-  }
-  main .page-nav.tour-course-nav a.place-next{
-    grid-template-columns:minmax(0,1fr) 15px
-  }
-  main .page-nav.tour-course-nav .place-nav-arrow{
-    width:15px;
-    font-size:18px
-  }
 }
 
 /* Canonical walked-gallery presentation */
