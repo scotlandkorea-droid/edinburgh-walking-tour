@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-14';
+  const VERSION='20261007-15';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -112,16 +112,15 @@
   const replaceLegacyNavsWith=nodes=>{
     const list=Array.isArray(nodes)?nodes.filter(Boolean):[nodes].filter(Boolean);
 
-    // Static fallbacks may already carry data-nav-system, so legacyPageNavs()
-    // intentionally does not see them. Before inserting a runtime copy,
-    // remove any existing nav with the same system key. This guarantees one
-    // visible previous/next navigation per role (series, theme, people, etc.).
-    const systems=new Set(list.map(node=>node.dataset?.navSystem).filter(Boolean));
-    if(systems.size){
-      document.querySelectorAll('.page-nav[data-nav-system]').forEach(existing=>{
-        if(!list.includes(existing)&&systems.has(existing.dataset.navSystem))existing.remove();
-      });
-    }
+    // A page can belong to more than one browsing context, and its static
+    // fallback may therefore use a different data-nav-system from the runtime
+    // navigation selected for the current context. Once runtime navigation is
+    // ready, remove every pre-existing bottom navigation system that is not
+    // one of the incoming nodes. This enforces one active navigation surface
+    // instead of allowing e.g. a series runtime nav plus a place fallback.
+    document.querySelectorAll('.page-nav[data-nav-system]').forEach(existing=>{
+      if(!list.includes(existing))existing.remove();
+    });
 
     const point=insertionPoint();
     if(point){
