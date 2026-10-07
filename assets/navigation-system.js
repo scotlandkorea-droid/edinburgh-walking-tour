@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-2';
+  const VERSION='20261007-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -123,7 +123,7 @@
   const makeLinearNav=(items,index,context,label)=>{
     if(!Array.isArray(items)||items.length<=1)return null;
     const nav=document.createElement('nav');
-    nav.className='page-nav context-nav '+(context==='tour'?'context-nav-tour tour-course-nav':'context-nav-place place-browse-nav');
+    nav.className='page-nav ew-prevnext context-nav '+(context==='tour'?'context-nav-tour tour-course-nav':'context-nav-place place-browse-nav');
     nav.dataset.navSystem=context;
     nav.setAttribute('aria-label',label);
     if(index===0)nav.classList.add('next-only');
@@ -131,16 +131,16 @@
 
     const makeLink=(item,direction)=>{
       const a=document.createElement('a');
-      a.className='place-'+direction;
+      a.className='place-'+direction+' ew-prevnext-link ew-prevnext-'+direction;
       a.href=contextualUrl(item.url,context);
 
       const arrow=document.createElement('span');
-      arrow.className='place-nav-arrow';
+      arrow.className='place-nav-arrow ew-prevnext-arrow';
       arrow.setAttribute('aria-hidden','true');
       arrow.textContent=direction==='prev'?'←':'→';
 
       const copy=document.createElement('span');
-      copy.className='place-nav-label';
+      copy.className='place-nav-label ew-prevnext-title';
       copy.textContent=item.name;
 
       if(direction==='prev')a.append(arrow,copy);
@@ -305,24 +305,28 @@
 
   const makeSeriesLink=(series,item,direction,context,{isHub=false}={})=>{
     const a=document.createElement('a');
-    a.className=direction==='prev'?'story-prev':'story-next';
+    a.className=(direction==='prev'?'story-prev':'story-next')+' ew-prevnext-link ew-prevnext-'+direction;
     a.href=contextualUrl(isHub?series.hub:item.url,context);
 
     const arrow=document.createElement('span');
-    arrow.className='nav-arrow';
+    arrow.className='nav-arrow ew-prevnext-arrow';
     arrow.setAttribute('aria-hidden','true');
     arrow.textContent=direction==='prev'?'←':'→';
 
     const copy=document.createElement('span');
-    copy.className='nav-copy';
+    copy.className='nav-copy ew-prevnext-copy';
     const small=document.createElement('small');
     const navKind=context==='place'?'장소':series.kind;
+    small.className='ew-prevnext-kicker';
     small.textContent=direction==='prev'?'이전 '+navKind:'다음 '+navKind;
     const strong=document.createElement('strong');
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    strong.append(num,document.createTextNode(' '+(isHub?(series.hubPrevName||'전체 개요'):item.name)));
+    const title=document.createElement('span');
+    title.className='nav-title ew-prevnext-title';
+    title.textContent=isHub?(series.hubPrevName||'전체 개요'):item.name;
+    strong.append(num,title);
     copy.append(small,strong);
 
     if(direction==='prev')a.append(arrow,copy);
@@ -408,7 +412,7 @@
     const items=match.items||seriesItemsFor(series,context);
     const nav=document.createElement('nav');
     const story=series.kind==='이야기';
-    nav.className='page-nav '+(story?'story-series-nav':'detail-series-nav');
+    nav.className='page-nav ew-prevnext ew-prevnext-numbered '+(story?'story-series-nav':'detail-series-nav');
     nav.dataset.navSystem='series';
     nav.setAttribute('aria-label',series.name+' 이전·다음 '+(context==='place'?'장소':series.kind));
 
