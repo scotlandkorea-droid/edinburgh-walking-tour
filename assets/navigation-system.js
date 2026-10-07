@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-15';
+  const VERSION='20261007-16';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -364,20 +364,15 @@
     arrow.setAttribute('aria-hidden','true');
     arrow.textContent=direction==='prev'?'←':'→';
 
-    const copy=document.createElement('span');
-    copy.className='nav-copy';
-    const small=document.createElement('small');
-    const navKind=series.kind;
+    const label=document.createElement('span');
+    label.className='series-nav-label';
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    small.append(document.createTextNode((direction==='prev'?'이전 ':'다음 ')+navKind+' '),num);
-    const strong=document.createElement('strong');
-    strong.textContent=isHub?(series.hubPrevName||'전체 개요'):itemNavName(item);
-    copy.append(small,strong);
+    label.append(num,document.createTextNode(' '+(isHub?(series.hubPrevName||'전체 개요'):itemNavName(item))));
 
-    if(direction==='prev')a.append(arrow,copy);
-    else a.append(copy,arrow);
+    if(direction==='prev')a.append(arrow,label);
+    else a.append(label,arrow);
     return a;
   };
 
@@ -620,25 +615,20 @@
       arrow.setAttribute('aria-hidden','true');
       arrow.textContent=direction==='prev'?'←':'→';
 
-      const copy=document.createElement('span');
-      copy.className='travel-nav-copy';
-      const small=document.createElement('small');
-      small.className='travel-nav-meta';
-      small.append(document.createTextNode(direction==='prev'?'이전 글':'다음 글'));
+      const label=document.createElement('span');
+      label.className='travel-nav-title';
       if(existingNo){
         const no=document.createElement('span');
         no.className='travel-nav-no';
         no.textContent=existingNo;
-        small.append(document.createTextNode(' '),no);
+        label.append(no,document.createTextNode(' '+title));
+      }else{
+        label.textContent=title;
       }
-      const strong=document.createElement('strong');
-      strong.className='travel-nav-title';
-      strong.textContent=title;
-      copy.append(small,strong);
 
       a.replaceChildren();
-      if(direction==='prev')a.append(arrow,copy);
-      else a.append(copy,arrow);
+      if(direction==='prev')a.append(arrow,label);
+      else a.append(label,arrow);
     };
 
     rebuild(prev,'prev');

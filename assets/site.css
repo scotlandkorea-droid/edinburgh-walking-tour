@@ -562,16 +562,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   column-gap:8px;
   text-align:right;
 }
-.page-nav.story-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:inherit}
-.page-nav.story-series-nav small{
-  display:block;
-  margin:0 0 8px;
-  color:#657069;
-  font-size:12px;
-  font-weight:700;
-  line-height:1.2;
-}
-.page-nav.story-series-nav strong{
+.page-nav.story-series-nav .series-nav-label{
   display:block;
   min-width:0;
   width:100%;
@@ -581,6 +572,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   word-break:keep-all;
   overflow-wrap:normal;
   text-wrap:wrap;
+  white-space:normal;
 }
 .page-nav.story-series-nav .nav-num{
   display:inline-block;
@@ -605,11 +597,10 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 @media(max-width:520px){
   .page-nav.story-series-nav{gap:10px}
   .page-nav.story-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.story-series-nav small{font-size:11px}
   .page-nav.story-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
   .page-nav.story-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
   .page-nav.story-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
-  .page-nav.story-series-nav strong{font-size:13px;line-height:1.42}
+  .page-nav.story-series-nav .series-nav-label{font-size:13px;line-height:1.42}
 }
 
 /* NUMBERED PLACE / REGION PREV-NEXT — same visual system as story series.
@@ -648,16 +639,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   column-gap:8px;
   text-align:right;
 }
-.page-nav.detail-series-nav .nav-copy{display:block;min-width:0;width:100%;text-align:inherit}
-.page-nav.detail-series-nav small{
-  display:block;
-  margin:0 0 8px;
-  color:#657069;
-  font-size:12px;
-  font-weight:700;
-  line-height:1.2;
-}
-.page-nav.detail-series-nav strong{
+.page-nav.detail-series-nav .series-nav-label{
   display:block;
   min-width:0;
   width:100%;
@@ -667,6 +649,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   word-break:keep-all;
   overflow-wrap:normal;
   text-wrap:wrap;
+  white-space:normal;
 }
 .page-nav.detail-series-nav .nav-num{
   display:inline-block;
@@ -727,11 +710,10 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 @media(max-width:520px){
   .page-nav.detail-series-nav{gap:10px}
   .page-nav.detail-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.detail-series-nav small{font-size:11px}
   .page-nav.detail-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
   .page-nav.detail-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
   .page-nav.detail-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
-  .page-nav.detail-series-nav strong{font-size:13px;line-height:1.42}
+  .page-nav.detail-series-nav .series-nav-label{font-size:13px;line-height:1.42}
 }
 
 
@@ -904,20 +886,9 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
   grid-template-columns:minmax(0,1fr) 20px;
   text-align:right;
 }
-.travel-ending .travel-series.travel-series-normalized .travel-nav-copy{
-  display:block;
-  min-width:0;
-  width:100%;
-}
-.travel-ending .travel-series.travel-series-normalized .travel-nav-meta{
-  display:block;
-  margin:0 0 6px;
-  color:#657069;
-  font-size:11px;
-  font-weight:700;
-  line-height:1.2;
-}
 .travel-ending .travel-series.travel-series-normalized .travel-nav-no{
+  display:inline-block;
+  margin-right:2px;
   color:#5e293c;
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
@@ -1125,81 +1096,6 @@ main .page-nav.tour-course-nav .place-nav-arrow{
     column-gap:3px;
     font-size:13px
   }
-}
-
-/* SHARED TWO-TIER PREV/NEXT VERTICAL ALIGNMENT — 2026-10-07
-   The meta/kicker is row 1 and the destination title is row 2.
-   The arrow always belongs to row 2, so it centers against the title itself
-   whether that title wraps to one, two or three lines. */
-.page-nav.story-series-nav>a,
-.page-nav.detail-series-nav>a,
-.travel-ending .travel-series.travel-series-normalized a{
-  grid-template-rows:auto auto;
-  align-content:center;
-  align-items:stretch;
-}
-.page-nav.story-series-nav .nav-copy,
-.page-nav.detail-series-nav .nav-copy,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-copy{
-  display:contents;
-}
-.page-nav.story-series-nav small,
-.page-nav.detail-series-nav small,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-meta{
-  grid-row:1;
-}
-.page-nav.story-series-nav strong,
-.page-nav.detail-series-nav strong,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-title{
-  grid-row:2;
-  align-self:center;
-}
-.page-nav.story-series-nav .nav-arrow,
-.page-nav.detail-series-nav .nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-arrow{
-  grid-row:2;
-  align-self:center;
-  justify-self:center;
-}
-.page-nav.story-series-nav .story-prev .nav-arrow,
-.page-nav.detail-series-nav .story-prev .nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-arrow{
-  grid-column:1;
-}
-.page-nav.story-series-nav .story-prev .nav-copy>small,
-.page-nav.story-series-nav .story-prev .nav-copy>strong,
-.page-nav.detail-series-nav .story-prev .nav-copy>small,
-.page-nav.detail-series-nav .story-prev .nav-copy>strong,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title{
-  grid-column:2;
-}
-.page-nav.story-series-nav .story-next .nav-arrow,
-.page-nav.detail-series-nav .story-next .nav-arrow,
-.travel-ending .travel-series.travel-series-normalized .next .travel-nav-arrow{
-  grid-column:2;
-}
-.page-nav.story-series-nav .story-next .nav-copy>small,
-.page-nav.story-series-nav .story-next .nav-copy>strong,
-.page-nav.detail-series-nav .story-next .nav-copy>small,
-.page-nav.detail-series-nav .story-next .nav-copy>strong,
-.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .next .travel-nav-copy>.travel-nav-title{
-  grid-column:1;
-  text-align:right;
-}
-.page-nav.story-series-nav .story-prev .nav-copy>small,
-.page-nav.story-series-nav .story-prev .nav-copy>strong,
-.page-nav.detail-series-nav .story-prev .nav-copy>small,
-.page-nav.detail-series-nav .story-prev .nav-copy>strong,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-meta,
-.travel-ending .travel-series.travel-series-normalized .prev .travel-nav-copy>.travel-nav-title{
-  text-align:left;
-}
-.page-nav.story-series-nav strong,
-.page-nav.detail-series-nav strong,
-.travel-ending .travel-series.travel-series-normalized .travel-nav-title{
-  white-space:normal;
 }
 
 /* Canonical walked-gallery presentation */
