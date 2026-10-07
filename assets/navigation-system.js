@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-5';
+  const VERSION='20261007-6';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -324,7 +324,7 @@
     const arrow=document.createElement('span');
     arrow.className='nav-arrow';
     arrow.setAttribute('aria-hidden','true');
-    arrow.textContent=direction==='prev'?'←':'→';
+    arrow.textContent=direction==='prev'?'‹':'›';
 
     const copy=document.createElement('span');
     copy.className='nav-copy';
