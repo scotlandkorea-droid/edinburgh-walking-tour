@@ -1,0 +1,17 @@
+# Navigation maintenance rule
+
+This file records the operational rule for title changes and previous/next navigation.
+
+- `assets/navigation-data.js` is the single source for numbered-series navigation labels.
+- `name` is the canonical/full item title.
+- `navName` is an optional shorter navigation label. Use it when a long article title should remain intact but hub/previous/next labels need to be shorter.
+- `tabName` is an optional tab-only label. It falls back to `navName`, then `name`.
+- When a manuscript or page title is edited, the same task must review the matching navigation-data record. The user should not need to separately request updates to tabs or previous/next cards.
+- Shared JavaScript rebuilds numbered-series tabs, hub-card labels, and previous/next labels from the central data. Do not hand-patch individual cards.
+- Do not insert page-specific `<br>`, shrink one page's font, or use `text-wrap: balance` to force a title to fit. Titles wrap naturally inside the text column; arrow columns stay fixed.
+- After a title/navigation change, audit numbering, duplicate URLs, first/last-card placement, and mobile → tablet → desktop rendering.
+- Full manuscripts are not shortened automatically. Only navigation labels are shortened when the editorial decision explicitly calls for it.
+
+## Automatic impact rule
+
+A title change is treated as a navigation-impacting change whenever the page belongs to a numbered series. The required review set is: page title/H1 as intended, central series record, series tabs, hub card, previous/next cards, and responsive wrapping.
