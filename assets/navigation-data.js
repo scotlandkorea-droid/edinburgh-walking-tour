@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-07-2",
+  "version": "2026-10-02-5",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -586,62 +586,52 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "세인트 자일스 전체 이야기",
-          "url": "/places/st-giles-overview.html",
-          "description": "로열마일 한가운데, 900년을 버텨온 교회에는 어떤 이야기가 숨어 있을까"
+          "url": "/places/st-giles-overview.html"
         },
         {
           "number": "02",
-          "name": "세인트 자일스의 건축",
-          "url": "/places/st-giles-architecture.html",
-          "description": "왕관 첨탑과 기둥·아치, 여러 시대가 겹쳐 만들어진 교회"
+          "name": "벽에 남은 스코틀랜드 인물들",
+          "url": "/places/st-giles-memorials.html"
         },
         {
           "number": "03",
-          "name": "벽에 남은 스코틀랜드 인물들",
-          "url": "/places/st-giles-memorials.html",
-          "description": "성당 벽의 작은 명패와 부조에서 만나는 뜻밖의 사람들"
+          "name": "존 녹스와 종교개혁",
+          "url": "/places/st-giles-john-knox.html"
         },
         {
           "number": "04",
-          "name": "존 녹스와 종교개혁",
-          "url": "/places/st-giles-john-knox.html",
-          "description": "한 사람의 설교가 스코틀랜드의 교회를 어떻게 바꾸었을까"
+          "name": "몬트로즈와 아가일",
+          "url": "/places/st-giles-montrose-argyll.html"
         },
         {
           "number": "05",
-          "name": "몬트로즈와 아가일",
-          "url": "/places/st-giles-montrose-argyll.html",
-          "description": "같은 서약에 이름을 올렸던 두 사람은 왜 서로 적이 되었을까"
+          "name": "제니 게디스의 의자",
+          "url": "/places/st-giles-jenny-geddes.html"
         },
         {
           "number": "06",
-          "name": "제니 게디스의 의자",
-          "url": "/places/st-giles-jenny-geddes.html",
-          "description": "예배 중 날아간 의자 하나, 영국 내전으로 이어지는 격변의 시작"
+          "name": "국민서약",
+          "url": "/places/st-giles-national-covenant.html"
         },
         {
           "number": "07",
-          "name": "국민서약",
-          "url": "/places/st-giles-national-covenant.html",
-          "description": "수많은 사람들이 이름을 걸고 왕의 종교정책에 맞섰던 약속"
+          "name": "시슬 채플",
+          "url": "/places/st-giles-thistle-chapel.html"
         },
         {
           "number": "08",
-          "name": "시슬 채플",
-          "url": "/places/st-giles-thistle-chapel.html",
-          "description": "화려한 기사단 예배당에서 백파이프를 부는 천사를 찾아보세요"
+          "name": "세인트 자일스의 스테인드글라스",
+          "url": "/places/st-giles-stained-glass.html"
         },
         {
           "number": "09",
-          "name": "세인트 자일스의 스테인드글라스",
-          "url": "/places/st-giles-stained-glass.html",
-          "description": "중세처럼 보이지만, 생각보다 훨씬 새로운 창들의 이야기"
+          "name": "고개를 들어 세인트 자일스를 보다",
+          "url": "/places/st-giles-architecture.html"
         },
         {
           "number": "10",
           "name": "존 녹스의 무덤",
-          "url": "/places/john-knox-grave.html",
-          "description": "그토록 유명한 종교개혁가의 무덤은 왜 주차장 아래에 있을까"
+          "url": "/places/john-knox-grave.html"
         }
       ]
     },
