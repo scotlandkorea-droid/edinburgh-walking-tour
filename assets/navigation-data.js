@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-07-1",
+  "version": "2026-10-07-2",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -995,5 +995,123 @@ window.EW_NAV_DATA={
         }
       ]
     }
-  ]
+  ],
+  "roleSequences": {
+    "theme": {
+      "label": "테마",
+      "hub": "/edinburgh/themes.html",
+      "items": [
+        {
+          "name": "에든버러의 역사와 왕실",
+          "url": "/edinburgh/themes/history-royalty.html"
+        },
+        {
+          "name": "에든버러의 종교개혁과 신앙",
+          "url": "/edinburgh/themes/reformation.html"
+        },
+        {
+          "name": "에든버러의 문학과 작가",
+          "url": "/edinburgh/themes/literary-city.html"
+        },
+        {
+          "name": "에든버러의 과학·의학·발명",
+          "url": "/edinburgh/themes/science-medicine-invention.html"
+        },
+        {
+          "name": "에든버러의 건축과 도시",
+          "url": "/edinburgh/themes/architecture-city.html"
+        }
+      ]
+    },
+    "people": {
+      "label": "인물",
+      "hub": "/edinburgh/people.html",
+      "items": [
+        {
+          "name": "성 마거릿",
+          "url": "/edinburgh/people/st-margaret.html"
+        },
+        {
+          "name": "데이비드 1세",
+          "url": "/edinburgh/people/david-i.html"
+        },
+        {
+          "name": "윌리엄 월리스",
+          "url": "/edinburgh/people/william-wallace.html"
+        },
+        {
+          "name": "로버트 브루스",
+          "url": "/edinburgh/people/robert-the-bruce.html"
+        },
+        {
+          "name": "메리 스튜어트",
+          "url": "/edinburgh/people/mary-queen-of-scots.html"
+        },
+        {
+          "name": "존 녹스",
+          "url": "/edinburgh/people/john-knox.html"
+        },
+        {
+          "name": "제임스 6세",
+          "url": "/edinburgh/people/james-vi.html"
+        },
+        {
+          "name": "데이비드 흄",
+          "url": "/edinburgh/people/david-hume.html"
+        },
+        {
+          "name": "아담 스미스",
+          "url": "/edinburgh/people/adam-smith.html"
+        },
+        {
+          "name": "제임스 허턴",
+          "url": "/edinburgh/people/james-hutton.html"
+        },
+        {
+          "name": "더걸드 스튜어트",
+          "url": "/edinburgh/people/dugald-stewart.html"
+        },
+        {
+          "name": "월터 스콧",
+          "url": "/edinburgh/people/walter-scott.html"
+        },
+        {
+          "name": "로버트 루이스 스티븐슨",
+          "url": "/edinburgh/people/robert-louis-stevenson.html"
+        },
+        {
+          "name": "아서 코난 도일",
+          "url": "/edinburgh/people/arthur-conan-doyle.html"
+        },
+        {
+          "name": "제임스 클러크 맥스웰",
+          "url": "/edinburgh/people/james-clerk-maxwell.html"
+        },
+        {
+          "name": "제임스 영 심슨",
+          "url": "/edinburgh/people/james-young-simpson.html"
+        },
+        {
+          "name": "조지프 벨",
+          "url": "/edinburgh/people/joseph-bell.html"
+        },
+        {
+          "name": "제임스 네이스미스",
+          "url": "/edinburgh/people/james-nasmyth.html"
+        },
+        {
+          "name": "알렉산더 그레이엄 벨",
+          "url": "/edinburgh/people/alexander-graham-bell.html"
+        },
+        {
+          "name": "에릭 리델",
+          "url": "/edinburgh/people/eric-liddell.html"
+        },
+        {
+          "name": "버크와 헤어",
+          "url": "/edinburgh/people/burke-and-hare.html"
+        }
+      ]
+    }
+  }
 };
