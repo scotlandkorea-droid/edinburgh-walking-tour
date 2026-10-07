@@ -593,6 +593,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   display:flex;
   align-items:center;
   justify-content:center;
+  align-self:center;
+  justify-self:center;
   width:20px;
   height:20px;
   font-size:0;
@@ -677,6 +679,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   display:flex;
   align-items:center;
   justify-content:center;
+  align-self:center;
+  justify-self:center;
   width:20px;
   height:20px;
   font-size:0;
@@ -691,11 +695,11 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.detail-series-nav .nav-arrow::before{
   content:"";
   display:block;
-  width:8px;
-  height:8px;
+  width:7px;
+  height:7px;
   box-sizing:border-box;
   border:solid currentColor;
-  border-width:0 2px 2px 0;
+  border-width:0 1.6px 1.6px 0;
 }
 .page-nav.story-series-nav .story-prev .nav-arrow::before,
 .page-nav.detail-series-nav .story-prev .nav-arrow::before{transform:rotate(135deg)}
@@ -703,7 +707,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 .page-nav.detail-series-nav .story-next .nav-arrow::before{transform:rotate(-45deg)}
 @media(max-width:520px){
   .page-nav.story-series-nav .nav-arrow::before,
-  .page-nav.detail-series-nav .nav-arrow::before{width:7px;height:7px}
+  .page-nav.detail-series-nav .nav-arrow::before{width:6px;height:6px}
 }
 @media(max-width:520px){
   .page-nav.detail-series-nav{gap:10px}
