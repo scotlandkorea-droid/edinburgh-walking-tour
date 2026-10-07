@@ -1,5 +1,5 @@
 window.EW_NAV_DATA={
-  "version": "2026-10-02-5",
+  "version": "2026-10-07-1",
   "placeRegions": [
     {
       "id": "edinburgh-1",
@@ -590,43 +590,43 @@ window.EW_NAV_DATA={
         },
         {
           "number": "02",
-          "name": "벽에 남은 스코틀랜드 인물들",
-          "url": "/places/st-giles-memorials.html"
+          "name": "세인트 자일스의 건축",
+          "url": "/places/st-giles-architecture.html"
         },
         {
           "number": "03",
+          "name": "벽에 남은 인물들",
+          "url": "/places/st-giles-memorials.html"
+        },
+        {
+          "number": "04",
           "name": "존 녹스와 종교개혁",
           "url": "/places/st-giles-john-knox.html"
         },
         {
-          "number": "04",
+          "number": "05",
           "name": "몬트로즈와 아가일",
           "url": "/places/st-giles-montrose-argyll.html"
         },
         {
-          "number": "05",
+          "number": "06",
           "name": "제니 게디스의 의자",
           "url": "/places/st-giles-jenny-geddes.html"
         },
         {
-          "number": "06",
+          "number": "07",
           "name": "국민서약",
           "url": "/places/st-giles-national-covenant.html"
         },
         {
-          "number": "07",
+          "number": "08",
           "name": "시슬 채플",
           "url": "/places/st-giles-thistle-chapel.html"
         },
         {
-          "number": "08",
+          "number": "09",
           "name": "세인트 자일스의 스테인드글라스",
           "url": "/places/st-giles-stained-glass.html"
-        },
-        {
-          "number": "09",
-          "name": "고개를 들어 세인트 자일스를 보다",
-          "url": "/places/st-giles-architecture.html"
         },
         {
           "number": "10",
