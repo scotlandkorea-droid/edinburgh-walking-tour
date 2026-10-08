@@ -2384,13 +2384,6 @@ body.place-single-detail main>.page-hero+section .detail-article{
   padding-top:0;
 }
 
-/* 2 — PLACE / REGION HUB: cream end to first content = 33 desktop / 31 mobile */
-body.place-region-hub :is(.detail-intro,.page-hero) + main .detail-article{
-  padding-top:33px;
-}
-body.place-region-hub main>.page-hero+section{
-  padding-top:33px;
-}
 body.place-region-hub main>.page-hero+section .detail-article{
   padding-top:0;
 }
@@ -2511,12 +2504,6 @@ body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro) .p
   body.place-single-detail main>.page-hero+section{
     padding-top:24px;
   }
-  body.place-region-hub :is(.detail-intro,.page-hero) + main .detail-article{
-    padding-top:31px;
-  }
-  body.place-region-hub main>.page-hero+section{
-    padding-top:31px;
-  }
   body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro){
     padding-top:24px;
     padding-bottom:14px;
@@ -2619,15 +2606,6 @@ body.place-single-detail main > .page-hero + section{
   padding-top:26px;
 }
 
-/* HUB: keep a little more breathing room below the cream top */
-body.place-region-hub .detail-intro + main .detail-article,
-body.place-region-hub .page-hero + main .detail-article,
-body.place-region-hub :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
-  padding-top:33px;
-}
-body.place-region-hub main > .page-hero + section{
-  padding-top:33px;
-}
 
 /* 3. STORY DETAIL — one shared top/body system across legacy story families */
 body.story-detail-standard > section:first-of-type{
@@ -2742,14 +2720,6 @@ body.story-detail-standard > section:first-of-type .place-map-link{
   }
   body.place-single-detail main > .page-hero + section{
     padding-top:24px;
-  }
-  body.place-region-hub .detail-intro + main .detail-article,
-  body.place-region-hub .page-hero + main .detail-article,
-  body.place-region-hub :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
-    padding-top:31px;
-  }
-  body.place-region-hub main > .page-hero + section{
-    padding-top:31px;
   }
   body.story-detail-standard > section:first-of-type{
     padding-top:24px;
