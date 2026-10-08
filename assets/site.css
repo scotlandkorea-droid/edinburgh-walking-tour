@@ -3638,3 +3638,7 @@ body.story-detail-standard .detail-article blockquote.story-quote-box p{
     padding:16px 17px;
   }
 }
+
+
+/* TEMP TEST: Edinburgh Castle 01 tab spacing only — remove after visual check */
+body.castle-story-esplanade .story-series-tabs>.story-series-tab:not(:last-child){margin-inline-end:50px}
