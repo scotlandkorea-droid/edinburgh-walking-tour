@@ -34,3 +34,18 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 - Card height and padding may remain role-specific; unification must not invent new information hierarchy.
 - Static fallback and runtime output must never coexist as duplicate visible navigation. A page may belong to multiple contexts (for example numbered-series/tour and place browsing), so the runtime replacement step must remove every pre-existing bottom `.page-nav[data-nav-system]` that is not one of the incoming runtime nodes. Static fallbacks exist only for pre-JS/no-JS safety; after runtime selection there must be one active navigation surface.
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
+
+
+## Approved short navigation names 2026-10-08
+
+Keep the full manuscript/H1 title intact and use `navName` only for compact numbered-series navigation where explicitly approved.
+
+- Greyfriars 04: `언약도 감옥`
+- Greyfriars 06: `알렉산더 헨더슨`
+- Greyfriars 07: `언약도 순교자들`
+- Falkland 06: `리처드 카메론 생가`
+- Glasgow 11: `켈빈그로브 공원 · 미술관·박물관`
+
+Glencoe 03 remains `해그리드 오두막은 어디 갔을까?` in the H1, hub card, series tabs, search title, and previous/next navigation. Do not broaden it with an added “영화 속 …” prefix.
+
+When one of these labels changes, update the central `navigation-data.js` record first, then keep static hub/tab/previous-next fallbacks consistent with the same label.
