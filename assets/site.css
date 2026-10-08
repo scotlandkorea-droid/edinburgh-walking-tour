@@ -527,20 +527,21 @@ body.course-detail .story:focus-visible,
 body.course-detail .stg-story:hover,
 body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);border-color:#cbd4cc;transform:translateY(-1px)}
 
-/* MULTI-STORY PREV/NEXT — shared detail navigation
-   One common rule for every multi-story detail page. */
-.page-nav.story-series-nav{
+/* NUMBERED DETAIL PREV/NEXT — one shared system
+   Shared by story-series and numbered place/region detail pages. */
+.page-nav:is(.story-series-nav,.detail-series-nav){
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
   margin:18px 0 0;
 }
-.page-nav.story-series-nav>a{
-  display:grid;
+.page-nav:is(.story-series-nav,.detail-series-nav)>a{
+  position:relative;
+  display:flex;
   align-items:center;
   min-width:0;
   min-height:92px;
-  padding:16px 14px;
+  padding:16px 10px;
   border:1px solid var(--line,#e3ded5);
   border-radius:18px;
   background:#eef3ee;
@@ -550,19 +551,16 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1.35;
   overflow:hidden;
 }
-.page-nav.story-series-nav .story-prev{
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev{
   grid-column:1;
-  grid-template-columns:20px minmax(0,1fr);
-  column-gap:8px;
   text-align:left;
 }
-.page-nav.story-series-nav .story-next{
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next{
   grid-column:2;
-  grid-template-columns:minmax(0,1fr) 20px;
-  column-gap:8px;
   text-align:right;
+  justify-content:flex-end;
 }
-.page-nav.story-series-nav .series-nav-label{
+.page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-label{
   display:block;
   min-width:0;
   width:100%;
@@ -574,108 +572,34 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   text-wrap:wrap;
   white-space:normal;
 }
-.page-nav.story-series-nav .nav-num{
-  display:inline-block;
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{padding-left:24px}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .series-nav-label{padding-right:24px}
+.page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-prefix{white-space:nowrap}
+.page-nav:is(.story-series-nav,.detail-series-nav) .nav-num{
+  display:inline;
   margin:0;
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
   color:#5e293c;
 }
-.page-nav.story-series-nav .nav-arrow{
+.page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow{
+  position:absolute;
+  top:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  align-self:center;
-  justify-self:center;
   width:20px;
   height:20px;
   font-size:0;
   line-height:1;
+  transform:translateY(-50%);
 }
-.page-nav.story-series-nav:has(.story-next:only-child) .story-next{grid-column:2}
-.page-nav.story-series-nav:has(.story-prev:only-child) .story-prev{grid-column:1}
-@media(max-width:520px){
-  .page-nav.story-series-nav{gap:10px}
-  .page-nav.story-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.story-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
-  .page-nav.story-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
-  .page-nav.story-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
-  .page-nav.story-series-nav .series-nav-label{font-size:13px;line-height:1.42}
-}
-
-/* NUMBERED PLACE / REGION PREV-NEXT — same visual system as story series.
-   Used by Glasgow, St Andrews and Isle of Skye detail sequences. */
-.page-nav.detail-series-nav{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin:18px 0 0;
-}
-.page-nav.detail-series-nav>a{
-  display:grid;
-  align-items:center;
-  justify-content:stretch;
-  min-width:0;
-  min-height:92px;
-  padding:16px 14px;
-  border:1px solid var(--line,#e3ded5);
-  border-radius:18px;
-  background:#eef3ee;
-  color:#31483d;
-  text-decoration:none;
-  font-weight:780;
-  line-height:1.35;
-  overflow:hidden;
-}
-.page-nav.detail-series-nav .story-prev{
-  grid-column:1;
-  grid-template-columns:20px minmax(0,1fr);
-  column-gap:8px;
-  text-align:left;
-}
-.page-nav.detail-series-nav .story-next{
-  grid-column:2;
-  grid-template-columns:minmax(0,1fr) 20px;
-  column-gap:8px;
-  text-align:right;
-}
-.page-nav.detail-series-nav .series-nav-label{
-  display:block;
-  min-width:0;
-  width:100%;
-  font-size:14px;
-  font-weight:800;
-  line-height:1.4;
-  word-break:keep-all;
-  overflow-wrap:normal;
-  text-wrap:wrap;
-  white-space:normal;
-}
-.page-nav.detail-series-nav .nav-num{
-  display:inline-block;
-  margin:0;
-  font-variant-numeric:tabular-nums;
-  white-space:nowrap;
-  color:#5e293c;
-}
-.page-nav.detail-series-nav .nav-arrow{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  align-self:center;
-  justify-self:center;
-  width:20px;
-  height:20px;
-  font-size:0;
-  line-height:1;
-}
-.page-nav.detail-series-nav.next-only .story-next{grid-column:2}
-.page-nav.detail-series-nav.prev-only .story-prev{grid-column:1}
-
-/* B-series arrows: use the same visual arrow scale as the other previous/next groups.
-   Keep the arrow in its dedicated fixed cell so title length never moves it. */
-.page-nav.story-series-nav .nav-arrow::before,
-.page-nav.detail-series-nav .nav-arrow::before{
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .nav-arrow{left:10px}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .nav-arrow{right:10px}
+.page-nav:is(.story-series-nav,.detail-series-nav):has(.story-next:only-child) .story-next{grid-column:2}
+.page-nav:is(.story-series-nav,.detail-series-nav):has(.story-prev:only-child) .story-prev{grid-column:1}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .nav-arrow::before,
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .nav-arrow::before{
   display:block;
   width:auto;
   height:auto;
@@ -686,36 +610,25 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   line-height:1;
   transform:none;
 }
-.page-nav.story-series-nav .story-prev .nav-arrow::before,
-.page-nav.detail-series-nav .story-prev .nav-arrow::before{content:"←"}
-.page-nav.story-series-nav .story-next .nav-arrow::before,
-.page-nav.detail-series-nav .story-next .nav-arrow::before{content:"→"}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .nav-arrow::before{content:"←"}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .nav-arrow::before{content:"→"}
 @media(max-width:719px){
-  .page-nav.story-series-nav .story-prev,
-  .page-nav.detail-series-nav .story-prev{
-    grid-template-columns:16px minmax(0,1fr);
+  .page-nav:is(.story-series-nav,.detail-series-nav){gap:10px}
+  .page-nav:is(.story-series-nav,.detail-series-nav)>a{
+    min-height:96px;
+    padding:14px 6px;
   }
-  .page-nav.story-series-nav .story-next,
-  .page-nav.detail-series-nav .story-next{
-    grid-template-columns:minmax(0,1fr) 16px;
+  .page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-label{
+    font-size:13px;
+    line-height:1.42;
   }
-  .page-nav.story-series-nav .nav-arrow,
-  .page-nav.detail-series-nav .nav-arrow{
-    width:16px;
-    height:16px;
-  }
-  .page-nav.story-series-nav .nav-arrow::before,
-  .page-nav.detail-series-nav .nav-arrow::before{font-size:19px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{padding-left:18px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .story-next .series-nav-label{padding-right:18px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow{width:16px;height:16px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .nav-arrow{left:6px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .story-next .nav-arrow{right:6px}
+  .page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow::before{font-size:19px}
 }
-@media(max-width:520px){
-  .page-nav.detail-series-nav{gap:10px}
-  .page-nav.detail-series-nav>a{min-height:96px;padding:14px 12px}
-  .page-nav.detail-series-nav .story-prev{grid-template-columns:16px minmax(0,1fr);column-gap:4px}
-  .page-nav.detail-series-nav .story-next{grid-template-columns:minmax(0,1fr) 16px;column-gap:4px}
-  .page-nav.detail-series-nav .nav-arrow{width:16px;height:16px;font-size:0}
-  .page-nav.detail-series-nav .series-nav-label{font-size:13px;line-height:1.42}
-}
-
 
 /* SHARED DETAIL READING SYSTEM
    Shared typography for completed story/detail pages.
