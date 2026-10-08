@@ -3552,3 +3552,12 @@ body.story-detail-standard .detail-article blockquote.story-quote-box p{
     padding:16px 17px;
   }
 }
+
+
+/* TEMP TEST 2026-10-08: hanging number indent on Glasgow 07 bottom prev card */
+@media(max-width:719px){
+  body.nav-number-indent-test .page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{
+    padding-left:38px;
+    text-indent:-20px;
+  }
+}
