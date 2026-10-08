@@ -2944,32 +2944,6 @@ html[data-nav-context="place"] body.story-detail-standard
 }
 
 
-/* DETAIL MAP + DIRECT BODY RHYTHM — place-single direct-manuscript spacing */
-/* 2) PLACE SINGLE: when there is no first overview/summary box, give the direct manuscript
-   the same deliberate breathing room. Existing overview-led pages remain untouched. */
-body.place-single-detail:not(:has(.detail-article > :is(
-  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-  .intro-box,.placeholder,.placeholder-section
-))) > .detail-intro + main .detail-article,
-body.place-single-detail:not(:has(.detail-article > :is(
-  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-  .intro-box,.placeholder,.placeholder-section
-))) > .hero + main .detail-article{
-  padding-top:45px!important;
-}
-body.place-single-detail:not(:has(.detail-article > :is(
-  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-  .intro-box,.placeholder,.placeholder-section
-))) > main > .page-hero + section{
-  padding-top:45px!important;
-}
-body.place-single-detail:not(:has(.detail-article > :is(
-  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-  .intro-box,.placeholder,.placeholder-section
-))) > main > .page-hero + section > .detail-article{
-  padding-top:0!important;
-}
-
 /* DETAIL MAP HEADER FINAL GENERALIZATION — 2026-10-06
    Any STORY DETAIL whose map action directly follows its story tabs keeps
    tabs + map in one cream header body, regardless of legacy family class. */
