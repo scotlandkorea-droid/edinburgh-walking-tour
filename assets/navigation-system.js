@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261007-16';
+  const VERSION='20261008-1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
