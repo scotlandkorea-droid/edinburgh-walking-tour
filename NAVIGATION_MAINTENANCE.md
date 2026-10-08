@@ -22,12 +22,12 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 
 - A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
 - The visible card content is one tier only: previous is `← title`, next is `title →`. Do not add a separate `이전/다음` kicker row unless the user explicitly approves a new design.
-- B numbered-series cards keep the sequence number inline with the title, e.g. `← 01 제목` / `03 제목 →`. The number must not be moved into a separate `이전 이야기/다음 이야기` row.
+- B numbered-series cards show the number and title in one visible tier (`← 01 제목` / `03 제목 →`), with fixed number and flexible title columns in shared CSS. The number must not become a separate `이전 이야기/다음 이야기` metadata row.
 - Numbered detail bottom cards (`story-series-nav` and `detail-series-nav`) use one shared CSS system. The arrow is absolutely positioned so it does not consume a text column. Inside each card, the sequence number and title are separate columns: the number stays in its own fixed-width column and every wrapped title line begins on the same title start line. The left card group is anchored left; the right card group is anchored right while the wrapped title itself stays aligned to its title column. Do not create page-specific wrapping fixes or temporary test classes.
 - Travel cards use the same one-tier form. If a travel sequence already has a meaningful number, keep it inline before the title; do not add `이전 글/다음 글` as a separate row.
 - C place-browse cards remain `← place name` / `place name →`.
 - Theme/people cards remain `← title` / `title →`; do not add `이전 테마/다음 테마` or `이전 인물/다음 인물`.
-- Previous-card text is left-aligned and next-card text is right-aligned. Titles use normal white-space with `word-break: keep-all`, `overflow-wrap: normal`, and `text-wrap: wrap`, so Korean titles wrap only at valid spaces.
+- Previous-card content groups anchor left and next-card content groups anchor right. In numbered B-series, wrapped titles within either group align left at the beginning of their title column; other navigation roles retain their approved left/right title alignment. Titles use normal white-space with `word-break: keep-all`, `overflow-wrap: normal`, and `text-wrap: wrap`, so Korean titles wrap only at valid spaces.
 - Wide screens (720px and above): arrow cell 20px, visible arrow 21px, font-weight 400.
 - Mobile/tablet-narrow (719px and below): arrow cell 16px, visible arrow 19px, font-weight 400.
 - Do not add a separate extra-small arrow size below 340px.
