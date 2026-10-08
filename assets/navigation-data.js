@@ -529,8 +529,7 @@ window.EW_NAV_DATA={
         },
         {
           "number": "04",
-          "name": "오래된 묘지 — 언약도 감옥·맥켄지·시체 도굴",
-          "navName": "언약도 감옥",
+          "name": "언약도 감옥",
           "url": "/places/greyfriars-old-cemetery.html"
         },
         {
@@ -540,14 +539,12 @@ window.EW_NAV_DATA={
         },
         {
           "number": "06",
-          "name": "알렉산더 헨더슨 — 죽은 뒤에도 남은 흔적",
-          "navName": "알렉산더 헨더슨",
+          "name": "알렉산더 헨더슨",
           "url": "/places/greyfriars-alexander-henderson.html"
         },
         {
           "number": "07",
-          "name": "언약도 순교자들 — 킬링 타임의 기억",
-          "navName": "언약도 순교자들",
+          "name": "언약도 순교자들",
           "url": "/places/greyfriars-covenanter-martyrs.html"
         }
       ]
@@ -807,8 +804,7 @@ window.EW_NAV_DATA={
         },
         {
           "number": "06",
-          "name": "리처드 카메론 생가 — ‘언약도의 사자’",
-          "navName": "리처드 카메론 생가",
+          "name": "리처드 카메론 생가",
           "url": "/scotland/places/falkland-richard-cameron.html"
         }
       ],
@@ -974,8 +970,7 @@ window.EW_NAV_DATA={
         },
         {
           "number": "11",
-          "name": "켈빈그로브 공원 · 켈빈그로브 미술관·박물관",
-          "navName": "켈빈그로브 공원 · 미술관·박물관",
+          "name": "켈빈그로브 공원 · 미술관·박물관",
           "url": "/scotland/places/glasgow/kelvingrove.html",
           "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
         }

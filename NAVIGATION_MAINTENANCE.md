@@ -36,9 +36,9 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
 
 
-## Approved short navigation names 2026-10-08
+## Approved numbered-detail titles 2026-10-08
 
-Keep the full manuscript/H1 title intact and use `navName` only for compact numbered-series navigation where explicitly approved.
+For the titles below, the approved short form is the canonical page title itself, not only a navigation alias. Keep page <title>, H1, hub card, series tab, search title, and previous/next label consistent from the central `navigation-data.js` name.
 
 - Greyfriars 04: `언약도 감옥`
 - Greyfriars 06: `알렉산더 헨더슨`
@@ -46,6 +46,6 @@ Keep the full manuscript/H1 title intact and use `navName` only for compact numb
 - Falkland 06: `리처드 카메론 생가`
 - Glasgow 11: `켈빈그로브 공원 · 미술관·박물관`
 
-Glencoe 03 remains `해그리드 오두막은 어디 갔을까?` in the H1, hub card, series tabs, search title, and previous/next navigation. Do not broaden it with an added “영화 속 …” prefix.
+Glencoe 03 remains `해그리드 오두막은 어디 갔을까?` everywhere. Do not add an “영화 속 …” prefix.
 
-When one of these labels changes, update the central `navigation-data.js` record first, then keep static hub/tab/previous-next fallbacks consistent with the same label.
+When one of these titles changes, update the central `navigation-data.js` record first, then keep page metadata/H1, hub cards, tabs, search data, and static previous/next fallbacks consistent.
