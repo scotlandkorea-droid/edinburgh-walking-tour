@@ -2133,24 +2133,12 @@ body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) .c
   color:#8a8176;
   text-transform:uppercase;
 }
-body:is(.place-single-detail,.place-region-hub) .place-map-link-row{
-  margin-top:27px;
-}
-body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
-  padding-bottom:18px;
-}
 body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
   padding-top:16px;
 }
 @media(max-width:719px){
   body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero) h1{
     font-size:clamp(37px,8.6vw,44px);
-  }
-  body:is(.place-single-detail,.place-region-hub) .place-map-link-row{
-    margin-top:29px;
-  }
-  body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row){
-    padding-bottom:16px;
   }
   body:is(.place-single-detail,.place-region-hub) :is(.detail-intro,.page-hero):has(.place-map-link-row) + main .detail-article{
     padding-top:14px;
@@ -2274,7 +2262,6 @@ body.explore-hub-standard .explore-tab:not(.active){
   text-decoration:none;
 }
 .breadcrumbs::-webkit-scrollbar,.crumbs::-webkit-scrollbar{display:none}
-.breadcrumb-separator{color:inherit}
 @media(max-width:719px){
   .breadcrumbs,.crumbs{font-size:13px!important}
 }
