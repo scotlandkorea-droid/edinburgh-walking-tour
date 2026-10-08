@@ -2224,15 +2224,9 @@ body.theme-detail-standard .theme-detail-intro .lead{
   color:#465a4f!important;
   font-weight:600;
 }
-body.theme-detail-standard .theme-article{
-  padding-top:32px;
-}
 @media(max-width:719px){
   body.theme-detail-standard .theme-detail-intro{
     padding-bottom:28px;
-  }
-  body.theme-detail-standard .theme-article{
-    padding-top:32px;
   }
 }
 
@@ -2520,9 +2514,6 @@ body.story-detail-standard :is(.story-series-tab,.story-tab).active{
 body.story-detail-standard main{
   padding-top:0;
 }
-body.story-detail-standard main .detail-article{
-  padding-top:19px;
-}
 
 /* STORY DETAIL maps: visually separate the map action into a white strip below title/tabs. */
 body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.place-map-link-row){
@@ -2579,9 +2570,6 @@ body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro) .p
   }
   body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro):has(.place-map-link-row){
     padding-bottom:0;
-  }
-  body.story-detail-standard main .detail-article{
-    padding-top:17px;
   }
   body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro) .place-map-link-row{
     margin-top:15px;
@@ -2778,10 +2766,6 @@ body.story-detail-standard > section:first-of-type .place-map-link-row{
 body.story-detail-standard > section:first-of-type .place-map-link{
   font-weight:700;
 }
-body.story-detail-standard main .detail-article,
-body.story-detail-standard > section:first-of-type:has(.place-map-link-row) + main .detail-article{
-  padding-top:19px;
-}
 
 /* Mobile final spacing */
 @media(max-width:719px){
@@ -2822,10 +2806,6 @@ body.story-detail-standard > section:first-of-type:has(.place-map-link-row) + ma
     margin-top:13px;
     margin-bottom:-14px;
     padding-top:12px;
-  }
-  body.story-detail-standard main .detail-article,
-  body.story-detail-standard > section:first-of-type:has(.place-map-link-row) + main .detail-article{
-    padding-top:17px;
   }
 }
 @media(min-width:720px){
