@@ -952,7 +952,7 @@ window.EW_NAV_DATA={
         },
         {
           "number": "08",
-          "name": "뷰캐넌 스트리트",
+          "name": "부케넌 스트리트",
           "url": "/scotland/places/glasgow/buchanan-street.html",
           "description": "상점과 거리 공연, 오래된 건물이 이어지는 글래스고의 대표적인 보행자 거리를 걷습니다."
         },
