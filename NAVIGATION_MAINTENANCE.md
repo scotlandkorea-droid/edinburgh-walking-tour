@@ -12,6 +12,14 @@ This file records the operational rule for title changes and previous/next navig
 - After a title/navigation change, audit numbering, duplicate URLs, first/last-card placement, and mobile → tablet → desktop rendering.
 - Full manuscripts are not shortened automatically. Only navigation labels are shortened when the editorial decision explicitly calls for it.
 
+
+## Context hash and actual anchor rules
+
+- `#tour-nav` and `#place-nav` are intentional navigation-context markers read from `location.hash` by `assets/navigation-system.js`. They select walking-tour order versus place-browsing order. They do **not** require corresponding HTML `id` attributes and must not be “fixed” by inventing anchor targets or removing the fragment.
+- Real scroll anchors must have a matching element ID on the target page. These include homepage `#tour`, `#explore`, `#walked`, `#guide`, `#travel`, `#contact`, and place-directory `#edinburgh`, `#scotland`, and regional anchors such as `#edinburgh-1`, `#edinburgh-4`, `#edinburgh-5`.
+- When changing cross-page links, validate the target page's actual `id` values first, then preserve the existing navigation-context marker if present. Do not treat an unknown fragment as a broken anchor without checking whether shared JavaScript interprets it.
+- Structural audit on 2026-10-08: 199 site HTML files and 2,812 cross-page fragment references were examined; no missing target was found among the recognized context markers and verified scroll anchors. This was a static source audit, **not** a live browser or mobile/tablet/PC verification.
+
 ## Automatic impact rule
 
 A title change is treated as a navigation-impacting change whenever the page belongs to a numbered series. The required review set is: page title/H1 as intended, central series record, series tabs, hub card, previous/next cards, and responsive wrapping.
