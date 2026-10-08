@@ -3103,88 +3103,7 @@ html[data-nav-context="place"] body.story-detail-standard
 }
 
 
-/* ST GILES STORY MAP — shared cream-header treatment, 2026-10-06
-   Keep the St Giles series tabs and any location map action in one header body. */
-body.stg-story-detail.story-detail-standard
-.detail-intro .story-series-tabs + .place-map-link-row{
-  margin-top:8px;
-  margin-bottom:0;
-  padding:0;
-  transform:none!important;
-  background:transparent;
-  box-shadow:none;
-  clip-path:none;
-}
-body.stg-story-detail.story-detail-standard
-.detail-intro .story-series-tabs + .place-map-link-row .place-map-link{
-  padding:4px 0;
-  font-size:12px;
-  line-height:1.25;
-  letter-spacing:-.01em;
-}
-body.stg-story-detail.story-detail-standard
-.detail-intro:has(.story-series-tabs + .place-map-link-row){
-  padding-bottom:12px;
-}
-body.stg-story-detail.story-detail-standard
-.detail-intro:has(.story-series-tabs + .place-map-link-row)
-+ main .detail-article{
-  padding-top:45px;
-}
-@media(max-width:719px){
-  body.stg-story-detail.story-detail-standard
-  .detail-intro .story-series-tabs + .place-map-link-row{
-    margin-top:8px;
-  }
-  body.stg-story-detail.story-detail-standard
-  .detail-intro .story-series-tabs + .place-map-link-row .place-map-link{
-    padding:4px 0;
-    font-size:12px;
-    line-height:1.25;
-    letter-spacing:-.01em;
-  }
-  body.stg-story-detail.story-detail-standard
-  .detail-intro:has(.story-series-tabs + .place-map-link-row){
-    padding-bottom:10px;
-  }
-  body.stg-story-detail.story-detail-standard
-  .detail-intro:has(.story-series-tabs + .place-map-link-row)
-  + main .detail-article{
-    padding-top:45px;
-  }
-}
-
-
-/* DETAIL MAP + DIRECT BODY RHYTHM — generalized final standard, 2026-10-06 */
-/* 1) STORY DETAIL: tabs + Google map remain one visual header body.
-   Preserve any place-context tab visibility logic; remove the old white-strip/translated map treatment. */
-body.story-detail-standard.map-after-series-tabs
-.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
-  margin-top:8px;
-  margin-bottom:0;
-  padding:0;
-  transform:none!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  clip-path:none!important;
-}
-body.story-detail-standard.map-after-series-tabs
-.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
-  padding:4px 0;
-  font-size:12px;
-  line-height:1.25;
-  letter-spacing:-.01em;
-}
-body.story-detail-standard.map-after-series-tabs
-.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
-  padding-bottom:12px!important;
-}
-body.story-detail-standard.map-after-series-tabs
-.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
-+ main .detail-article{
-  padding-top:45px!important;
-}
-
+/* DETAIL MAP + DIRECT BODY RHYTHM — place-single direct-manuscript spacing */
 /* 2) PLACE SINGLE: when there is no first overview/summary box, give the direct manuscript
    the same deliberate breathing room. Existing overview-led pages remain untouched. */
 body.place-single-detail:not(:has(.detail-article > :is(
@@ -3211,27 +3130,6 @@ body.place-single-detail:not(:has(.detail-article > :is(
 }
 
 @media(max-width:719px){
-  body.story-detail-standard.map-after-series-tabs
-  .detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
-    margin-top:8px;
-  }
-  body.story-detail-standard.map-after-series-tabs
-  .detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
-    padding:4px 0;
-    font-size:12px;
-    line-height:1.25;
-    letter-spacing:-.01em;
-  }
-  body.story-detail-standard.map-after-series-tabs
-  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
-    padding-bottom:10px!important;
-  }
-  body.story-detail-standard.map-after-series-tabs
-  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
-  + main .detail-article{
-    padding-top:45px!important;
-  }
-
   body.place-single-detail:not(:has(.detail-article > :is(
     .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
     .intro-box,.placeholder,.placeholder-section
