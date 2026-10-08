@@ -561,9 +561,12 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   justify-content:flex-end;
 }
 .page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-label{
-  display:block;
+  display:inline-grid;
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:4px;
+  align-items:start;
   min-width:0;
-  width:100%;
+  max-width:100%;
   font-size:14px;
   font-weight:800;
   line-height:1.4;
@@ -572,15 +575,24 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   text-wrap:wrap;
   white-space:normal;
 }
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{padding-left:24px}
-.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .series-nav-label{padding-right:24px}
-.page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-prefix{white-space:nowrap}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{
+  padding-left:24px;
+  justify-self:start;
+}
+.page-nav:is(.story-series-nav,.detail-series-nav) .story-next .series-nav-label{
+  padding-right:24px;
+  justify-self:end;
+}
 .page-nav:is(.story-series-nav,.detail-series-nav) .nav-num{
-  display:inline;
+  display:block;
   margin:0;
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
   color:#5e293c;
+}
+.page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-title{
+  min-width:0;
+  text-align:left;
 }
 .page-nav:is(.story-series-nav,.detail-series-nav) .nav-arrow{
   position:absolute;
@@ -3550,14 +3562,5 @@ body.story-detail-standard .detail-article blockquote.story-quote-box p{
   body.story-detail-standard .detail-article blockquote.story-quote-box{
     margin:28px 0;
     padding:16px 17px;
-  }
-}
-
-
-/* TEMP TEST 2026-10-08: hanging number indent on Glasgow 07 bottom prev card */
-@media(max-width:719px){
-  body.nav-number-indent-test .page-nav:is(.story-series-nav,.detail-series-nav) .story-prev .series-nav-label{
-    padding-left:38px;
-    text-indent:-20px;
   }
 }

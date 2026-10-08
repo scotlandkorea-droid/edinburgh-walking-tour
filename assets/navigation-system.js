@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261008-2';
+  const VERSION='20261008-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -366,17 +366,13 @@
 
     const label=document.createElement('span');
     label.className='series-nav-label';
-    const fullLabel=isHub?(series.hubPrevName||'전체 개요'):itemNavName(item);
-    const parts=String(fullLabel||'').trim().split(/\s+/).filter(Boolean);
-    const firstWord=parts.shift()||'';
-    const prefix=document.createElement('span');
-    prefix.className='series-nav-prefix';
     const num=document.createElement('span');
     num.className='nav-num';
     num.textContent=isHub?'00':item.number;
-    prefix.append(num,document.createTextNode(firstWord?' '+firstWord:''));
-    label.append(prefix);
-    if(parts.length)label.append(document.createTextNode(' '+parts.join(' ')));
+    const title=document.createElement('span');
+    title.className='series-nav-title';
+    title.textContent=isHub?(series.hubPrevName||'전체 개요'):itemNavName(item);
+    label.append(num,title);
 
     if(direction==='prev')a.append(arrow,label);
     else a.append(label,arrow);
