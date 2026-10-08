@@ -136,7 +136,12 @@
         script.src='/assets/search-data.js?v=20260930-4';
         script.dataset.ewSearchData='true';
         script.onload=()=>resolve(Array.isArray(window.EW_SEARCH_INDEX)?window.EW_SEARCH_INDEX:[]);
-        script.onerror=reject;
+        script.onerror=error=>{
+          // A failed request must not permanently block later search attempts.
+          searchDataPromise=null;
+          script.remove();
+          reject(error);
+        };
         document.head.appendChild(script);
       });
       return searchDataPromise;
