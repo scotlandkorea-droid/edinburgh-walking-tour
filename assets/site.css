@@ -212,7 +212,7 @@ body:has(.detail-article) main>section{padding-bottom:0}
 
 /* STORY SERIES NAV */
 .story-series-tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin:18px 0 6px;padding:3px 0 6px;-webkit-overflow-scrolling:touch}
-:is(.story-series-tabs,.story-tabs){gap:18px}
+:is(.story-series-tabs,.story-tabs){gap:0}\n:is(.story-series-tabs,.story-tabs)>:is(.story-series-tab,.story-tab):not(:last-child){margin-inline-end:18px}
 .story-series-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 .story-series-tab span{font-weight:800}
 .story-series-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
