@@ -23,6 +23,7 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 - A walking tour, B numbered series, C place browsing, theme/people role navigation, and travel navigation all use the same stemmed left/right arrow form.
 - The visible card content is one tier only: previous is `← title`, next is `title →`. Do not add a separate `이전/다음` kicker row unless the user explicitly approves a new design.
 - B numbered-series cards keep the sequence number inline with the title, e.g. `← 01 제목` / `03 제목 →`. The number must not be moved into a separate `이전 이야기/다음 이야기` row.
+- Numbered detail bottom cards (`story-series-nav` and `detail-series-nav`) use one shared CSS system. On narrow screens the arrow is absolutely positioned so it does not consume a text grid column, card horizontal padding is kept compact, and `series-nav-prefix` keeps the sequence number plus the first word together. This prevents a bare number from floating onto its own line while allowing the remaining title to use the full card width. Do not create page-specific wrapping fixes.
 - Travel cards use the same one-tier form. If a travel sequence already has a meaningful number, keep it inline before the title; do not add `이전 글/다음 글` as a separate row.
 - C place-browse cards remain `← place name` / `place name →`.
 - Theme/people cards remain `← title` / `title →`; do not add `이전 테마/다음 테마` or `이전 인물/다음 인물`.
