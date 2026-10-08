@@ -8,6 +8,12 @@
     "binding": "ASSETS",
     "html_handling": "none",
     "run_worker_first": [
+      "/assets/search-data.js",
+      "/assets/tour-course-data.js",
+      "/assets/navigation-data.js",
+      "/assets/navigation-system.js",
+      "/assets/site-header.js",
+      "/assets/site.css",
       "/",
       "/st-andrews",
       "/st-andrews/",
