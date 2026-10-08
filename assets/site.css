@@ -3109,26 +3109,6 @@ body.place-single-detail:not(:has(.detail-article > :is(
   padding-top:0!important;
 }
 
-@media(max-width:719px){
-  body.place-single-detail:not(:has(.detail-article > :is(
-    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-    .intro-box,.placeholder,.placeholder-section
-  ))) > .detail-intro + main .detail-article,
-  body.place-single-detail:not(:has(.detail-article > :is(
-    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-    .intro-box,.placeholder,.placeholder-section
-  ))) > .hero + main .detail-article{
-    padding-top:45px!important;
-  }
-  body.place-single-detail:not(:has(.detail-article > :is(
-    .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,
-    .intro-box,.placeholder,.placeholder-section
-  ))) > main > .page-hero + section{
-    padding-top:45px!important;
-  }
-}
-
-
 /* DETAIL MAP HEADER FINAL GENERALIZATION — 2026-10-06
    Any STORY DETAIL whose map action directly follows its story tabs keeps
    tabs + map in one cream header body, regardless of legacy family class. */
@@ -3163,17 +3143,6 @@ body.story-detail-standard
   .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
     padding-bottom:10px!important;
   }
-  body.story-detail-standard
-  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
-  + main .detail-article{
-    padding-top:45px!important;
-  }
-}
-
-
-/* EXPLORE HUB FIRST-CONTENT SPACING — 2026-10-06 */
-body.explore-hub-standard main > .page-hero + section{
-  padding-top:90px;
 }
 
 
@@ -3215,9 +3184,6 @@ body.travel-detail.travel-info-standard .travel-article{
 .detail-article > :first-child:is(
   .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,.intro-box
 ){
-  margin-bottom:45px!important;
-}
-body.museum-story-detail .detail-article > .quicklook:first-child{
   margin-bottom:45px!important;
 }
 
