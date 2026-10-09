@@ -10,7 +10,7 @@ import math
 roots = (Path("assets"), Path("images"))
 paths = sorted(p for root in roots for p in root.rglob("*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"})
 attention = (
-    "edited", "city-chambers", "new-college", "princes-street-gardens",
+    "edited", "deacon-brodie", "city-chambers", "new-college", "princes-street-gardens",
     "scott-monument", "ab75b4", "ef5aaf", "isle-of-skye",
     "robert-fergusson-writers", "heart-of-midlothian",
 )
@@ -27,7 +27,8 @@ for path in paths:
             stat = ImageStat.Stat(lap)
             # Subtract 128 before computing the rms contrast of the Laplacian.
             energy = math.sqrt(stat.var[0] + (stat.mean[0]-128)**2)
-            format = original.format
+            # Pillow calls JPEGs with MPF headers "MPO"; their first image is JPEG.
+            format = "JPEG" if original.format == "MPO" else original.format
             suffix = path.suffix.lower()
             expected = "JPEG" if suffix in {".jpg", ".jpeg"} else suffix[1:].upper()
             mismatch = format.upper() != expected
