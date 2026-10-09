@@ -485,9 +485,10 @@ window.EW_NAV_DATA={
         },
         {
           "number": "02",
-          "name": "처형장과 커버넌터",
+          "name": "그래스마켓의 처형장과 언약도",
           "url": "/places/grassmarket-executions-covenanters.html",
-          "tabName": "처형장과 커버넌터"
+          "navName": "처형장과 언약도",
+          "tabName": "처형장과 언약도"
         },
         {
           "number": "03",
