@@ -126,6 +126,23 @@ for(const field of ['aliases','titleOverrides','typeOverrides']){
 console.log('Shared data: '+navRefs+' navigation entries, '
   +searchRows.length+' search records; source references checked');
 
+
+// Every Worker-managed URL must also route through the Worker on Cloudflare.
+// Keep the runtime configuration and the shared-asset revalidation list in sync.
+const workerSource=read('worker.js');
+const workerCacheBlock=workerSource.match(/const revalidateAssets\s*=\s*new Set\(\[([\s\S]*?)\]\)/)?.[1];
+if(!workerCacheBlock)issues.push('worker: cannot locate shared asset revalidation list');
+else {
+  const workerCache=JSON.parse('['+workerCacheBlock+']');
+  const wrangler=JSON.parse(read('wrangler.jsonc'));
+  const first=new Set(wrangler.assets?.run_worker_first||[]);
+  for(const url of ['/', '/st-andrews/', ...redirects, ...workerCache])
+    if(!first.has(url))issues.push('wrangler: URL must run Worker first: '+url);
+  for(const url of workerCache)
+    if(!existing.has(url))issues.push('worker: cached asset is missing: '+url);
+  console.log('Worker routing: '+workerCache.length+' shared assets and all known redirects checked');
+}
+
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + indexablePages + ' indexable pages, '
   + noindexPages + ' noindex pages');
