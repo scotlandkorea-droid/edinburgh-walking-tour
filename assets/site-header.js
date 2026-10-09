@@ -242,15 +242,16 @@
       });
       renderResults(input.value);
     };
-    closeSearch=()=>{
+    closeSearch=(options={})=>{
       searchRequestId++;
       searchPanel.hidden=true;
       searchToggle.setAttribute('aria-expanded','false');
       searchToggle.setAttribute('aria-label','검색 열기');
+      if(options.returnFocus)searchToggle.focus({preventScroll:true});
     };
 
     searchToggle.addEventListener('click',()=>searchPanel.hidden?openSearch():closeSearch());
-    closeButton.addEventListener('click',closeSearch);
+    closeButton.addEventListener('click',()=>closeSearch({returnFocus:true}));
     input.addEventListener('input',()=>renderResults(input.value));
     form.addEventListener('submit',event=>{
       event.preventDefault();
@@ -261,7 +262,7 @@
       if(!searchPanel.hidden&&!searchHeader.contains(event.target))closeSearch();
     });
     document.addEventListener('keydown',event=>{
-      if(event.key==='Escape'&&!searchPanel.hidden)closeSearch();
+      if(event.key==='Escape'&&!searchPanel.hidden)closeSearch({returnFocus:true});
     });
   }
 
