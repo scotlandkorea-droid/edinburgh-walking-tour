@@ -33,7 +33,7 @@ const modal=document.getElementById('routeMapModal');
 const mapEl=document.getElementById('routeMap');
 if(!preview||!previewCanvas||!modal||!mapEl)return;
 function renderPreview(){
-  const lats=[...path.map(p=>p[0]),optionalStop.lat],lngs=[...path.map(p=>p[1]),optionalStop.lng];
+  const lngs=[...path.map(p=>p[1]),optionalStop.lng];
   const minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const projectX=lng=>12+(lng-minLng)/(maxLng-minLng)*976;
   const mainLats=path.map(p=>p[0]),mainMinLat=Math.min(...mainLats),mainMaxLat=Math.max(...mainLats);
