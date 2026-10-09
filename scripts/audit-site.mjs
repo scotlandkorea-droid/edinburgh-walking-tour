@@ -61,6 +61,22 @@ for (const file of pages) {
   const ogUrl = head.match(/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*\bcontent=["']([^"']+)["'][^>]*>/i)?.[1];
   if (ogUrl && canonical && ogUrl !== canonical)
     issues.push(file + ': social sharing URL differs from canonical URL');
+  // Social previews must not silently point at deleted or renamed local photos.
+  for(const key of ['og:image','twitter:image']){
+    const imageUrl=head.match(new RegExp(
+      '<meta\\b(?=[^>]*\\b(?:property|name)=[\\"\\\']'+key.replace(':','\\:')+
+      '[\\"\\\'])[^>]*\\bcontent=[\\"\\\']([^\\"\\\']+)[\\"\\\']','i'))?.[1];
+    if(!imageUrl)continue;
+    let parsed;
+    try{parsed=new URL(imageUrl,canonical||'https://edinburgh-walking-tour.scotlandkorea.workers.dev/')}
+    catch{issues.push(file+': invalid social preview image URL');continue}
+    if(parsed.origin!=='https://edinburgh-walking-tour.scotlandkorea.workers.dev')continue;
+    let imagePath;
+    try{imagePath=decodeURIComponent(parsed.pathname)}
+    catch{issues.push(file+': malformed social preview image URL');continue}
+    if(!existing.has(imagePath)&&!redirects.has(imagePath))
+      issues.push(file+': missing '+key+' image '+imagePath);
+  }
   if (noindex) noindexPages++;
   else {
     indexablePages++;
@@ -88,6 +104,19 @@ for (const file of pages) {
     catch { issues.push(file + ': invalid percent encoding in ' + match[1]); continue; }
     if (!existing.has(target) && !redirects.has(target))
       issues.push(file + ': missing local asset/page ' + target);
+  }
+}
+
+// Check externalized stylesheet images; static markup checks alone miss these.
+for(const cssPath of ['assets/site.css']){
+  const stylesheet=read(cssPath);
+  for(const match of stylesheet.matchAll(/url\\(\\s*[\\"\\']?(\\/[^)\\"\\']+)/gi)){
+    const raw=match[1].split(/[?#]/)[0];
+    let imagePath;
+    try{imagePath=decodeURIComponent(raw)}
+    catch{issues.push(cssPath+': malformed image reference');continue}
+    if(!existing.has(imagePath)&&!redirects.has(imagePath))
+      issues.push(cssPath+': missing CSS resource '+imagePath);
   }
 }
 for (const url of sitemap) {
