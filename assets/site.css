@@ -3116,3 +3116,9 @@ body.deep-dive-detail .theme-detail-intro .course-title-en{
 body.deep-dive-detail .theme-detail-intro .lead{
   margin-top:22px;
 }
+
+/* Shared travel article photograph block; natural aspect ratio, no photo cropping. */
+body.travel-detail .travel-article .travel-story-photo{margin:28px 0 34px;max-width:100%}
+body.travel-detail .travel-article .travel-story-photo img{display:block;width:100%;height:auto;max-width:100%;border-radius:10px}
+body.travel-detail .travel-article .travel-story-photo figcaption{padding:9px 2px 0;font-size:13px;line-height:1.55;color:var(--muted,#657069)}
+@media(max-width:620px){body.travel-detail .travel-article .travel-story-photo{margin:22px 0 27px}}
