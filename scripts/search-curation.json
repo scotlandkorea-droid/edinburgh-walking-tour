@@ -95,17 +95,24 @@
       "Surgeons Hall",
       "Surgeons’ Hall",
       "Surgeons' Hall Museums",
-      "서전스홀"
+      "서전스홀",
+      "리스터"
     ],
     "/edinburgh/places/pleasance.html": [
       "플레전스",
       "Pleasance",
       "Pleasance Courtyard",
-      "The Pleasance"
+      "The Pleasance",
+      "Quaker"
     ],
     "/edinburgh/places/mcewan-hall.html": [
       "McEwan Hall",
-      "University of Edinburgh McEwan Hall"
+      "University of Edinburgh McEwan Hall",
+      "Carmina Burana",
+      "Noël Coward",
+      "Gorbachev",
+      "Trudeau",
+      "Graduation"
     ],
     "/places/royal-mile.html": [
       "로열 마일",
@@ -200,28 +207,37 @@
       "스카이 들어가는 길",
       "Road to Skye",
       "Eilean Donan",
-      "Skye Bridge"
+      "Skye Bridge",
+      "Kyleakin",
+      "Broadford",
+      "브로드포드"
     ],
     "/scotland/places/isle-of-skye-cuillin-fairy-pools.html": [
       "페어리 풀",
       "Fairy Pools",
       "Cuillin",
       "Black Cuillin",
-      "Red Cuillin"
+      "Red Cuillin",
+      "Glen Brittle",
+      "글렌브리틀"
     ],
     "/scotland/places/isle-of-skye-trotternish.html": [
       "트로터니시",
       "Trotternish",
       "Old Man of Storr",
       "Quiraing",
-      "Staffin"
+      "Staffin",
+      "Mealt Falls",
+      "Kilt Rock",
+      "Uig"
     ],
     "/scotland/places/isle-of-skye-west.html": [
       "던베건",
       "Dunvegan Castle",
       "Neist Point",
       "Clan MacLeod",
-      "서쪽 스카이"
+      "서쪽 스카이",
+      "Fairy Flag"
     ],
     "/scotland/places/isle-of-skye-sleat.html": [
       "슬리트",
@@ -245,12 +261,15 @@
       "Glasgow Cathedral",
       "세인트 멍고 대성당",
       "St Mungo's Cathedral",
-      "High Kirk of Glasgow"
+      "High Kirk of Glasgow",
+      "St Mungo",
+      "Saint Mungo"
     ],
     "/scotland/places/glasgow/glasgow-necropolis.html": [
       "Glasgow Necropolis",
       "네크로폴리스",
-      "글래스고 공동묘지"
+      "글래스고 공동묘지",
+      "City of the Dead"
     ],
     "/scotland/places/dumfries.html": [
       "던프리스",
@@ -304,11 +323,19 @@
     "/places/canongate-adam-smith.html": [
       "애덤 스미스 무덤",
       "Adam Smith Grave",
-      "Adam Smith’s Grave"
+      "Adam Smith’s Grave",
+      "Panmure House",
+      "국부론",
+      "The Wealth of Nations"
     ],
     "/places/canongate-kirkyard-stories.html": [
       "캐논게이트 묘지",
-      "Canongate Kirkyard"
+      "Canongate Kirkyard",
+      "Scrooge",
+      "Horatius Bonar",
+      "David Rizzio",
+      "Clarinda",
+      "Agnes Maclehose"
     ],
     "/places/canongate-robert-fergusson.html": [
       "Robert Fergusson Statue"
@@ -460,7 +487,10 @@
       "Advance",
       "Off-Peak",
       "Anytime",
-      "SplitSave"
+      "SplitSave",
+      "Delay Repay",
+      "Lumo",
+      "LNER"
     ],
     "/travel/accommodation.html": [
       "숙박",
@@ -608,6 +638,13 @@
       "MBE OBE KBE",
       "Honours and Orders",
       "영국 왕실 훈장"
+    ],
+    "/places/st-giles-architecture.html": [
+      "Crown Spire",
+      "크라운 첨탑",
+      "고딕 아치",
+      "외부 건축",
+      "내부 건축"
     ]
   },
   "virtual": [
