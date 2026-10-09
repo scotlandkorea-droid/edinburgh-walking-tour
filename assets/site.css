@@ -2659,25 +2659,6 @@ body.place-region-hub.st-andrews-guide :is(.guide-core,.city-core,.guide-info,.c
   position:relative;
 }
 
-/* Grassmarket fallback while legacy HTML is being normalized to story-series-tabs. */
-body.story-detail-standard .story-tabs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  padding:3px 0 6px;
-  -webkit-overflow-scrolling:touch;
-}
-body.story-detail-standard .story-tab{
-  flex:0 0 auto;
-  text-decoration:none;
-  color:var(--muted,#657069);
-  border-radius:10px;
-  border:1px solid transparent;
-  white-space:nowrap;
-}
-
-
 /* PLACE SINGLE LEGACY HERO ALIAS — Arthur's Seat structure, 2026-10-05 */
 /* Keep the homepage Hero untouched; only a Place Single using the old .hero shell joins the shared detail top. */
 body.place-single-detail > .hero{
