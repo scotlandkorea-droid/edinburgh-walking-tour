@@ -601,7 +601,7 @@ window.EW_NAV_DATA={
         },
         {
           "number": "03",
-          "name": "벽에 남은 인물들",
+          "name": "벽에 남은 스코틀랜드 인물들",
           "url": "/places/st-giles-memorials.html"
         },
         {
