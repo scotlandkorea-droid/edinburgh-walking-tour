@@ -274,7 +274,8 @@
     const next=document.querySelector('.gallery-arrow.next');
     const image=lightbox.querySelector('img');
     const closeButton=lightbox.querySelector('button');
-    const protectedImages=[...gallery.querySelectorAll('.photo-card img'),image];
+    const galleryPhotos=[...gallery.querySelectorAll('.photo-card img')];
+    const protectedImages=[...galleryPhotos,image];
     protectedImages.forEach(photo=>{
       photo.draggable=false;
       photo.setAttribute('draggable','false');
@@ -318,7 +319,18 @@
     };
     prev?.addEventListener('click',()=>gallery.scrollBy({left:-gallery.clientWidth*.78,behavior:'smooth'}));
     next?.addEventListener('click',()=>gallery.scrollBy({left:gallery.clientWidth*.78,behavior:'smooth'}));
-    gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>openLightbox(photo)));
+    galleryPhotos.forEach(photo=>{
+      // Thumbnails are clickable images, so they also need keyboard activation.
+      photo.tabIndex=0;
+      photo.setAttribute('role','button');
+      photo.setAttribute('aria-label',(photo.alt||'사진')+' 확대 보기');
+      photo.addEventListener('click',()=>openLightbox(photo));
+      photo.addEventListener('keydown',event=>{
+        if(event.key!=='Enter'&&event.key!==' ')return;
+        event.preventDefault();
+        openLightbox(photo);
+      });
+    });
     closeButton?.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&(lightbox.classList.contains('open')||lightboxPending))closeLightbox()});
