@@ -11,6 +11,15 @@ on:
       - 'st-andrews/**/*.html'
       - 'travel/**/*.html'
       - 'assets/navigation-data.js'
+      - 'assets/navigation-system.js'
+      - 'assets/site-header.js'
+      - 'assets/tour-course-data.js'
+      - 'assets/tour-map.js'
+      - 'assets/site.css'
+      - 'sitemap.xml'
+      - '.assetsignore'
+      - 'worker.js'
+      - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
       - 'scripts/audit-site.mjs'
       - 'scripts/search-curation.json'
@@ -31,6 +40,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check assets/site-header.js
+          node --check assets/navigation-system.js
+          node --check assets/navigation-data.js
+          node --check assets/tour-course-data.js
+          node --check assets/tour-map.js
+          node --check assets/search-data.js
       - name: Generate static search index
         run: node scripts/build-search-index.mjs
       - name: Check generated index is reproducible
