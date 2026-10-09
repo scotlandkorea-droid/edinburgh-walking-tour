@@ -62,10 +62,11 @@ for (const file of pages) {
   if (ogUrl && canonical && ogUrl !== canonical)
     issues.push(file + ': social sharing URL differs from canonical URL');
   // Social previews must not silently point at deleted or renamed local photos.
+  const socialMeta=[...head.matchAll(/<meta\b[^>]*>/gi)].map(match=>match[0]);
   for(const key of ['og:image','twitter:image']){
-    const imageUrl=head.match(new RegExp(
-      '<meta\\b(?=[^>]*\\b(?:property|name)=[\\"\\\']'+key.replace(':','\\:')+
-      '[\\"\\\'])[^>]*\\bcontent=[\\"\\\']([^\\"\\\']+)[\\"\\\']','i'))?.[1];
+    const tag=socialMeta.find(value=>
+      value.match(/\b(?:property|name)=["']([^"']+)["']/i)?.[1]===key);
+    const imageUrl=tag?.match(/\bcontent=["']([^"']+)["']/i)?.[1];
     if(!imageUrl)continue;
     let parsed;
     try{parsed=new URL(imageUrl,canonical||'https://edinburgh-walking-tour.scotlandkorea.workers.dev/')}
@@ -110,7 +111,7 @@ for (const file of pages) {
 // Check externalized stylesheet images; static markup checks alone miss these.
 for(const cssPath of ['assets/site.css']){
   const stylesheet=read(cssPath);
-  for(const match of stylesheet.matchAll(/url\\(\\s*[\\"\\']?(\\/[^)\\"\\']+)/gi)){
+  for(const match of stylesheet.matchAll(/url\(\s*["']?(\/[^)"']+)/gi)){
     const raw=match[1].split(/[?#]/)[0];
     let imagePath;
     try{imagePath=decodeURIComponent(raw)}
