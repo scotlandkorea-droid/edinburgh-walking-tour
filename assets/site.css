@@ -2038,7 +2038,7 @@ body.composite-story-detail .detail-intro .course-title-en + .lead{
 }
 
 /* MAP AFTER SERIES TABS — separate route navigation from map action, keep map closer to body */
-body.map-after-series-tabs :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
   margin-top:26px;
   transform:translateY(13px);
 }
@@ -2049,7 +2049,7 @@ body.map-after-series-tabs .detail-intro:has(.place-map-link-row) + main .detail
   padding-top:16px;
 }
 @media(max-width:719px){
-  body.map-after-series-tabs :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+  body.map-after-series-tabs .story-series-tabs + .place-map-link-row{
     margin-top:28px;
     transform:translateY(15px);
   }
@@ -2353,12 +2353,12 @@ body.story-detail-standard :is(.detail-intro,.castle-intro,.greyfriars-intro) .l
   color:#465a4f!important;
   font-weight:600;
 }
-body.story-detail-standard :is(.story-series-tabs,.story-tabs){
+body.story-detail-standard .story-series-tabs{
   margin:19px 0 0;
   padding:3px 0 6px;
   gap:8px;
 }
-body.story-detail-standard :is(.story-series-tab,.story-tab){
+body.story-detail-standard .story-series-tab{
   flex:0 0 auto;
   padding:7px 9px;
   border:1px solid transparent;
@@ -2370,7 +2370,7 @@ body.story-detail-standard :is(.story-series-tab,.story-tab){
   text-decoration:none;
   white-space:nowrap;
 }
-body.story-detail-standard :is(.story-series-tab,.story-tab).active{
+body.story-detail-standard .story-series-tab.active{
   background:#e8eee8;
   border-color:var(--line,#e3ded5);
   color:var(--ink,#18211d);
@@ -2572,15 +2572,15 @@ body.story-detail-standard > section:first-of-type > .wrap .lead{
   color:var(--detail-subtitle)!important;
   font-weight:600;
 }
-body.story-detail-standard > section:first-of-type :is(.story-series-tabs,.story-tabs){
+body.story-detail-standard > section:first-of-type .story-series-tabs{
   margin-top:19px;
 }
-body.story-detail-standard > section:first-of-type :is(.story-series-tab,.story-tab){
+body.story-detail-standard > section:first-of-type .story-series-tab{
   font-size:12px;
   line-height:1.35;
   padding:7px 9px;
 }
-body.story-detail-standard > section:first-of-type :is(.story-series-tab,.story-tab).active{
+body.story-detail-standard > section:first-of-type .story-series-tab.active{
   background:var(--detail-active-sage);
   border-color:var(--line,#e3ded5);
   color:var(--ink,#18211d);
@@ -2592,7 +2592,7 @@ body.story-detail-standard > section:first-of-type > .wrap{
   display:flex;
   flex-direction:column;
 }
-body.story-detail-standard > section:first-of-type :is(.story-series-tabs,.story-tabs){order:10}
+body.story-detail-standard > section:first-of-type .story-series-tabs{order:10}
 body.story-detail-standard > section:first-of-type .place-map-link-row{order:11}
 
 /* STORY maps remain below title/tabs, but visually sit on their own white strip. */
@@ -2907,7 +2907,7 @@ html[data-nav-context="place"] body.story-detail-standard
    Any STORY DETAIL whose map action directly follows its story tabs keeps
    tabs + map in one cream header body, regardless of legacy family class. */
 body.story-detail-standard
-.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row{
+.detail-intro .story-series-tabs + .place-map-link-row{
   margin-top:8px!important;
   margin-bottom:0!important;
   padding:0!important;
@@ -2917,24 +2917,24 @@ body.story-detail-standard
   clip-path:none!important;
 }
 body.story-detail-standard
-.detail-intro :is(.story-series-tabs,.story-tabs) + .place-map-link-row .place-map-link{
+.detail-intro .story-series-tabs + .place-map-link-row .place-map-link{
   padding:4px 0!important;
   font-size:12px!important;
   line-height:1.25!important;
   letter-spacing:-.01em!important;
 }
 body.story-detail-standard
-.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+.detail-intro:has(.story-series-tabs + .place-map-link-row){
   padding-bottom:12px!important;
 }
 body.story-detail-standard
-.detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row)
+.detail-intro:has(.story-series-tabs + .place-map-link-row)
 + main .detail-article{
   padding-top:45px!important;
 }
 @media(max-width:719px){
   body.story-detail-standard
-  .detail-intro:has(:is(.story-series-tabs,.story-tabs) + .place-map-link-row){
+  .detail-intro:has(.story-series-tabs + .place-map-link-row){
     padding-bottom:10px!important;
   }
 }

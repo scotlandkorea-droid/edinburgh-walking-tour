@@ -263,7 +263,7 @@
     const visible=context!=='place';
     const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
     const eyebrow=wrap?.querySelector(':scope > .eyebrow');
-    const tabs=wrap?.querySelector(':scope > .story-series-tabs,:scope > .story-tabs');
+    const tabs=wrap?.querySelector(':scope > .story-series-tabs');
     [eyebrow,tabs].filter(Boolean).forEach(node=>{
       node.hidden=!visible;
       if(visible)node.style.removeProperty('display');
@@ -409,7 +409,7 @@
 
   const syncSeriesTabs=(series,index,context)=>{
     if(series.kind!=='이야기')return;
-    let tabs=document.querySelector('.story-series-tabs, .story-tabs');
+    let tabs=document.querySelector('.story-series-tabs');
     if(!tabs&&context==='place'&&Array.isArray(series.placeItems)){
       tabs=document.createElement('nav');
       tabs.className='story-series-tabs place-context-series-tabs';
@@ -422,20 +422,15 @@
     tabs.hidden=false;
     tabs.style.removeProperty('display');
     const items=seriesItemsFor(series,context);
-    const legacy=tabs.classList.contains('story-tabs');
     tabs.setAttribute('aria-label',series.name+' 이야기 목록');
     tabs.replaceChildren(...items.map((item,i)=>{
       const a=document.createElement('a');
-      a.className=(legacy?'story-tab':'story-series-tab')+(i===index?' active':'');
+      a.className='story-series-tab'+(i===index?' active':'');
       if(i===index)a.setAttribute('aria-current','page');
       a.href=contextualUrl(item.url,context);
-      if(legacy){
-        a.textContent=item.number+' '+itemTabName(item);
-      }else{
-        const num=document.createElement('span');
-        num.textContent=item.number;
-        a.append(num,document.createTextNode(' '+itemTabName(item)));
-      }
+      const num=document.createElement('span');
+      num.textContent=item.number;
+      a.append(num,document.createTextNode(' '+itemTabName(item)));
       return a;
     }));
 
