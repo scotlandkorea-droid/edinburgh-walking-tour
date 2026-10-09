@@ -1023,4 +1023,88 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/highlands.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/skye-islands.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/whisky-distilleries.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/castles-history.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/film-locations.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/towns-villages.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/golf.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/lochs.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/jacobite-footsteps.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/faith-footsteps.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/destinations/faith-places.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/where-to-go-itineraries.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

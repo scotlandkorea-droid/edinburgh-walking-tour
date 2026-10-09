@@ -3124,3 +3124,32 @@ body.travel-detail .travel-article .travel-story-photo{margin:28px 0 34px;max-wi
 body.travel-detail .travel-article .travel-story-photo img{display:block;width:100%;height:auto;max-width:100%;border-radius:10px}
 body.travel-detail .travel-article .travel-story-photo figcaption{padding:9px 2px 0;font-size:13px;line-height:1.55;color:var(--muted,#657069)}
 @media(max-width:620px){body.travel-detail .travel-article .travel-story-photo{margin:22px 0 27px}}
+
+/* SCOTLAND DESTINATIONS — shared, non-numbered travel choice system (2026-10-09).
+   Use existing travel-detail/travel-info-standard layout and typographic rhythm. */
+body.travel-detail.travel-info-standard.destination-hub{--travel-max:1080px}
+.destination-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:4px 0 24px}
+.destination-choice-card{display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:104px;padding:20px 17px;border:1px solid #d5dfd5;border-radius:15px;background:#f5f7f2;color:var(--travel-green,#315844);text-decoration:none}
+.destination-choice-card strong{min-width:0;font-size:clamp(16px,3vw,19px);line-height:1.35;font-weight:800;word-break:keep-all;overflow-wrap:break-word}
+.destination-choice-card>span{flex:0 0 auto;color:var(--plum);font-size:26px;line-height:1}
+.destination-itinerary-card{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 23px;border:1px solid #ccd8ce;border-radius:16px;background:#eaf0e8;color:var(--travel-green,#315844);text-decoration:none}
+.destination-itinerary-card strong{display:block;font-size:clamp(19px,4vw,22px);line-height:1.35;font-weight:800;word-break:keep-all}
+.destination-itinerary-card small{display:block;margin-top:8px;font-size:14px;line-height:1.6;font-weight:500;color:#506559}
+.destination-itinerary-arrow{flex:0 0 auto;font-size:29px;color:var(--plum)}
+.destination-choice-card:hover,.destination-itinerary-card:hover{border-color:#aabfac;background:#e9f0e7}
+.destination-choice-card:focus-visible,.destination-itinerary-card:focus-visible,.destination-region-jump a:focus-visible{outline:3px solid var(--plum);outline-offset:3px}
+.destination-hub-note{margin:25px 0 0!important;color:var(--muted);font-size:14px}
+body.travel-detail .travel-hero .destination-topic-subtitle{margin:0 0 12px;color:var(--plum);font-size:14px;font-weight:720;line-height:1.5;word-break:keep-all}
+body.travel-detail .travel-article .further-reading-box{margin:36px 0 32px;padding:21px 22px;border-radius:15px;background:var(--sage,#edf2ed)}
+.destination-region-jump{margin:36px 0 40px;padding:21px 19px;border:1px solid #d7e1d8;border-radius:15px;background:#f7f9f5}
+.destination-region-jump p{margin:0 0 13px!important;color:var(--travel-green,#315844);font-size:15px;font-weight:800}
+.destination-region-jump>div{display:flex;flex-wrap:wrap;gap:9px}
+.destination-region-jump a{display:inline-flex;min-height:37px;align-items:center;padding:7px 12px;border-radius:9px;border:1px solid #cbd9ce;background:#fff;color:#315844;font-size:13px;font-weight:700;line-height:1.35;word-break:keep-all}
+.destination-region-jump a:hover{background:#e6eee7}
+.destination-region-detail h2[id]{scroll-margin-top:95px}
+.destination-region-detail .destination-site-line{margin:0!important;padding:16px 0 16px 14px;border-bottom:1px solid #e3e9e1;border-left:3px solid #d7e4d9;line-height:1.8}
+.destination-region-detail .destination-site-line a,.destination-topic-detail .travel-article p a{color:#365746;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:359px){.destination-choice-grid{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:720px){.destination-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.destination-choice-card{min-height:116px;padding:21px}}
+@media(min-width:1000px){.destination-choice-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.destination-choice-card{min-height:124px;align-items:flex-start;gap:5px;padding:19px 13px}.destination-choice-card>span{font-size:23px}}
+@media(prefers-reduced-motion:no-preference){.destination-choice-card,.destination-itinerary-card{transition:background-color .16s ease,border-color .16s ease}}
