@@ -139,7 +139,7 @@ for filename, content in pending.items():
 for filename in tracked:
     p = Path(filename)
     if (p.suffix.lower() not in textual_suffixes or not p.exists() or
-        filename.startswith(("scripts/", ".github/")) or filename == "worker.js"):
+        filename.startswith(("scripts/", ".github/")) or filename in ("worker.js", "wrangler.jsonc")):
         continue
     text = p.read_text(encoding="utf-8")
     for old in renames:
