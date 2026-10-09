@@ -45,6 +45,10 @@ for (const file of pages) {
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
+  const title = head.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim();
+  const description = head.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*\bcontent=["']([^"']+)["'][^>]*>/i)?.[1]?.trim();
+  if (!title) issues.push(file + ': missing document title');
+  if (!description) issues.push(file + ': missing meta description');
   const canonical = head.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i)?.[1];
   if (!canonical) issues.push(file + ': no canonical link');
   else if (!canonical.endsWith(pathname)) issues.push(file + ': canonical differs from ' + pathname);
@@ -59,6 +63,15 @@ for (const file of pages) {
   // shared navigation/search data tests, not treated as ordinary anchors.
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+  for (const img of markup.matchAll(/<img\b[^>]*>/gi)) {
+    if (!/\balt\s*=\s*["'][^"']*["']/i.test(img[0]))
+      issues.push(file + ': image is missing alt attribute');
+  }
+  for (const anchor of markup.matchAll(/<a\b[^>]*>/gi)) {
+    if (/\btarget\s*=\s*["']_blank["']/i.test(anchor[0]) &&
+        !/\brel\s*=\s*["'][^"']*\b(?:noopener|noreferrer)\b/i.test(anchor[0]))
+      issues.push(file + ': external-window link is missing rel=noopener');
+  }
   for (const match of markup.matchAll(/\b(?:href|src|poster)=["'](\/[^"']+)["']/gi)) {
     let target = match[1].split(/[?#]/)[0];
     if (!target || target.startsWith('//')) continue;
