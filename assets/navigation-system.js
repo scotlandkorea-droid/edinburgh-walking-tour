@@ -17,14 +17,20 @@
     if(existing){
       if(test())return resolve();
       existing.addEventListener('load',()=>resolve(),{once:true});
-      existing.addEventListener('error',reject,{once:true});
+      existing.addEventListener('error',error=>{
+        existing.remove();
+        reject(error);
+      },{once:true});
       setTimeout(()=>test()&&resolve(),0);
       return;
     }
     const script=document.createElement('script');
     script.src=src;
     script.onload=resolve;
-    script.onerror=reject;
+    script.onerror=error=>{
+      script.remove();
+      reject(error);
+    };
     document.head.appendChild(script);
   });
 
