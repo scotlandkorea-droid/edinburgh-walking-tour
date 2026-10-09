@@ -69,5 +69,13 @@ for stem in ("deacon-brodie-house-cafe", "deacon-brodie-tavern", "deacon-brodie-
               f"| low-resolution-colour-diff={mean_absolute_diff:.1f}/255 "
               "| interpret only with visual confirmation")
 
+# Check whether the bigger Greyfriars Bobby fountain photo depicts the same crop.
+with Image.open("assets/greyfriars-bobby-fountain.webp") as small, Image.open("assets/greyfriars-bobby-fountain.jpg") as big:
+    a=small.convert("RGB").resize((256,300),Image.Resampling.LANCZOS)
+    b=big.convert("RGB").resize((256,300),Image.Resampling.LANCZOS)
+    stat=ImageStat.Stat(ImageChops.difference(a,b))
+    delta=sum(stat.mean)/3
+    print(f"FOUNTAIN COMPARISON | webp={small.size} jpeg={big.size} "
+          f"| colour-diff={delta:.1f}/255")
 print(f"CHECKED | {len(paths)} image files | {len(flagged)} format mismatches")
 print("Quality scores are indicative only; no image has been re-encoded or replaced.")
