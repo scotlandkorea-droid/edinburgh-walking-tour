@@ -119,6 +119,7 @@ function initMap(){
   map.fitBounds(mapBounds,{padding:[28,28]});
 }
 async function openMap(){
+  if(modal.classList.contains('open'))return;
   lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('map-open');modal.querySelector('.route-map-close').focus();
   // Leaflet owns the container once initialized; clearing it on a later open
   // disconnects its tiles and controls while keeping a stale map instance.
