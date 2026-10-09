@@ -108,6 +108,10 @@ for (const file of files.sort()) {
 }
 console.log('Image privacy inspection: '+inspected+' files, '+flagged.length+' with embedded metadata or unknown signatures');
 console.log('Image format mismatches: '+mismatched.length);
+if(mismatched.length){
+  console.error('Image format check FAILED: '+mismatched.length+' files have incorrect extensions.');
+  process.exitCode=1;
+}else console.log('Image format check PASS: all image extensions match their real format.');
 for(const item of mismatched)
   console.log('Format review: '+item.file+' [extension '+item.extension+', data '+item.format+']');
 for(const item of flagged)
