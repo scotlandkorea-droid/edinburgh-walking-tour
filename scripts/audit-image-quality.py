@@ -77,5 +77,60 @@ with Image.open("assets/greyfriars-bobby-fountain.webp") as small, Image.open("a
     delta=sum(stat.mean)/3
     print(f"FOUNTAIN COMPARISON | webp={small.size} jpeg={big.size} "
           f"| colour-diff={delta:.1f}/255")
+
+# Cross-check the actual dimensions against declared HTML img width/height.
+# This is a report, not an automatic resizer or an assertion of blur.
+from html.parser import HTMLParser
+from urllib.parse import unquote, urlsplit
+
+class ImageRefs(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.images=[]
+    def handle_starttag(self, tag, attrs):
+        if tag != "img": return
+        attr=dict(attrs)
+        if attr.get("src"):
+            self.images.append(attr)
+
+used=0
+mismatches=[]
+undersized=[]
+for page in sorted(Path(".").rglob("*.html")):
+    if any(part.startswith(".") for part in page.parts) or "node_modules" in page.parts:
+        continue
+    parser=ImageRefs()
+    parser.feed(page.read_text(encoding="utf-8"))
+    for attrs in parser.images:
+        source=attrs.get("src","")
+        if not source.startswith("/") or source.startswith("//"): continue
+        target=Path(unquote(urlsplit(source).path).lstrip("/"))
+        if not target.exists(): continue
+        try:
+            with Image.open(target) as img:
+                actual_width,actual_height=img.size
+        except Exception: continue
+        used+=1
+        try:
+            declared_width=int(attrs.get("width") or 0)
+            declared_height=int(attrs.get("height") or 0)
+        except (ValueError,TypeError): continue
+        if not declared_width or not declared_height: continue
+        ratio_declared=declared_width/declared_height
+        ratio_actual=actual_width/actual_height
+        if abs(ratio_declared/ratio_actual-1)>0.02:
+            mismatches.append((str(page),str(target),
+                f"declared {declared_width}x{declared_height}, actual {actual_width}x{actual_height}"))
+        if max(declared_width/actual_width,declared_height/actual_height)>1.35:
+            undersized.append((str(page),str(target),
+                f"declared {declared_width}x{declared_height}, actual {actual_width}x{actual_height}"))
+
+print(f"HTML IMAGE USE | {used} local <img> tags, {len(mismatches)} aspect mismatches, "
+      f"{len(undersized)} sources smaller than declared size")
+for page,asset,detail in mismatches:
+    print(f"ASPECT REVIEW | {page} | {asset} | {detail}")
+for page,asset,detail in undersized:
+    print(f"DIMENSION REVIEW | {page} | {asset} | {detail}")
+
 print(f"CHECKED | {len(paths)} image files | {len(flagged)} format mismatches")
 print("Quality scores are indicative only; no image has been re-encoded or replaced.")
