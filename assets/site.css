@@ -1075,15 +1075,10 @@ body.grassmarket-story-detail .breadcrumbs a{text-decoration:none}
 body.grassmarket-story-detail .eyebrow{margin:14px 0 2px;font-size:12px;font-weight:800;letter-spacing:.08em;color:#6f3547}
 body.grassmarket-story-detail h1{font-size:clamp(32px,7vw,50px);line-height:1.12;letter-spacing:-.04em;margin:0 0 9px}
 body.grassmarket-story-detail .lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
-body.grassmarket-story-detail .story-tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 0;padding:3px 0 8px;-webkit-overflow-scrolling:touch}
-body.grassmarket-story-detail .story-tab{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:13px;font-weight:650;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
-body.grassmarket-story-detail .story-tab.active{color:var(--ink);background:var(--sage);border-color:var(--line);font-weight:800}
 body.grassmarket-story-detail main{padding:42px 0 76px}
 body.grassmarket-story-detail .detail-article p{margin:0 0 17px}
 body.grassmarket-story-detail .detail-article h2{margin-top:42px}
-body.grassmarket-story-detail .placeholder{padding:22px;border-radius:16px;background:var(--sage);color:var(--muted)}
 
-@media(min-width:900px){body.grassmarket-story-detail .story-tabs{flex-wrap:wrap;overflow:visible}}
 
 
 /* GREYFRIARS STORY DETAIL COMMON */
