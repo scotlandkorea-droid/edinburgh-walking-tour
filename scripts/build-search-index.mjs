@@ -71,19 +71,20 @@ for (const file of htmlFiles.sort()) {
     : file === 'st-andrews/index.html' ? '/st-andrews/'
     : '/' + file;
   const heading = plain(tagContent(html, 'h1'));
-  const title = url === '/' ? '에든버러 워킹투어'
-    : heading || plain(tagContent(html, 'title')).split(' | ')[0];
+  const title = curation.titleOverrides?.[url]
+    || (url === '/' ? '에든버러 워킹투어'
+      : heading || plain(tagContent(html, 'title')).split(' | ')[0]);
   if (!title) throw new Error('Missing searchable title: ' + file);
   const firstLead = html.match(/<p\b[^>]*class=["'][^"']*\blead\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || '';
   const main = tagContent(html, 'main');
   const firstParagraph = main.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || '';
   const description = excerpt(
     meta(html, 'name', 'description') || meta(html, 'property', 'og:description') || firstLead || firstParagraph || title,
-    125
+    100
   );
   const headings = [...main.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)].map(m => plain(m[1])).join(' ');
-  const firstText = plain(main).slice(0, 245);
-  const keywords = excerpt(headings, 240) + ' ' + firstText;
+  const firstText = plain(main).slice(0, 135);
+  const keywords = excerpt(headings, 180) + ' ' + firstText;
   const entry = {
     title,
     url,
