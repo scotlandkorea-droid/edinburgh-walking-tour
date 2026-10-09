@@ -54,6 +54,9 @@ for (const file of pages) {
   const canonical = head.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i)?.[1];
   if (!canonical) issues.push(file + ': no canonical link');
   else if (!canonical.endsWith(pathname)) issues.push(file + ': canonical differs from ' + pathname);
+  const ogUrl = head.match(/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*\bcontent=["']([^"']+)["'][^>]*>/i)?.[1];
+  if (ogUrl && canonical && ogUrl !== canonical)
+    issues.push(file + ': social sharing URL differs from canonical URL');
   if (noindex) noindexPages++;
   else {
     indexablePages++;
