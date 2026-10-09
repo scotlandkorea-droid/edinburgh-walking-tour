@@ -15,6 +15,26 @@ function walk(dir) {
 walk('assets');
 walk('images');
 
+// Inspect only TIFF tags, never values. GPSInfoIFDPointer is tag 0x8825.
+function hasExifGpsTag(bytes, base, end) {
+  if(base+8>end)return false;
+  const endian=bytes.toString('ascii',base,base+2);
+  if(endian!=='II'&&endian!=='MM')return false;
+  const le=endian==='II';
+  const get16=i=>i>=base&&i+2<=end?(le?bytes.readUInt16LE(i):bytes.readUInt16BE(i)):null;
+  const get32=i=>i>=base&&i+4<=end?(le?bytes.readUInt32LE(i):bytes.readUInt32BE(i)):null;
+  if(get16(base+2)!==42)return false;
+  const ptr=get32(base+4);
+  if(ptr===null)return false;
+  const dir=base+ptr;
+  const count=get16(dir);
+  if(count===null||count>1024)return false;
+  for(let i=0;i<count;i++){
+    const entry=dir+2+i*12;
+    if(get16(entry)===0x8825)return true;
+  }
+  return false;
+}
 function inspectJpeg(bytes) {
   if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return ['unreadable JPEG'];
   const flags = new Set();
@@ -30,8 +50,14 @@ function inspectJpeg(bytes) {
     const begin = offset + 2;
     if (marker === 0xe1) {
       const prefix = bytes.toString('ascii',begin,Math.min(begin+34,offset+length));
-      if (prefix.startsWith('Exif\0\0')) flags.add('EXIF');
-      else if (prefix.includes('http://ns.adobe.com/xap/')) flags.add('XMP');
+      if (prefix.startsWith('Exif\0\0')) {
+        flags.add('EXIF');
+        if (hasExifGpsTag(bytes, begin+6, offset+length)) flags.add('EXIF GPS tag');
+      } else if (prefix.includes('http://ns.adobe.com/xap/')) {
+        flags.add('XMP');
+        if (/GPS(?:Latitude|Longitude|Altitude)/i.test(bytes.toString('utf8',begin,offset+length)))
+          flags.add('XMP GPS tag');
+      }
     }
     if (marker === 0xed) flags.add('IPTC/APP13');
     if (marker === 0xfe) flags.add('JPEG comment');
