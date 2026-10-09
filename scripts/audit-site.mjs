@@ -54,6 +54,24 @@ for (const file of pages) {
     issues.push(file+': missing shared header/search script');
   if(!/<link\b[^>]*href=["']\/assets\/site\.css(?:\?[^"']*)?["']/i.test(html))
     issues.push(file+': missing shared site CSS');
+  // A numbered tour/place page can intentionally keep two context variants
+  // (one for tour, one for place). A second generic .page-nav is never needed:
+  // it doubles the visible previous/next card before shared JS replaces it.
+  const pageNavTags=[...html.matchAll(/<nav\b[^>]*>/gi)]
+    .map(match=>match[0])
+    .filter(tag=>{
+      const value=tag.match(/\bclass=["']([^"']+)["']/i)?.[1]||'';
+      return value.split(/\s+/).includes('page-nav');
+    });
+  if(pageNavTags.length>1){
+    const contexts=pageNavTags.map(tag=>
+      tag.match(/\bdata-nav-system=["']([^"']+)["']/i)?.[1]||'');
+    const allowedContexts=pageNavTags.length===2 &&
+      new Set(contexts).size===2 &&
+      contexts.includes('tour') && contexts.includes('place');
+    if(!allowedContexts)
+      issues.push(file+': duplicate static page-nav outside intentional tour/place pair');
+  }
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
