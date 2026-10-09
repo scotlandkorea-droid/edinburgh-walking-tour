@@ -28,7 +28,7 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Pillow for read-only inspection
         run: python3 -m pip install --quiet --target /tmp/ew-photo-qa 'Pillow>=10,<13'
       - name: Report image dimensions and comparative detail
