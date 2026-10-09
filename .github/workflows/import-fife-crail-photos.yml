@@ -1,0 +1,60 @@
+name: Import Fife Crail photographs once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/fife-crail/manifest.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-fife-crail-photos
+  cancel-in-progress: false
+
+jobs:
+  import-photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Restore original photographed walk from archived illustrated document
+        run: |
+          python3 - <<'PY'
+          import base64, pathlib, zipfile, io, xml.etree.ElementTree as ET, posixpath
+          root=pathlib.Path('staging/fife-crail')
+          parts=sorted(root.glob('part-*.b64'))
+          assert len(parts)==26, f'Expected 26 archived pieces, found {len(parts)}'
+          encoded=''.join(p.read_text(encoding='utf-8') for p in parts)
+          raw=base64.b64decode(encoded,validate=True)
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              ns_doc='http://schemas.openxmlformats.org/drawingml/2006/main'
+              ns_rel='http://schemas.openxmlformats.org/officeDocument/2006/relationships'
+              reltree=ET.fromstring(z.read('word/_rels/document.xml.rels'))
+              relations={r.get('Id'):r.get('Target') for r in reltree}
+              doc=ET.fromstring(z.read('word/document.xml'))
+              refs=[el.get('{'+ns_rel+'}embed') for el in doc.iter('{'+ns_doc+'}blip') if el.get('{'+ns_rel+'}embed')]
+              assert len(refs)==17, f'Expected 17 placed photographs, found {len(refs)}'
+              out=pathlib.Path('assets/travel/fife-anstruther-crail')
+              out.mkdir(parents=True,exist_ok=True)
+              for number,ref in enumerate(refs,1):
+                  target=relations[ref]
+                  src=posixpath.normpath(posixpath.join('word',target))
+                  assert src.startswith('word/media/') and src.endswith('.jpg'),src
+                  photo=z.read(src)
+                  assert photo[:3]==b'\xff\xd8\xff', f'Not a JPEG: {src}'
+                  (out/f'{number:02d}.jpg').write_bytes(photo)
+                  print(f'photo {number:02d}: {len(photo)} bytes')
+          PY
+      - name: Commit 17 embedded photographs in walking order
+        run: |
+          git add assets/travel/fife-anstruther-crail
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Add 17 Fife coastal walk photographs in route order"
+            git push origin HEAD:main
+          fi
