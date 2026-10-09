@@ -30,7 +30,11 @@ const redirects = new Set([
   '/places/royal-mile-overview.html', '/places/canongate-horatius-bonar.html',
   '/places/canongate-scrooge.html', '/places/canongate-holyrood-end.html',
   '/scotland/places/melrose-abbey.html', '/scotland', '/scotland/',
-  '/scotland/index.html'
+  '/scotland/index.html',
+  '/assets/city-chambers-courtyard-18363.png',
+  '/assets/city-chambers-front-18362.png',
+  '/assets/new-college/john-knox-statue-final.png',
+  '/assets/new-college/new-college-courtyard.png'
 ]);
 
 const sitemap = new Set([...read('sitemap.xml').matchAll(/<loc>\s*https?:\/\/[^/]+(\/[^<]*)<\/loc>/g)]
@@ -159,6 +163,31 @@ else {
     if(!existing.has(url))issues.push('worker: cached asset is missing: '+url);
   console.log('Worker routing: '+workerCache.length+' shared assets and all known redirects checked');
 }
+
+
+// Test legacy JPEG-format correction as a real Worker GET/HEAD redirect.
+const {default: routingWorker}=await import(
+  'data:text/javascript;base64,'+Buffer.from(workerSource).toString('base64'));
+const photoRedirects=new Map([
+  ["/assets/city-chambers-courtyard-18363.png", "/assets/city-chambers-courtyard-18363.jpg"],
+  ["/assets/city-chambers-front-18362.png", "/assets/city-chambers-front-18362.jpg"],
+  ["/assets/new-college/john-knox-statue-final.png", "/assets/new-college/john-knox-statue-final.jpg"],
+  ["/assets/new-college/new-college-courtyard.png", "/assets/new-college/new-college-courtyard.jpg"]
+]);
+for(const [from,to] of photoRedirects){
+  if(!existing.has(to)) issues.push('missing corrected image '+to);
+  for(const method of ['GET','HEAD']){
+    const response=await routingWorker.fetch(
+      new Request('https://example.test'+from+'?image-test=1',{method}),
+      {ASSETS:{fetch:()=>{throw Error('Unexpected asset fetch on redirect')}}}
+    );
+    const destination=new URL(response.headers.get('location'));
+    if(response.status!==301||destination.pathname!==to||
+       destination.search!=='?image-test=1')
+      issues.push('photo redirect failed: '+method+' '+from);
+  }
+}
+console.log('Photo redirects: '+photoRedirects.size+' legacy URLs tested for GET/HEAD');
 
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + indexablePages + ' indexable pages, '

@@ -38,7 +38,7 @@ export default {
         return Response.redirect(redirectUrl.toString(), 301);
       }
 
-      const legacyPlaceRedirects = {
+      const legacyRedirects = {
         "/edinburgh/places/city-chambers.html": "/places/royal-mile-city-chambers.html",
         "/edinburgh/places/mercat-cross.html": "/places/royal-mile-mercat-cross.html",
         "/places/canongate-overview.html": "/places/canongate.html",
@@ -46,11 +46,15 @@ export default {
         "/places/canongate-horatius-bonar.html": "/places/canongate-kirkyard-stories.html",
         "/places/canongate-scrooge.html": "/places/canongate-kirkyard-stories.html",
         "/places/canongate-holyrood-end.html": "/places/canongate.html",
-        "/scotland/places/melrose-abbey.html": "/scotland/places/melrose.html"
+        "/scotland/places/melrose-abbey.html": "/scotland/places/melrose.html",
+        "/assets/city-chambers-courtyard-18363.png": "/assets/city-chambers-courtyard-18363.jpg",
+        "/assets/city-chambers-front-18362.png": "/assets/city-chambers-front-18362.jpg",
+        "/assets/new-college/john-knox-statue-final.png": "/assets/new-college/john-knox-statue-final.jpg",
+        "/assets/new-college/new-college-courtyard.png": "/assets/new-college/new-college-courtyard.jpg"
       };
-      if (legacyPlaceRedirects[url.pathname]) {
+      if (legacyRedirects[url.pathname]) {
         const redirectUrl = new URL(url);
-        redirectUrl.pathname = legacyPlaceRedirects[url.pathname];
+        redirectUrl.pathname = legacyRedirects[url.pathname];
         redirectUrl.hash = "";
         return Response.redirect(redirectUrl.toString(), 301);
       }
