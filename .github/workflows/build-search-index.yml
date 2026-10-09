@@ -22,6 +22,7 @@ on:
       - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
       - 'scripts/audit-site.mjs'
+      - 'scripts/report-css-inventory.mjs'
       - 'scripts/audit-search-behavior.mjs'
       - 'scripts/audit-image-privacy.mjs'
       - 'assets/**/*.jpg'
@@ -61,6 +62,7 @@ jobs:
           node --input-type=module --check < worker.js
           node --check scripts/build-search-index.mjs
           node --check scripts/audit-site.mjs
+          node --check scripts/report-css-inventory.mjs
           node --check scripts/audit-search-behavior.mjs
           node --check scripts/audit-image-privacy.mjs
       - name: Generate static search index
@@ -73,6 +75,8 @@ jobs:
         run: node scripts/audit-search-behavior.mjs
       - name: Inspect image metadata without changing photographs
         run: node scripts/audit-image-privacy.mjs
+      - name: Report CSS cleanup candidates without removing rules
+        run: node scripts/report-css-inventory.mjs
       - name: Commit changes only if index differs
         run: |
           git add assets/search-data.js
