@@ -2,6 +2,7 @@
 // This file lives under scripts/ (excluded from published site assets).
 import fs from 'node:fs';
 import path from 'node:path';
+import { isUnfinishedSearchPage } from './search-page-rules.mjs';
 
 const read = file => fs.readFileSync(file, 'utf8');
 const scanDirs = ['places', 'edinburgh', 'scotland', 'st-andrews', 'travel'];
@@ -41,11 +42,13 @@ const sitemap = new Set([...read('sitemap.xml').matchAll(/<loc>\s*https?:\/\/[^/
   .map(m => m[1]));
 const issues = [];
 let linksChecked = 0, noindexPages = 0, indexablePages = 0;
+const unfinishedSearchPages = new Set();
 
 for (const file of pages) {
   const html = read(file);
   const pathname = file === 'index.html' ? '/'
     : file === 'st-andrews/index.html' ? '/st-andrews/' : '/' + file;
+  if (isUnfinishedSearchPage(html)) unfinishedSearchPages.add(pathname);
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
@@ -166,16 +169,18 @@ for(const row of searchRows||[]){
   if(rowsByUrl.has(row.url))issues.push('search: duplicate URL '+row.url);
   rowsByUrl.set(row.url,row);
   if(!navigable(row.url))issues.push('search: missing page '+row.url);
+  if(unfinishedSearchPages.has(row.url))issues.push('search: unfinished placeholder was indexed '+row.url);
   if(!row.title||!row.description)issues.push('search: missing title or description '+row.url);
   const aliases=(row.aliases||[]).map(a=>a.trim().toLowerCase());
   if(new Set(aliases).size!==aliases.length)issues.push('search: duplicate alias '+row.url);
 }
 for(const field of ['aliases','titleOverrides','typeOverrides']){
   for(const url of Object.keys(curation[field]||{}))
-    if(!rowsByUrl.has(url))issues.push('curation: orphan '+field+' entry '+url);
+    if(!rowsByUrl.has(url) && !unfinishedSearchPages.has(url))
+      issues.push('curation: orphan '+field+' entry '+url);
 }
 console.log('Shared data: '+navRefs+' navigation entries, '
-  +searchRows.length+' search records; source references checked');
+  +searchRows.length+' search records; '+unfinishedSearchPages.size+' unfinished placeholders excluded');
 
 
 // Every Worker-managed URL must also route through the Worker on Cloudflare.
