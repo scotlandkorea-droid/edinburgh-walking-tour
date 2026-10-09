@@ -21,6 +21,7 @@ on:
       - 'worker.js'
       - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
+      - 'scripts/search-page-rules.mjs'
       - 'scripts/audit-site.mjs'
       - 'scripts/audit-image-privacy.mjs'
       - 'assets/**/*.jpg'
@@ -59,6 +60,7 @@ jobs:
           node --check assets/search-data.js
           node --input-type=module --check < worker.js
           node --check scripts/build-search-index.mjs
+          node --check scripts/search-page-rules.mjs
           node --check scripts/audit-site.mjs
           node --check scripts/audit-image-privacy.mjs
       - name: Generate static search index
