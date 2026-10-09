@@ -57,7 +57,8 @@ if not affected_pages:
 
 # One shared place/asset redirect registry, rather than four ad-hoc handlers.
 worker = Path("worker.js").read_text(encoding="utf-8")
-worker = replace_once(worker, "legacyPlaceRedirects", "legacyRedirects", "worker.js")
+if worker.count("legacyPlaceRedirects") != 3:
+    raise RuntimeError("Unexpected Worker redirect registry")
 worker = worker.replace("legacyPlaceRedirects", "legacyRedirects")
 anchor = '        "/scotland/places/melrose-abbey.html": "/scotland/places/melrose.html"'
 redirect_rows = ",\n" + ",\n".join(
