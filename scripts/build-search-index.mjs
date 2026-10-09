@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { isUnfinishedSearchPage } from './search-page-rules.mjs';
 
 const root = process.cwd();
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
@@ -65,11 +66,16 @@ const scan = dir => {
 };
 for (const dir of ['places', 'edinburgh', 'scotland', 'st-andrews', 'travel']) scan(dir);
 const rows = [];
+let excludedDrafts = 0;
 for (const file of htmlFiles.sort()) {
   const html = read(file);
   const url = file === 'index.html' ? '/'
     : file === 'st-andrews/index.html' ? '/st-andrews/'
     : '/' + file;
+  if (isUnfinishedSearchPage(html)) {
+    excludedDrafts++;
+    continue;
+  }
   const heading = plain(tagContent(html, 'h1'));
   const title = curation.titleOverrides?.[url]
     || (url === '/' ? '에든버러 워킹투어'
@@ -117,5 +123,5 @@ if (process.argv.includes('--check')) {
   } else console.log('Search index current:', rows.length, 'records');
 } else {
   fs.writeFileSync(target, out);
-  console.log('Generated search index:', rows.length, 'pages; bytes:', Buffer.byteLength(out));
+  console.log('Generated search index:', rows.length, 'entries;', excludedDrafts, 'unfinished drafts excluded; bytes:', Buffer.byteLength(out));
 }
