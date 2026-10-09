@@ -1,0 +1,622 @@
+{
+  "note": "Only human-approved alternate names and virtual link records are curated here. Page titles, descriptions, routes and search text come from HTML.",
+  "aliases": {
+    "/": [
+      "에딘버러 워킹투어",
+      "에든버러 가이드",
+      "에딘버러 가이드",
+      "에든버러 도보 안내",
+      "에딘버러 도보 안내",
+      "에든버러 도보투어",
+      "에딘버러 도보투어",
+      "에든버러 투어",
+      "에딘버러 투어",
+      "Edinburgh walking tour",
+      "Edinburgh guide",
+      "Edinburgh tour"
+    ],
+    "/edinburgh/tour-guide.html": [
+      "에든버러 가이드",
+      "에딘버러 가이드",
+      "에든버러 도보 안내",
+      "에딘버러 도보 안내",
+      "에든버러 투어 안내",
+      "에딘버러 투어 안내",
+      "Edinburgh walking tour guide",
+      "Edinburgh tour guide"
+    ],
+    "/places/scott-monument.html": [
+      "월터 스콧 기념탑",
+      "월터 스코트 기념탑",
+      "스코트 기념탑",
+      "Scott Monument",
+      "Walter Scott Monument"
+    ],
+    "/places/princes-street.html": [
+      "프린스 스트리트 가든",
+      "프린스 스트리트 정원",
+      "프린세스 스트리트 정원",
+      "Princes Street Gardens",
+      "Prince Street Gardens"
+    ],
+    "/places/balmoral-hotel.html": [
+      "발모랄 호텔",
+      "Balmoral Hotel",
+      "The Balmoral",
+      "웨이벌리역",
+      "Edinburgh Waverley"
+    ],
+    "/places/new-college.html": [
+      "뉴칼리지",
+      "New College Edinburgh"
+    ],
+    "/places/writers-museum.html": [
+      "작가 박물관",
+      "Writers Museum",
+      "The Writers' Museum",
+      "Lady Stair's House",
+      "레이디 스테어스 하우스",
+      "마카스 코트"
+    ],
+    "/places/edinburgh-castle.html": [
+      "에딘버러 성",
+      "Edinburgh Castle"
+    ],
+    "/places/grassmarket.html": [
+      "그라스마켓",
+      "그라스 마켓",
+      "그래스 마켓",
+      "Grass Market",
+      "Grassmarket Edinburgh"
+    ],
+    "/places/greyfriars.html": [
+      "그레이 프라이어스",
+      "그레이프라이어스 묘지",
+      "그레이프라이어스 교회",
+      "Greyfriars",
+      "Greyfriars Edinburgh"
+    ],
+    "/places/greyfriars-bobby.html": [
+      "보비",
+      "보비 동상",
+      "바비",
+      "그레이프라이어스 보비",
+      "그레이프라이어스 바비",
+      "Greyfriars Bobby",
+      "Bobby statue"
+    ],
+    "/places/national-museum.html": [
+      "스코틀랜드 국립박물관",
+      "에든버러 국립박물관",
+      "National Museum of Scotland",
+      "Scotland National Museum"
+    ],
+    "/edinburgh/places/surgeons-hall.html": [
+      "Surgeons Hall",
+      "Surgeons’ Hall",
+      "Surgeons' Hall Museums",
+      "서전스홀"
+    ],
+    "/edinburgh/places/pleasance.html": [
+      "플레전스",
+      "Pleasance",
+      "Pleasance Courtyard",
+      "The Pleasance"
+    ],
+    "/edinburgh/places/mcewan-hall.html": [
+      "McEwan Hall",
+      "University of Edinburgh McEwan Hall"
+    ],
+    "/places/royal-mile.html": [
+      "로열 마일",
+      "로얄마일",
+      "로얄 마일",
+      "Royal Mile"
+    ],
+    "/places/st-giles.html": [
+      "성 자일스",
+      "세인트자일스",
+      "성 자일스 대성당",
+      "세인트 자일스 대성당",
+      "St Giles",
+      "St Giles Cathedral"
+    ],
+    "/places/john-knox-house.html": [
+      "존 낙스 하우스",
+      "존 낙스 집",
+      "존 녹스 집",
+      "John Knox House"
+    ],
+    "/places/canongate.html": [
+      "캐논게이트",
+      "캐넌 게이트",
+      "Canongate"
+    ],
+    "/edinburgh/places/museum-of-edinburgh.html": [
+      "Museum of Edinburgh",
+      "헌틀리 하우스",
+      "Huntly House",
+      "에든버러 시립박물관"
+    ],
+    "/places/scottish-parliament.html": [
+      "의사당",
+      "의회당",
+      "스코틀랜드 의사당",
+      "스코틀랜드 의회당",
+      "스코틀랜드 국회의사당",
+      "Scottish Parliament",
+      "Holyrood Parliament"
+    ],
+    "/places/holyrood-palace.html": [
+      "홀리루드하우스 궁전",
+      "홀리루드 하우스",
+      "홀리루드하우스",
+      "Palace of Holyroodhouse",
+      "Holyroodhouse",
+      "Holyrood Palace"
+    ],
+    "/places/arthurs-seat.html": [
+      "아서 시트",
+      "아서스시트",
+      "Arthur's Seat",
+      "Arthurs Seat"
+    ],
+    "/edinburgh/places/new-calton-burial-ground.html": [
+      "뉴칼튼 묘지",
+      "New Calton Burial Ground"
+    ],
+    "/places/calton-hill.html": [
+      "칼튼힐",
+      "칼튼 언덕",
+      "Calton Hill"
+    ],
+    "/edinburgh/places/old-calton-burial-ground.html": [
+      "Old Calton Burial Ground",
+      "올드 칼튼 묘지",
+      "Old Calton Cemetery",
+      "링컨 동상",
+      "에든버러 링컨 동상"
+    ],
+    "/st-andrews/": [
+      "세인트 앤드류스",
+      "세인트 앤드루스",
+      "세인트앤드류스",
+      "세인트 앤드루",
+      "Saint Andrews",
+      "St Andrews"
+    ],
+    "/scotland/places/andrew-carnegie-birthplace-museum.html": [
+      "카네기 생가 박물관",
+      "Carnegie Birthplace Museum"
+    ],
+    "/scotland/places/isle-of-skye.html": [
+      "스카이",
+      "스카이 섬",
+      "Isle of Skye",
+      "Skye",
+      "Skye Island"
+    ],
+    "/scotland/places/isle-of-skye-arrival.html": [
+      "스카이 들어가는 길",
+      "Road to Skye",
+      "Eilean Donan",
+      "Skye Bridge"
+    ],
+    "/scotland/places/isle-of-skye-cuillin-fairy-pools.html": [
+      "페어리 풀",
+      "Fairy Pools",
+      "Cuillin",
+      "Black Cuillin",
+      "Red Cuillin"
+    ],
+    "/scotland/places/isle-of-skye-trotternish.html": [
+      "트로터니시",
+      "Trotternish",
+      "Old Man of Storr",
+      "Quiraing",
+      "Staffin"
+    ],
+    "/scotland/places/isle-of-skye-west.html": [
+      "던베건",
+      "Dunvegan Castle",
+      "Neist Point",
+      "Clan MacLeod",
+      "서쪽 스카이"
+    ],
+    "/scotland/places/isle-of-skye-sleat.html": [
+      "슬리트",
+      "Sleat",
+      "Armadale",
+      "Armadale Castle",
+      "Clan Donald",
+      "Point of Sleat"
+    ],
+    "/scotland/places/glasgow.html": [
+      "글래스고",
+      "Glasgow",
+      "글라스고"
+    ],
+    "/scotland/places/glasgow/george-square.html": [
+      "George Square",
+      "글래스고 조지 스퀘어",
+      "조지스퀘어"
+    ],
+    "/scotland/places/glasgow/glasgow-cathedral.html": [
+      "Glasgow Cathedral",
+      "세인트 멍고 대성당",
+      "St Mungo's Cathedral",
+      "High Kirk of Glasgow"
+    ],
+    "/scotland/places/glasgow/glasgow-necropolis.html": [
+      "Glasgow Necropolis",
+      "네크로폴리스",
+      "글래스고 공동묘지"
+    ],
+    "/scotland/places/dumfries.html": [
+      "던프리스",
+      "Dumfries",
+      "Dumfries Scotland"
+    ],
+    "/scotland/places/melrose.html": [
+      "Melrose",
+      "Melrose Scotland",
+      "멜로즈 스코틀랜드"
+    ],
+    "/scotland/places/hawick.html": [
+      "호익",
+      "Hawick",
+      "Hawick Scotland"
+    ],
+    "/places/greyfriars-bobby-story.html": [
+      "보비 이야기",
+      "바비 이야기",
+      "그레이프라이어스 보비",
+      "그레이프라이어스 바비",
+      "Greyfriars Bobby"
+    ],
+    "/places/st-giles-national-covenant.html": [
+      "국가언약",
+      "국민서약",
+      "내셔널 커버넌트",
+      "National Covenant",
+      "Scottish National Covenant"
+    ],
+    "/places/john-knox-grave.html": [
+      "존 낙스 무덤",
+      "존 녹스 묘",
+      "존 낙스 묘",
+      "John Knox grave"
+    ],
+    "/places/royal-mile-adam-smith.html": [
+      "애덤 스미스 동상",
+      "Adam Smith Statue",
+      "아담스미스 동상"
+    ],
+    "/places/canongate-worlds-end.html": [
+      "월즈 엔드",
+      "월드 엔드",
+      "Worlds End"
+    ],
+    "/places/canongate-kirk-stories.html": [
+      "캐논게이트 커크",
+      "Canongate Kirk"
+    ],
+    "/places/canongate-adam-smith.html": [
+      "애덤 스미스 무덤",
+      "Adam Smith Grave",
+      "Adam Smith’s Grave"
+    ],
+    "/places/canongate-kirkyard-stories.html": [
+      "캐논게이트 묘지",
+      "Canongate Kirkyard"
+    ],
+    "/places/canongate-robert-fergusson.html": [
+      "Robert Fergusson Statue"
+    ],
+    "/edinburgh/people/adam-smith.html": [
+      "아담 스미스",
+      "애덤스미스",
+      "Adam Smith"
+    ],
+    "/edinburgh/people/alexander-graham-bell.html": [
+      "그레이엄 벨",
+      "알렉산더 벨",
+      "Alexander Graham Bell",
+      "Graham Bell"
+    ],
+    "/edinburgh/people/arthur-conan-doyle.html": [
+      "코난 도일",
+      "아서 코난도일",
+      "Conan Doyle",
+      "Arthur Conan Doyle"
+    ],
+    "/edinburgh/people/david-hume.html": [
+      "데이빗 흄",
+      "데이비드흄",
+      "David Hume"
+    ],
+    "/edinburgh/people/eric-liddell.html": [
+      "에릭 리들",
+      "에릭리델",
+      "Eric Liddell"
+    ],
+    "/edinburgh/people/james-clerk-maxwell.html": [
+      "제임스 클라크 맥스웰",
+      "제임스 맥스웰",
+      "James Clerk Maxwell",
+      "James Maxwell"
+    ],
+    "/edinburgh/people/james-hutton.html": [
+      "제임스 허턴",
+      "제임스허튼",
+      "James Hutton"
+    ],
+    "/edinburgh/people/james-vi.html": [
+      "제임스 6세",
+      "제임스 1세",
+      "James VI",
+      "James I of England",
+      "James VI and I",
+      "James Stuart"
+    ],
+    "/edinburgh/people/john-knox.html": [
+      "존 낙스",
+      "녹스",
+      "낙스",
+      "John Knox"
+    ],
+    "/edinburgh/people/joseph-bell.html": [
+      "조셉 벨",
+      "조지프벨",
+      "Joseph Bell"
+    ],
+    "/edinburgh/people/mary-queen-of-scots.html": [
+      "메리 여왕",
+      "스코틀랜드 메리 여왕",
+      "스코틀랜드의 메리",
+      "스코틀랜드의 메리 여왕",
+      "스코트 메리",
+      "메리 퀸 오브 스코츠",
+      "Mary Stuart",
+      "Mary Queen of Scots",
+      "Mary, Queen of Scots",
+      "Queen Mary"
+    ],
+    "/edinburgh/people/robert-the-bruce.html": [
+      "로버트 브루스",
+      "Robert Bruce",
+      "Robert the Bruce"
+    ],
+    "/edinburgh/people/st-margaret.html": [
+      "성 마거릿",
+      "성 마가렛",
+      "세인트 마거릿",
+      "Saint Margaret",
+      "St Margaret"
+    ],
+    "/edinburgh/people/walter-scott.html": [
+      "월터 스코트",
+      "월터스콧",
+      "Walter Scott"
+    ],
+    "/edinburgh/themes/architecture-city.html": [
+      "에든버러의 건축과 도시"
+    ],
+    "/edinburgh/themes/history-royalty.html": [
+      "에든버러의 역사와 왕실"
+    ],
+    "/edinburgh/themes/literary-city.html": [
+      "에든버러의 문학과 작가"
+    ],
+    "/edinburgh/themes/reformation.html": [
+      "에든버러의 종교개혁과 신앙"
+    ],
+    "/edinburgh/themes/science-medicine-invention.html": [
+      "에든버러의 과학·의학·발명"
+    ],
+    "/travel/airport-transport.html": [
+      "에든버러 공항",
+      "에딘버러 공항",
+      "공항 교통",
+      "공항에서 시내",
+      "공항 시내",
+      "Edinburgh Airport transport"
+    ],
+    "/travel/transport.html": [
+      "대중교통",
+      "버스",
+      "트램",
+      "기차",
+      "철도",
+      "렌터카",
+      "에든버러 교통",
+      "에딘버러 교통"
+    ],
+    "/travel/train.html": [
+      "기차",
+      "철도",
+      "기차 타기",
+      "기차여행",
+      "스코틀랜드 기차",
+      "영국 기차",
+      "Train travel",
+      "Rail travel"
+    ],
+    "/travel/train-waverley.html": [
+      "웨이벌리역",
+      "에든버러역",
+      "에딘버러역",
+      "Edinburgh Waverley",
+      "Waverley Station",
+      "EDB"
+    ],
+    "/travel/train-booking.html": [
+      "기차표 예약",
+      "영국 기차표",
+      "Railcard",
+      "레일카드",
+      "Trainline",
+      "트레인라인",
+      "Advance",
+      "Off-Peak",
+      "Anytime",
+      "SplitSave"
+    ],
+    "/travel/accommodation.html": [
+      "숙박",
+      "호텔",
+      "에든버러 호텔",
+      "에딘버러 호텔"
+    ],
+    "/travel/food-drink.html": [
+      "음식",
+      "맛집",
+      "펍",
+      "식당",
+      "스코틀랜드 음식"
+    ],
+    "/travel/shopping.html": [
+      "기념품",
+      "쇼핑",
+      "에든버러 쇼핑",
+      "에딘버러 쇼핑"
+    ],
+    "/travel/whisky.html": [
+      "위스키",
+      "위스키 투어",
+      "Scotch whisky",
+      "whiskey",
+      "whisky"
+    ],
+    "/travel/festivals.html": [
+      "프린지",
+      "에든버러 축제",
+      "에딘버러 축제",
+      "Edinburgh Festival",
+      "Edinburgh Fringe"
+    ],
+    "/travel/hiking.html": [
+      "트레킹",
+      "걷기",
+      "하이킹",
+      "스코틀랜드 트레킹"
+    ],
+    "/travel/rental-car.html": [
+      "렌트카",
+      "렌터카",
+      "자동차 렌트",
+      "차 렌트"
+    ],
+    "/places/balmoral-hotel-story.html": [
+      "발모랄 호텔",
+      "The Balmoral Hotel",
+      "Balmoral Hotel"
+    ],
+    "/places/waverley-station.html": [
+      "웨이벌리역",
+      "웨이버리역",
+      "에딘버러 웨이벌리역",
+      "Edinburgh Waverley",
+      "Waverley Station"
+    ],
+    "/scotland/places/falkland-richard-cameron.html": [
+      "리처드 카메론",
+      "리처드 카메런",
+      "Richard Cameron",
+      "Cameron House",
+      "언약도의 사자"
+    ],
+    "/scotland/places/jedburgh.html": [
+      "Jedburgh",
+      "제드버러 수도원",
+      "Jedburgh Abbey",
+      "Jedburgh Castle Jail",
+      "Jethart Justice"
+    ],
+    "/scotland/places/peebles.html": [
+      "Peebles",
+      "Tweed Green",
+      "Chambers Institution",
+      "William Chambers",
+      "Robert Chambers"
+    ],
+    "/scotland/places/galashiels.html": [
+      "Galashiels",
+      "갈라시엘스",
+      "Gala Water",
+      "Old Gala House",
+      "The Great Tapestry of Scotland",
+      "Great Tapestry of Scotland"
+    ],
+    "/scotland/places/stirling-history.html": [
+      "Stirling Castle",
+      "스털링 성",
+      "스털링 브리지 전투",
+      "배녹번 전투"
+    ],
+    "/scotland/places/stirling-holy-rude.html": [
+      "Church of the Holy Rude",
+      "Holy Rude",
+      "홀리루드 교회",
+      "제임스 거스리"
+    ],
+    "/st-andrews/st-andrews-castle.html": [
+      "St Andrews Castle",
+      "세인트앤드루스성",
+      "세인트앤드루스 캐슬"
+    ],
+    "/scotland/places/glasgow/buchanan-street.html": [
+      "Buchanan Street",
+      "뷰캐넌 스트리트",
+      "부캐넌 스트리트"
+    ],
+    "/st-andrews/st-andrews-cathedral.html": [
+      "St Andrews Cathedral",
+      "세인트 앤드루스 대성당",
+      "세인트앤드루스 성당"
+    ],
+    "/scotland/places/glasgow/high-street-glasgow-cross.html": [
+      "하이 스트리트 · 글래스고 크로스",
+      "High Street & Glasgow Cross",
+      "High Street Glasgow Cross",
+      "글래스고 옛 대학교",
+      "Glasgow High Street"
+    ],
+    "/scotland/places/glasgow/merchant-city.html": [
+      "Merchant City",
+      "Glasgow Merchant City",
+      "글래스고 머천트 시티"
+    ],
+    "/scotland/places/glasgow/royal-exchange-square-goma.html": [
+      "Royal Exchange Square & GoMA",
+      "Royal Exchange Square",
+      "Gallery of Modern Art Glasgow",
+      "로열 익스체인지 스퀘어 · GoMA",
+      "글래스고 현대미술관"
+    ],
+    "/edinburgh/themes/orders-of-chivalry.html": [
+      "기사단",
+      "가터 기사단",
+      "엉겅퀴 기사단",
+      "Order of the Garter",
+      "Order of the Thistle",
+      "시슬 채플"
+    ],
+    "/travel/explainers/honours-and-orders.html": [
+      "영국 훈장",
+      "영국 서훈 제도",
+      "MBE OBE KBE",
+      "Honours and Orders",
+      "영국 왕실 훈장"
+    ]
+  },
+  "virtual": [
+    {
+      "title": "스코틀랜드",
+      "url": "/edinburgh/places.html#scotland",
+      "type": "허브",
+      "description": "스코틀랜드 전역 여행과 장소",
+      "keywords": "scotland"
+    }
+  ]
+}
