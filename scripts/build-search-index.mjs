@@ -84,7 +84,12 @@ for (const file of htmlFiles.sort()) {
   );
   const headings = [...main.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)].map(m => plain(m[1])).join(' ');
   const firstText = plain(main).slice(0, 135);
-  const keywords = excerpt(headings, 180) + ' ' + firstText;
+  // Preserve English place/person name lookup even when an HTML excerpt omits it.
+  // Route slugs are already maintained as part of the site's canonical URLs.
+  const routeTerms = url.split('#')[0]
+    .replace(/\.html$/i, '')
+    .split('/').filter(Boolean).slice(-2).join(' ').replace(/[-_]+/g, ' ');
+  const keywords = (excerpt(headings, 180) + ' ' + firstText + ' ' + routeTerms).trim();
   const entry = {
     title,
     url,
