@@ -118,6 +118,9 @@ for (const file of pages) {
     if(end<0||/<a\b/i.test(html.slice(box.index+tag.length,end)))
       issues.push(file+': nested link or missing closing anchor in further-reading box');
   }
+  const expectedDeepDive=[...deepDiveOrigins.entries()].find(([,origin])=>origin===pathname)?.[0];
+  if(expectedDeepDive&&(readingBoxes.length!==1||!readingBoxes[0][0].includes('href="'+expectedDeepDive+'"')))
+    issues.push(file+': originating story must contain exactly one full-card link to its deep dive');
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
