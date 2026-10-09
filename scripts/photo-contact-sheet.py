@@ -40,3 +40,23 @@ draw_sheet("CITY",[
     ("assets/city-chambers-courtyard.jpg","assets/city-chambers-courtyard-18363.png","courtyard"),
     ("assets/new-college/new-college-exterior.png","assets/new-college/new-college-view.png","new college")
 ])
+
+# 1:1 pixel crops show actual edge quality, without another resize.
+from PIL import ImageFilter
+canvas=Image.new("RGB",(1060,1210),"#f2f0eb")
+d=ImageDraw.Draw(canvas)
+d.text((20,14),"BRODIE: full-resolution crops / baseline vs gentle unsharp",fill="#222",font=font)
+for idx,stem in enumerate(["deacon-brodie-house-cafe","deacon-brodie-tavern","deacon-brodie-cabinet"]):
+    with Image.open("assets/"+stem+"-edited.png") as opened:
+        img=opened.convert("RGB")
+        w,h=img.size
+        crop=img.crop((max(0,(w-500)//2),max(0,(h-310)//2),max(0,(w-500)//2)+500,max(0,(h-310)//2)+310))
+        enhanced=crop.filter(ImageFilter.UnsharpMask(radius=1.1,percent=80,threshold=3))
+        y=50+idx*380
+        canvas.paste(crop,(20,y))
+        canvas.paste(enhanced,(540,y))
+        d.text((20,y+320),"ORIGINAL EDIT  /  "+stem,fill="#222",font=font)
+        d.text((540,y+320),"SHARPENING CANDIDATE  /  80% unsharp",fill="#222",font=font)
+buffer=BytesIO()
+canvas.save(buffer,"JPEG",quality=70,optimize=True,subsampling=0)
+print("PHOTO_CONTACT_SHEET_SHARPEN="+base64.b64encode(buffer.getvalue()).decode("ascii"))
