@@ -78,7 +78,8 @@ export default {
       "/assets/navigation-system.js",
       "/assets/navigation-data.js",
       "/assets/tour-course-data.js",
-      "/assets/search-data.js"
+      "/assets/search-data.js",
+      "/assets/tour-map.js"
     ]);
     if (revalidateAssets.has(url.pathname)) {
       const headers = new Headers(response.headers);
