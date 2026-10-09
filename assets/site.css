@@ -3038,3 +3038,42 @@ body.story-detail-standard .detail-article blockquote.story-quote-box p{
     padding:16px 17px;
   }
 }
+
+/* SHARED DEEP-DIVE DETAIL TOP — origin story > English subject > complete title.
+   Only independent articles reached via the shared "더 자세히 보기" panel.
+   Preserve all manuscript content, original back-link, and other detail roles. */
+body.deep-dive-detail .theme-detail-intro .breadcrumbs{
+  line-height:1.65;
+  word-break:keep-all;
+  overflow-wrap:normal;
+}
+body.deep-dive-detail .theme-detail-intro .breadcrumb-current{
+  color:var(--muted,#657069);
+  font-weight:650;
+}
+body.deep-dive-detail .theme-detail-intro .eyebrow{
+  margin:18px 0 0;
+  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
+  font-size:12px;
+  line-height:1.45;
+  letter-spacing:.085em;
+  font-weight:800;
+  color:var(--detail-en,#8a8176);
+  text-transform:uppercase;
+}
+body.deep-dive-detail .theme-detail-intro .course-title{
+  margin:11px 0 0;
+  line-height:1.2;
+  letter-spacing:-.04em;
+}
+body.deep-dive-detail .theme-detail-intro .course-title-en{
+  margin:10px 0 0;
+  max-width:760px;
+  line-height:1.45;
+  letter-spacing:.055em;
+  text-wrap:balance;
+  overflow-wrap:normal;
+}
+body.deep-dive-detail .theme-detail-intro .lead{
+  margin-top:22px;
+}

@@ -81,6 +81,32 @@ for (const file of pages) {
     if(!allowedContexts)
       issues.push(file+': duplicate static page-nav outside intentional tour/place pair');
   }
+  // Deep-dive articles are one shared role, with the actual source story in
+  // breadcrumbs and one fixed return link. Never duplicate the article or
+  // introduce page-specific style shims when a new explainer is published.
+  const deepDiveOrigins=new Map([
+    ['/travel/explainers/honours-and-orders.html','/places/st-giles-thistle-chapel.html'],
+    ['/edinburgh/themes/execution-sites.html','/places/grassmarket-executions-covenanters.html']
+  ]);
+  if(deepDiveOrigins.has(pathname)||/\\bdeep-dive-detail\\b/.test(html.match(/<body\\b[^>]*>/i)?.[0]||'')){
+    const origin=deepDiveOrigins.get(pathname);
+    const bodyTag=html.match(/<body\\b[^>]*>/i)?.[0]||'';
+    const intro=html.match(/<section\\b[^>]*class=["'][^"']*theme-detail-intro[^"']*["'][^>]*>[\\s\\S]*?<\\/section>/i)?.[0]||'';
+    const crumbs=intro.match(/<div\\b[^>]*class=["']breadcrumbs["'][^>]*>[\\s\\S]*?<\\/div>/i)?.[0]||'';
+    if(!/\\bdeep-dive-detail\\b/.test(bodyTag))
+      issues.push(file+': missing shared deep-dive detail role');
+    if(origin&&!crumbs.includes('href="'+origin+'"'))
+      issues.push(file+': breadcrumb must link to originating story '+origin);
+    if(!/class=["']breadcrumb-current["'][^>]*aria-current=["']page["']/.test(crumbs))
+      issues.push(file+': missing current-page breadcrumb');
+    if(!/<p\\b[^>]*class=["']eyebrow["'][^>]*lang=["']en["'][^>]*>DEEP DIVE · [A-Z ]+<\\/p>/.test(intro))
+      issues.push(file+': missing shared English deep-dive eyebrow');
+    if(!/<p\\b[^>]*class=["']course-title-en["'][^>]*lang=["']en["'][^>]*>[^<]+<\\/p>/.test(intro))
+      issues.push(file+': missing English article title');
+    const returns=[...html.matchAll(/<a\\b[^>]*class=["'][^"']*\\bdeep-dive-return\\b[^"']*["'][^>]*href=["']([^"']+)["']/gi)];
+    if(returns.length!==1||(origin&&returns[0]?.[1]!==origin))
+      issues.push(file+': must have exactly one return link to originating story');
+  }
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
