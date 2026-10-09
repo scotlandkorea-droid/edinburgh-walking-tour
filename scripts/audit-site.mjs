@@ -42,6 +42,28 @@ const sitemap = new Set([...read('sitemap.xml').matchAll(/<loc>\s*https?:\/\/[^/
 const issues = [];
 let linksChecked = 0, noindexPages = 0, indexablePages = 0;
 
+
+// Resolve real scroll targets from the site's existing HTML. The navigation
+// context hashes #tour-nav and #place-nav are intentionally handled by JS.
+let fragmentLinksChecked = 0;
+const siteOrigin = 'https://edinburgh-walking-tour.scotlandkorea.workers.dev';
+const htmlFilesByPath = new Map(pages.map(file => [
+  file === 'index.html' ? '/' :
+    file === 'st-andrews/index.html' ? '/st-andrews/' : '/' + file,
+  file
+]));
+const anchorIdsByFile = new Map();
+const anchorsIn = file => {
+  if (!anchorIdsByFile.has(file)) {
+    const target = read(file);
+    const ids = new Set([...target.matchAll(/\bid=["']([^"']+)["']/gi)].map(m => m[1]));
+    for (const match of target.matchAll(/<a\b[^>]*\bname=["']([^"']+)["']/gi))
+      ids.add(match[1]);
+    anchorIdsByFile.set(file, ids);
+  }
+  return anchorIdsByFile.get(file);
+};
+
 for (const file of pages) {
   const html = read(file);
   const pathname = file === 'index.html' ? '/'
@@ -188,6 +210,24 @@ for (const file of pages) {
     if (/\btarget\s*=\s*["']_blank["']/i.test(anchor[0]) &&
         !/\brel\s*=\s*["'][^"']*\b(?:noopener|noreferrer)\b/i.test(anchor[0]))
       issues.push(file + ': external-window link is missing rel=noopener');
+
+    const hrefMatch = anchor[0].match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    const href = hrefMatch?.[1] ?? hrefMatch?.[2];
+    if (!href || !href.includes('#')) continue;
+    let target;
+    try { target = new URL(href.replace(/&amp;/g, '&'), siteOrigin + pathname); }
+    catch { continue; }
+    if (target.origin !== siteOrigin || !target.hash ||
+        target.hash === '#tour-nav' || target.hash === '#place-nav') continue;
+    const targetFile = htmlFilesByPath.get(target.pathname);
+    if (!targetFile) continue; // redirected and external URLs have no local HTML ID target
+    let fragment;
+    try { fragment = decodeURIComponent(target.hash.slice(1)); }
+    catch { issues.push(file + ': malformed local fragment ' + href); continue; }
+    if (!fragment) continue;
+    fragmentLinksChecked++;
+    if (!anchorsIn(targetFile).has(fragment))
+      issues.push(file + ': missing scroll target ' + href);
   }
   for (const match of markup.matchAll(/\b(?:href|src|poster)=["'](\/[^"']+)["']/gi)) {
     let target = match[1].split(/[?#]/)[0];
@@ -383,7 +423,8 @@ console.log('Photo redirects: '+photoRedirects.size+' legacy URLs tested for GET
  }
 
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
-  + ' local references, ' + indexablePages + ' indexable pages, '
+  + ' local references, ' + fragmentLinksChecked + ' scroll fragments, '
+  + indexablePages + ' indexable pages, '
   + noindexPages + ' noindex pages');
 if (issues.length) {
   console.error('Integrity issues (' + issues.length + '):\n' + issues.slice(0, 50).join('\n'));
