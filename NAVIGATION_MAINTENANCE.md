@@ -59,3 +59,12 @@ For the titles below, the approved short form is the canonical page title itself
 Glencoe 03 remains `해그리드 오두막은 어디 갔을까?` everywhere. Do not add an “영화 속 …” prefix.
 
 When one of these titles changes, update the central `navigation-data.js` record first, then keep page metadata/H1, hub cards, tabs, search data, and static previous/next fallbacks consistent.
+
+
+## Automatically generated internal site search
+
+- `assets/search-data.js` is the **only browser-loaded search index**. Do not manually edit it; GitHub Actions regenerates it on `main` when HTML pages, navigation classifications, the generator or curation change.
+- `scripts/build-search-index.mjs` scans actual site HTML and extracts H1, meta description, section headings, and a bounded body excerpt. New pages are discovered automatically; search results keep a single URL per page.
+- `scripts/search-curation.json` stores only human-selected aliases, the intentionally short titles and exceptional type labels, plus the one virtual Scotland hub link. Existing public titles and alternative names must survive regeneration; obsolete historical titles must not be reintroduced.
+- `.assetsignore` excludes `scripts/`, so the generator and curation do not ship to visitors. Search data is loaded lazily by `assets/site-header.js`, not on every page load.
+- The source of truth is HTML; never reintroduce a second hand-maintained 189-page search inventory. Verify the workflow completed, the emitted index has unique URLs, and old URLs/aliases remain discoverable. GitHub generation success does not prove Cloudflare deployment or live search UI behaviour.
