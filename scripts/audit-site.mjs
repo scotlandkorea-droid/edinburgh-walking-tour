@@ -107,6 +107,17 @@ for (const file of pages) {
     if(returns.length!==1||(origin&&returns[0]?.[1]!==origin))
       issues.push(file+': must have exactly one return link to originating story');
   }
+  // Entire "더 자세히 보기" panel is one keyboard-focusable link.
+  // No page-level click handlers, nested anchors or legacy div-only panels.
+  const readingBoxes=[...html.matchAll(/<([a-z][\w:-]*)\b[^>]*\bclass=["'][^"']*\bfurther-reading-box\b[^"']*["'][^>]*>/gi)];
+  for(const box of readingBoxes){
+    const tag=box[0];
+    if(box[1].toLowerCase()!=='a'||!/\bhref=["']\/[^"']+["']/.test(tag))
+      issues.push(file+': full further-reading box must be one internal anchor');
+    const end=html.indexOf('</a>',box.index+tag.length);
+    if(end<0||/<a\b/i.test(html.slice(box.index+tag.length,end)))
+      issues.push(file+': nested link or missing closing anchor in further-reading box');
+  }
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];

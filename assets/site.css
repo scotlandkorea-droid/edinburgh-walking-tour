@@ -1055,8 +1055,46 @@ body.stg-story-detail .lead{font-size:18px;color:var(--muted);margin:0;max-width
 body.stg-story-detail main article{padding:42px 0 76px}
 body.stg-story-detail h2{font-size:25px;letter-spacing:-.025em;margin:34px 0 10px;padding-left:12px;border-left:3px solid var(--plum)}
 body.stg-story-detail p{margin:0 0 15px}
-/* Shared further-reading panel equivalent to the St Giles Thistle Chapel box. */
-body.stg-story-detail .note,.further-reading-box{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage,#e8eee8);color:#46534c}
+/* Shared note appearance is retained for actual static notes. Full-card deep reading
+   uses one semantic link across all originating story pages; no nested anchors or JS. */
+body.stg-story-detail .note,
+.further-reading-box{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage,#e8eee8);color:#46534c}
+.further-reading-box{
+  display:block;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color .16s ease,box-shadow .16s ease;
+}
+.further-reading-box .further-reading-label{
+  display:block;
+  margin-bottom:5px;
+  font-weight:800;
+  color:var(--deep,#17271f);
+}
+.further-reading-box .further-reading-content{
+  display:block;
+  line-height:1.7;
+}
+.further-reading-box .further-reading-title{
+  color:#365246;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+@media(hover:hover){
+  .further-reading-box:hover{
+    background:#e1eae2;
+    box-shadow:0 3px 13px rgba(24,33,29,.1);
+  }
+}
+.further-reading-box:focus-visible{
+  outline:3px solid var(--plum,#6f3547);
+  outline-offset:3px;
+  background:#e1eae2;
+}
+@media(prefers-reduced-motion:reduce){
+  .further-reading-box{transition:none}
+}
 body.stg-story-detail .page-nav{margin-top:18px}
 
 
