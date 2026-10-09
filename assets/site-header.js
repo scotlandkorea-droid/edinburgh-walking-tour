@@ -86,6 +86,7 @@
       .toLocaleLowerCase('ko-KR')
       .normalize('NFKC')
       .replace(/[·•—–_\/\\.(),"\'’‘:;!?]+/g,' ')
+      .replace(/-/g,' ')
       .replace(/\s+/g,' ')
       .trim();
     const compact=value=>normalize(value).replace(/\s+/g,'');
