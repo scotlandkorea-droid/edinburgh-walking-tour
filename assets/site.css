@@ -1073,7 +1073,8 @@ body.stg-story-detail .lead{font-size:18px;color:var(--muted);margin:0;max-width
 body.stg-story-detail main article{padding:42px 0 76px}
 body.stg-story-detail h2{font-size:25px;letter-spacing:-.025em;margin:34px 0 10px;padding-left:12px;border-left:3px solid var(--plum)}
 body.stg-story-detail p{margin:0 0 15px}
-body.stg-story-detail .note{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage);color:#46534c}
+/* Shared further-reading panel equivalent to the St Giles Thistle Chapel box. */
+body.stg-story-detail .note,.further-reading-box{margin:26px 0;padding:18px 20px;border-radius:16px;background:var(--sage,#e8eee8);color:#46534c}
 body.stg-story-detail .page-nav{margin-top:18px}
 
 
