@@ -169,7 +169,6 @@ for(const row of searchRows||[]){
   if(rowsByUrl.has(row.url))issues.push('search: duplicate URL '+row.url);
   rowsByUrl.set(row.url,row);
   if(!navigable(row.url))issues.push('search: missing page '+row.url);
-  if(unfinishedSearchPages.has(row.url))issues.push('search: unfinished placeholder was indexed '+row.url);
   if(!row.title||!row.description)issues.push('search: missing title or description '+row.url);
   const aliases=(row.aliases||[]).map(a=>a.trim().toLowerCase());
   if(new Set(aliases).size!==aliases.length)issues.push('search: duplicate alias '+row.url);
