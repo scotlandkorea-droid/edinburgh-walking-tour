@@ -198,6 +198,24 @@ for (const file of pages) {
     if (!existing.has(target) && !redirects.has(target))
       issues.push(file + ': missing local asset/page ' + target);
   }
+
+  // Responsive image sources are separate from img[src]. Check each local
+  // srcset candidate so a deleted desktop/tablet photo cannot pass unnoticed.
+  for (const tag of markup.matchAll(/<(?:source|img)\b[^>]*>/gi)) {
+    const attr = tag[0].match(/\bsrcset\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    if (!attr) continue;
+    const candidates = (attr[1] ?? attr[2]).split(',');
+    for (const candidate of candidates) {
+      const raw = candidate.trim().split(/\s+/)[0];
+      if (!raw || !raw.startsWith('/') || raw.startsWith('//')) continue;
+      let imagePath = raw.split(/[?#]/)[0];
+      linksChecked++;
+      try { imagePath = decodeURIComponent(imagePath); }
+      catch { issues.push(file + ': invalid srcset percent encoding in ' + raw); continue; }
+      if (!existing.has(imagePath) && !redirects.has(imagePath))
+        issues.push(file + ': missing responsive image ' + imagePath);
+    }
+  }
 }
 
 // Check externalized stylesheet images; static markup checks alone miss these.
