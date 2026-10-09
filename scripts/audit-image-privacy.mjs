@@ -113,3 +113,10 @@ for(const item of mismatched)
 for(const item of flagged)
   console.log('Review metadata: '+item.file+' ['+item.flags.join(', ')+']');
 console.log('Metadata values are never printed. This inspection does not modify image files.');
+// Unlike format mismatches, embedded EXIF/XMP may reveal camera details,
+// timestamps or locations. Fail CI if such metadata is reintroduced.
+const sensitive=flagged.filter(item=>item.flags.some(f=>f==='EXIF'||f==='XMP'||f.includes('GPS tag')));
+if(sensitive.length){
+  console.error('Privacy check FAILED: '+sensitive.length+' image files have EXIF/XMP or GPS tags.');
+  process.exitCode=1;
+}else console.log('Privacy check PASS: no EXIF/XMP or GPS tags detected.');
