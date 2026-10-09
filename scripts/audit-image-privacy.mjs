@@ -66,15 +66,24 @@ function inspectWebp(bytes) {
   return [...flags];
 }
 let inspected=0;
-const flagged=[];
+const flagged=[],mismatched=[];
 for (const file of files.sort()) {
   const bytes=fs.readFileSync(file);
-  const flags=/\.jpe?g$/i.test(file)?inspectJpeg(bytes)
-    :/\.png$/i.test(file)?inspectPng(bytes):inspectWebp(bytes);
+  const format=bytes[0]===0xff&&bytes[1]===0xd8?'JPEG'
+    :bytes.toString('hex',0,8)==='89504e470d0a1a0a'?'PNG'
+    :bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WEBP'?'WebP':'unknown';
+  const extension=/\.jpe?g$/i.test(file)?'JPEG':/\.png$/i.test(file)?'PNG':'WebP';
+  if(format!==extension)mismatched.push({file,extension,format});
+  const flags=format==='JPEG'?inspectJpeg(bytes)
+    :format==='PNG'?inspectPng(bytes)
+    :format==='WebP'?inspectWebp(bytes):['unrecognized image signature'];
   if (flags.length) flagged.push({file,flags});
   inspected++;
 }
-console.log('Image privacy inspection: '+inspected+' files, '+flagged.length+' with embedded metadata');
+console.log('Image privacy inspection: '+inspected+' files, '+flagged.length+' with embedded metadata or unknown signatures');
+console.log('Image format mismatches: '+mismatched.length);
+for(const item of mismatched)
+  console.log('Format review: '+item.file+' [extension '+item.extension+', data '+item.format+']');
 for(const item of flagged)
   console.log('Review metadata: '+item.file+' ['+item.flags.join(', ')+']');
 console.log('Metadata values are never printed. This inspection does not modify image files.');
