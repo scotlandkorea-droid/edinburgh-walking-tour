@@ -56,7 +56,12 @@ function loadLeaflet(){
   if(leafletPromise)return leafletPromise;
   leafletPromise=new Promise((resolve,reject)=>{
     if(!document.querySelector('link[data-leaflet]')){const l=document.createElement('link');l.rel='stylesheet';l.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';l.dataset.leaflet='1';document.head.appendChild(l)}
-    const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';s.crossOrigin='';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
+    const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';s.crossOrigin='';s.onload=resolve;s.onerror=error=>{
+      // Do not retain a rejected promise: opening the map again should retry.
+      leafletPromise=null;
+      s.remove();
+      reject(error);
+    };document.head.appendChild(s);
   });return leafletPromise;
 }
 function arrowAngle(a,b){const lat=(a[0]+b[0])/2*Math.PI/180;const dx=(b[1]-a[1])*Math.cos(lat),dy=-(b[0]-a[0]);return Math.atan2(dy,dx)*180/Math.PI}
@@ -115,8 +120,21 @@ function initMap(){
 }
 async function openMap(){
   lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('map-open');modal.querySelector('.route-map-close').focus();
+  // Leaflet owns the container once initialized; clearing it on a later open
+  // disconnects its tiles and controls while keeping a stale map instance.
+  if(map){initMap();return;}
   mapEl.innerHTML='<div class="map-loading">지도를 불러오는 중입니다…</div>';
-  try{await loadLeaflet();mapEl.innerHTML='';initMap();setTimeout(()=>map.invalidateSize(),100)}catch(e){mapEl.innerHTML='<div class="map-loading">지도를 불러오지 못했습니다. 위의 코스 목록은 계속 이용할 수 있습니다.</div>'}
+  try{
+    await loadLeaflet();
+    if(!modal.classList.contains('open'))return;
+    // Multiple opens may share a pending library load. Initialize only once.
+    if(map){initMap();return;}
+    mapEl.innerHTML='';
+    initMap();
+    setTimeout(()=>{if(map&&modal.classList.contains('open'))map.invalidateSize()},100);
+  }catch(e){
+    if(modal.classList.contains('open'))mapEl.innerHTML='<div class="map-loading">지도를 불러오지 못했습니다. 위의 코스 목록은 계속 이용할 수 있습니다.</div>';
+  }
 }
 function closeMap(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('map-open');if(lastFocus)lastFocus.focus()}
 preview.addEventListener('click',openMap);preview.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openMap()}});
