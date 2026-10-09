@@ -73,6 +73,59 @@ for (const url of sitemap) {
   if (url !== '/' && !existing.has(url) && url !== '/st-andrews/')
     issues.push('sitemap: non-existent destination ' + url);
 }
+
+/* Check JavaScript-generated navigation and search references too.
+   These links are not visible to the HTML href/src scan above. */
+const vm = await import('node:vm');
+const shared = {window:{}};
+vm.runInNewContext(read('assets/navigation-data.js'),shared,{timeout:1000});
+vm.runInNewContext(read('assets/search-data.js'),shared,{timeout:1000});
+const navigation=shared.window.EW_NAV_DATA;
+const searchRows=shared.window.EW_SEARCH_INDEX;
+const curation=JSON.parse(read('scripts/search-curation.json'));
+const navigable=url=>{
+  const pathname=String(url||'').split(/[?#]/)[0]||'/';
+  return existing.has(pathname)||redirects.has(pathname);
+};
+let navRefs=0;
+const testItems=(group,items,{numbered=false}={})=>{
+  const local=new Set();
+  (items||[]).forEach((item,index)=>{
+    if(!item.name||!String(item.name).trim())issues.push(group+': empty navigation label');
+    if(!item.url||!navigable(item.url))issues.push(group+': missing navigation destination '+item.url);
+    if(numbered&&item.number!==String(index+1).padStart(2,'0'))
+      issues.push(group+': wrong numbered item at '+index);
+    if(local.has(item.url))issues.push(group+': duplicate navigation URL '+item.url);
+    local.add(item.url);
+    navRefs++;
+  });
+};
+for(const series of navigation.series||[]){
+  if(!navigable(series.hub))issues.push(series.id+': missing series hub '+series.hub);
+  testItems('series '+series.id,series.items,{numbered:true});
+  if(series.placeItems)testItems('series '+series.id+' place',series.placeItems);
+}
+for(const region of navigation.placeRegions||[])testItems('region '+region.id,region.items);
+for(const [name,sequence] of Object.entries(navigation.roleSequences||{})){
+  if(!navigable(sequence.hub))issues.push('role '+name+': missing hub '+sequence.hub);
+  testItems('role '+name,sequence.items);
+}
+const rowsByUrl=new Map();
+for(const row of searchRows||[]){
+  if(rowsByUrl.has(row.url))issues.push('search: duplicate URL '+row.url);
+  rowsByUrl.set(row.url,row);
+  if(!navigable(row.url))issues.push('search: missing page '+row.url);
+  if(!row.title||!row.description)issues.push('search: missing title or description '+row.url);
+  const aliases=(row.aliases||[]).map(a=>a.trim().toLowerCase());
+  if(new Set(aliases).size!==aliases.length)issues.push('search: duplicate alias '+row.url);
+}
+for(const field of ['aliases','titleOverrides','typeOverrides']){
+  for(const url of Object.keys(curation[field]||{}))
+    if(!rowsByUrl.has(url))issues.push('curation: orphan '+field+' entry '+url);
+}
+console.log('Shared data: '+navRefs+' navigation entries, '
+  +searchRows.length+' search records; source references checked');
+
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + indexablePages + ' indexable pages, '
   + noindexPages + ' noindex pages');
