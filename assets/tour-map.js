@@ -37,7 +37,7 @@ function renderPreview(){
   const minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
   const projectX=lng=>12+(lng-minLng)/(maxLng-minLng)*976;
   const mainLats=path.map(p=>p[0]),mainMinLat=Math.min(...mainLats),mainMaxLat=Math.max(...mainLats);
-  const viewH=220,mainTop=28,mainBottom=211;
+  const mainTop=28,mainBottom=211;
   const projectMain=([lat,lng])=>[projectX(lng),mainTop+(mainMaxLat-lat)/(mainMaxLat-mainMinLat)*(mainBottom-mainTop)];
   const pts=path.map(p=>projectMain(p).join(',')).join(' ');
   const dots=stops.slice(1,-1).map(s=>{const [x,y]=projectMain([s.lat,s.lng]);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" class="stop-dot"><title>${s.n}</title></circle>`}).join('');
