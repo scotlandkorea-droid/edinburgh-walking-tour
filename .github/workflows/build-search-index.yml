@@ -12,6 +12,7 @@ on:
       - 'travel/**/*.html'
       - 'assets/navigation-data.js'
       - 'scripts/build-search-index.mjs'
+      - 'scripts/audit-site.mjs'
       - 'scripts/search-curation.json'
       - '.github/workflows/build-search-index.yml'
   workflow_dispatch:
@@ -32,6 +33,10 @@ jobs:
           persist-credentials: true
       - name: Generate static search index
         run: node scripts/build-search-index.mjs
+      - name: Check generated index is reproducible
+        run: node scripts/build-search-index.mjs --check
+      - name: Audit static site links and metadata
+        run: node scripts/audit-site.mjs
       - name: Commit changes only if index differs
         run: |
           git add assets/search-data.js
