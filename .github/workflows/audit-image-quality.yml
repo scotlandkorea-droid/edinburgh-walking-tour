@@ -6,7 +6,6 @@ on:
     branches: [main]
     paths:
       - 'scripts/audit-image-quality.py'
-      - 'scripts/photo-contact-sheet.py'
       - '.github/workflows/audit-image-quality.yml'
       - 'assets/**/*.jpg'
       - 'assets/**/*.jpeg'
@@ -30,7 +29,3 @@ jobs:
         env:
           PYTHONPATH: /tmp/ew-photo-qa
         run: python3 scripts/audit-image-quality.py
-      - name: Create visual comparisons (no file changes)
-        env:
-          PYTHONPATH: /tmp/ew-photo-qa
-        run: python3 scripts/photo-contact-sheet.py
