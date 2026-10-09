@@ -33,6 +33,9 @@ for path in paths:
             expected = "JPEG" if suffix in {".jpg", ".jpeg"} else suffix[1:].upper()
             mismatch = format.upper() != expected
             candidate = any(q in str(path).lower() for q in attention)
+            if max(width,height) < 850:
+                print(f"SMALL SOURCE | {path} | {width}x{height} | "
+                      "may look soft when enlarged above its native dimensions")
             if candidate or mismatch:
                 print(f"IMAGE | {path} | {width}x{height} | {format} | "
                       f"{path.stat().st_size//1024} KiB | indicative-edge={energy:.1f}" +
