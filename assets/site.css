@@ -2654,11 +2654,6 @@ body.story-detail-standard > section:first-of-type .place-map-link{
   }
 }
 
-/* Keep the already approved functional HUB core blocks intact. */
-body.place-region-hub.st-andrews-guide :is(.guide-core,.city-core,.guide-info,.city-info){
-  position:relative;
-}
-
 /* PLACE SINGLE LEGACY HERO ALIAS — Arthur's Seat structure, 2026-10-05 */
 /* Keep the homepage Hero untouched; only a Place Single using the old .hero shell joins the shared detail top. */
 body.place-single-detail > .hero{
@@ -2976,7 +2971,7 @@ body.travel-detail.travel-info-standard .travel-article{
 
 /* First intro/overview box -> manuscript rhythm. Only the first direct child is affected. */
 .detail-article > :first-child:is(
-  .course-overview,.quicklook,.overview-box,.summary-box,.at-a-glance,.key-facts,.intro-box
+  .course-overview,.quicklook
 ){
   margin-bottom:45px!important;
 }
