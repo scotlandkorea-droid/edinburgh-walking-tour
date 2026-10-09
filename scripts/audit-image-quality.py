@@ -42,5 +42,28 @@ for path in paths:
     except Exception as error:
         print(f"IMAGE OPEN ERROR | {path} | {type(error).__name__}")
 
+# Compare each Brodie edit with its surviving source thumbnail.
+# A high difference indicates content/reconstruction edits, not just sharpening.
+from PIL import ImageChops
+for stem in ("deacon-brodie-house-cafe", "deacon-brodie-tavern", "deacon-brodie-cabinet"):
+    original_path=Path("assets")/(stem+".webp")
+    edited_path=Path("assets")/(stem+"-edited.png")
+    if not original_path.exists() or not edited_path.exists():
+        continue
+    with Image.open(original_path) as original, Image.open(edited_path) as edited:
+        source=ImageOps.exif_transpose(original).convert("RGB")
+        current=ImageOps.exif_transpose(edited).convert("RGB")
+        previous_size=source.size
+        # Downsample both to the same 256-pixel reference, avoiding false
+        # comparisons caused by different original pixel dimensions.
+        source=source.resize((256,192) if source.width>source.height else (192,256),Image.Resampling.LANCZOS)
+        current=current.resize(source.size,Image.Resampling.LANCZOS)
+        delta=ImageStat.Stat(ImageChops.difference(source,current))
+        mean_absolute_diff=sum(delta.mean)/3
+        print(f"BRODIE COMPARISON | {stem} | source={previous_size} "
+              f"| edited={edited.size} | edited/source-scale={edited.width/previous_size[0]:.2f} "
+              f"| low-resolution-colour-diff={mean_absolute_diff:.1f}/255 "
+              "| interpret only with visual confirmation")
+
 print(f"CHECKED | {len(paths)} image files | {len(flagged)} format mismatches")
 print("Quality scores are indicative only; no image has been re-encoded or replaced.")
