@@ -67,4 +67,11 @@ When one of these titles changes, update the central `navigation-data.js` record
 - `scripts/build-search-index.mjs` scans actual site HTML and extracts H1, meta description, section headings, and a bounded body excerpt. New pages are discovered automatically; search results keep a single URL per page.
 - `scripts/search-curation.json` stores only human-selected aliases, the intentionally short titles and exceptional type labels, plus the one virtual Scotland hub link. Existing public titles and alternative names must survive regeneration; obsolete historical titles must not be reintroduced.
 - `.assetsignore` excludes `scripts/`, so the generator and curation do not ship to visitors. Search data is loaded lazily by `assets/site-header.js`, not on every page load.
-- The source of truth is HTML; never reintroduce a second hand-maintained 189-page search inventory. Verify the workflow completed, the emitted index has unique URLs, and old URLs/aliases remain discoverable. GitHub generation success does not prove Cloudflare deployment or live search UI behaviour.
+- The source of truth is HTML; never reintroduce a second hand-maintained page-by-page search inventory. All existing HTML pages, including `noindex` pages and manuscript placeholders, remain eligible for internal search. `noindex` controls external search-engine indexing, not the website search. The GitHub workflow checks coverage of every HTML page and all approved name variants. Google Docs manuscripts update the actual HTML only when published. GitHub generation success does not prove Cloudflare deployment or live search UI behaviour.
+
+
+## CSS cleanup safety (2026-10-09)
+
+- Before removing CSS, compare selector classes against all site HTML and shared JavaScript using the read-only `scripts/report-css-inventory.mjs`. The report is an inventory, **not** automatic permission to delete: Leaflet creates classes at runtime, and some generic classes are reserved for future manuscript components.
+- Removed source-unreferenced rules for `.route-map-compass`, `.text-link`, `.place-chip`, `.place-pending`, `.page-nav-next-only`, `.page-nav-prev-only`, `.page-nav-empty` and `.nav-label`. The active `.place-strip > a` styling is preserved. The CSS audit and search/navigation/privacy checks passed.
+- Do not bulk-delete legacy CSS while actual public mobile/tablet/PC visual verification remains unavailable. Confirm all active classes and role-specific fallbacks before any next removal.
