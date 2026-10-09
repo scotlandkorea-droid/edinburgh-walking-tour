@@ -22,6 +22,15 @@ on:
       - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
       - 'scripts/audit-site.mjs'
+      - 'scripts/audit-image-privacy.mjs'
+      - 'assets/**/*.jpg'
+      - 'assets/**/*.jpeg'
+      - 'assets/**/*.png'
+      - 'assets/**/*.webp'
+      - 'images/**/*.jpg'
+      - 'images/**/*.jpeg'
+      - 'images/**/*.png'
+      - 'images/**/*.webp'
       - 'scripts/search-curation.json'
       - '.github/workflows/build-search-index.yml'
   workflow_dispatch:
@@ -51,12 +60,15 @@ jobs:
           node --input-type=module --check < worker.js
           node --check scripts/build-search-index.mjs
           node --check scripts/audit-site.mjs
+          node --check scripts/audit-image-privacy.mjs
       - name: Generate static search index
         run: node scripts/build-search-index.mjs
       - name: Check generated index is reproducible
         run: node scripts/build-search-index.mjs --check
       - name: Audit static site links and metadata
         run: node scripts/audit-site.mjs
+      - name: Inspect image metadata without changing photographs
+        run: node scripts/audit-image-privacy.mjs
       - name: Commit changes only if index differs
         run: |
           git add assets/search-data.js
