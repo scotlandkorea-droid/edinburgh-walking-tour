@@ -47,12 +47,13 @@ for (const file of pages) {
   const head = html.split(/<\/head>/i)[0];
   const title = head.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim();
   const description = head.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*\bcontent=["']([^"']+)["'][^>]*>/i)?.[1]?.trim();
+  const noindex = /<meta\b(?=[^>]*\bname=["']robots["'])[^>]*content=["'][^"']*noindex/i.test(head);
   if (!title) issues.push(file + ': missing document title');
-  if (!description) issues.push(file + ': missing meta description');
+  // Unpublished noindex placeholders do not need a search-snippet description.
+  if (!description && !noindex) issues.push(file + ': missing meta description');
   const canonical = head.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i)?.[1];
   if (!canonical) issues.push(file + ': no canonical link');
   else if (!canonical.endsWith(pathname)) issues.push(file + ': canonical differs from ' + pathname);
-  const noindex = /<meta\b(?=[^>]*\bname=["']robots["'])[^>]*content=["'][^"']*noindex/i.test(head);
   if (noindex) noindexPages++;
   else {
     indexablePages++;
