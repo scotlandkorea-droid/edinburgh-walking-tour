@@ -43,6 +43,7 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 - Card height and padding may remain role-specific; unification must not invent new information hierarchy.
 - Static fallback and runtime output must never coexist as duplicate visible navigation. A page may belong to multiple contexts (for example numbered-series/tour and place browsing), so the runtime replacement step must remove every pre-existing bottom `.page-nav[data-nav-system]` that is not one of the incoming runtime nodes. Static fallbacks exist only for pre-JS/no-JS safety; after runtime selection there must be one active navigation surface.
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
+- Asset cache revalidation must be configured in **both** `worker.js` (`revalidateAssets`) and `wrangler.jsonc` (`assets.run_worker_first`). Cloudflare serves a matched static asset before Worker code unless its path matches `run_worker_first`. Keep the seven shared asset routes synchronized: `site.css`, `site-header.js`, `navigation-system.js`, `navigation-data.js`, `tour-course-data.js`, `search-data.js`, and `tour-map.js`. Do not send all pages and images through the Worker for this purpose.
 
 
 ## Approved numbered-detail titles 2026-10-08
