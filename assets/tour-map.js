@@ -138,5 +138,19 @@ async function openMap(){
 }
 function closeMap(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('map-open');if(lastFocus)lastFocus.focus()}
 preview.addEventListener('click',openMap);preview.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openMap()}});
-modal.querySelector('.route-map-close').addEventListener('click',closeMap);modal.addEventListener('click',e=>{if(e.target===modal)closeMap()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeMap()});
+modal.querySelector('.route-map-close').addEventListener('click',closeMap);modal.addEventListener('click',e=>{if(e.target===modal)closeMap()});document.addEventListener('keydown',e=>{
+  if(!modal.classList.contains('open'))return;
+  if(e.key==='Escape'){e.preventDefault();closeMap();return}
+  if(e.key!=='Tab')return;
+  // Keep keyboard navigation within the map dialog, including Leaflet controls.
+  const focusable=[...modal.querySelectorAll('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')]
+    .filter(el=>!el.hasAttribute('hidden')&&el.getAttribute('aria-hidden')!=='true');
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey&&(document.activeElement===first||!modal.contains(document.activeElement))){
+    e.preventDefault();last.focus();
+  }else if(!e.shiftKey&&(document.activeElement===last||!modal.contains(document.activeElement))){
+    e.preventDefault();first.focus();
+  }
+});
 })();
