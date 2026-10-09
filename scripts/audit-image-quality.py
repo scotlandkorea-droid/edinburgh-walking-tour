@@ -21,6 +21,12 @@ for path in paths:
         with Image.open(path) as original:
             original.load()
             width, height = original.size
+            # EXIF orientation changes visible pixels when a file is decoded.
+            # Report only orientation, never shooting date, device or location.
+            exif=original.getexif()
+            if exif:
+                print(f"EXIF ORIENTATION | {path} | value={exif.get(274, 1)} "
+                      f"| tag-count={len(exif)}")
             photo = ImageOps.exif_transpose(original).convert("RGB")
             photo.thumbnail((960, 960), Image.Resampling.LANCZOS)
             grayscale = ImageOps.grayscale(photo)
