@@ -80,6 +80,7 @@
     const results=searchPanel.querySelector('.site-search-results');
     const closeButton=searchPanel.querySelector('.site-search-close');
     let searchDataPromise=null;
+    let searchRequestId=0;
 
     const normalize=value=>String(value||'')
       .toLocaleLowerCase('ko-KR')
@@ -182,6 +183,7 @@
     };
 
     const renderResults=async value=>{
+      const requestId=++searchRequestId;
       const query=normalize(value);
       results.replaceChildren();
       if(!query){
@@ -190,7 +192,13 @@
       }
       let data=[];
       try{data=await loadSearchData()}
-      catch(e){status.textContent='검색 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';return}
+      catch(e){
+        if(requestId===searchRequestId&&!searchPanel.hidden)
+          status.textContent='검색 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';
+        return;
+      }
+      // Ignore a response if the visitor has changed/cleared the query or closed search.
+      if(requestId!==searchRequestId||searchPanel.hidden)return;
       let matches=directMatches(query,data);
       let similar=false;
       if(!matches.length){
@@ -222,16 +230,20 @@
       }
     };
 
-    const openSearch=async()=>{
+    const openSearch=()=>{
       if(mobileMenu?.hasAttribute('open'))mobileMenu.removeAttribute('open');
       searchPanel.hidden=false;
       searchToggle.setAttribute('aria-expanded','true');
       searchToggle.setAttribute('aria-label','검색 닫기');
-      await loadSearchData().catch(()=>{});
-      requestAnimationFrame(()=>input.focus({preventScroll:true}));
+      // Focus immediately; fetching the lazy search index must not block typing.
+      void loadSearchData().catch(()=>{});
+      requestAnimationFrame(()=>{
+        if(!searchPanel.hidden)input.focus({preventScroll:true});
+      });
       renderResults(input.value);
     };
     closeSearch=()=>{
+      searchRequestId++;
       searchPanel.hidden=true;
       searchToggle.setAttribute('aria-expanded','false');
       searchToggle.setAttribute('aria-label','검색 열기');
