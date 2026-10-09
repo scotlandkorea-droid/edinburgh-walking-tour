@@ -248,6 +248,38 @@ for(const [from,to] of photoRedirects){
 }
 console.log('Photo redirects: '+photoRedirects.size+' legacy URLs tested for GET/HEAD');
 
+ // Exercise the real Worker handler with a mock asset binding, not just its
+ // configuration. Old HTML query versions must not pin outdated shared UI.
+ if(workerCacheBlock){
+   const sharedAssets=JSON.parse('['+workerCacheBlock+']');
+   const oldCache='public, max-age=31536000, immutable';
+   let checked=0;
+   for(const pathname of [...sharedAssets,'/places/new-town.html']){
+     for(const method of ['GET','HEAD']){
+       const requestUrl='https://example.test'+pathname+'?v=old-test-version';
+       let fetchedPath='';
+       const response=await routingWorker.fetch(
+         new Request(requestUrl,{method}),
+         {ASSETS:{fetch:assetRequest=>{
+           fetchedPath=new URL(assetRequest.url).pathname;
+           return new Response(null,{status:200,headers:{
+             'Cache-Control':oldCache,
+             'X-Audit-Asset':'preserved'
+           }});
+         }}}
+       );
+       const expectedCache=sharedAssets.includes(pathname)
+         ?'public, max-age=0, must-revalidate':oldCache;
+       if(response.status!==200||fetchedPath!==pathname||
+          response.headers.get('Cache-Control')!==expectedCache||
+          response.headers.get('X-Audit-Asset')!=='preserved')
+         issues.push('worker asset cache header failed: '+method+' '+pathname);
+       checked++;
+     }
+   }
+   console.log('Worker cache: '+checked+' GET/HEAD responses checked with stale query versions');
+ }
+
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + indexablePages + ' indexable pages, '
   + noindexPages + ' noindex pages');
