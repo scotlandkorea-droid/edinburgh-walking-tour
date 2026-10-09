@@ -289,18 +289,29 @@
     lightbox.addEventListener('contextmenu',blockImageSave);
     gallery.addEventListener('dragstart',blockImageSave);
     lightbox.addEventListener('dragstart',blockImageSave);
+    let lightboxRequestId=0;
+    let lightboxPending=false;
     const closeLightbox=()=>{
+      // Invalidate an image decode that may still be pending.
+      lightboxRequestId++;
+      lightboxPending=false;
       lightbox.classList.remove('open','zooming');
       lightbox.setAttribute('aria-hidden','true');
     };
     const openLightbox=async(photo)=>{
+      const requestId=++lightboxRequestId;
+      lightboxPending=true;
       lightbox.classList.remove('open','zooming');
       image.src=photo.currentSrc||photo.src;
       image.alt=photo.alt;
       try{if(image.decode)await image.decode()}catch(e){}
+      // A second photo or a close action must win over stale image decoding.
+      if(requestId!==lightboxRequestId)return;
+      lightboxPending=false;
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden','false');
       requestAnimationFrame(()=>{
+        if(requestId!==lightboxRequestId||!lightbox.classList.contains('open'))return;
         void image.offsetWidth;
         lightbox.classList.add('zooming');
       });
@@ -310,7 +321,7 @@
     gallery.querySelectorAll('.photo-card img').forEach(photo=>photo.addEventListener('click',()=>openLightbox(photo)));
     closeButton?.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&(lightbox.classList.contains('open')||lightboxPending))closeLightbox()});
   }
 
   requestAnimationFrame(fitTitles);
