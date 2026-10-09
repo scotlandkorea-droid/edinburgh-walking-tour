@@ -46,6 +46,14 @@ for (const file of pages) {
   const html = read(file);
   const pathname = file === 'index.html' ? '/'
     : file === 'st-andrews/index.html' ? '/st-andrews/' : '/' + file;
+  // Shared header/search/CSS must be present on every page. Otherwise a new
+  // article could exist in search data without offering the search UI itself.
+  if(!/<header\b[^>]*class=["'][^"']*\bsite-header\b/i.test(html))
+    issues.push(file+': missing shared site header');
+  if(!/<script\b[^>]*src=["']\/assets\/site-header\.js(?:\?[^"']*)?["']/i.test(html))
+    issues.push(file+': missing shared header/search script');
+  if(!/<link\b[^>]*href=["']\/assets\/site\.css(?:\?[^"']*)?["']/i.test(html))
+    issues.push(file+': missing shared site CSS');
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
