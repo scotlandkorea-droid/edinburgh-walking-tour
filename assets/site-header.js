@@ -292,15 +292,23 @@
     lightbox.addEventListener('dragstart',blockImageSave);
     let lightboxRequestId=0;
     let lightboxPending=false;
+    let lightboxOpener=null;
+    lightbox.setAttribute('role','dialog');
+    lightbox.setAttribute('aria-modal','true');
+    lightbox.setAttribute('aria-label','확대 사진');
     const closeLightbox=()=>{
       // Invalidate an image decode that may still be pending.
       lightboxRequestId++;
       lightboxPending=false;
       lightbox.classList.remove('open','zooming');
       lightbox.setAttribute('aria-hidden','true');
+      const opener=lightboxOpener;
+      lightboxOpener=null;
+      if(opener?.isConnected)opener.focus({preventScroll:true});
     };
     const openLightbox=async(photo)=>{
       const requestId=++lightboxRequestId;
+      lightboxOpener=photo;
       lightboxPending=true;
       lightbox.classList.remove('open','zooming');
       image.src=photo.currentSrc||photo.src;
@@ -311,6 +319,7 @@
       lightboxPending=false;
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden','false');
+      closeButton?.focus({preventScroll:true});
       requestAnimationFrame(()=>{
         if(requestId!==lightboxRequestId||!lightbox.classList.contains('open'))return;
         void image.offsetWidth;
@@ -333,7 +342,16 @@
     });
     closeButton?.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&(lightbox.classList.contains('open')||lightboxPending))closeLightbox()});
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&(lightbox.classList.contains('open')||lightboxPending)){
+        event.preventDefault();
+        closeLightbox();
+      }else if(event.key==='Tab'&&lightbox.classList.contains('open')){
+        // The close button is the only focusable control in this dialog.
+        event.preventDefault();
+        closeButton?.focus({preventScroll:true});
+      }
+    });
   }
 
   requestAnimationFrame(fitTitles);
