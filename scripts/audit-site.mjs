@@ -54,6 +54,15 @@ for (const file of pages) {
     issues.push(file+': missing shared header/search script');
   if(!/<link\b[^>]*href=["']\/assets\/site\.css(?:\?[^"']*)?["']/i.test(html))
     issues.push(file+': missing shared site CSS');
+  // Guard against old/new HTML snippets accidentally loading shared UI twice.
+  // A second header script executes the menu/search event setup a second time.
+  for(const [label,pattern] of [
+    ['shared site CSS',/<link\b[^>]*href=["']\/assets\/site\.css(?:\?[^"']*)?["'][^>]*>/gi],
+    ['shared header/search script',/<script\b[^>]*src=["']\/assets\/site-header\.js(?:\?[^"']*)?["'][^>]*>/gi]
+  ]){
+    const count=[...html.matchAll(pattern)].length;
+    if(count>1)issues.push(file+': duplicate '+label+' ('+count+' loads)');
+  }
   // A numbered tour/place page can intentionally keep two context variants
   // (one for tour, one for place). A second generic .page-nav is never needed:
   // it doubles the visible previous/next card before shared JS replaces it.
@@ -75,6 +84,23 @@ for (const file of pages) {
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   if (h1Count !== 1) issues.push(file + ': expected exactly one H1, got ' + h1Count);
   const head = html.split(/<\/head>/i)[0];
+  // Multiple canonical/robots/OG URL tags are ambiguous for crawlers
+  // and are a common leftover when a complete article replaces a draft.
+  const headTags=[...head.matchAll(/<(?:link|meta)\b[^>]*>/gi)].map(m=>m[0]);
+  const attributes=tag=>{
+    const entries=[...tag.matchAll(/([a-zA-Z-]+)\s*=\s*["']([^"']*)["']/g)];
+    return Object.fromEntries(entries.map(m=>[m[1].toLowerCase(),m[2].toLowerCase()]));
+  };
+  const descriptions=[
+    ['canonical',tag=>/^<link\b/i.test(tag)&&attributes(tag).rel==='canonical'],
+    ['robots',tag=>/^<meta\b/i.test(tag)&&attributes(tag).name==='robots'],
+    ['description',tag=>/^<meta\b/i.test(tag)&&attributes(tag).name==='description'],
+    ['og:url',tag=>/^<meta\b/i.test(tag)&&attributes(tag).property==='og:url']
+  ];
+  for(const [label,detect] of descriptions){
+    const matches=headTags.filter(detect);
+    if(matches.length>1)issues.push(file+': duplicate '+label+' metadata ('+matches.length+' tags)');
+  }
   const title = head.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim();
   const description = head.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*\bcontent=["']([^"']+)["'][^>]*>/i)?.[1]?.trim();
   const noindex = /<meta\b(?=[^>]*\bname=["']robots["'])[^>]*content=["'][^"']*noindex/i.test(head);
