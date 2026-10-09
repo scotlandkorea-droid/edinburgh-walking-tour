@@ -13,6 +13,7 @@ attention = (
     "edited", "deacon-brodie", "city-chambers", "new-college", "princes-street-gardens",
     "scott-monument", "ab75b4", "ef5aaf", "isle-of-skye",
     "robert-fergusson-writers", "heart-of-midlothian",
+    "greyfriars-bobby-fountain", "elephant-house",
 )
 flagged = []
 for path in paths:
