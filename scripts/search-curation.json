@@ -618,5 +618,39 @@
       "description": "스코틀랜드 전역 여행과 장소",
       "keywords": "scotland"
     }
-  ]
+  ],
+  "typeOverrides": {
+    "/edinburgh/places/museum-of-edinburgh.html": "장소",
+    "/scotland/places/isle-of-skye-arrival.html": "이야기",
+    "/scotland/places/isle-of-skye-cuillin-fairy-pools.html": "이야기",
+    "/scotland/places/isle-of-skye-trotternish.html": "이야기",
+    "/scotland/places/isle-of-skye-west.html": "이야기",
+    "/scotland/places/isle-of-skye-sleat.html": "이야기",
+    "/scotland/places/glasgow/george-square.html": "이야기",
+    "/scotland/places/glasgow/glasgow-cathedral.html": "이야기",
+    "/scotland/places/glasgow/glasgow-necropolis.html": "이야기",
+    "/places/royal-mile-gladstones-land.html": "장소",
+    "/places/royal-mile-deacon-brodie.html": "장소",
+    "/places/royal-mile-heart-midlothian.html": "장소",
+    "/places/royal-mile-mercat-cross.html": "장소",
+    "/places/royal-mile-city-chambers.html": "장소",
+    "/places/royal-mile-mary-kings-close.html": "장소",
+    "/places/royal-mile-adam-smith.html": "장소",
+    "/places/canongate-worlds-end.html": "장소",
+    "/places/canongate-kirk-stories.html": "장소",
+    "/places/canongate-adam-smith.html": "장소",
+    "/places/canongate-kirkyard-stories.html": "장소",
+    "/places/canongate-robert-fergusson.html": "장소",
+    "/st-andrews/old-course.html": "이야기",
+    "/st-andrews/martyrs-monument.html": "이야기",
+    "/st-andrews/university-of-st-andrews.html": "이야기",
+    "/scotland/places/stirling-history.html": "이야기",
+    "/scotland/places/stirling-holy-rude.html": "이야기",
+    "/st-andrews/st-andrews-castle.html": "이야기",
+    "/scotland/places/glasgow/buchanan-street.html": "이야기",
+    "/st-andrews/st-andrews-cathedral.html": "이야기",
+    "/scotland/places/glasgow/high-street-glasgow-cross.html": "이야기",
+    "/scotland/places/glasgow/merchant-city.html": "이야기",
+    "/scotland/places/glasgow/royal-exchange-square-goma.html": "이야기"
+  }
 }
