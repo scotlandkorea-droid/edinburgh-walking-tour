@@ -170,12 +170,33 @@ for(const row of searchRows||[]){
   const aliases=(row.aliases||[]).map(a=>a.trim().toLowerCase());
   if(new Set(aliases).size!==aliases.length)issues.push('search: duplicate alias '+row.url);
 }
+// Internal search includes all HTML pages, including noindex and draft pages.
+// noindex affects external search engines only. Catch accidental omissions.
+const expectedSearchUrls=new Set(pages.map(file=>file==='index.html'?'/'
+  :file==='st-andrews/index.html'?'/st-andrews/':'/'+file));
+for(const url of expectedSearchUrls)
+  if(!rowsByUrl.has(url))issues.push('search: HTML page missing from internal search '+url);
 for(const field of ['aliases','titleOverrides','typeOverrides']){
   for(const url of Object.keys(curation[field]||{}))
     if(!rowsByUrl.has(url))issues.push('curation: orphan '+field+' entry '+url);
 }
+// Every manually approved alternate spelling must still find its intended page
+// after the HTML-based search index is regenerated.
+let validatedAliases=0;
+for(const [url,variants] of Object.entries(curation.aliases||{})){
+  const entry=rowsByUrl.get(url);
+  if(!entry)continue;
+  const present=new Set([entry.title,...(entry.aliases||[])]
+    .map(value=>String(value).normalize('NFKC').toLocaleLowerCase('ko-KR').trim()));
+  for(const variant of variants){
+    validatedAliases++;
+    if(!present.has(String(variant).normalize('NFKC').toLocaleLowerCase('ko-KR').trim()))
+      issues.push('search: approved alias missing '+url+' / '+variant);
+  }
+}
 console.log('Shared data: '+navRefs+' navigation entries, '
-  +searchRows.length+' search records; source references checked');
+  +searchRows.length+' search records, '+expectedSearchUrls.size
+  +' HTML pages, '+validatedAliases+' approved aliases verified');
 
 
 // Every Worker-managed URL must also route through the Worker on Cloudflare.
