@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 625" width="1120" height="625" role="img" aria-labelledby="maptitle mapdesc">
+<title id="maptitle">파이프 코스탈 패스 전체 진행 방향 개략도</title>
+<desc id="mapdesc">남서쪽 킨카딘에서 시작해 컬로스, 노스 퀸스페리, 달게티 베이, 애버두어, 번티슬랜드, 커콜디, 레번, 엘리, 안스트루더, 크레일, 세인트앤드루스, 테이포트를 지나 뉴버그까지 이어지는 방향을 표시한 개략도입니다. 정확한 보행 경로나 지형 축척과 일치하지 않습니다.</desc>
+<rect width="1120" height="625" rx="22" fill="#f4f6f3"/>
+<path d="M 70 585 Q 580 565 1075 360 L 1075 610 L 70 610 Z" fill="#dbe9ee"/>
+<path d="M 530 35 Q 810 5 1042 160 L 1110 0 L 470 0 Z" fill="#dbe9ee"/>
+<text x="70" y="58" font-size="29" font-weight="750" fill="#244439">파이프 코스탈 패스</text>
+<text x="70" y="88" font-size="18" fill="#526964">Fife Coastal Path · 전체 진행 방향</text>
+<text x="120" y="599" font-size="21" fill="#5c8290">Firth of Forth · 포스만</text>
+<text x="898" y="57" font-size="19" fill="#5c8290">Firth of Tay</text>
+<path d="M 100 532 L 180 515 L 268 510 L 372 508 L 450 492 L 527 474 L 606 456 L 665 440 L 722 422 L 800 392 L 889 355 L 974 315 L 992 238 L 920 168 L 840 139 L 756 107 L 665 89 L 568 68" fill="none" stroke="#e5eddd" stroke-width="21" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 100 532 L 180 515 L 268 510 L 372 508 L 450 492 L 527 474 L 606 456 L 665 440 L 722 422 L 800 392 L 889 355 L 974 315 L 992 238 L 920 168 L 840 139 L 756 107 L 665 89 L 568 68" fill="none" stroke="#176a55" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="100" cy="532" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="180" cy="515" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="268" cy="510" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="372" cy="508" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="450" cy="492" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="527" cy="474" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="606" cy="456" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="665" cy="440" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="722" cy="422" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="800" cy="392" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="889" cy="355" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="974" cy="315" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="992" cy="238" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="920" cy="168" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="840" cy="139" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="756" cy="107" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="665" cy="89" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<circle cx="568" cy="68" r="5.5" fill="#fdfbf7" stroke="#1a6755" stroke-width="3"/>
+<text x="88" y="511" text-anchor="end" font-size="19" font-weight="650" fill="#254a41">Kincardine</text>
+<text x="180" y="547" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Culross</text>
+
+<text x="372" y="544" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">North Queensferry</text>
+<text x="450" y="472" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Dalgety Bay</text>
+<text x="527" y="506" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Aberdour</text>
+<text x="606" y="438" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Burntisland</text>
+<text x="665" y="473" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Kinghorn</text>
+<text x="722" y="400" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Kirkcaldy</text>
+<text x="796" y="423" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Leven</text>
+<text x="881" y="335" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Elie</text>
+<text x="964" y="345" text-anchor="end" font-size="19" font-weight="650" fill="#254a41">Anstruther</text>
+<text x="967" y="233" text-anchor="end" font-size="19" font-weight="650" fill="#254a41">Crail</text>
+<text x="916" y="145" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">St Andrews</text>
+<text x="840" y="169" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Leuchars</text>
+<text x="768" y="87" text-anchor="middle" font-size="19" font-weight="650" fill="#254a41">Tayport</text>
+
+<text x="552" y="52" text-anchor="end" font-size="19" font-weight="650" fill="#254a41">Newburgh</text>
+<circle cx="100" cy="532" r="11" fill="#196653"/>
+<text x="76" y="499" font-size="18" font-weight="700" fill="#196653">출발</text>
+<circle cx="568" cy="68" r="11" fill="#196653"/>
+<text x="597" y="41" font-size="18" font-weight="700" fill="#196653">도착</text>
+<rect x="720" y="538" width="355" height="55" rx="12" fill="#fff" stroke="#cbd9d2"/>
+<text x="740" y="561" font-size="17" fill="#354e43" font-weight="700">노선 개략도 · 실제 트레일 선 아님</text>
+<text x="740" y="581" font-size="15" fill="#637b71">거리·곡선·방향은 지도 축척과 다를 수 있음</text>
+</svg>
