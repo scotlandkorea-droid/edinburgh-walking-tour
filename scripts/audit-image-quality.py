@@ -140,3 +140,8 @@ for page,asset,detail in undersized:
 
 print(f"CHECKED | {len(paths)} image files | {len(flagged)} format mismatches")
 print("Quality scores are indicative only; no image has been re-encoded or replaced.")
+# Incorrect HTML aspect ratios can cause visible layout shifts and distortion.
+# Treat them as regressions; intentionally smaller source sizes remain warnings.
+if mismatches:
+    raise SystemExit(f"FAIL: {len(mismatches)} HTML image aspect ratios differ from source files")
+print("HTML photo aspect check: PASS")
