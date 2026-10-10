@@ -58,7 +58,8 @@
         const name=document.createElement('span');
         name.className='breadcrumb-current';
         name.setAttribute('aria-current','page');
-        name.textContent=document.querySelector('h1')?.textContent?.trim()||readingContextEntries[current].short;
+        // Reading-hub context uses its stable 01/02/03 order, not the full manuscript H1.
+        name.textContent=String(current+1).padStart(2,'0');
         crumb.append(name);
       }
       const back=document.querySelector('.deep-dive-return,.travel-ending .travel-hub');
