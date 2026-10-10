@@ -328,7 +328,7 @@ const transportModes = [
   {path:'/travel/airport-transport.html',title:'에든버러 공항에서 시내까지'},
   {path:'/travel/train.html',title:'기차로 여행하기'},
   {path:'/travel/bus.html',title:'버스로 여행하기'},
-  {path:'/travel/rental-car.html',title:'에든버러에서 렌터카 빌리기'},
+  {path:'/travel/rental-car.html',title:'렌터카로 여행하기'},
   {path:'/travel/boat.html',title:'배로 여행하기'}
 ];
 const busChapters = [
@@ -353,6 +353,24 @@ const expectCardOrder=(file,items)=>{
 expectCardOrder('travel/transport.html',transportModes);
 expectCardOrder('travel/bus.html',busChapters);
 expectCardOrder('travel/boat.html',boatChapters);
+const boatHub=read('travel/boat.html');
+const boatSections=[
+  '<h2>배표를 예약하기 전에</h2>',
+  '<h2>공식 노선 안내</h2>',
+  '<h2>01 국내 페리</h2>',
+  '<h2>02 국제 페리</h2>',
+  '<h2>03 국내 크루즈</h2>',
+  '<h2>04 국제 크루즈</h2>',
+  '<div class="travel-story-grid">',
+  '<div class="travel-ending">'
+].map(token=>boatHub.indexOf(token));
+if(boatSections.some((i,index)=>i<0||(index>0&&i<=boatSections[index-1])))
+  issues.push('travel/boat.html: overview must finish before the four numbered descriptions and end-of-article cards');
+if(!read('travel/transport.html').includes('<strong>렌터카로 여행하기</strong>')||
+   !read('travel/rental-car.html').includes('<h1>렌터카로 여행하기</h1>')||
+   !read('travel/boat.html').includes('렌터카로 여행하기'))
+  issues.push('Transport rental title must stay consistent in hub, detail and previous navigation');
+
 const checkSequence=(items,label,hub)=>{
   for(const [i,item] of items.entries()){
     const file=item.path.slice(1);
