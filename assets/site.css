@@ -34,7 +34,7 @@
    Single source of truth for detail-page ending layout. */
 /* One height rule for every detail prev/next card; CSS grid keeps paired cards equal. */
 main .page-nav > a,
-.travel-ending .travel-series > a{min-height:72px}
+.travel-ending .travel-series > a{min-height:65px;padding-block:16px}
 .detail-article>.action-buttons{
   display:grid;grid-template-columns:1fr;justify-items:center;
   gap:0;margin:40px 0 0;padding:20px 0 0;
@@ -58,7 +58,7 @@ main .page-nav > a,
   gap:12px;margin:38px 0 0
 }
 .detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a{
-  display:flex;align-items:center;padding:11px 10px;
+  display:flex;align-items:center;padding-inline:10px;
   border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;
   color:#31483d;text-decoration:none;font-weight:780;line-height:1.35;
   word-break:keep-all;overflow-wrap:normal;text-wrap:wrap
@@ -82,7 +82,7 @@ main .page-nav > a,
 body:has(.detail-article) main>section{padding-bottom:0}
 @media(min-width:720px){
   .detail-article>.action-buttons{margin-top:48px;padding-top:24px}
-  .detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a{padding:14px 16px}
+  .detail-article>.page-nav:not(.story-series-nav):not(.detail-series-nav) a{padding-inline:16px}
   .detail-article>.kakao-action{padding-top:118px}
 }
 
@@ -191,17 +191,17 @@ body:has(.detail-article) main>section{padding-bottom:0}
 .travel-ending .travel-series-next-only{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .travel-ending .travel-series-next-only .travel-nav-empty{display:block;min-width:0}
 .travel-ending .travel-series-next-only .next{grid-column:2;justify-content:flex-end;text-align:right}
-.travel-ending .travel-series a{display:flex;align-items:center;padding:11px 10px;border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;color:#31483d;text-decoration:none;font-weight:780;line-height:1.35;word-break:keep-all;overflow-wrap:normal;text-wrap:wrap}
+.travel-ending .travel-series a{display:flex;align-items:center;padding-inline:10px;border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;color:#31483d;text-decoration:none;font-weight:780;line-height:1.35;word-break:keep-all;overflow-wrap:normal;text-wrap:wrap}
 .travel-ending .travel-series .next{justify-content:flex-end;text-align:right}
 .travel-ending .travel-series.single a{justify-content:center;text-align:center}
 .travel-ending .travel-kakao{display:flex;justify-content:center;padding:110px 0 0}
 .travel-ending .travel-kakao a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 16px;border:1px solid rgba(53,47,27,.05);border-radius:999px;background:#fbf0b9;color:#393424;font-size:13px;font-weight:760;text-decoration:none;box-shadow:none}
-@media(min-width:720px){.travel-ending{margin-top:48px;padding-top:24px}.travel-ending .travel-series a{padding:14px 16px}.travel-ending .travel-kakao{padding-top:118px}}
-@media(max-width:560px){.travel-ending .travel-series{gap:10px}.travel-ending .travel-series a{padding:10px 11px;font-size:14px}}
+@media(min-width:720px){.travel-ending{margin-top:48px;padding-top:24px}.travel-ending .travel-series a{padding-inline:16px}.travel-ending .travel-kakao{padding-top:118px}}
+@media(max-width:560px){.travel-ending .travel-series{gap:10px}.travel-ending .travel-series a{padding-inline:11px;font-size:14px}}
 
 /* STORY SERIES NAV */
 .story-series-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:18px 0 6px;padding:3px 0 6px;-webkit-overflow-scrolling:touch}
-.story-series-tab{flex:0 0 auto;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
+.story-series-tab{flex:0 0 auto;max-width:170px;overflow:hidden;text-overflow:ellipsis;text-decoration:none;color:var(--muted,#657069);font-size:13px;font-weight:650;line-height:1.35;padding:8px 10px;border-radius:10px;border:1px solid transparent;white-space:nowrap}
 .story-series-tab span{font-weight:800}
 .story-series-tab:hover{border-color:var(--line,#e3ded5);color:var(--ink,#18211d)}
 .story-series-tab.active{color:var(--ink,#18211d);background:var(--sage,#e8eee8);border-color:var(--line,#e3ded5);font-weight:800}
@@ -529,7 +529,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
   display:flex;
   align-items:center;
   min-width:0;
-  padding:16px 10px;
+  padding-inline:10px;
   border:1px solid var(--line,#e3ded5);
   border-radius:18px;
   background:#eef3ee;
@@ -615,7 +615,7 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 @media(max-width:719px){
   .page-nav:is(.story-series-nav,.detail-series-nav){gap:10px}
   .page-nav:is(.story-series-nav,.detail-series-nav)>a{
-    padding:12px 6px;
+    padding-inline:6px;
   }
   .page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-label{
     font-size:13px;
@@ -717,7 +717,7 @@ main .page-nav.role-linear-nav a{
   display:grid;
   align-items:center;
   min-width:0;
-  padding:14px 16px;
+  padding-inline:16px;
   column-gap:8px;
 }
 main .page-nav.role-linear-nav a.role-prev{
@@ -751,7 +751,7 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
 @media(max-width:719px){
   main .page-nav.role-linear-nav{gap:10px}
   main .page-nav.role-linear-nav a{
-    padding:12px 10px;
+    padding-inline:10px;
     column-gap:4px;
   }
   main .page-nav.role-linear-nav a.role-prev{
@@ -776,7 +776,7 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
   display:grid;
   align-items:center;
   min-width:0;
-  padding:11px 10px;
+  padding-inline:10px;
   column-gap:8px;
   border:1px solid #d9e2d9;
   border-radius:15px;
@@ -827,13 +827,13 @@ main .page-nav.role-linear-nav.prev-only a.role-prev{grid-column:1}
 .travel-ending .travel-series.travel-series-normalized.prev-only a.prev{grid-column:1}
 @media(min-width:720px){
   .travel-ending .travel-series.travel-series-normalized a{
-    padding:14px 16px;
+    padding-inline:16px;
   }
 }
 @media(max-width:719px){
   .travel-ending .travel-series.travel-series-normalized{gap:10px}
   .travel-ending .travel-series.travel-series-normalized a{
-    padding:10px 11px;
+    padding-inline:11px;
     column-gap:4px;
   }
   .travel-ending .travel-series.travel-series-normalized a.prev{
@@ -865,7 +865,7 @@ main .page-nav{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px
 }
 main .page-nav a{
-  display:flex;align-items:center;padding:14px 16px;
+  display:flex;align-items:center;padding-inline:16px;
   border:1px solid #d9e2d9;border-radius:15px;background:#eef3ee;
   color:#31483d;text-decoration:none;font-weight:780;line-height:1.35;
   word-break:keep-all;overflow-wrap:normal;text-wrap:wrap
@@ -935,7 +935,7 @@ main .page-nav.tour-course-nav a.place-next{
   display:grid;
   align-items:center;
   min-width:0;
-  padding:14px 16px;
+  padding-inline:16px;
   column-gap:8px;
   justify-content:stretch
 }
@@ -969,7 +969,7 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   main .page-nav.tour-course-nav a.place-prev,
   main .page-nav.tour-course-nav a.place-next{
     display:grid;
-    padding:12px 10px;
+    padding-inline:10px;
     column-gap:4px;
     font-size:clamp(14px,3.9vw,15px);
     line-height:1.35;
@@ -996,7 +996,7 @@ main .page-nav.tour-course-nav .place-nav-arrow{
   main .page-nav.tour-course-nav{gap:8px}
   main .page-nav.tour-course-nav a.place-prev,
   main .page-nav.tour-course-nav a.place-next{
-    padding:11px 8px;
+    padding-inline:8px;
     column-gap:3px;
     font-size:13px
   }
