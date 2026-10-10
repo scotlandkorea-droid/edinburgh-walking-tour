@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261008-3';
+  const VERSION='20261010-3';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -428,6 +428,7 @@
       a.className='story-series-tab'+(i===index?' active':'');
       if(i===index)a.setAttribute('aria-current','page');
       a.href=contextualUrl(item.url,context);
+      a.title=item.name;
       const num=document.createElement('span');
       num.textContent=item.number;
       a.append(num,document.createTextNode(' '+itemTabName(item)));
