@@ -48,7 +48,7 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 
 ## Approved numbered-detail titles 2026-10-08
 
-For the titles below, the approved short form is the canonical page title itself, not only a navigation alias. Keep page <title>, H1, hub card, series tab, search title, and previous/next label consistent from the central `navigation-data.js` name.
+The following approved **canonical page titles** remain unchanged in <title>, H1, hub-story cards and search results. Under the newer 2026-10-10 compact-navigation decision, numbered upper tabs and previous/next cards may use distinct `tabName` and `navName` aliases; those short navigation labels do not rename the pages.
 
 - Greyfriars 04: `언약도 감옥`
 - Greyfriars 06: `알렉산더 헨더슨`
