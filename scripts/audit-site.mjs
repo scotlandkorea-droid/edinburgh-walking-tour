@@ -258,6 +258,69 @@ for (const file of pages) {
   }
 }
 
+
+// One-body Scotland destination hierarchy and sibling navigation.
+// These are content structure checks, not per-page CSS or duplicated JS.
+// Each completed theme has one URL, one card, and correctly adjacent arrows.
+const destinationSlugs = [
+  'highlands', 'skye-islands', 'whisky-distilleries', 'castles-history',
+  'film-locations', 'towns-villages', 'golf', 'lochs',
+  'jacobite-footsteps', 'faith-footsteps'
+];
+const destinationPaths = destinationSlugs
+  .map(slug => '/travel/destinations/' + slug + '.html');
+const destinationHub = read('travel/where-to-go.html');
+const hubCards = [...destinationHub.matchAll(
+  /<a\b[^>]*\bclass="destination-choice-card"[^>]*\bhref="([^"]+)"[^>]*>/g
+)].map(match => match[1]);
+if (hubCards.length !== destinationPaths.length ||
+    destinationPaths.some((href, i) => hubCards[i] !== href))
+  issues.push('travel/where-to-go.html: destination choices must be ten ordered, unique live links');
+if ([...destinationHub.matchAll(/class="destination-itinerary-card"/g)].length !== 1 ||
+    !destinationHub.includes('href="/travel/where-to-go-itineraries.html"'))
+  issues.push('travel/where-to-go.html: missing single preserved itineraries link');
+for (const [index, pathname] of destinationPaths.entries()) {
+  const file = pathname.slice(1);
+  if (!existing.has(pathname)) {
+    issues.push(file + ': missing published travel topic');
+    continue;
+  }
+  const html = read(file);
+  if (!/class="travel-detail travel-info-standard destination-topic-detail"/.test(html))
+    issues.push(file + ': missing shared travel-detail role');
+  const nav = [...html.matchAll(
+    /<nav\b[^>]*\bclass="[^"]*\btravel-series\b[^"]*"[^>]*\baria-label="여행 주제 이전·다음"[^>]*>([\s\S]*?)<\/nav>/g
+  )];
+  if (nav.length !== 1) {
+    issues.push(file + ': expected exactly one shared previous/next travel-topic navigation');
+    continue;
+  }
+  const prev = [...nav[0][1].matchAll(
+    /<a\b[^>]*\bclass="prev"[^>]*\bhref="([^"]+)"/g
+  )].map(m => m[1]);
+  const next = [...nav[0][1].matchAll(
+    /<a\b[^>]*\bclass="next"[^>]*\bhref="([^"]+)"/g
+  )].map(m => m[1]);
+  const expectedPrev = destinationPaths[index - 1];
+  const expectedNext = destinationPaths[index + 1];
+  if (prev.length !== (expectedPrev ? 1 : 0) ||
+      (expectedPrev && prev[0] !== expectedPrev) ||
+      next.length !== (expectedNext ? 1 : 0) ||
+      (expectedNext && next[0] !== expectedNext))
+    issues.push(file + ': left/right travel navigation does not match ten-topic order');
+  if ([...html.matchAll(/\bfurther-reading-box\b/g)].length !==
+      (pathname.endsWith('/faith-footsteps.html') ? 1 : 0))
+    issues.push(file + ': unexpected/missing specialized further-reading box');
+}
+const faith = read('travel/destinations/faith-footsteps.html');
+if (!faith.includes('class="further-reading-box" href="/travel/destinations/faith-places.html"'))
+  issues.push('travel/destinations/faith-footsteps.html: religious regional deep-link missing');
+const faithPlaces = read('travel/destinations/faith-places.html');
+if ([...faithPlaces.matchAll(/class="destination-site-line"/g)].length !== 134 ||
+    !faithPlaces.includes('href="/travel/destinations/faith-footsteps.html"'))
+  issues.push('travel/destinations/faith-places.html: preserve 134 sites and main-story return');
+console.log('Destination hierarchy: 10 topic cards, 10 sibling navigations, 134 religious sites audited');
+
 // Check externalized stylesheet images; static markup checks alone miss these.
 for(const cssPath of ['assets/site.css']){
   const stylesheet=read(cssPath);
