@@ -520,7 +520,8 @@
       const title=link.querySelector('h3');
       const desc=link.querySelector('p');
       if(num)num.textContent=item.number;
-      if(title)title.textContent=itemNavName(item);
+      // Preserve published hub-card titles; only navigation tabs and prev/next use short labels.
+      if(title)title.textContent=item.name;
       if(desc&&item.description)desc.textContent=item.description;
     });
     const parent=links.find(link=>byUrl.get(normalizePath(new URL(link.getAttribute('href'),location.origin).pathname))===link)?.parentElement;
