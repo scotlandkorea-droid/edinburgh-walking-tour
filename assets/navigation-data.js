@@ -1075,6 +1075,10 @@ window.EW_NAV_DATA={
           "url": "/edinburgh/people/james-hutton.html"
         },
         {
+          "name": "조지프 블랙",
+          "url": "/edinburgh/people/joseph-black.html"
+        },
+        {
           "name": "더걸드 스튜어트",
           "url": "/edinburgh/people/dugald-stewart.html"
         },
