@@ -3158,3 +3158,29 @@ body.travel-detail .travel-article .further-reading-box{margin:36px 0 32px;paddi
 /* Homepage travel section: one shared card system for all ten categories. */
 @media (min-width:620px) and (max-width:899px){#travel .travel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:900px){#travel .travel-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+/* Shared travel reference links: quiet, compact external sources, not CTA cards. */
+body.travel-detail .travel-article .travel-reference-list{
+  display:grid;gap:0;margin:8px 0 24px;padding:1px 0 1px 14px;
+  border-left:2px solid #d9e2d9;
+}
+body.travel-detail .travel-article .travel-reference-list p{
+  margin:0;padding:5px 0;line-height:1.6;
+}
+body.travel-detail .travel-article p.travel-reference-link{
+  margin:5px 0 19px;line-height:1.6;
+}
+body.travel-detail .travel-article .travel-reference-list a,
+body.travel-detail .travel-article p.travel-reference-link>a{
+  color:var(--plum);font-weight:720;text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:3px;
+  overflow-wrap:anywhere;
+}
+body.travel-detail .travel-article .travel-reference-list a:hover,
+body.travel-detail .travel-article p.travel-reference-link>a:hover{
+  color:var(--plum-strong);text-decoration-thickness:2px;
+}
+body.travel-detail .travel-article .travel-reference-list a:focus-visible,
+body.travel-detail .travel-article p.travel-reference-link>a:focus-visible{
+  outline:2px solid var(--plum);outline-offset:3px;border-radius:2px;
+}
