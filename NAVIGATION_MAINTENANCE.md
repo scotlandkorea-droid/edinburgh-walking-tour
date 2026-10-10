@@ -4,10 +4,10 @@ This file records the operational rule for title changes and previous/next navig
 
 - `assets/navigation-data.js` is the single source for numbered-series navigation labels.
 - `name` is the canonical/full item title.
-- `navName` is an optional shorter navigation label. Use it when a long article title should remain intact but hub/previous/next labels need to be shorter.
+- `navName` is an optional shorter previous/next navigation label. Keep the canonical `name` on hub-story cards and on the page; abbreviate only the navigation surface when long titles are unnecessary.
 - `tabName` is an optional tab-only label. It falls back to `navName`, then `name`.
 - When a manuscript or page title is edited, the same task must review the matching navigation-data record. The user should not need to separately request updates to tabs or previous/next cards.
-- Shared JavaScript rebuilds numbered-series tabs, hub-card labels, and previous/next labels from the central data. Do not hand-patch individual cards.
+- Shared JavaScript rebuilds numbered-series tabs and previous/next labels from central `tabName`/`navName`. Hub-story cards continue to display the canonical full `name`. Do not hand-patch individual cards.
 - Do not insert page-specific `<br>`, shrink one page's font, or use `text-wrap: balance` to force a title to fit. Titles wrap naturally inside the text column; arrow columns stay fixed.
 - After a title/navigation change, audit numbering, duplicate URLs, first/last-card placement, and mobile → tablet → desktop rendering.
 - Full manuscripts are not shortened automatically. Only navigation labels are shortened when the editorial decision explicitly calls for it.
@@ -40,7 +40,7 @@ All bottom previous/next roles use one shared one-tier reading pattern while kee
 - Mobile/tablet-narrow (719px and below): arrow cell 16px, visible arrow 19px, font-weight 400.
 - Do not add a separate extra-small arrow size below 340px.
 - B-series may render the visible arrow through CSS pseudo-elements, but its apparent size, weight and breakpoint must stay equal to the other roles.
-- Card height and padding may remain role-specific; unification must not invent new information hierarchy.
+- All bottom navigation roles share `min-height:65px` and `padding-block:16px` in the existing shared CSS. One-line labels stay compact, two lines are approximately 72px, longer titles grow naturally, and paired cards match heights via the same grid row. Role-specific horizontal padding, arrows and numbering remain preserved. The hub-to-navigation vertical spacing remains the approved 38px.
 - Static fallback and runtime output must never coexist as duplicate visible navigation. A page may belong to multiple contexts (for example numbered-series/tour and place browsing), so the runtime replacement step must remove every pre-existing bottom `.page-nav[data-nav-system]` that is not one of the incoming runtime nodes. Static fallbacks exist only for pre-JS/no-JS safety; after runtime selection there must be one active navigation surface.
 - Shared UI assets are served with revalidation so stale query-string versions do not preserve an old navigation appearance indefinitely.
 - Asset cache revalidation must be configured in **both** `worker.js` (`revalidateAssets`) and `wrangler.jsonc` (`assets.run_worker_first`). Cloudflare serves a matched static asset before Worker code unless its path matches `run_worker_first`. Keep the seven shared asset routes synchronized: `site.css`, `site-header.js`, `navigation-system.js`, `navigation-data.js`, `tour-course-data.js`, `search-data.js`, and `tour-map.js`. Do not send all pages and images through the Worker for this purpose.
@@ -56,7 +56,7 @@ For the titles below, the approved short form is the canonical page title itself
 - Falkland 06: `리처드 카메론 생가`
 - Glasgow 11: `켈빈그로브 공원 · 미술관·박물관`
 
-Glencoe 03 remains `해그리드 오두막은 어디 갔을까?` everywhere. Do not add an “영화 속 …” prefix.
+Glencoe 03 keeps `해그리드 오두막은 어디 갔을까?` as its original article H1, canonical title and hub-story title, while its top numbered tab and bottom previous/next label use the approved shorter `해그리드 오두막`. Do not add an “영화 속 …” prefix.
 
 When one of these titles changes, update the central `navigation-data.js` record first, then keep page metadata/H1, hub cards, tabs, search data, and static previous/next fallbacks consistent.
 
@@ -75,3 +75,12 @@ When one of these titles changes, update the central `navigation-data.js` record
 - Before removing CSS, compare selector classes against all site HTML and shared JavaScript using the read-only `scripts/report-css-inventory.mjs`. The report is an inventory, **not** automatic permission to delete: Leaflet creates classes at runtime, and some generic classes are reserved for future manuscript components.
 - Removed source-unreferenced rules for `.route-map-compass`, `.text-link`, `.place-chip`, `.place-pending`, `.page-nav-next-only`, `.page-nav-prev-only`, `.page-nav-empty` and `.nav-label`. The active `.place-strip > a` styling is preserved. The CSS audit and search/navigation/privacy checks passed.
 - Do not bulk-delete legacy CSS while actual public mobile/tablet/PC visual verification remains unavailable. Confirm all active classes and role-specific fallbacks before any next removal.
+
+
+## Latest numbered-detail navigation labels and card size (2026-10-10)
+
+- On numbered detail pages, use `name` for the original article/page title and hub-story card, `navName` for concise previous/next titles, and `tabName` for concise numbered upper tabs. These are distinct purposes, not three competing manuscripts.
+- The current shared source sets short `navName` and `tabName` on 41 numbered-series items. Examples: Glencoe 03 `해그리드 오두막`, Edinburgh Castle 07 `전쟁포로 감옥`, Glencoe 02 `글렌코 학살`, Glasgow 11 `켈빈그로브 박물관`. Preserve numbering, destinations, canonical URLs and original titles. `World’s End` navigation tab is `월드 엔드`; the full English original may remain inside the article.
+- The upper numbered tabs keep their horizontal scroll on narrow screens and wrap on wide screens, with a maximum tab width 170px, ellipsis for an unusually long label, and accessible original title on the link. Do not remove/hide tabs as a workaround for length; shorten labels in `navigation-data.js` first.
+- Prev/next cards now share one adaptive minimum height 65px (not a fixed height) and 16px block padding. Paired cards remain equal height; long titles still wrap. Do not reintroduce the older 72px common minimum or type-by-type 60/68/70/92/96px overrides. The 38px vertical gap to the preceding 'all items' button is unchanged.
+- Source commits for this change: `6570f4e9d897f8b9b6222ee61d75015e0f9824a9` (CSS), `7317fb3fef9b5d8cd3c49b56501f9c49ce08f850` (41 labels), `ad0c1c4c7b9362244699467f318491336ab363a3` and `cec76adb42a2bcfc7abd4eeb0d66f6f3981353e7` (runtime/loader versions), `c76edb86728966e2f6594bc22ba6297b2459ebd9` (protect hub-card titles). Run actual public mobile → tablet → desktop visual checks separately from GitHub CI.
