@@ -1120,4 +1120,25 @@
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/dugald-stewart.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/eric-liddell.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/edinburgh/people/james-hutton.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
