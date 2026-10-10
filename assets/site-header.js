@@ -34,6 +34,67 @@
 
   const cleanPageUrl=location.origin+location.pathname+location.search;
 
+  // Contextual breadcrumb and sibling links for articles reached through the
+  // Reading hub. Original source breadcrumbs and return URLs stay intact.
+  const readingContextEntries=[
+    {path:'/travel/explainers/honours-and-orders.html',short:'왕실의 서훈 제도'},
+    {path:'/edinburgh/themes/execution-sites.html',short:'에든버러의 처형장들'},
+    {path:'/travel/destinations/faith-places.html',short:'종교 유적지 134곳'}
+  ];
+  if(new URLSearchParams(location.search).get('from')==='reading'){
+    const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
+    if(current>=0){
+      const crumb=document.querySelector('.breadcrumbs');
+      if(crumb){
+        crumb.replaceChildren();
+        const pushLink=(label,url)=>{
+          const a=document.createElement('a');
+          a.href=url;a.textContent=label;crumb.append(a);
+          crumb.append(document.createTextNode(' › '));
+        };
+        pushLink('홈','/');
+        pushLink('스코틀랜드 여행정보','/#travel');
+        pushLink('읽을거리','/travel/reading.html');
+        const name=document.createElement('span');
+        name.className='breadcrumb-current';
+        name.setAttribute('aria-current','page');
+        name.textContent=document.querySelector('h1')?.textContent?.trim()||readingContextEntries[current].short;
+        crumb.append(name);
+      }
+      const back=document.querySelector('.deep-dive-return,.travel-ending .travel-hub');
+      if(back){back.href='/travel/reading.html';back.textContent='읽을거리 전체 보기'}
+      const nav=document.createElement('nav');
+      nav.className='page-nav role-linear-nav reading-linear-nav';
+      nav.dataset.navSystem='reading';
+      nav.setAttribute('aria-label','읽을거리 이전·다음');
+      if(current===0)nav.classList.add('next-only');
+      if(current===readingContextEntries.length-1)nav.classList.add('prev-only');
+      const neighbor=(item,dir)=>{
+        const a=document.createElement('a');
+        a.className=dir==='prev'?'role-prev':'role-next';
+        a.href=item.path+'?from=reading';
+        const arrow=document.createElement('span');
+        arrow.className='role-nav-arrow';
+        arrow.setAttribute('aria-hidden','true');
+        arrow.textContent=dir==='prev'?'←':'→';
+        const label=document.createElement('span');
+        label.className='role-nav-label';
+        label.textContent=item.short;
+        if(dir==='prev')a.append(arrow,label);else a.append(label,arrow);
+        nav.append(a);
+      };
+      if(current>0)neighbor(readingContextEntries[current-1],'prev');
+      if(current<readingContextEntries.length-1)neighbor(readingContextEntries[current+1],'next');
+      const ending=document.querySelector('.travel-ending');
+      const actions=document.querySelector('.action-buttons');
+      if(ending){
+        const hub=ending.querySelector('.travel-hub-row');
+        if(hub)hub.insertAdjacentElement('afterend',nav);
+        else ending.prepend(nav);
+      }else if(actions)actions.insertAdjacentElement('afterend',nav);
+    }
+  }
+
   // Navigation is handled by one shared system. Header/share/gallery logic stays here.
   if(!window.EW_NAV_SYSTEM&&!document.querySelector('script[data-ew-nav-system]')){
     const navScript=document.createElement('script');

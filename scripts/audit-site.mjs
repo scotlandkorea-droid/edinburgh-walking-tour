@@ -546,6 +546,19 @@ if(!read('travel/festivals.html').includes('href="/travel/reading.html"'))issues
 if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html"'))issues.push('Reading hub deep-dive links missing');
 console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
+// New Reading hub reuses existing deep-dive content under its canonical URL.
+const readingMarkup=read('travel/reading.html');
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html'];
+const readingHrefs=[...readingMarkup.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
+if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=reading')))issues.push('Reading hub contextual order mismatch');
+for(const path of readingTargets){
+  const details=read(path.slice(1));
+  if(!details.includes('site-header.js?v=20261010-reading1'))issues.push('Reading detail lacks current shared nav JS: '+path);
+  if(!details.includes('class="breadcrumbs"'))issues.push('Reading detail breadcrumb absent: '+path);
+}
+if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
+console.log('Reading: three shared original articles, contextual breadcrumb and sibling links');
+
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + fragmentLinksChecked + ' scroll fragments, '
   + indexablePages + ' indexable pages, '
