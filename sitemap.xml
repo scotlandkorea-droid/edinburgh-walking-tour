@@ -1197,4 +1197,10 @@
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/boat-international-ferry.html</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/boat-domestic-cruise.html</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/travel/boat-international-cruise.html</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/glasgow/kelvingrove.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
