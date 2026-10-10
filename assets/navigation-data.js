@@ -1083,6 +1083,10 @@ window.EW_NAV_DATA={
           "url": "/edinburgh/people/dugald-stewart.html"
         },
         {
+          "name": "로버트 번스",
+          "url": "/edinburgh/people/robert-burns.html"
+        },
+        {
           "name": "월터 스콧",
           "url": "/edinburgh/people/walter-scott.html"
         },
