@@ -321,6 +321,57 @@ if ([...faithPlaces.matchAll(/class="destination-site-line"/g)].length !== 134 |
   issues.push('travel/destinations/faith-places.html: preserve 134 sites and main-story return');
 console.log('Destination hierarchy: 10 topic cards, 10 sibling navigations, 134 religious sites audited');
 
+
+// One-body transport hierarchy: four modes, nested three bus manuscripts, and ordered footer links.
+// Keep using the shared travel-story-card and travel-series HTML/CSS conventions.
+const transportModes = [
+  {path:'/travel/airport-transport.html',title:'에든버러 공항에서 시내까지'},
+  {path:'/travel/train.html',title:'기차로 여행하기'},
+  {path:'/travel/bus.html',title:'버스로 여행하기'},
+  {path:'/travel/rental-car.html',title:'에든버러에서 렌터카 빌리기'}
+];
+const busChapters = [
+  {path:'/travel/bus-city.html',title:'에든버러와 글래스고 시내버스'},
+  {path:'/travel/bus-regional.html',title:'스코틀랜드 지역·도시간 버스'},
+  {path:'/travel/bus-coach.html',title:'스코틀랜드와 영국 장거리 코치'}
+];
+const exactCardOrder = file => [...read(file).matchAll(
+  /<a\b[^>]*\bclass="travel-story-card"[^>]*\bhref="([^"]+)"/g
+)].map(m=>m[1]);
+const expectCardOrder=(file,items)=>{
+  const actual=exactCardOrder(file),expected=items.map(x=>x.path);
+  if(actual.length!==expected.length||expected.some((href,i)=>href!==actual[i]))
+    issues.push(file+': shared story-card order differs from confirmed transport sequence');
+};
+expectCardOrder('travel/transport.html',transportModes);
+expectCardOrder('travel/bus.html',busChapters);
+const checkSequence=(items,label,hub)=>{
+  for(const [i,item] of items.entries()){
+    const file=item.path.slice(1);
+    if(!existing.has(item.path)){issues.push(file+': missing transport page');continue;}
+    const html=read(file);
+    if(!html.includes('travel-info-standard')||!html.includes('<h1>'+item.title+'</h1>')||
+       !html.includes('href="'+hub+'"'))
+      issues.push(file+': lost common travel shell, title, or parent link');
+    const matches=[...html.matchAll(
+      /<nav\b[^>]*\bclass="[^"]*\btravel-series-normalized\b[^"]*"[^>]*>([\s\S]*?)<\/nav>/g
+    )];
+    if(matches.length!==1){issues.push(file+': expected one shared previous/next nav');continue;}
+    const slot=matches[0][1];
+    const prev=[...slot.matchAll(/<a class="prev" href="([^"]+)"/g)].map(m=>m[1]);
+    const next=[...slot.matchAll(/<a class="next" href="([^"]+)"/g)].map(m=>m[1]);
+    const wantedPrev=items[i-1]?.path,wantedNext=items[i+1]?.path;
+    if(prev.length!==(wantedPrev?1:0)||(wantedPrev&&prev[0]!==wantedPrev)||
+       next.length!==(wantedNext?1:0)||(wantedNext&&next[0]!==wantedNext))
+      issues.push(file+': '+label+' previous/next page does not match confirmed sequence');
+    if(label==='bus'&&(html.match(/<h2>/g)||[]).length!==8)
+      issues.push(file+': unexpected number of source manuscript headings');
+  }
+};
+checkSequence(transportModes,'transport','/travel/transport.html');
+checkSequence(busChapters,'bus','/travel/bus.html');
+console.log('Transport hierarchy: 4 mode cards, 3 bus chapters, all sibling routes audited');
+
 // Check externalized stylesheet images; static markup checks alone miss these.
 for(const cssPath of ['assets/site.css']){
   const stylesheet=read(cssPath);
