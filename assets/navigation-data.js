@@ -429,42 +429,58 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "에스플러네이드와 에든버러 성문",
-          "url": "/places/edinburgh-castle-esplanade.html"
+          "url": "/places/edinburgh-castle-esplanade.html",
+          "navName": "에스플러네이드·성문",
+          "tabName": "에스플러네이드"
         },
         {
           "number": "02",
           "name": "아가일 배터리와 원 오클록 건",
-          "url": "/places/edinburgh-castle-argyle-battery.html"
+          "url": "/places/edinburgh-castle-argyle-battery.html",
+          "navName": "아가일 배터리·시보포",
+          "tabName": "아가일 배터리"
         },
         {
           "number": "03",
           "name": "세인트 마가렛 예배당과 몬스 메그",
-          "url": "/places/edinburgh-castle-st-margarets-chapel.html"
+          "url": "/places/edinburgh-castle-st-margarets-chapel.html",
+          "navName": "마가렛 예배당·몬스 메그",
+          "tabName": "마가렛 예배당"
         },
         {
           "number": "04",
           "name": "하프문 배터리와 데이비드 타워",
-          "url": "/places/edinburgh-castle-half-moon-battery.html"
+          "url": "/places/edinburgh-castle-half-moon-battery.html",
+          "navName": "하프문 배터리",
+          "tabName": "하프문 배터리"
         },
         {
           "number": "05",
           "name": "크라운 스퀘어와 그레이트 홀",
-          "url": "/places/edinburgh-castle-crown-square.html"
+          "url": "/places/edinburgh-castle-crown-square.html",
+          "navName": "크라운 스퀘어·그레이트 홀",
+          "tabName": "크라운 스퀘어"
         },
         {
           "number": "06",
           "name": "스코틀랜드 왕관 보석과 운명의 돌",
-          "url": "/places/edinburgh-castle-honours-stone.html"
+          "url": "/places/edinburgh-castle-honours-stone.html",
+          "navName": "왕관 보석·운명의 돌",
+          "tabName": "왕관 보석"
         },
         {
           "number": "07",
           "name": "에든버러 성의 전쟁포로 감옥",
-          "url": "/places/edinburgh-castle-prisoners-of-war.html"
+          "url": "/places/edinburgh-castle-prisoners-of-war.html",
+          "navName": "전쟁포로 감옥",
+          "tabName": "전쟁포로 감옥"
         },
         {
           "number": "08",
           "name": "서쪽 성벽과 에든버러 서쪽 전망",
-          "url": "/places/edinburgh-castle-western-view.html"
+          "url": "/places/edinburgh-castle-western-view.html",
+          "navName": "서쪽 성벽과 전망",
+          "tabName": "서쪽 성벽"
         }
       ]
     },
@@ -481,6 +497,7 @@ window.EW_NAV_DATA={
           "number": "01",
           "name": "그래스마켓의 역사와 시장",
           "url": "/places/grassmarket-history-market.html",
+          "navName": "역사와 시장",
           "tabName": "역사와 시장"
         },
         {
@@ -500,6 +517,7 @@ window.EW_NAV_DATA={
           "number": "04",
           "name": "그래스마켓의 펍 이름들",
           "url": "/places/grassmarket-pub-names.html",
+          "navName": "펍 이름들",
           "tabName": "펍 이름들"
         }
       ]
@@ -516,17 +534,23 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "그레이프라이어스 바비",
-          "url": "/places/greyfriars-bobby-story.html"
+          "url": "/places/greyfriars-bobby-story.html",
+          "navName": "그레이프라이어스 바비",
+          "tabName": "바비"
         },
         {
           "number": "02",
           "name": "묘비에서 만나는 해리포터",
-          "url": "/places/greyfriars-harry-potter.html"
+          "url": "/places/greyfriars-harry-potter.html",
+          "navName": "해리포터 묘비",
+          "tabName": "해리포터 묘비"
         },
         {
           "number": "03",
           "name": "플로든 성벽과 제임스 4세",
-          "url": "/places/greyfriars-flodden-wall.html"
+          "url": "/places/greyfriars-flodden-wall.html",
+          "navName": "플로든 성벽·제임스 4세",
+          "tabName": "플로든 성벽"
         },
         {
           "number": "04",
@@ -536,7 +560,9 @@ window.EW_NAV_DATA={
         {
           "number": "05",
           "name": "그레이프라이어스 교회 안으로",
-          "url": "/places/greyfriars-kirk.html"
+          "url": "/places/greyfriars-kirk.html",
+          "navName": "그레이프라이어스 교회 내부",
+          "tabName": "교회 내부"
         },
         {
           "number": "06",
@@ -593,22 +619,30 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "세인트 자일스 전체 이야기",
-          "url": "/places/st-giles-overview.html"
+          "url": "/places/st-giles-overview.html",
+          "navName": "세인트 자일스 전체",
+          "tabName": "전체"
         },
         {
           "number": "02",
           "name": "세인트 자일스의 건축",
-          "url": "/places/st-giles-architecture.html"
+          "url": "/places/st-giles-architecture.html",
+          "navName": "세인트 자일스 건축",
+          "tabName": "건축"
         },
         {
           "number": "03",
           "name": "벽에 남은 스코틀랜드 인물들",
-          "url": "/places/st-giles-memorials.html"
+          "url": "/places/st-giles-memorials.html",
+          "navName": "벽에 남은 인물들",
+          "tabName": "인물들"
         },
         {
           "number": "04",
           "name": "존 녹스와 종교개혁",
-          "url": "/places/st-giles-john-knox.html"
+          "url": "/places/st-giles-john-knox.html",
+          "navName": "존 녹스·종교개혁",
+          "tabName": "종교개혁"
         },
         {
           "number": "05",
@@ -618,7 +652,9 @@ window.EW_NAV_DATA={
         {
           "number": "06",
           "name": "제니 게디스의 의자",
-          "url": "/places/st-giles-jenny-geddes.html"
+          "url": "/places/st-giles-jenny-geddes.html",
+          "navName": "제니 게디스 의자",
+          "tabName": "제니 게디스"
         },
         {
           "number": "07",
@@ -633,12 +669,16 @@ window.EW_NAV_DATA={
         {
           "number": "09",
           "name": "세인트 자일스의 스테인드글라스",
-          "url": "/places/st-giles-stained-glass.html"
+          "url": "/places/st-giles-stained-glass.html",
+          "navName": "스테인드글라스",
+          "tabName": "스테인드글라스"
         },
         {
           "number": "10",
           "name": "존 녹스의 무덤",
-          "url": "/places/john-knox-grave.html"
+          "url": "/places/john-knox-grave.html",
+          "navName": "존 녹스의 무덤",
+          "tabName": "존 녹스 무덤"
         }
       ]
     },
@@ -702,7 +742,9 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "World’s End",
-          "url": "/places/canongate-worlds-end.html"
+          "url": "/places/canongate-worlds-end.html",
+          "navName": "월드 엔드",
+          "tabName": "월드 엔드"
         },
         {
           "number": "02",
@@ -744,7 +786,9 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "스카이로 들어가는 길",
-          "url": "/scotland/places/isle-of-skye-arrival.html"
+          "url": "/scotland/places/isle-of-skye-arrival.html",
+          "navName": "스카이로 들어가는 길",
+          "tabName": "스카이 가는 길"
         },
         {
           "number": "02",
@@ -791,17 +835,23 @@ window.EW_NAV_DATA={
         {
           "number": "03",
           "name": "세계에서 가장 오래된 테니스장",
-          "url": "/scotland/places/falkland-real-tennis.html"
+          "url": "/scotland/places/falkland-real-tennis.html",
+          "navName": "왕실 테니스장",
+          "tabName": "테니스장"
         },
         {
           "number": "04",
           "name": "“여자로 왔으니 여자로 떠나리라”",
-          "url": "/scotland/places/falkland-james-v-last-words.html"
+          "url": "/scotland/places/falkland-james-v-last-words.html",
+          "navName": "제임스 5세의 마지막 말",
+          "tabName": "제임스 5세의 말"
         },
         {
           "number": "05",
           "name": "광장의 분수와 언약도 호텔",
-          "url": "/scotland/places/falkland-outlander.html"
+          "url": "/scotland/places/falkland-outlander.html",
+          "navName": "분수와 언약도 호텔",
+          "tabName": "분수·언약도 호텔"
         },
         {
           "number": "06",
@@ -823,17 +873,23 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "글렌코를 만나는 세 가지 방법",
-          "url": "/scotland/places/glencoe-three-ways.html"
+          "url": "/scotland/places/glencoe-three-ways.html",
+          "navName": "글렌코 세 가지 길",
+          "tabName": "글렌코 여행법"
         },
         {
           "number": "02",
           "name": "글렌코 학살, 손님이 살인자가 된 밤",
-          "url": "/scotland/places/glencoe-massacre.html"
+          "url": "/scotland/places/glencoe-massacre.html",
+          "navName": "글렌코 학살",
+          "tabName": "글렌코 학살"
         },
         {
           "number": "03",
           "name": "해그리드 오두막은 어디 갔을까?",
-          "url": "/scotland/places/glencoe-film-locations.html"
+          "url": "/scotland/places/glencoe-film-locations.html",
+          "navName": "해그리드 오두막",
+          "tabName": "해그리드 오두막"
         }
       ]
     },
@@ -849,7 +905,9 @@ window.EW_NAV_DATA={
         {
           "number": "01",
           "name": "올드코스 — 골프의 고향",
-          "url": "/st-andrews/old-course.html"
+          "url": "/st-andrews/old-course.html",
+          "navName": "올드코스",
+          "tabName": "올드코스"
         },
         {
           "number": "02",
@@ -859,7 +917,9 @@ window.EW_NAV_DATA={
         {
           "number": "03",
           "name": "세인트앤드루스 대학교",
-          "url": "/st-andrews/university-of-st-andrews.html"
+          "url": "/st-andrews/university-of-st-andrews.html",
+          "navName": "세인트앤드루스 대학교",
+          "tabName": "대학교"
         },
         {
           "number": "04",
@@ -874,22 +934,30 @@ window.EW_NAV_DATA={
         {
           "number": "06",
           "name": "세인트앤드루스 성",
-          "url": "/st-andrews/st-andrews-castle.html"
+          "url": "/st-andrews/st-andrews-castle.html",
+          "navName": "세인트앤드루스 성",
+          "tabName": "성"
         },
         {
           "number": "07",
           "name": "세인트앤드루스 대성당",
-          "url": "/st-andrews/st-andrews-cathedral.html"
+          "url": "/st-andrews/st-andrews-cathedral.html",
+          "navName": "세인트앤드루스 대성당",
+          "tabName": "대성당"
         },
         {
           "number": "08",
           "name": "세인트메리스 칼리지",
-          "url": "/st-andrews/st-marys-college.html"
+          "url": "/st-andrews/st-marys-college.html",
+          "navName": "메리스 칼리지",
+          "tabName": "메리스 칼리지"
         },
         {
           "number": "09",
           "name": "블랙프라이어스 채플",
-          "url": "/st-andrews/blackfriars-chapel.html"
+          "url": "/st-andrews/blackfriars-chapel.html",
+          "navName": "블랙프라이어스 채플",
+          "tabName": "블랙프라이어스"
         },
         {
           "number": "10",
@@ -931,7 +999,9 @@ window.EW_NAV_DATA={
           "number": "04",
           "name": "하이 스트리트 · 글래스고 크로스",
           "url": "/scotland/places/glasgow/high-street-glasgow-cross.html",
-          "description": "중세 글래스고의 오래된 중심축을 따라 남쪽으로 내려갑니다."
+          "description": "중세 글래스고의 오래된 중심축을 따라 남쪽으로 내려갑니다.",
+          "navName": "하이 스트리트·크로스",
+          "tabName": "하이 스트리트"
         },
         {
           "number": "05",
@@ -943,13 +1013,17 @@ window.EW_NAV_DATA={
           "number": "06",
           "name": "시티 홀스 · 올드 프루트마켓",
           "url": "/scotland/places/glasgow/city-halls-old-fruitmarket.html",
-          "description": "오래된 시장과 상업 공간이 음악과 공연의 장소로 이어진 모습을 살펴봅니다."
+          "description": "오래된 시장과 상업 공간이 음악과 공연의 장소로 이어진 모습을 살펴봅니다.",
+          "navName": "시티 홀스·프루트마켓",
+          "tabName": "시티 홀스"
         },
         {
           "number": "07",
           "name": "로열 익스체인지 스퀘어 · GoMA",
           "url": "/scotland/places/glasgow/royal-exchange-square-goma.html",
-          "description": "상업도시의 중심에서 오늘날의 문화도시로 이어지는 모습을 만나고, GoMA 앞 웰링턴 공작 기마상의 주황색 교통 고깔도 살펴봅니다."
+          "description": "상업도시의 중심에서 오늘날의 문화도시로 이어지는 모습을 만나고, GoMA 앞 웰링턴 공작 기마상의 주황색 교통 고깔도 살펴봅니다.",
+          "navName": "익스체인지 광장·미술관",
+          "tabName": "광장·미술관"
         },
         {
           "number": "08",
@@ -961,19 +1035,25 @@ window.EW_NAV_DATA={
           "number": "09",
           "name": "세인트 이녹 · 클라이드 강변",
           "url": "/scotland/places/glasgow/st-enoch-clyde.html",
-          "description": "클라이드강에 닿으며 무역과 산업도시로 성장한 글래스고의 이야기를 살펴봅니다."
+          "description": "클라이드강에 닿으며 무역과 산업도시로 성장한 글래스고의 이야기를 살펴봅니다.",
+          "navName": "세인트 이녹·강변",
+          "tabName": "세인트 이녹"
         },
         {
           "number": "10",
           "name": "글래스고 대학교",
           "url": "/scotland/places/glasgow/glasgow-university.html",
-          "description": "West End에서 다시 걷기 시작해 오래된 대학 건물과 회랑을 둘러봅니다."
+          "description": "West End에서 다시 걷기 시작해 오래된 대학 건물과 회랑을 둘러봅니다.",
+          "navName": "글래스고 대학교",
+          "tabName": "대학교"
         },
         {
           "number": "11",
           "name": "켈빈그로브 공원 · 미술관·박물관",
           "url": "/scotland/places/glasgow/kelvingrove.html",
-          "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다."
+          "description": "대학교에서 공원을 따라 내려가 미술관과 박물관까지 걸으며 글래스고의 흐름을 마무리합니다.",
+          "navName": "켈빈그로브 박물관",
+          "tabName": "켈빈그로브 박물관"
         }
       ],
       "detailEyebrow": false
