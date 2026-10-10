@@ -543,7 +543,7 @@ const requiredCards=['/travel/entry.html','/travel/when-to-go.html','/travel/whe
 if(JSON.stringify(cardLinks)!==JSON.stringify(requiredCards))issues.push('Home travel cards must be in ten-category order');
 if(!read('travel/when-to-go.html').includes('href="/travel/entry.html"'))issues.push('Entry to when navigation missing');
 if(!read('travel/festivals.html').includes('href="/travel/reading.html"'))issues.push('Festivals to reading navigation missing');
-if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html"'))issues.push('Reading hub deep-dive links missing');
+if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html?from=reading"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html?from=reading"'))issues.push('Reading hub deep-dive links missing');
 console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
 // New Reading hub reuses existing deep-dive content under its canonical URL.
