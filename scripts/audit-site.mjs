@@ -536,6 +536,16 @@ console.log('Photo redirects: '+photoRedirects.size+' legacy URLs tested for GET
    console.log('Worker cache: '+checked+' GET/HEAD responses checked with stale query versions');
  }
 
+// Main travel categories: order, sibling boundaries and deep-reading links.
+const travelCards=(read('index.html').match(/<div class="travel-grid">([\s\S]*?)<\/div>/)||[])[1]||'';
+const cardLinks=[...travelCards.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
+const requiredCards=['/travel/entry.html','/travel/when-to-go.html','/travel/where-to-go.html','/travel/transport.html','/travel/accommodation.html','/travel/food-drink.html','/travel/shopping.html','/travel/hiking.html','/travel/festivals.html','/travel/reading.html'];
+if(JSON.stringify(cardLinks)!==JSON.stringify(requiredCards))issues.push('Home travel cards must be in ten-category order');
+if(!read('travel/when-to-go.html').includes('href="/travel/entry.html"'))issues.push('Entry to when navigation missing');
+if(!read('travel/festivals.html').includes('href="/travel/reading.html"'))issues.push('Festivals to reading navigation missing');
+if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html"'))issues.push('Reading hub deep-dive links missing');
+console.log('Travel categories:',cardLinks.length,'ordered cards audited');
+
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + fragmentLinksChecked + ' scroll fragments, '
   + indexablePages + ' indexable pages, '
