@@ -613,8 +613,8 @@ body.course-detail .stg-story:focus-visible{background:var(--cream,#f5f2eb);bord
 @media(max-width:719px){
   .page-nav:is(.story-series-nav,.detail-series-nav){gap:10px}
   .page-nav:is(.story-series-nav,.detail-series-nav)>a{
-    min-height:96px;
-    padding:14px 6px;
+    min-height:72px;
+    padding:12px 6px;
   }
   .page-nav:is(.story-series-nav,.detail-series-nav) .series-nav-label{
     font-size:13px;
