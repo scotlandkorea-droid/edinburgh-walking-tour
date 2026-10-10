@@ -77,6 +77,12 @@ When one of these titles changes, update the central `navigation-data.js` record
 - Do not bulk-delete legacy CSS while actual public mobile/tablet/PC visual verification remains unavailable. Confirm all active classes and role-specific fallbacks before any next removal.
 
 
+## Reading-hub contextual breadcrumb (2026-10-10)
+
+- For the three deep-dive articles linked from `/travel/reading.html`, the existing `?from=reading` context uses `assets/site-header.js` to render `홈 › 스코틀랜드 여행정보 › 읽을거리 › 01/02/03` in reading-hub order. The number is the item's position in `readingContextEntries`, matching the hub's visible 01/02/03 cards. Preserve `aria-current`, breadcrumb links and the short-label previous/next links.
+- Without `?from=reading`, keep each completed article's original source breadcrumb and its original full H1. Do not globally override `.breadcrumbs` for all topics or duplicate manuscripts. Travel and numbered-series breadcrumbs already using numeric final crumbs stay unchanged.
+- Cleanup review: one old experimental GitHub branch `experiment/nav-width-st-andrews-20261010` is not merged into `main` and is still at reverted commit `22a93ff0fb1c0ddc0f3f1565f32537975d09bbc7`. Branch deletion was not available through the connected actions, so it remains untouched. The current `main` tree does not contain an identifiable `tmp/`, `test/` or backup directory. Retain static no-JS navigation fallbacks, historical commit history, published media and completed pages; they are not disposable test waste.
+
 ## Latest numbered-detail navigation labels and card size (2026-10-10)
 
 - On numbered detail pages, use `name` for the original article/page title and hub-story card, `navName` for concise previous/next titles, and `tabName` for concise numbered upper tabs. These are distinct purposes, not three competing manuscripts.
