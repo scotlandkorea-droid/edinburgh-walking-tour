@@ -458,7 +458,7 @@ window.EW_NAV_DATA={
           "number": "05",
           "name": "크라운 스퀘어와 그레이트 홀",
           "url": "/places/edinburgh-castle-crown-square.html",
-          "navName": "크라운 스퀘어·그레이트 홀",
+          "navName": "크라운 스퀘어",
           "tabName": "크라운 스퀘어"
         },
         {
@@ -561,7 +561,7 @@ window.EW_NAV_DATA={
           "number": "05",
           "name": "그레이프라이어스 교회 안으로",
           "url": "/places/greyfriars-kirk.html",
-          "navName": "그레이프라이어스 교회 내부",
+          "navName": "교회 내부",
           "tabName": "교회 내부"
         },
         {
