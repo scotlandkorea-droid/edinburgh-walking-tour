@@ -26,6 +26,7 @@ on:
       - 'scripts/complete-social-metadata.mjs'
       - 'scripts/check-public-deployment.mjs'
       - 'scripts/set-image-dimensions.mjs'
+      - 'scripts/audit-accessibility.mjs'
       - 'scripts/report-css-inventory.mjs'
       - 'scripts/audit-search-behavior.mjs'
       - 'scripts/audit-image-privacy.mjs'
@@ -70,6 +71,7 @@ jobs:
           node --check scripts/complete-social-metadata.mjs
           node --check scripts/check-public-deployment.mjs
           node --check scripts/set-image-dimensions.mjs
+          node --check scripts/audit-accessibility.mjs
           node --check scripts/report-css-inventory.mjs
           node --check scripts/audit-search-behavior.mjs
           node --check scripts/audit-image-privacy.mjs
@@ -85,6 +87,8 @@ jobs:
         run: node scripts/audit-site.mjs
       - name: Report publication metadata and prevent misleading business schema
         run: node scripts/audit-publication-quality.mjs
+      - name: Report accessibility consistency of HTML pages
+        run: node scripts/audit-accessibility.mjs
       - name: Verify internal search ranking and aliases
         run: node scripts/audit-search-behavior.mjs
       - name: Inspect image metadata without changing photographs
