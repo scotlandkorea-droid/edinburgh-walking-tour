@@ -6,6 +6,8 @@ const checks = [
   {path:'/robots.txt',kind:'robots'},
   {path:'/sitemap.xml',kind:'sitemap'},
   {path:'/favicon.ico',kind:'favicon'},
+  {path:'/assets/site-header.js',kind:'shared-js'},
+  {path:'/assets/site.css',kind:'shared-css'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/places/st-giles.html',kind:'article'},
   {path:'/__ew_missing_page_audit_20261011__',kind:'notfound'}
@@ -22,7 +24,7 @@ async function inspect({path,kind},agent) {
     const type=response.headers.get('content-type')??'';
     const buf=await response.arrayBuffer();
     let page='';
-    if(type.includes('text/')||type.includes('xml')||type.includes('html'))
+    if(type.includes('text/')||type.includes('xml')||type.includes('html')||type.includes('javascript'))
       page=new TextDecoder().decode(buf);
     const findings={
       kind,path,status:response.status,url:response.url,
@@ -38,6 +40,14 @@ async function inspect({path,kind},agent) {
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
+      const tags=page.match(/<img\b[^>]*>/gi)??[];
+      findings.homeImageCount=tags.length;
+      findings.homeImagesWithSizes=tags.filter(tag=>/\bwidth=["']\d+/.test(tag)&&/\bheight=["']\d+/.test(tag)).length;
+    } else if(kind==='shared-js') {
+      findings.skipLinkCode=page.includes('skip-to-content');
+      findings.sharedPrivacyCode=page.includes('footerPrivacyLink');
+    } else if(kind==='shared-css') {
+      findings.skipLinkStyles=page.includes('body>.skip-to-content');
     } else if(kind==='robots') {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
     } else if(kind==='sitemap') {
