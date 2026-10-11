@@ -24,6 +24,7 @@ on:
       - 'scripts/audit-site.mjs'
       - 'scripts/audit-publication-quality.mjs'
       - 'scripts/complete-social-metadata.mjs'
+      - 'scripts/check-public-deployment.mjs'
       - 'scripts/report-css-inventory.mjs'
       - 'scripts/audit-search-behavior.mjs'
       - 'scripts/audit-image-privacy.mjs'
@@ -66,6 +67,7 @@ jobs:
           node --check scripts/audit-site.mjs
           node --check scripts/audit-publication-quality.mjs
           node --check scripts/complete-social-metadata.mjs
+          node --check scripts/check-public-deployment.mjs
           node --check scripts/report-css-inventory.mjs
           node --check scripts/audit-search-behavior.mjs
           node --check scripts/audit-image-privacy.mjs
@@ -85,6 +87,8 @@ jobs:
         run: node scripts/audit-image-privacy.mjs
       - name: Report CSS cleanup candidates without removing rules
         run: node scripts/report-css-inventory.mjs
+      - name: Check public Workers deployment without treating lag as CI failure
+        run: node scripts/check-public-deployment.mjs
       - name: Commit search index and metadata only when they differ
         run: |
           git add assets/search-data.js
