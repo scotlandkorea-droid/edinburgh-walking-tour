@@ -1,0 +1,5 @@
+# Baseline browser safeguards for files served directly as Workers static assets.
+# Do not set X-Robots-Tag, a CSP, or long cache lifetimes here.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
