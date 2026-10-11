@@ -1,4 +1,14 @@
 (async()=>{
+  // A keyboard-only skip link does not change the normal page layout.
+  const mainContent=document.querySelector('main');
+  if(mainContent&&!document.querySelector('.skip-to-content')){
+    if(!mainContent.id)mainContent.id='main-content';
+    const skip=document.createElement('a');
+    skip.className='skip-to-content';
+    skip.href='#'+mainContent.id;
+    skip.textContent='본문으로 바로가기';
+    document.body.insertBefore(skip,document.body.firstChild);
+  }
   // Keep the factual privacy notice reachable from every page's shared footer.
   const footerPrivacyLink=document.querySelector('footer .foot');
   if(footerPrivacyLink&&!footerPrivacyLink.querySelector('a[href="/privacy.html"]')){
