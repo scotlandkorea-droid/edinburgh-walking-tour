@@ -886,10 +886,10 @@ window.EW_NAV_DATA={
         },
         {
           "number": "03",
-          "name": "해그리드 오두막은 어디 갔을까?",
+          "name": "글렌코의 영화 촬영지",
           "url": "/scotland/places/glencoe-film-locations.html",
-          "navName": "해그리드 오두막",
-          "tabName": "해그리드 오두막"
+          "navName": "글렌코 영화 촬영지",
+          "tabName": "영화 촬영지"
         }
       ]
     },
