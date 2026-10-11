@@ -1201,10 +1201,6 @@ window.EW_NAV_DATA={
         {
           "name": "에릭 리델",
           "url": "/edinburgh/people/eric-liddell.html"
-        },
-        {
-          "name": "버크와 헤어",
-          "url": "/edinburgh/people/burke-and-hare.html"
         }
       ]
     }
