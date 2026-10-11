@@ -1151,6 +1151,10 @@ window.EW_NAV_DATA={
           "url": "/edinburgh/people/adam-smith.html"
         },
         {
+          "name": "제임스 길레스피",
+          "url": "/edinburgh/people/james-gillespie.html"
+        },
+        {
           "name": "제임스 허턴",
           "url": "/edinburgh/people/james-hutton.html"
         },
@@ -1197,6 +1201,10 @@ window.EW_NAV_DATA={
         {
           "name": "알렉산더 그레이엄 벨",
           "url": "/edinburgh/people/alexander-graham-bell.html"
+        },
+        {
+          "name": "엘시 잉글리스",
+          "url": "/edinburgh/people/elsie-inglis.html"
         },
         {
           "name": "에릭 리델",
