@@ -22,6 +22,7 @@ on:
       - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
       - 'scripts/audit-site.mjs'
+      - 'scripts/audit-publication-quality.mjs'
       - 'scripts/report-css-inventory.mjs'
       - 'scripts/audit-search-behavior.mjs'
       - 'scripts/audit-image-privacy.mjs'
@@ -62,6 +63,7 @@ jobs:
           node --input-type=module --check < worker.js
           node --check scripts/build-search-index.mjs
           node --check scripts/audit-site.mjs
+          node --check scripts/audit-publication-quality.mjs
           node --check scripts/report-css-inventory.mjs
           node --check scripts/audit-search-behavior.mjs
           node --check scripts/audit-image-privacy.mjs
@@ -71,6 +73,8 @@ jobs:
         run: node scripts/build-search-index.mjs --check
       - name: Audit static site links and metadata
         run: node scripts/audit-site.mjs
+      - name: Report publication metadata and prevent misleading business schema
+        run: node scripts/audit-publication-quality.mjs
       - name: Verify internal search ranking and aliases
         run: node scripts/audit-search-behavior.mjs
       - name: Inspect image metadata without changing photographs
