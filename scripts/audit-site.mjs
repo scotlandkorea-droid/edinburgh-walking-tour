@@ -20,6 +20,8 @@ function collect(dir) {
   }
 }
 for (const dir of ['assets', 'images']) if (fs.existsSync(dir)) collect(dir);
+// Root-level browser icon is an asset too, not an HTML page.
+if (fs.existsSync('favicon.ico')) existing.add('/favicon.ico');
 existing.add('/');
 existing.add('/st-andrews/');
 
