@@ -6,7 +6,12 @@ export default {
     if (method === "GET" || method === "HEAD") {
       if (url.pathname === "/") {
         const indexUrl = new URL("/index.html", url);
-        return env.ASSETS.fetch(new Request(indexUrl, request));
+        const index = await env.ASSETS.fetch(new Request(indexUrl, request));
+        // The root is Worker-served, so static _headers alone does not cover it.
+        const headers = new Headers(index.headers);
+        headers.set("X-Content-Type-Options", "nosniff");
+        headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+        return new Response(index.body, { status: index.status, statusText: index.statusText, headers });
       }
 
       if (url.pathname === "/st-andrews") {
