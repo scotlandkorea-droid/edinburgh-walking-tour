@@ -1209,6 +1209,10 @@ window.EW_NAV_DATA={
         {
           "name": "에릭 리델",
           "url": "/edinburgh/people/eric-liddell.html"
+        },
+        {
+          "name": "숀 코너리",
+          "url": "/edinburgh/people/sean-connery.html"
         }
       ]
     }
