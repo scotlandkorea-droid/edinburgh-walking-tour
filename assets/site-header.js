@@ -1,4 +1,12 @@
 (async()=>{
+  // Keep the factual privacy notice reachable from every page's shared footer.
+  const footerPrivacyLink=document.querySelector('footer .foot');
+  if(footerPrivacyLink&&!footerPrivacyLink.querySelector('a[href="/privacy.html"]')){
+    const link=document.createElement('a');
+    link.href='/privacy.html';
+    link.textContent='개인정보 안내';
+    footerPrivacyLink.append(link);
+  }
   const fitTitles=()=>{
     document.querySelectorAll('.course-title').forEach(el=>{
       el.style.removeProperty('font-size');
