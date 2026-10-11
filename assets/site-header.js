@@ -99,7 +99,7 @@
   // Navigation is handled by one shared system. Header/share/gallery logic stays here.
   if(!window.EW_NAV_SYSTEM&&!document.querySelector('script[data-ew-nav-system]')){
     const navScript=document.createElement('script');
-    navScript.src='/assets/navigation-system.js?v=20261010-3';
+    navScript.src='/assets/navigation-system.js?v=20261011-1';
     navScript.dataset.ewNavSystem='true';
     document.head.appendChild(navScript);
   }
@@ -197,7 +197,7 @@
       if(searchDataPromise)return searchDataPromise;
       searchDataPromise=new Promise((resolve,reject)=>{
         const script=document.createElement('script');
-        script.src='/assets/search-data.js?v=20260930-4';
+        script.src='/assets/search-data.js?v=20261011-1';
         script.dataset.ewSearchData='true';
         script.onload=()=>resolve(Array.isArray(window.EW_SEARCH_INDEX)?window.EW_SEARCH_INDEX:[]);
         script.onerror=error=>{
