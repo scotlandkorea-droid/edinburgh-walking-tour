@@ -25,6 +25,7 @@ on:
       - 'scripts/audit-publication-quality.mjs'
       - 'scripts/complete-social-metadata.mjs'
       - 'scripts/check-public-deployment.mjs'
+      - 'scripts/set-image-dimensions.mjs'
       - 'scripts/report-css-inventory.mjs'
       - 'scripts/audit-search-behavior.mjs'
       - 'scripts/audit-image-privacy.mjs'
@@ -68,9 +69,12 @@ jobs:
           node --check scripts/audit-publication-quality.mjs
           node --check scripts/complete-social-metadata.mjs
           node --check scripts/check-public-deployment.mjs
+          node --check scripts/set-image-dimensions.mjs
           node --check scripts/report-css-inventory.mjs
           node --check scripts/audit-search-behavior.mjs
           node --check scripts/audit-image-privacy.mjs
+      - name: Set missing intrinsic image sizes without changing photos
+        run: node scripts/set-image-dimensions.mjs --write
       - name: Complete missing social metadata without editing article bodies
         run: node scripts/complete-social-metadata.mjs --write
       - name: Generate static search index
