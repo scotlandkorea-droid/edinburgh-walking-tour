@@ -658,6 +658,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://edinburgh-walking-tour.scotlandkorea.workers.dev/scotland/places/glencoe-film-locations.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
 
   <url>
