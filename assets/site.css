@@ -3178,3 +3178,15 @@ body.travel-detail .travel-article .travel-reference-list a:focus-visible,
 body.travel-detail .travel-article p.travel-reference-link>a:focus-visible{
   outline:2px solid var(--plum);outline-offset:3px;border-radius:2px;
 }
+
+/* Shared keyboard-accessible skip link; hidden until focused. */
+body>.skip-to-content{
+  position:fixed;left:12px;top:8px;z-index:2200;
+  padding:10px 14px;border-radius:9px;
+  background:var(--plum,#6f3547);color:#fffaf5;
+  font-size:15px;font-weight:760;text-decoration:none;
+  transform:translateY(-180%);transition:none;
+}
+body>.skip-to-content:focus,body>.skip-to-content:focus-visible{
+  transform:translateY(0);outline:3px solid #f3dd78;outline-offset:2px;
+}
