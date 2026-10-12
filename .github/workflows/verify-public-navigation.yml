@@ -1,0 +1,36 @@
+name: Verify published navigation journeys
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/verify-public-navigation.py'
+      - '.github/workflows/verify-public-navigation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  public-navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install browser controller and Korean fonts
+        run: |
+          python3 -m pip install --quiet --target /tmp/ew-browser-python 'playwright>=1.54,<1.60'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: Test public browsing journeys in three viewports
+        env:
+          PYTHONPATH: /tmp/ew-browser-python
+        run: python3 scripts/verify-public-navigation.py
+      - name: Preserve navigation results and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-navigation-journeys
+          path: /tmp/ew-navigation-qa/
+          retention-days: 7
