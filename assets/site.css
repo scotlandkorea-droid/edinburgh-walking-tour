@@ -3224,17 +3224,17 @@ body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;
 @media (min-width:350px){
   .contact-privacy-area>.privacy-notice-link{position:relative;left:13px}
 }
-/* Scott Monument pilot: move the privacy link toward the bottom divider,
-   far from the Kakao tap target, without changing the button position
-   or the overall distance to the footer. */
-body.privacy-placement-pilot .detail-article>.kakao-action{
+/* Scott Monument pilot: place the privacy link 40px above its previous
+   position, keeping the Kakao button and the footer divider unchanged.
+   Apply only to this page until the visual layout is approved. */
+body.privacy-placement-pilot.scott-monument-page .detail-article>.kakao-action{
   flex-direction:column;align-items:center;gap:0;
 }
-body.privacy-placement-pilot .detail-article>.kakao-action>.privacy-notice-link{
-  margin-top:58px;
+body.privacy-placement-pilot.scott-monument-page .detail-article>.kakao-action>.privacy-notice-link{
+  margin-top:18px;
 }
 body.privacy-placement-pilot.scott-monument-page main.article{
-  padding-bottom:24px;
+  padding-bottom:64px;
 }
 .privacy-notice-link:hover{color:#4c5a51;text-decoration-color:currentColor}
 .privacy-notice-link:focus-visible{outline:2px solid var(--plum);outline-offset:4px;border-radius:3px}
