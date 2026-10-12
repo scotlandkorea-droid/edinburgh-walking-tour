@@ -91,13 +91,11 @@ const homepageDescription = results.find(r => r.file === 'index.html')?.descript
 const homepageHtml = fs.readFileSync(root, 'utf8');
 // Social crawlers rely on the real image dimensions, not the displayed Hero
 // viewport size. Validate the shared homepage OG PNG against its IHDR header.
-const homeOgMeta = property => homepageHtml.match(
-  new RegExp('<meta\\s+property=["\\']' + property + '["\\']\\s+content=["\\']([^"\\']+)["\\']', 'i')
-)?.[1] ?? '';
+const homeOgMeta = property => meta(homepageHtml.split(/<\/head>/i)[0], 'property', property);
 const socialImageUrl = homeOgMeta('og:image');
 let socialImageDimensions = null;
 try {
-  const pathName = new URL(socialImageUrl).pathname.replace(/^\\/+/, '');
+  const pathName = new URL(socialImageUrl).pathname.replace(/^\/+/, '');
   const image = fs.readFileSync(pathName);
   if (image.toString('hex', 0, 8) === '89504e470d0a1a0a') {
     socialImageDimensions = {
