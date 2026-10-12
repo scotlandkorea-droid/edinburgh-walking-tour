@@ -120,8 +120,27 @@ const missingCards = results.filter(r => !r.twitterCard).map(r => r.file);
 const imageDimensions = results.filter(r => r.noDimensions > 0).map(r => ({page:r.file, images:r.noDimensions}));
 const dupTitles = duplicates('title');
 const dupDescriptions = duplicates('description');
+// Site identity is displayed in one shared header across all published pages.
+// Protect the new brand without rewriting titles/finished article copy.
+const sharedBrandPattern = /<a class="brand"[^>]*><span class="mark">EW<\/span><span>걸어서 에든버러<\/span><\/a>/;
+const staleBrandHeaders = ['404.html','privacy.html',...allPages]
+  .filter(file => !sharedBrandPattern.test(fs.readFileSync(file,'utf8')));
+const homepageBrandIdentityCorrect =
+  homepageHtml.includes('<title>걸어서 에든버러 | 에든버러 워킹투어·스코틀랜드 여행정보</title>') &&
+  homepageHtml.includes('<meta property="og:site_name" content="걸어서 에든버러">') &&
+  homepageHtml.includes('"name": "걸어서 에든버러"') &&
+  homepageHtml.includes('"alternateName": "에든버러 워킹투어"') &&
+  homepageHtml.includes('<h1>에든버러 워킹투어</h1><p class="sub">걸어서 에든버러</p>') &&
+  homepageHtml.includes('걸어서 에든버러는 에든버러 워킹투어 코스를 중심으로') &&
+  homepageHtml.includes('<footer><div class="wrap foot"><a href="/">에든버러 워킹투어</a></div></footer>');
+const saintAndrewsTourNamePreserved = fs.readFileSync('st-andrews/index.html','utf8')
+  .includes('<title>세인트앤드루스 워킹투어 안내 | 스코틀랜드 여행</title>');
 console.log('Publication-quality report for ' + results.length + ' HTML pages:');
 console.log(JSON.stringify({
+  sharedBrandHeadersWrong: staleBrandHeaders.length,
+  sharedBrandHeadersWrongExamples: staleBrandHeaders.slice(0,8),
+  homepageBrandIdentityCorrect,
+  saintAndrewsTourNamePreserved,
   homepageDescriptionLength: homepageDescription.length,
   homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
   noFabricatedGooglebotRequests: !spoofedCrawlerUserAgent,
@@ -140,6 +159,9 @@ console.log(JSON.stringify({
 }, null, 2));
 // Critical publication regressions fail CI instead of merely being reported.
 const failures = [
+  ['sharedBrandHeaderWrong', staleBrandHeaders.length],
+  ['homepageBrandIdentityWrong', Number(!homepageBrandIdentityCorrect)],
+  ['saintAndrewsTourTitleAltered', Number(!saintAndrewsTourNamePreserved)],
   ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
   ['spoofedCrawlerUserAgent', Number(spoofedCrawlerUserAgent)],
   ['homepageHeroPriorityMissing', Number(!homepageHeroPriorityCorrect)],

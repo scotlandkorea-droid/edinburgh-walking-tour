@@ -47,6 +47,13 @@ def smoke(browser, label, width, height):
         response = page.goto(BASE, wait_until="domcontentloaded", timeout=45000)
         passed("public HTTP 200", bool(response and response.status == 200))
         passed("main title", "에든버러 워킹투어" in page.locator(".hero h1").inner_text())
+        passed("new shared header brand", page.locator(".site-header .brand span").last.inner_text().strip() == "걸어서 에든버러")
+        passed("homepage title joins brand and tour", page.title() == "걸어서 에든버러 | 에든버러 워킹투어·스코틀랜드 여행정보")
+        lead = page.locator("#intro .lead").inner_text()
+        passed("homepage introduction joins brand, tour and travel", all(
+            token in lead for token in ("걸어서 에든버러", "에든버러 워킹투어", "스코틀랜드 여행정보")
+        ))
+        passed("footer retains walking tour label", page.locator("footer .foot a").inner_text().strip() == "에든버러 워킹투어")
         page.locator(".site-search-toggle").wait_for(state="attached", timeout=15000)
         passed("shared search script loaded")
         hero = page.locator(".hero picture img")
@@ -163,6 +170,20 @@ def smoke(browser, label, width, height):
             )
         page.evaluate("window.scrollTo(0,0)")
         page.screenshot(path=str(OUT / (label + ".png")), animations="disabled")
+        # Check that the same new header appears on real interior pages
+        # without renaming the Saint Andrews tour itself.
+        detail = context.new_page()
+        try:
+            response = detail.goto(BASE + "places/st-giles.html", wait_until="domcontentloaded", timeout=30000)
+            passed("St Giles page HTTP 200", bool(response and response.status == 200))
+            passed("St Giles page branded header", detail.locator(".site-header .brand span").last.inner_text().strip() == "걸어서 에든버러")
+            passed("St Giles original title preserved", "세인트 자일스" in detail.title())
+            response = detail.goto(BASE + "st-andrews/", wait_until="domcontentloaded", timeout=30000)
+            passed("St Andrews page HTTP 200", bool(response and response.status == 200))
+            passed("St Andrews shared brand header", detail.locator(".site-header .brand span").last.inner_text().strip() == "걸어서 에든버러")
+            passed("St Andrews tour name preserved", "세인트앤드루스 워킹투어" in detail.title())
+        finally:
+            detail.close()
         row["status"] = "PASS"
     except Exception as exc:
         row["status"] = "FAIL"
