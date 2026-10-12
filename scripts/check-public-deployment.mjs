@@ -10,6 +10,7 @@ const checks = [
   {path:'/assets/site.css',kind:'shared-css'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/places/st-giles.html',kind:'article'},
+  {path:'/places/scott-monument.html',kind:'privacy-pilot'},
   {path:'/__ew_missing_page_audit_20261011__',kind:'notfound'}
 ];
 async function inspect({path,kind},agent) {
@@ -40,6 +41,8 @@ async function inspect({path,kind},agent) {
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
+      findings.inquiryPrivacyLink=/<div class="contact-privacy-area">[\s\S]*?카카오톡 문의[\s\S]*?이메일 문의[\s\S]*?class="privacy-notice-link"/.test(page);
+      findings.footerPrivacyDuplicated=/<footer[\s\S]*?href="\/privacy.html"/.test(page);
       const tags=page.match(/<img\b[^>]*>/gi)??[];
       findings.homeImageCount=tags.length;
       findings.homeImagesWithSizes=tags.filter(tag=>/\bwidth=["']\d+/.test(tag)&&/\bheight=["']\d+/.test(tag)).length;
@@ -55,7 +58,12 @@ async function inspect({path,kind},agent) {
     } else if(kind==='article') {
       findings.ogImage=/property=["']og:image["']/.test(page);
       findings.twitterCard=/name=["']twitter:card["']/.test(page);
+    } else if(kind==='privacy-pilot') {
+      findings.kakaoThenPrivacy=/<div class="kakao-action">[\s\S]*?카카오톡 문의[\s\S]*?class="privacy-notice-link"/.test(page);
+      findings.pilotBodyClass=page.includes('privacy-placement-pilot');
     } else if(kind==='privacy') {
+      findings.threeMonthLimit=page.includes('문의 종료일로부터 3개월 이내');
+      findings.unwantedProfileOrPayment=/프로필 정보|온라인 결제 기능이 없습니다/.test(page);
       findings.noticeText=page.includes('개인정보 처리 안내') || page.includes('개인정보 안내');
     } else if(kind==='notfound') {
       findings.customPage=page.includes('페이지를 찾을 수 없습니다');
