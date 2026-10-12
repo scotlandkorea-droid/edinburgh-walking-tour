@@ -42,6 +42,7 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.misleadingBusinessSchema=/"@type"\s*:\s*"LocalBusiness"/.test(page);
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
+      findings.brandHeroSubtitle=page.includes('<p class="sub">걸어서 에든버러</p>');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
       const description=page.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i)?.[1]??'';
       findings.homeMetaDescription=description;
