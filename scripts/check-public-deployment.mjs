@@ -11,20 +11,21 @@ const checks = [
   {path:'/assets/hero-mobile-optimized.webp',kind:'hero-webp'},
   {path:'/assets/hero-desktop-optimized.webp',kind:'hero-webp'},
   {path:'/privacy.html',kind:'privacy'},
+  {path:'/edinburgh/people/burke-and-hare.html',kind:'retired-people-redirect',targetPath:'/places/grassmarket-burke-hare.html'},
   {path:'/places/st-giles.html',kind:'article'},
   {path:'/places/scott-monument.html',kind:'article-privacy-free'},
   {path:'/places/arthurs-seat.html',kind:'image-dimensions',imageSrc:'../assets/arthurs-seat.jpg',expectedWidth:1536,expectedHeight:1152},
   {path:'/places/canongate-worlds-end.html',kind:'image-dimensions',imageSrc:'818px-Netherbow_E.jpg',expectedWidth:818,expectedHeight:1198},
   {path:'/__ew_missing_page_audit_20261011__',kind:'notfound'}
 ];
-async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) {
+async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight,targetPath},agent) {
   const url=base+path;
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),14000);
   try {
     const response=await fetch(url,{
       headers:{'User-Agent':agent,'Accept':'*/*'},
-      redirect:'follow',signal:controller.signal
+      redirect:kind==='retired-people-redirect'?'manual':'follow',signal:controller.signal
     });
     const type=response.headers.get('content-type')??'';
     const buf=await response.arrayBuffer();
@@ -39,7 +40,12 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       nosniff:response.headers.get('x-content-type-options'),
       referrerPolicy:response.headers.get('referrer-policy')
     };
-    if(kind==='home') {
+    if(kind==='retired-people-redirect') {
+      const location=response.headers.get('location');
+      findings.location=location;
+      findings.permanentRedirectToPreservedStory=response.status===301&&
+        Boolean(location)&&new URL(location,base).pathname===targetPath;
+    } else if(kind==='home') {
       findings.siteSchema=/"@type"\s*:\s*"WebSite"/.test(page);
       findings.misleadingBusinessSchema=/"@type"\s*:\s*"LocalBusiness"/.test(page);
       findings.faviconLinked=page.includes('href="/favicon.ico"');
