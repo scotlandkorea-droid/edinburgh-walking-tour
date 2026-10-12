@@ -11,10 +11,13 @@
   }
   // Keep the factual privacy notice reachable from every page's shared footer.
   const footerPrivacyLink=document.querySelector('footer .foot');
-  if(footerPrivacyLink&&!footerPrivacyLink.querySelector('a[href="/privacy.html"]')){
+  // The homepage and the current detail pilot show this link beside inquiries.
+  // Do not repeat the same link in their footers.
+  const privacyNearInquiry=Boolean(document.querySelector('.privacy-notice-link'));
+  if(footerPrivacyLink&&!privacyNearInquiry&&!footerPrivacyLink.querySelector('a[href="/privacy.html"]')){
     const link=document.createElement('a');
     link.href='/privacy.html';
-    link.textContent='개인정보 안내';
+    link.textContent='개인정보 처리 안내';
     footerPrivacyLink.append(link);
   }
   const fitTitles=()=>{
