@@ -97,14 +97,29 @@ def smoke(browser, label, width, height):
             "(el) => el.classList.contains('open')"
         ))
 
-        if label != "mobile":
+        # The existing responsive design uses swipe/scroll on mobile and tablet,
+        # while the desktop exposes explicit previous/next arrow controls.
+        if label == "desktop":
             next_button = page.locator(".gallery-arrow.next")
-            passed("gallery next button visible", next_button.is_visible())
-            before = gallery.evaluate("(el) => el.scrollLeft")
+            passed("desktop gallery next button visible", next_button.is_visible())
+            before_scroll = gallery.evaluate("(el) => el.scrollLeft")
             next_button.click()
             page.wait_for_timeout(900)
-            after = gallery.evaluate("(el) => el.scrollLeft")
-            passed("gallery advances", after > before)
+            after_scroll = gallery.evaluate("(el) => el.scrollLeft")
+            passed("desktop gallery advances", after_scroll > before_scroll)
+        else:
+            passed(
+                "touch gallery horizontally scrollable",
+                gallery.evaluate(
+                    "(el) => el.scrollWidth > el.clientWidth && "
+                    "['auto', 'scroll'].includes(getComputedStyle(el).overflowX)"
+                ),
+            )
+            before_scroll = gallery.evaluate("(el) => el.scrollLeft")
+            gallery.evaluate("(el) => el.scrollBy({left: el.clientWidth * .6, behavior:'instant'})")
+            page.wait_for_timeout(250)
+            after_scroll = gallery.evaluate("(el) => el.scrollLeft")
+            passed("touch gallery track advances", after_scroll > before_scroll)
 
         preview = page.locator("[data-route-preview]")
         preview.scroll_into_view_if_needed(timeout=15000)
