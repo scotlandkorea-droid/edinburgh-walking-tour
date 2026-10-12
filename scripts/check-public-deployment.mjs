@@ -43,6 +43,10 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
+      const description=page.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i)?.[1]??'';
+      findings.homeMetaDescription=description;
+      findings.homeMetaDescriptionLength=description.length;
+      findings.homeMetaDescriptionWithin80Characters=description.length>0&&description.length<=80;
       findings.inquiryPrivacyLink=/<div class="contact-privacy-area">[\s\S]*?카카오톡 문의[\s\S]*?이메일 문의[\s\S]*?class="privacy-notice-link"/.test(page);
       findings.footerPrivacyDuplicated=/<footer[\s\S]*?href="\/privacy.html"/.test(page);
       const tags=page.match(/<img\b[^>]*>/gi)??[];

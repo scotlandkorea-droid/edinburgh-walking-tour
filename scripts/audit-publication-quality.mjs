@@ -79,6 +79,11 @@ const duplicates = (name) => {
   }
   return [...groups.values()].filter(x => x.length > 1);
 };
+// Naver recommended a concise main description (80 Korean characters or fewer).
+// Keep this quality limit specific to the homepage; do not rewrite finished detail metadata.
+const homepageDescription = results.find(r => r.file === 'index.html')?.description ?? '';
+const homepageDescriptionTooLong = homepageDescription.length > 80 ||
+  homepageDescription.length === 0;
 const missingImages = results.filter(r => !r.ogImage).map(r => r.file);
 const missingCards = results.filter(r => !r.twitterCard).map(r => r.file);
 const imageDimensions = results.filter(r => r.noDimensions > 0).map(r => ({page:r.file, images:r.noDimensions}));
@@ -86,6 +91,8 @@ const dupTitles = duplicates('title');
 const dupDescriptions = duplicates('description');
 console.log('Publication-quality report for ' + results.length + ' HTML pages:');
 console.log(JSON.stringify({
+  homepageDescriptionLength: homepageDescription.length,
+  homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
   missingOpenGraphImage: missingImages.length, missingOpenGraphImageExamples:missingImages.slice(0,25),
   missingTwitterCard: missingCards.length, missingTwitterCardExamples:missingCards.slice(0,6),
   imageDimensionsMissingPages:imageDimensions.length, imageDimensionsMissingExamples:imageDimensions.slice(0,15),
@@ -95,6 +102,7 @@ console.log(JSON.stringify({
 }, null, 2));
 // Critical publication regressions fail CI instead of merely being reported.
 const failures = [
+  ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
   ['missingOpenGraphImage', missingImages.length],
   ['missingTwitterCard', missingCards.length],
   ['imageDimensionsMissingPages', imageDimensions.length],
