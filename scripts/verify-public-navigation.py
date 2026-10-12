@@ -149,7 +149,7 @@ def st_andrews(page, mark):
     checked(tabs.locator(".story-series-tab").count() >= 9,
             "St Andrews should list the walking tour chapters")
     mark("St Andrews chapter list responsive")
-    tabs.locator('a[href="/st-andrews/st-andrews-cathedral.html"]').click()
+    tabs.locator('a[href^="/st-andrews/st-andrews-cathedral.html"]').click()
     page.wait_for_url("**/st-andrews/st-andrews-cathedral.html*")
     checked("대성당" in page.locator("h1").first.inner_text(), "St Andrews cathedral navigation")
     mark("St Andrews chapter navigation works")
@@ -160,7 +160,7 @@ def glasgow(page, mark):
     checked(page.locator(".story-series-tabs .story-series-tab").count() >= 10,
             "Glasgow walking chapters absent")
     mark("Glasgow chapter list responsive")
-    page.locator('a.story-next[href="/scotland/places/glasgow/kelvingrove.html"]').click()
+    page.locator('a.story-next[href^="/scotland/places/glasgow/kelvingrove.html"]').click()
     page.wait_for_url("**/scotland/places/glasgow/kelvingrove.html*")
     checked("켈빈그로브" in page.locator("h1").first.inner_text(), "Glasgow next article")
     mark("Glasgow next article works")
