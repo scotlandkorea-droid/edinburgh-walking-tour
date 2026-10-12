@@ -8,7 +8,7 @@ import {execFileSync} from 'node:child_process';
 const SITEMAP='sitemap.xml';
 const ORIGIN='https://edinburgh-walking-tour.scotlandkorea.workers.dev';
 const CHECK=process.argv.includes('--check');
-const git=args=>execFileSync('git',args,{encoding:'utf8',maxBuffer:12*1024*1024});
+const git=args=>execFileSync('git',args,{encoding:'utf8',maxBuffer:12*1024*1024,stdio:['ignore','pipe','pipe']});
 if(git(['rev-parse','--is-shallow-repository']).trim()!=='false')
   throw Error('Full Git history required for accurate lastmod (checkout fetch-depth: 0).');
 
