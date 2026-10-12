@@ -8,6 +8,8 @@ const checks = [
   {path:'/favicon.ico',kind:'favicon'},
   {path:'/assets/site-header.js',kind:'shared-js'},
   {path:'/assets/site.css',kind:'shared-css'},
+  {path:'/assets/hero-mobile-optimized.webp',kind:'hero-webp'},
+  {path:'/assets/hero-desktop-optimized.webp',kind:'hero-webp'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/places/st-giles.html',kind:'article'},
   {path:'/places/scott-monument.html',kind:'article-privacy-free'},
@@ -45,6 +47,8 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.brandHeroSubtitle=page.includes('<p class="sub">걸어서 에든버러</p>');
       const heroImgTag=page.match(/<section class="hero">[\s\S]*?<picture>[\s\S]*?(<img\b[^>]*>)/i)?.[1]??'';
       findings.heroImageHighPriority=/\bfetchpriority="high"/.test(heroImgTag);
+      findings.modernHeroSourcesPresent=page.includes('srcset="/assets/hero-mobile-optimized.webp" type="image/webp"')&&page.includes('srcset="/assets/hero-desktop-optimized.webp" type="image/webp"');
+      findings.originalHeroFallbackPreserved=page.includes('srcset="/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png" type="image/png"')&&page.includes('src="/assets/ab75b4d57bc76a4b8ce8d532e05cf08119800cc3381112669064a9110390bfc7 (1).png"');
       const galleryHtml=page.match(/<div class="photo-strip" id="tourGallery">([\s\S]*?)<\/div>/i)?.[1]??'';
       const galleryImageTags=galleryHtml.match(/<img\b[^>]*>/gi)??[];
       findings.galleryImagesDeferred=galleryImageTags.length>0&&galleryImageTags.every(tag=>/\bloading="lazy"/.test(tag));
@@ -59,6 +63,12 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       const tags=page.match(/<img\b[^>]*>/gi)??[];
       findings.homeImageCount=tags.length;
       findings.homeImagesWithSizes=tags.filter(tag=>/\bwidth=["']\d+/.test(tag)&&/\bheight=["']\d+/.test(tag)).length;
+    } else if(kind==='hero-webp') {
+      const bytes=new Uint8Array(buf);
+      findings.validWebP=type.includes('image/webp')&&
+        new TextDecoder('ascii').decode(bytes.subarray(0,4))==='RIFF'&&
+        new TextDecoder('ascii').decode(bytes.subarray(8,12))==='WEBP';
+      findings.compactSize=buf.byteLength>10000&&buf.byteLength<700000;
     } else if(kind==='shared-js') {
       findings.skipLinkCode=page.includes('skip-to-content');
       findings.noAutomaticFooterPrivacy= !page.includes('footerPrivacyLink');

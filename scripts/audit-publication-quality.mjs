@@ -97,6 +97,22 @@ const homepageGallery = homepageHtml.match(/<div class="photo-strip" id="tourGal
 const homepageGalleryImages = homepageGallery.match(/<img\b[^>]*>/gi) ?? [];
 const homepageGalleryEagerImages = homepageGalleryImages.filter(tag => readAttribute(tag, 'loading') !== 'lazy').length;
 const homepageGalleryMissing = homepageGalleryImages.length === 0;
+// Serve modern images without losing the original full-quality PNG fallbacks.
+const heroPicture = homepageHtml.match(/<section class="hero"><picture>([\s\S]*?)<\/picture>/i)?.[1] ?? '';
+const modernHeroSourcesPresent =
+  heroPicture.includes('srcset="/assets/hero-desktop-optimized.webp" type="image/webp"') &&
+  heroPicture.includes('srcset="/assets/hero-mobile-optimized.webp" type="image/webp"');
+const originalHeroSourcesPreserved =
+  heroPicture.includes('srcset="/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png" type="image/png"') &&
+  heroPicture.includes('src="/assets/ab75b4d57bc76a4b8ce8d532e05cf08119800cc3381112669064a9110390bfc7 (1).png"');
+const modernHeroFilesValid=['mobile','desktop'].every(view=>{
+  const file='assets/hero-'+view+'-optimized.webp';
+  if(!fs.existsSync(file))return false;
+  const content=fs.readFileSync(file);
+  return content.length>10000 && content.length<700000 &&
+    content.toString('ascii',0,4)==='RIFF' &&
+    content.toString('ascii',8,12)==='WEBP';
+});
 const homepageDescriptionTooLong = homepageDescription.length > 80 ||
   homepageDescription.length === 0;
 const missingImages = results.filter(r => !r.ogImage).map(r => r.file);
@@ -110,6 +126,9 @@ console.log(JSON.stringify({
   homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
   noFabricatedGooglebotRequests: !spoofedCrawlerUserAgent,
   homepageHeroPriorityCorrect,
+  modernHeroSourcesPresent,
+  originalHeroSourcesPreserved,
+  modernHeroFilesValid,
   homepageGalleryImageCount:homepageGalleryImages.length,
   homepageGalleryEagerImages,
   missingOpenGraphImage: missingImages.length, missingOpenGraphImageExamples:missingImages.slice(0,25),
@@ -124,6 +143,9 @@ const failures = [
   ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
   ['spoofedCrawlerUserAgent', Number(spoofedCrawlerUserAgent)],
   ['homepageHeroPriorityMissing', Number(!homepageHeroPriorityCorrect)],
+  ['heroWebPSourcesMissing', Number(!modernHeroSourcesPresent)],
+  ['originalHeroFallbackMissing', Number(!originalHeroSourcesPreserved)],
+  ['heroWebPFilesInvalid', Number(!modernHeroFilesValid)],
   ['homepageGalleryMissing', Number(homepageGalleryMissing)],
   ['homepageGalleryEagerImages', homepageGalleryEagerImages],
   ['missingOpenGraphImage', missingImages.length],
