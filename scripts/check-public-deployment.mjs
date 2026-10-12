@@ -61,6 +61,7 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.homeButtonGapOffset=page.includes('left:13px');
       findings.noPrivacyPilotCSS= !page.includes('privacy-placement-pilot');
       findings.subduedPrivacyColor=page.includes('#87928a');
+      findings.heroSubtitlePlumTint=/\.hero \.sub\{[^}]*color:#eac3d1;/.test(page);
     } else if(kind==='robots') {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
     } else if(kind==='sitemap') {
