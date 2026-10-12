@@ -43,6 +43,11 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.brandHeroSubtitle=page.includes('<p class="sub">걸어서 에든버러</p>');
+      const heroImgTag=page.match(/<section class="hero">[\s\S]*?<picture>[\s\S]*?(<img\b[^>]*>)/i)?.[1]??'';
+      findings.heroImageHighPriority=/\bfetchpriority="high"/.test(heroImgTag);
+      const galleryHtml=page.match(/<div class="photo-strip" id="tourGallery">([\s\S]*?)<\/div>/i)?.[1]??'';
+      const galleryImageTags=galleryHtml.match(/<img\b[^>]*>/gi)??[];
+      findings.galleryImagesDeferred=galleryImageTags.length>0&&galleryImageTags.every(tag=>/\bloading="lazy"/.test(tag));
       findings.homeCssVersionUpdated=page.includes('/assets/site.css?v=20261012-5');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
       const description=page.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i)?.[1]??'';

@@ -82,6 +82,17 @@ const duplicates = (name) => {
 // Naver recommended a concise main description (80 Korean characters or fewer).
 // Keep this quality limit specific to the homepage; do not rewrite finished detail metadata.
 const homepageDescription = results.find(r => r.file === 'index.html')?.description ?? '';
+// Keep first paint focused on the hero; gallery is well below the fold.
+// Preserve image bytes, dimensions, order, and all visitor-visible markup.
+const homepageHtml = fs.readFileSync(root, 'utf8');
+const heroImageTag = homepageHtml.match(/<section class="hero">[\s\S]*?<picture>[\s\S]*?(<img\b[^>]*>)/i)?.[1] ?? '';
+const homepageHeroPriorityCorrect =
+  readAttribute(heroImageTag, 'fetchpriority') === 'high' &&
+  readAttribute(heroImageTag, 'loading') !== 'lazy';
+const homepageGallery = homepageHtml.match(/<div class="photo-strip" id="tourGallery">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+const homepageGalleryImages = homepageGallery.match(/<img\b[^>]*>/gi) ?? [];
+const homepageGalleryEagerImages = homepageGalleryImages.filter(tag => readAttribute(tag, 'loading') !== 'lazy').length;
+const homepageGalleryMissing = homepageGalleryImages.length === 0;
 const homepageDescriptionTooLong = homepageDescription.length > 80 ||
   homepageDescription.length === 0;
 const missingImages = results.filter(r => !r.ogImage).map(r => r.file);
@@ -93,6 +104,9 @@ console.log('Publication-quality report for ' + results.length + ' HTML pages:')
 console.log(JSON.stringify({
   homepageDescriptionLength: homepageDescription.length,
   homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
+  homepageHeroPriorityCorrect,
+  homepageGalleryImageCount:homepageGalleryImages.length,
+  homepageGalleryEagerImages,
   missingOpenGraphImage: missingImages.length, missingOpenGraphImageExamples:missingImages.slice(0,25),
   missingTwitterCard: missingCards.length, missingTwitterCardExamples:missingCards.slice(0,6),
   imageDimensionsMissingPages:imageDimensions.length, imageDimensionsMissingExamples:imageDimensions.slice(0,15),
@@ -103,6 +117,9 @@ console.log(JSON.stringify({
 // Critical publication regressions fail CI instead of merely being reported.
 const failures = [
   ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
+  ['homepageHeroPriorityMissing', Number(!homepageHeroPriorityCorrect)],
+  ['homepageGalleryMissing', Number(homepageGalleryMissing)],
+  ['homepageGalleryEagerImages', homepageGalleryEagerImages],
   ['missingOpenGraphImage', missingImages.length],
   ['missingTwitterCard', missingCards.length],
   ['imageDimensionsMissingPages', imageDimensions.length],
