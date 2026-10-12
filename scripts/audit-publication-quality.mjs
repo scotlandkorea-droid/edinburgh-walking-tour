@@ -1,4 +1,4 @@
-// Report-only audit for publication metadata that link-integrity checks do not cover.
+// Enforced metadata/image-dimension audit; protect completed article content from changes.
 // Do not rewrite pages or their completed editorial copy.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -36,6 +36,17 @@ for (const file of allPages) {
   const html = fs.readFileSync(file, 'utf8');
   const head = html.split(/<\/head>/i)[0];
   const images = html.match(/<img\b[^>]*>/gi) ?? [];
+  // This image has no src until a visitor opens the lightbox. It is not
+  // a loading image, and intrinsic width/height do not apply to it.
+  const dynamicLightbox = /<div\b[^>]*class=["'][^"']*\blightbox\b[^"']*["'][^>]*id=["']lightbox["']/i.test(html);
+  const missingSizeImages = images.filter(tag => {
+    const isDynamicPlaceholder = dynamicLightbox &&
+      readAttribute(tag, 'src') === null &&
+      readAttribute(tag, 'srcset') === null &&
+      readAttribute(tag, 'alt') === '확대 사진';
+    return !isDynamicPlaceholder &&
+      (readAttribute(tag, 'width') === null || readAttribute(tag, 'height') === null);
+  });
   const tags = [...head.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
   for (const tag of tags) {
     try {
@@ -56,7 +67,7 @@ for (const file of allPages) {
     ogType: meta(head, 'property', 'og:type').trim(),
     twitterCard: meta(head, 'name', 'twitter:card').trim(),
     images: images.length,
-    noDimensions: images.filter(tag => readAttribute(tag, 'width') === null || readAttribute(tag, 'height') === null).length
+    noDimensions: missingSizeImages.length
   });
 }
 const duplicates = (name) => {
@@ -82,7 +93,19 @@ console.log(JSON.stringify({
   duplicateDescriptionGroups:dupDescriptions.length, duplicateDescriptionExamples:dupDescriptions.slice(0,12),
   invalidStructuredData:brokenSchema, forbiddenBusinessSchema:forbidden
 }, null, 2));
-if (brokenSchema.length || forbidden.length) {
-  console.error('Invalid / inaccurate structured data must be fixed.');
+// Critical publication regressions fail CI instead of merely being reported.
+const failures = [
+  ['missingOpenGraphImage', missingImages.length],
+  ['missingTwitterCard', missingCards.length],
+  ['imageDimensionsMissingPages', imageDimensions.length],
+  ['duplicateTitleGroups', dupTitles.length],
+  ['duplicateDescriptionGroups', dupDescriptions.length],
+  ['invalidStructuredData', brokenSchema.length],
+  ['forbiddenBusinessSchema', forbidden.length]
+].filter(([, count]) => count > 0);
+if (failures.length) {
+  console.error('Publication quality gate FAILED: ' + JSON.stringify(failures));
   process.exitCode = 1;
+} else {
+  console.log('Publication quality gate PASS');
 }

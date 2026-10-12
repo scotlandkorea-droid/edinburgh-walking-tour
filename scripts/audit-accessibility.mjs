@@ -1,4 +1,4 @@
-// Report-only HTML accessibility consistency audit (no markup writes).
+// Enforced static HTML accessibility checks (no markup writes).
 // Manual keyboard/screen-reader and mobile checks remain necessary.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,3 +41,11 @@ for(const p of pages){
   }
 }
 console.log(JSON.stringify({totalPages:pages.length,issues:Object.fromEntries(Object.entries(finds).map(([k,v])=>[k,{count:v.length,examples:v.slice(0,16)}]))},null,2));
+const failures = Object.entries(finds).filter(([, items]) => items.length);
+if (failures.length) {
+  console.error('Accessibility consistency gate FAILED: ' +
+    JSON.stringify(failures.map(([name, items]) => ({name, count:items.length}))));
+  process.exitCode = 1;
+} else {
+  console.log('Accessibility consistency gate PASS');
+}
