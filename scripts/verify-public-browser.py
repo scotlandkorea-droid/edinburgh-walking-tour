@@ -55,6 +55,13 @@ def smoke(browser, label, width, height):
             timeout=25000,
         )
         passed("hero image rendered")
+        # Preserve the PNG fallback but ensure capable browsers choose WebP.
+        selected_hero = hero.evaluate("(img) => img.currentSrc")
+        expected_image = (
+            "hero-mobile-optimized.webp" if label == "mobile"
+            else "hero-desktop-optimized.webp"
+        )
+        passed("optimized Hero photo actually selected", expected_image in selected_hero)
 
         if label == "mobile":
             menu = page.locator("details.mobile-menu")
