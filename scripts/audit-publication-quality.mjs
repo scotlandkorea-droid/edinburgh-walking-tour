@@ -89,6 +89,27 @@ const homepageDescription = results.find(r => r.file === 'index.html')?.descript
 // Keep first paint focused on the hero; gallery is well below the fold.
 // Preserve image bytes, dimensions, order, and all visitor-visible markup.
 const homepageHtml = fs.readFileSync(root, 'utf8');
+// Social crawlers rely on the real image dimensions, not the displayed Hero
+// viewport size. Validate the shared homepage OG PNG against its IHDR header.
+const homeOgMeta = property => homepageHtml.match(
+  new RegExp('<meta\\s+property=["\\']' + property + '["\\']\\s+content=["\\']([^"\\']+)["\\']', 'i')
+)?.[1] ?? '';
+const socialImageUrl = homeOgMeta('og:image');
+let socialImageDimensions = null;
+try {
+  const pathName = new URL(socialImageUrl).pathname.replace(/^\\/+/, '');
+  const image = fs.readFileSync(pathName);
+  if (image.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+    socialImageDimensions = {
+      width: image.readUInt32BE(16), height: image.readUInt32BE(20)
+    };
+  }
+} catch (error) {
+  // A missing or unreadable image fails the metadata check below.
+}
+const homeOgImageDimensionsCorrect = Boolean(socialImageDimensions)
+  && Number(homeOgMeta('og:image:width')) === socialImageDimensions.width
+  && Number(homeOgMeta('og:image:height')) === socialImageDimensions.height;
 const heroImageTag = homepageHtml.match(/<section class="hero">[\s\S]*?<picture>[\s\S]*?(<img\b[^>]*>)/i)?.[1] ?? '';
 const homepageHeroPriorityCorrect =
   readAttribute(heroImageTag, 'fetchpriority') === 'high' &&
@@ -142,6 +163,8 @@ console.log(JSON.stringify({
   homepageBrandIdentityCorrect,
   saintAndrewsTourNamePreserved,
   homepageDescriptionLength: homepageDescription.length,
+  homeOgImageDimensionsCorrect,
+  socialImageDimensions,
   homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
   noFabricatedGooglebotRequests: !spoofedCrawlerUserAgent,
   homepageHeroPriorityCorrect,
@@ -163,6 +186,7 @@ const failures = [
   ['homepageBrandIdentityWrong', Number(!homepageBrandIdentityCorrect)],
   ['saintAndrewsTourTitleAltered', Number(!saintAndrewsTourNamePreserved)],
   ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
+  ['homeOgImageDimensionsWrong', Number(!homeOgImageDimensionsCorrect)],
   ['spoofedCrawlerUserAgent', Number(spoofedCrawlerUserAgent)],
   ['homepageHeroPriorityMissing', Number(!homepageHeroPriorityCorrect)],
   ['heroWebPSourcesMissing', Number(!modernHeroSourcesPresent)],
