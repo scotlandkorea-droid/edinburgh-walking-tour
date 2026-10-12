@@ -207,7 +207,29 @@ DETAIL_SCENARIOS = (
     ("st_andrews_tour", "st-andrews/"),
     ("iona", "scotland/places/iona.html"),
     ("waverley_rail", "travel/train-waverley.html"),
+    ("scott_monument", "places/scott-monument.html"),
+    ("arthurs_seat", "places/arthurs-seat.html"),
+    ("city_chambers", "places/royal-mile-city-chambers.html"),
+    ("canongate_worlds_end", "places/canongate-worlds-end.html"),
+    ("new_college", "places/new-college.html"),
+    ("st_andrews_old_course", "st-andrews/old-course.html"),
+    ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
+    ("skye_overview", "scotland/places/isle-of-skye.html"),
 )
+
+
+# Pages with intended photographic content must not accidentally lose all
+# their article images while still passing the layout/visibility checks.
+PHOTO_MINIMUMS = {
+    "places/scott-monument.html": 3,
+    "places/arthurs-seat.html": 1,
+    "places/royal-mile-city-chambers.html": 4,
+    "places/canongate-worlds-end.html": 1,
+    "places/new-college.html": 4,
+    "st-andrews/old-course.html": 3,
+    "places/royal-mile-deacon-brodie.html": 3,
+    "scotland/places/isle-of-skye.html": 1,
+}
 
 
 def detail_smoke(browser, label, width, height):
@@ -261,12 +283,16 @@ def detail_smoke(browser, label, width, height):
                 # to article photos, not decorative SVGs or external map tiles.
                 photos = page.locator("main img[src]")
                 photo_count = photos.count()
+                minimum = PHOTO_MINIMUMS.get(path, 0)
+                ensure(photo_count >= minimum,
+                       f"{label} {path}: expected at least {minimum} article images, found {photo_count}")
+                row["checks"]["intended article images present"] = "PASS"
                 loaded = []
                 for idx in range(photo_count):
                     img = photos.nth(idx)
                     source = img.get_attribute("src") or ""
                     if not (source.startswith("/") or source.startswith("../")
-                            or source.startswith("./")):
+                            or source.startswith("./") or source.startswith("https://")):
                         continue
                     img.scroll_into_view_if_needed(timeout=10000)
                     try:
@@ -284,13 +310,13 @@ def detail_smoke(browser, label, width, height):
                       naturalWidth: img.naturalWidth
                     })""")
                     loaded.append(info)
-                row["localPhotos"] = {"totalArticleImages": photo_count,
-                                      "testedLocal": len(loaded),
-                                      "loaded": sum(bool(i["loaded"]) for i in loaded),
-                                      "failed": [i["src"] for i in loaded if not i["loaded"]]}
+                row["articlePhotos"] = {"totalArticleImages": photo_count,
+                                        "tested": len(loaded),
+                                        "loaded": sum(bool(i["loaded"]) for i in loaded),
+                                        "failed": [i["src"] for i in loaded if not i["loaded"]]}
                 ensure(all(i["loaded"] for i in loaded),
-                       f"{label} {path}: local article image did not load")
-                row["checks"]["local article images load"] = "PASS"
+                       f"{label} {path}: article image did not load")
+                row["checks"]["article images load"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
