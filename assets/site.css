@@ -3217,7 +3217,7 @@ body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;
   text-underline-offset:3px;text-decoration-thickness:1px;
   overflow-wrap:anywhere;
 }
-.contact-privacy-area>.privacy-notice-link{margin-top:12px}
+.contact-privacy-area>.privacy-notice-link{margin-top:24px}
 /* The two buttons have slightly different widths and left padding.
    Center the label under the actual gap, not the enclosing button row.
    At very narrow widths, retain the natural centered position if buttons wrap. */
