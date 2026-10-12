@@ -432,10 +432,18 @@
 
   const menu=document.querySelector('.mobile-menu');
   if(menu){
+    const menuSummary=menu.querySelector('summary');
+    const syncMenuLabel=()=>{
+      menuSummary?.setAttribute('aria-label',menu.hasAttribute('open')?'메뉴 닫기':'메뉴 열기');
+    };
     const close=()=>menu.removeAttribute('open');
     menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-    menu.addEventListener('toggle',()=>{if(menu.hasAttribute('open'))closeSearch()});
+    menu.addEventListener('toggle',()=>{
+      syncMenuLabel();
+      if(menu.hasAttribute('open'))closeSearch();
+    });
     document.addEventListener('click',e=>{if(menu.hasAttribute('open')&&!menu.contains(e.target))close()});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+    syncMenuLabel();
   }
 })();
