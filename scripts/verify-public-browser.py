@@ -279,9 +279,10 @@ def detail_smoke(browser, label, width, height):
                 ensure(overflow <= 2, f"{label} {path}: {overflow}px document overflow")
                 row["checks"]["no document horizontal overflow"] = "PASS"
 
-                # Trigger the browser's normal lazy-image mechanism.  Limit this
-                # to article photos, not decorative SVGs or external map tiles.
-                photos = page.locator("main img[src]")
+                # Editorial photos may live in the article or its preceding
+                # page Hero (e.g. Arthur's Seat). Ignore unrelated header icons.
+                # Scroll them to trigger normal lazy loading, including externals.
+                photos = page.locator("main img[src], section.hero img[src]")
                 photo_count = photos.count()
                 minimum = PHOTO_MINIMUMS.get(path, 0)
                 ensure(photo_count >= minimum,
