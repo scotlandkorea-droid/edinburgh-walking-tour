@@ -44,6 +44,7 @@ export default {
       }
 
       const legacyRedirects = {
+        "/edinburgh/people/burke-and-hare.html": "/places/grassmarket-burke-hare.html",
         "/edinburgh/places/city-chambers.html": "/places/royal-mile-city-chambers.html",
         "/edinburgh/places/mercat-cross.html": "/places/royal-mile-mercat-cross.html",
         "/places/canongate-overview.html": "/places/canongate.html",
