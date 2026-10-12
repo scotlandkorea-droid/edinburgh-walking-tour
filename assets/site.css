@@ -3190,3 +3190,16 @@ body>.skip-to-content{
 body>.skip-to-content:focus,body>.skip-to-content:focus-visible{
   transform:translateY(0);outline:3px solid #f3dd78;outline-offset:2px;
 }
+
+/* Privacy notice: comfortably readable at mobile, tablet and desktop widths.
+   Scope to this stand-alone page; preserve every existing site layout. */
+body.privacy-page .privacy-intro{padding:34px 0 24px}
+body.privacy-page .privacy-intro .wrap{width:min(760px,calc(100% - 36px))}
+body.privacy-page .privacy-intro h1{font-size:clamp(26px,6.5vw,36px);line-height:1.25;letter-spacing:-.035em;white-space:normal}
+body.privacy-page .privacy-intro p{max-width:100%;font-size:16px;line-height:1.7;white-space:normal;overflow-wrap:anywhere}
+body.privacy-page .privacy-section{padding:28px 0 54px}
+body.privacy-page .privacy-copy{width:min(760px,calc(100% - 36px));min-width:0;margin:0 auto;overflow-wrap:anywhere}
+body.privacy-page .privacy-copy h2{margin:32px 0 12px;font-size:clamp(20px,4.8vw,24px);font-weight:780;line-height:1.35;letter-spacing:-.025em}
+body.privacy-page .privacy-copy h2:first-child{margin-top:0}
+body.privacy-page .privacy-copy p{margin:0 0 16px;font-size:16px;line-height:1.82;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;text-underline-offset:3px}
