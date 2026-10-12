@@ -20,8 +20,9 @@ function walk(dir){
   });
 }
 function attr(tag,name){
-  const re=new RegExp('(?:^|\\s)'+name+'\\s*=\\s*(?:"([^"]*)"|\\'([^\\']*)\\')','i');
-  const m=tag.match(re);return m?(m[1]??m[2]):null;
+  for(const m of tag.matchAll(/([a-zA-Z_:][\w:.-]*)\s*=\s*(?:"([^"]*)"|'([^']*)')/g))
+    if(m[1].toLowerCase()===name.toLowerCase())return m[2]??m[3];
+  return null;
 }
 const head=html=>html.split(/<\/head\s*>/i)[0]||'';
 function meta(h,name){
