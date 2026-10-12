@@ -30,6 +30,13 @@ jobs:
         env:
           PYTHONPATH: /tmp/ew-photo-codec
         run: python3 scripts/prepare-hero-images.py
+      - name: Preserve side-by-side photographic comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-versus-optimized-hero
+          path: /tmp/ew-hero-preview/
+          retention-days: 7
       - name: Commit reproducible delivery copies when different
         run: |
           git add assets/hero-mobile-optimized.webp assets/hero-desktop-optimized.webp
