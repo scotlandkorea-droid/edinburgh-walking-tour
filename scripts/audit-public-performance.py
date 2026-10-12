@@ -8,6 +8,8 @@ import json
 import os
 import shutil
 import sys
+import time
+from urllib.request import Request, urlopen
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -165,7 +167,28 @@ def measure(browser, scenario):
             ],
             "requestErrors": errors[:8],
         }
-        result["status"] = "PASS" if result["httpStatus"] == 200 else "FAIL"
+        if pathname == "/":
+            # A modern browser must actually select the compact source.
+            # The original PNG continues to exist as the picture fallback.
+            modern = [x for x in completed
+                      if x.get("resourceType") == "Image"
+                      and "hero-" in x["url"] and x["url"].endswith(".webp")]
+            result["network"]["optimizedHeroSelected"] = bool(modern)
+            result["network"]["originalHeroPngDownloaded"] = any(
+                x.get("resourceType") == "Image"
+                and x["url"].endswith(".png")
+                and "/assets/" in x["url"]
+                for x in completed
+            )
+            result["network"]["firstScreenUnderOneMiB"] = (
+                sum(x["bytes"] for x in first_party) < 1024 * 1024
+            )
+            result["status"] = (
+                "PASS" if result["httpStatus"] == 200 and modern
+                and not result["network"]["originalHeroPngDownloaded"] else "FAIL"
+            )
+        else:
+            result["status"] = "PASS" if result["httpStatus"] == 200 else "FAIL"
         page.screenshot(path=str(OUT / (name+".png")), animations="disabled", timeout=15000)
     except Exception as exc:
         result["status"] = "FAIL"
@@ -184,6 +207,28 @@ def main():
               or shutil.which("google-chrome-stable") or shutil.which("chromium"))
     if not binary:
         print("ERROR: system Chrome was not found")
+        return 2
+    # On a publication push Cloudflare can finish after GitHub CI starts.
+    # Wait for the actual public HTML to advertise the new optimized sources.
+    # This deliberately avoids reporting pre-deployment measurements.
+    optimized_live = False
+    for _ in range(24):
+        try:
+            req = Request(BASE + "/", headers={
+                "User-Agent": "EW-Performance-Lab/1.0",
+                "Cache-Control": "no-cache",
+            })
+            with urlopen(req, timeout=12) as reply:
+                body = reply.read().decode("utf-8", errors="replace")
+            optimized_live = ('srcset="/assets/hero-mobile-optimized.webp"' in body
+                              and 'srcset="/assets/hero-desktop-optimized.webp"' in body)
+            if optimized_live:
+                break
+        except Exception as exc:
+            print("Retrying public rollout check:", type(exc).__name__, flush=True)
+        time.sleep(4)
+    if not optimized_live:
+        print("ERROR: optimized hero HTML is not yet present on public site")
         return 2
     results = []
     with sync_playwright() as playwright:
