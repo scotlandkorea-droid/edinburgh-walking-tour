@@ -21,6 +21,7 @@ on:
       - 'worker.js'
       - 'wrangler.jsonc'
       - 'scripts/build-search-index.mjs'
+      - 'scripts/sync-sitemap-lastmod.mjs'
       - 'scripts/audit-site.mjs'
       - 'scripts/audit-publication-quality.mjs'
       - 'scripts/complete-social-metadata.mjs'
@@ -56,6 +57,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: true
+          fetch-depth: 0
       - name: Check browser JavaScript syntax
         run: |
           node --check assets/site-header.js
@@ -66,6 +68,7 @@ jobs:
           node --check assets/search-data.js
           node --input-type=module --check < worker.js
           node --check scripts/build-search-index.mjs
+          node --check scripts/sync-sitemap-lastmod.mjs
           node --check scripts/audit-site.mjs
           node --check scripts/audit-publication-quality.mjs
           node --check scripts/complete-social-metadata.mjs
@@ -83,6 +86,10 @@ jobs:
         run: node scripts/build-search-index.mjs
       - name: Check generated index is reproducible
         run: node scripts/build-search-index.mjs --check
+      - name: Update sitemap dates using meaningful page history
+        run: node scripts/sync-sitemap-lastmod.mjs
+      - name: Verify sitemap dates are reproducible
+        run: node scripts/sync-sitemap-lastmod.mjs --check
       - name: Audit static site links and metadata
         run: node scripts/audit-site.mjs
       - name: Report publication metadata and prevent misleading business schema
@@ -100,10 +107,11 @@ jobs:
       - name: Commit search index and metadata only when they differ
         run: |
           git add assets/search-data.js
+          git add sitemap.xml
           git add -u -- '*.html'
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "Maintain site search index and social preview metadata"
+            git commit -m "Maintain site search index, metadata and accurate sitemap dates"
             git push
           fi
