@@ -43,6 +43,7 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.brandHeroSubtitle=page.includes('<p class="sub">걸어서 에든버러</p>');
+      findings.homeCssVersionUpdated=page.includes('/assets/site.css?v=20261012-4');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
       const description=page.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i)?.[1]??'';
       findings.homeMetaDescription=description;
@@ -62,6 +63,9 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.noPrivacyPilotCSS= !page.includes('privacy-placement-pilot');
       findings.subduedPrivacyColor=page.includes('#87928a');
       findings.heroSubtitlePlumTint=/\.hero \.sub\{[^}]*color:#eac3d1;/.test(page);
+      findings.heroSubtitleSizeMobile=page.includes('font-size:clamp(24px,5.1vw,31px)');
+      findings.heroSubtitleSizeTablet=page.includes('.hero .sub{font-size:30px}');
+      findings.heroSubtitleSizeDesktop=page.includes('.hero .sub{font-size:32px}');
     } else if(kind==='robots') {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
     } else if(kind==='sitemap') {
