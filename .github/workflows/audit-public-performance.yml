@@ -1,0 +1,36 @@
+name: Measure published page loading
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit-public-performance.py'
+      - '.github/workflows/audit-public-performance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  public-performance-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install browser controller and Korean fonts
+        run: |
+          python3 -m pip install --quiet --target /tmp/ew-browser-python 'playwright>=1.54,<1.60'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: Measure homepage and one representative detail page
+        env:
+          PYTHONPATH: /tmp/ew-browser-python
+        run: python3 scripts/audit-public-performance.py
+      - name: Save lab report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-site-performance-lab
+          path: /tmp/ew-public-performance/
+          retention-days: 7
