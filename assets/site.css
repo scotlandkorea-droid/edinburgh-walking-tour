@@ -3204,8 +3204,8 @@ body.privacy-page .privacy-copy h2:first-child{margin-top:0}
 body.privacy-page .privacy-copy p{margin:0 0 16px;font-size:16px;line-height:1.82;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;text-underline-offset:3px}
 
-/* Privacy inquiry placement pilot 2026-10-12.
-   Preserve both existing inquiry buttons. Keep the privacy link discreet but focusable. */
+/* Homepage contact privacy notice: the single visible link to /privacy.html.
+   Preserve the confirmed two-button layout and accessible notice styling. */
 .contact-privacy-area{
   display:inline-flex;flex-direction:column;align-items:center;max-width:100%;
 }
@@ -3223,18 +3223,6 @@ body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;
    At very narrow widths, retain the natural centered position if buttons wrap. */
 @media (min-width:350px){
   .contact-privacy-area>.privacy-notice-link{position:relative;left:13px}
-}
-/* Scott Monument placement trial: lower the privacy link 14px to
-   balance the footer space, keeping the Kakao button and divider in place.
-   Only this detail page is affected until visual approval. */
-body.privacy-placement-pilot.scott-monument-page .detail-article>.kakao-action{
-  flex-direction:column;align-items:center;gap:0;
-}
-body.privacy-placement-pilot.scott-monument-page .detail-article>.kakao-action>.privacy-notice-link{
-  margin-top:32px;
-}
-body.privacy-placement-pilot.scott-monument-page main.article{
-  padding-bottom:50px;
 }
 .privacy-notice-link:hover{color:#4c5a51;text-decoration-color:currentColor}
 .privacy-notice-link:focus-visible{outline:2px solid var(--plum);outline-offset:4px;border-radius:3px}
