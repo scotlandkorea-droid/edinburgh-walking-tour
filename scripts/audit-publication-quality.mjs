@@ -35,7 +35,7 @@ const brokenSchema = [];
 // Regression guard: our public uptime checks must never create fake Googlebot
 // visits that could be mistaken for authentic Google crawler activity.
 const publicAuditSource = fs.readFileSync('scripts/check-public-deployment.mjs', 'utf8');
-const spoofedCrawlerUserAgent = /Googlebot\\/2\\.1|\\bgooglebotComparison\\b|\\bconst\\s+googlebot\\s*=/i.test(publicAuditSource);
+const spoofedCrawlerUserAgent = publicAuditSource.includes('Googlebot/2.1') || /\bgooglebotComparison\b|\bconst\s+googlebot\s*=/.test(publicAuditSource);
 for (const file of allPages) {
   const html = fs.readFileSync(file, 'utf8');
   const head = html.split(/<\/head>/i)[0];
