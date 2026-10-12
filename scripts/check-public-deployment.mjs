@@ -10,7 +10,7 @@ const checks = [
   {path:'/assets/site.css',kind:'shared-css'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/places/st-giles.html',kind:'article'},
-  {path:'/places/scott-monument.html',kind:'privacy-pilot'},
+  {path:'/places/scott-monument.html',kind:'article-privacy-free'},
   {path:'/__ew_missing_page_audit_20261011__',kind:'notfound'}
 ];
 async function inspect({path,kind},agent) {
@@ -48,12 +48,11 @@ async function inspect({path,kind},agent) {
       findings.homeImagesWithSizes=tags.filter(tag=>/\bwidth=["']\d+/.test(tag)&&/\bheight=["']\d+/.test(tag)).length;
     } else if(kind==='shared-js') {
       findings.skipLinkCode=page.includes('skip-to-content');
-      findings.sharedPrivacyCode=page.includes('footerPrivacyLink');
+      findings.noAutomaticFooterPrivacy= !page.includes('footerPrivacyLink');
     } else if(kind==='shared-css') {
       findings.skipLinkStyles=page.includes('body>.skip-to-content');
       findings.homeButtonGapOffset=page.includes('left:13px');
-      findings.detailPrivacySpacing=page.includes('margin-top:58px');
-      findings.detailFooterSpacing=page.includes('padding-bottom:24px');
+      findings.noPrivacyPilotCSS= !page.includes('privacy-placement-pilot');
       findings.subduedPrivacyColor=page.includes('#87928a');
     } else if(kind==='robots') {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
@@ -62,13 +61,14 @@ async function inspect({path,kind},agent) {
     } else if(kind==='article') {
       findings.ogImage=/property=["']og:image["']/.test(page);
       findings.twitterCard=/name=["']twitter:card["']/.test(page);
-    } else if(kind==='privacy-pilot') {
-      findings.kakaoThenPrivacy=/<div class="kakao-action">[\s\S]*?카카오톡 문의[\s\S]*?class="privacy-notice-link"/.test(page);
-      findings.pilotBodyClass=page.includes('privacy-placement-pilot');
+    } else if(kind==='article-privacy-free') {
+      findings.detailPrivacyLinkAbsent=!page.includes('href="/privacy.html"');
+      findings.privacyPilotClassAbsent=!page.includes('privacy-placement-pilot');
     } else if(kind==='privacy') {
       findings.threeMonthLimit=page.includes('문의 종료일로부터 3개월 이내');
       findings.unwantedProfileOrPayment=/프로필 정보|온라인 결제 기능이 없습니다/.test(page);
       findings.noticeText=page.includes('개인정보 처리 안내') || page.includes('개인정보 안내');
+      findings.noSelfFooterLink=!/<footer[\s\S]*?href="\/privacy.html"/.test(page);
     } else if(kind==='notfound') {
       findings.customPage=page.includes('페이지를 찾을 수 없습니다');
     }
