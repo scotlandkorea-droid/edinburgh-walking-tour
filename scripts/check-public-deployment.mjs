@@ -51,6 +51,10 @@ async function inspect({path,kind},agent) {
       findings.sharedPrivacyCode=page.includes('footerPrivacyLink');
     } else if(kind==='shared-css') {
       findings.skipLinkStyles=page.includes('body>.skip-to-content');
+      findings.homeButtonGapOffset=page.includes('left:13px');
+      findings.detailPrivacySpacing=page.includes('margin-top:58px');
+      findings.detailFooterSpacing=page.includes('padding-bottom:24px');
+      findings.subduedPrivacyColor=page.includes('#87928a');
     } else if(kind==='robots') {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
     } else if(kind==='sitemap') {
