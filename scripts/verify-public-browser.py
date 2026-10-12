@@ -202,6 +202,7 @@ def smoke(browser, label, width, height):
 DETAIL_SCENARIOS = (
     ("st_giles_architecture_photo", "places/st-giles-architecture.html"),
     ("st_giles_glass_six_figures_photo", "places/st-giles-stained-glass.html"),
+    ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
     ("greyfriars_kirk", "places/greyfriars-kirk.html"),
     ("victoria_street", "edinburgh/places/victoria-street.html"),
@@ -224,6 +225,7 @@ DETAIL_SCENARIOS = (
 PHOTO_MINIMUMS = {
     "places/st-giles-architecture.html": 1,
     "places/st-giles-stained-glass.html": 1,
+    "places/st-giles-thistle-chapel.html": 1,
     "places/scott-monument.html": 3,
     "places/arthurs-seat.html": 1,
     "places/royal-mile-city-chambers.html": 4,
