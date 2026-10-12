@@ -50,8 +50,8 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight,targetPa
     } else if(kind==='home') {
       findings.siteSchema=/"@type"\s*:\s*"WebSite"/.test(page);
       findings.misleadingBusinessSchema=/"@type"\s*:\s*"LocalBusiness"/.test(page);
-      findings.ogImageWidth=Number(page.match(/<meta property="og:image:width" content="(\\d+)"/)?.[1]??0);
-      findings.ogImageHeight=Number(page.match(/<meta property="og:image:height" content="(\\d+)"/)?.[1]??0);
+      findings.ogImageWidth=Number(page.match(/<meta property="og:image:width" content="(\d+)"/)?.[1]??0);
+      findings.ogImageHeight=Number(page.match(/<meta property="og:image:height" content="(\d+)"/)?.[1]??0);
       findings.ogMetadataMatchesPublishedPng=page.includes('property="og:image" content="'+base+'/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png"') &&
         findings.ogImageWidth===1672 && findings.ogImageHeight===941;
       findings.faviconLinked=page.includes('href="/favicon.ico"');
