@@ -12,7 +12,8 @@ const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(item=>{
   return item.isDirectory()?walk(file):item.isFile()?[file]:[];
 });
 const markup=[
-  'index.html',
+  // Include standalone root pages so their active CSS is not misreported as unused.
+  ...['index.html','privacy.html','404.html'].filter(p=>fs.existsSync(p)),
   ...['places','edinburgh','scotland','st-andrews','travel'].flatMap(walk)
     .filter(p=>p.endsWith('.html'))
 ];
