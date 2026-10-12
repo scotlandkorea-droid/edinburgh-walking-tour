@@ -12,7 +12,7 @@ function walk(dir){
   }
 }
 ['places','edinburgh','scotland','st-andrews','travel'].forEach(walk);
-const finds={missingLanguage:[],missingMain:[],missingSharedHeaderScript:[],duplicateIds:[],targetBlankWithoutNoopener:[],iframeMissingTitle:[],buttonsWithoutName:[]};
+const finds={missingLanguage:[],missingMain:[],missingSharedHeaderScript:[],duplicateIds:[],targetBlankWithoutNoopener:[],iframeMissingTitle:[],buttonsWithoutName:[],modalStackingConflicts:[]};
 function attr(tag,key){
   const found=[...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)]
     .find(m=>m[1].toLowerCase()===key);
@@ -40,6 +40,19 @@ for(const p of pages){
     if(!text&&!/title=["']/.test(m[0]))finds.buttonsWithoutName.push(p);
   }
 }
+// Keep document-level photo/map dialogs above the sticky shared header.
+const css=fs.readFileSync('assets/site.css','utf8');
+const layer=(name)=>{
+  const start=css.indexOf('.'+name+'{');
+  if(start<0)return 0;
+  const rule=css.slice(start,css.indexOf('}',start));
+  return Number(rule.match(/z-index:(\d+)/)?.[1]??0);
+};
+const headerLayer=layer('site-header');
+const photoLayer=layer('lightbox');
+const mapLayer=layer('route-map-modal');
+if(!(headerLayer>0&&photoLayer>headerLayer&&mapLayer>photoLayer))
+  finds.modalStackingConflicts.push({headerLayer,photoLayer,mapLayer});
 console.log(JSON.stringify({totalPages:pages.length,issues:Object.fromEntries(Object.entries(finds).map(([k,v])=>[k,{count:v.length,examples:v.slice(0,16)}]))},null,2));
 const failures = Object.entries(finds).filter(([, items]) => items.length);
 if (failures.length) {

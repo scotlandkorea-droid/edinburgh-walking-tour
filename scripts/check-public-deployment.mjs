@@ -48,7 +48,7 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       const galleryHtml=page.match(/<div class="photo-strip" id="tourGallery">([\s\S]*?)<\/div>/i)?.[1]??'';
       const galleryImageTags=galleryHtml.match(/<img\b[^>]*>/gi)??[];
       findings.galleryImagesDeferred=galleryImageTags.length>0&&galleryImageTags.every(tag=>/\bloading="lazy"/.test(tag));
-      findings.homeCssVersionUpdated=page.includes('/assets/site.css?v=20261012-5');
+      findings.homeCssVersionUpdated=page.includes('/assets/site.css?v=20261012-6');
       findings.metaNoindex=/<meta\b[^>]*name=["']robots["'][^>]*noindex/i.test(page);
       const description=page.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i)?.[1]??'';
       findings.homeMetaDescription=description;
@@ -67,6 +67,13 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
       findings.homeButtonGapOffset=page.includes('left:13px');
       findings.noPrivacyPilotCSS= !page.includes('privacy-placement-pilot');
       findings.subduedPrivacyColor=page.includes('#87928a');
+      const layer=(name)=>{
+        const start=page.indexOf('.'+name+'{');
+        if(start<0)return 0;
+        return Number(page.slice(start,page.indexOf('}',start)).match(/z-index:(\d+)/)?.[1]??0);
+      };
+      findings.galleryModalAboveHeader=layer('lightbox')>layer('site-header');
+      findings.mapModalAboveGallery=layer('route-map-modal')>layer('lightbox');
       findings.heroSubtitleUsesSharedPlum=/\.hero \.sub\{[^}]*color:var\(--plum-strong\);/.test(page);
       findings.heroSubtitleSizeMobile=page.includes('font-size:clamp(24px,5.1vw,31px)');
       findings.heroSubtitleSizeTablet=page.includes('.hero .sub{font-size:30px}');
