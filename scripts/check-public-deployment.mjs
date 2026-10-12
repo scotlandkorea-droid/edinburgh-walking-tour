@@ -58,6 +58,8 @@ async function inspect({path,kind},agent) {
       findings.crawlerAllowed=/User-agent:\s*\*/i.test(page)&&/Allow:\s*\//i.test(page);
     } else if(kind==='sitemap') {
       findings.urls=(page.match(/<loc>/g)||[]).length;
+      findings.lastmodCount=(page.match(/<lastmod>/g)||[]).length;
+      findings.homeLastmod=page.match(/<url>\\s*<loc>https:\\/\\/edinburgh-walking-tour\\.scotlandkorea\\.workers\\.dev\\/<\\/loc>\\s*<lastmod>(\\d{4}-\\d{2}-\\d{2})<\\/lastmod>/)?.[1]??null;
     } else if(kind==='article') {
       findings.ogImage=/property=["']og:image["']/.test(page);
       findings.twitterCard=/name=["']twitter:card["']/.test(page);
