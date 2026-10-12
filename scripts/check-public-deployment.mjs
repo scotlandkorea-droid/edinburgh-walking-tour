@@ -56,7 +56,7 @@ async function inspect({path,kind},agent) {
       findings.ogImage=/property=["']og:image["']/.test(page);
       findings.twitterCard=/name=["']twitter:card["']/.test(page);
     } else if(kind==='privacy') {
-      findings.noticeText=page.includes('개인정보 안내');
+      findings.noticeText=page.includes('개인정보 처리 안내') || page.includes('개인정보 안내');
     } else if(kind==='notfound') {
       findings.customPage=page.includes('페이지를 찾을 수 없습니다');
     }
