@@ -32,6 +32,10 @@ const meta = (head, key, name) => {
 const results = [];
 const forbidden = [];
 const brokenSchema = [];
+// Regression guard: our public uptime checks must never create fake Googlebot
+// visits that could be mistaken for authentic Google crawler activity.
+const publicAuditSource = fs.readFileSync('scripts/check-public-deployment.mjs', 'utf8');
+const spoofedCrawlerUserAgent = /Googlebot\\/2\\.1|\\bgooglebotComparison\\b|\\bconst\\s+googlebot\\s*=/i.test(publicAuditSource);
 for (const file of allPages) {
   const html = fs.readFileSync(file, 'utf8');
   const head = html.split(/<\/head>/i)[0];
@@ -104,6 +108,7 @@ console.log('Publication-quality report for ' + results.length + ' HTML pages:')
 console.log(JSON.stringify({
   homepageDescriptionLength: homepageDescription.length,
   homepageDescriptionWithin80Characters: !homepageDescriptionTooLong,
+  noFabricatedGooglebotRequests: !spoofedCrawlerUserAgent,
   homepageHeroPriorityCorrect,
   homepageGalleryImageCount:homepageGalleryImages.length,
   homepageGalleryEagerImages,
@@ -117,6 +122,7 @@ console.log(JSON.stringify({
 // Critical publication regressions fail CI instead of merely being reported.
 const failures = [
   ['homepageDescriptionTooLongOrMissing', Number(homepageDescriptionTooLong)],
+  ['spoofedCrawlerUserAgent', Number(spoofedCrawlerUserAgent)],
   ['homepageHeroPriorityMissing', Number(!homepageHeroPriorityCorrect)],
   ['homepageGalleryMissing', Number(homepageGalleryMissing)],
   ['homepageGalleryEagerImages', homepageGalleryEagerImages],

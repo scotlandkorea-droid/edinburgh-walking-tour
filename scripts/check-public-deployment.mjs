@@ -114,7 +114,11 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) 
   } finally {clearTimeout(timeout);}
 }
 const normal='Mozilla/5.0 (compatible; EW-Public-Deployment-Audit/1.0)';
-const googlebot='Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
+// Only use the audit's own user agent. Spoofing crawler identities pollutes
+// Cloudflare request logs and cannot prove that genuine search crawlers visited.
 const results=await Promise.all(checks.map(c=>inspect(c,normal)));
-const googlebotComparison=await inspect({path:'/',kind:'home'},googlebot);
-console.log(JSON.stringify({auditedAt:new Date().toISOString(),note:'Googlebot user-agent simulation is not proof of genuine Google crawler access',results,googlebotComparison},null,2));
+console.log(JSON.stringify({
+  auditedAt:new Date().toISOString(),
+  note:'Public deployment audit uses only its own declared user agent; real crawler visits must be verified separately.',
+  results
+},null,2));
