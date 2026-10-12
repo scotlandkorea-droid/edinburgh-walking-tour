@@ -3205,21 +3205,36 @@ body.privacy-page .privacy-copy p{margin:0 0 16px;font-size:16px;line-height:1.8
 body.privacy-page .privacy-copy p a{color:var(--plum);text-decoration:underline;text-underline-offset:3px}
 
 /* Privacy inquiry placement pilot 2026-10-12.
-   Keep original inquiry buttons and all unrelated page styles unchanged. */
+   Preserve both existing inquiry buttons. Keep the privacy link discreet but focusable. */
 .contact-privacy-area{
   display:inline-flex;flex-direction:column;align-items:center;max-width:100%;
 }
 .contact-privacy-area .contact-actions{max-width:100%}
 .privacy-notice-link{
   display:inline-block;max-width:100%;font-size:12px;line-height:1.5;
-  font-weight:450;letter-spacing:0;color:#758078;
-  text-decoration:underline;text-decoration-color:#b2bbb4;
+  font-weight:450;letter-spacing:0;color:#87928a;
+  text-decoration:underline;text-decoration-color:#c5cdc6;
   text-underline-offset:3px;text-decoration-thickness:1px;
   overflow-wrap:anywhere;
 }
 .contact-privacy-area>.privacy-notice-link{margin-top:12px}
+/* The two buttons have slightly different widths and left padding.
+   Center the label under the actual gap, not the enclosing button row.
+   At very narrow widths, retain the natural centered position if buttons wrap. */
+@media (min-width:350px){
+  .contact-privacy-area>.privacy-notice-link{position:relative;left:13px}
+}
+/* Scott Monument pilot: move the privacy link toward the bottom divider,
+   far from the Kakao tap target, without changing the button position
+   or the overall distance to the footer. */
 body.privacy-placement-pilot .detail-article>.kakao-action{
-  flex-direction:column;align-items:center;gap:10px;
+  flex-direction:column;align-items:center;gap:0;
+}
+body.privacy-placement-pilot .detail-article>.kakao-action>.privacy-notice-link{
+  margin-top:58px;
+}
+body.privacy-placement-pilot.scott-monument-page main.article{
+  padding-bottom:24px;
 }
 .privacy-notice-link:hover{color:#4c5a51;text-decoration-color:currentColor}
 .privacy-notice-link:focus-visible{outline:2px solid var(--plum);outline-offset:4px;border-radius:3px}
