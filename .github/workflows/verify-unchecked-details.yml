@@ -1,0 +1,36 @@
+name: Verify additional published detail pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/verify-unchecked-details.py'
+      - '.github/workflows/verify-unchecked-details.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  additional-detail-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install browser controller and Korean fonts
+        run: |
+          python3 -m pip install --quiet --target /tmp/ew-browser-python 'playwright>=1.54,<1.60'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: Inspect 13 previously unchecked pages in three public browser viewports
+        env:
+          PYTHONPATH: /tmp/ew-browser-python
+        run: python3 scripts/verify-unchecked-details.py
+      - name: Preserve actual results and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: additional-detail-browser-checks
+          path: /tmp/ew-unchecked-detail-qa/
+          retention-days: 7
