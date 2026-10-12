@@ -29,6 +29,7 @@ existing.add('/st-andrews/');
 
 const redirects = new Set([
   '/st-andrews', '/travel/st-andrews.html', '/travel/st-andrews', '/travel/st-andrews/',
+  '/edinburgh/people/burke-and-hare.html',
   '/edinburgh/places/adam-smith-grave.html', '/edinburgh/places/city-chambers.html',
   '/edinburgh/places/mercat-cross.html', '/places/canongate-overview.html',
   '/places/royal-mile-overview.html', '/places/canongate-horatius-bonar.html',
