@@ -10,6 +10,8 @@ const checks = [
   {path:'/assets/site.css',kind:'shared-css'},
   {path:'/assets/hero-mobile-optimized.webp',kind:'hero-webp'},
   {path:'/assets/hero-desktop-optimized.webp',kind:'hero-webp'},
+  {path:'/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png',kind:'social-png',expectedWidth:1672,expectedHeight:941},
+  {path:'/assets/greyfriars-kirk/pulpit-front.webp',kind:'social-webp'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/edinburgh/people/burke-and-hare.html',kind:'retired-people-redirect',targetPath:'/places/grassmarket-burke-hare.html'},
   {path:'/places/st-giles.html',kind:'article'},
@@ -48,6 +50,10 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight,targetPa
     } else if(kind==='home') {
       findings.siteSchema=/"@type"\s*:\s*"WebSite"/.test(page);
       findings.misleadingBusinessSchema=/"@type"\s*:\s*"LocalBusiness"/.test(page);
+      findings.ogImageWidth=Number(page.match(/<meta property="og:image:width" content="(\\d+)"/)?.[1]??0);
+      findings.ogImageHeight=Number(page.match(/<meta property="og:image:height" content="(\\d+)"/)?.[1]??0);
+      findings.ogMetadataMatchesPublishedPng=page.includes('property="og:image" content="'+base+'/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png"') &&
+        findings.ogImageWidth===1672 && findings.ogImageHeight===941;
       findings.faviconLinked=page.includes('href="/favicon.ico"');
       findings.privacyLinked=page.includes('href="/privacy.html"');
       findings.brandHeroSubtitle=page.includes('<p class="sub">걸어서 에든버러</p>');
@@ -69,6 +75,21 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight,targetPa
       const tags=page.match(/<img\b[^>]*>/gi)??[];
       findings.homeImageCount=tags.length;
       findings.homeImagesWithSizes=tags.filter(tag=>/\bwidth=["']\d+/.test(tag)&&/\bheight=["']\d+/.test(tag)).length;
+    } else if(kind==='social-png') {
+      const bytes=new Uint8Array(buf);
+      const pngHeader=bytes.length>=24&&
+        Array.from(bytes.subarray(0,8)).join(',')==='137,80,78,71,13,10,26,10';
+      const dimensions=pngHeader?new DataView(buf):null;
+      findings.actualWidth=dimensions?.getUint32(16)??null;
+      findings.actualHeight=dimensions?.getUint32(20)??null;
+      findings.ogImageReady=response.status===200&&type.includes('image/png')&&
+        findings.actualWidth===expectedWidth&&findings.actualHeight===expectedHeight;
+    } else if(kind==='social-webp') {
+      const bytes=new Uint8Array(buf);
+      findings.ogImageReady=response.status===200&&type.includes('image/webp')&&
+        new TextDecoder('ascii').decode(bytes.subarray(0,4))==='RIFF'&&
+        new TextDecoder('ascii').decode(bytes.subarray(8,12))==='WEBP'&&
+        bytes.length>3000;
     } else if(kind==='hero-webp') {
       const bytes=new Uint8Array(buf);
       findings.validWebP=type.includes('image/webp')&&
