@@ -197,6 +197,130 @@ def smoke(browser, label, width, height):
         context.close()
 
 
+# Target previously unreviewed interior-page rendering instead of repeating
+# the already completed homepage design checks. Leave public HTML untouched.
+DETAIL_SCENARIOS = (
+    ("st_giles_glass", "places/st-giles-stained-glass.html"),
+    ("grassmarket_story", "places/grassmarket-burke-hare.html"),
+    ("greyfriars_kirk", "places/greyfriars-kirk.html"),
+    ("victoria_street", "edinburgh/places/victoria-street.html"),
+    ("st_andrews_tour", "st-andrews/"),
+    ("iona", "scotland/places/iona.html"),
+    ("waverley_rail", "travel/train-waverley.html"),
+)
+
+
+def detail_smoke(browser, label, width, height):
+    """Validate rendered detail layouts and local photos at each viewport.
+
+    Treat intentional scrollable tabs/breadcrumbs as normal; only document-level
+    horizontal overflow is a regression. Photos are tested after lazy loading.
+    """
+    context = browser.new_context(
+        viewport={"width": width, "height": height},
+        device_scale_factor=1,
+        is_mobile=(label == "mobile"),
+        has_touch=(label != "desktop"),
+        locale="ko-KR",
+    )
+    rows = []
+    try:
+        for slug, path in DETAIL_SCENARIOS:
+            page = context.new_page()
+            row = {"viewport": label, "page": path, "checks": {}, "status": "PENDING"}
+            try:
+                response = page.goto(BASE + path, wait_until="domcontentloaded", timeout=45000)
+                ensure(response and response.status == 200, f"{label} {path}: HTTP status")
+                row["checks"]["public HTTP 200"] = "PASS"
+
+                header = page.locator(".site-header .brand span").last
+                ensure(header.inner_text().strip() == "걸어서 에든버러",
+                       f"{label} {path}: shared brand")
+                row["checks"]["shared header"] = "PASS"
+                ensure(page.locator("main").count() == 1 and page.locator("h1").count() >= 1,
+                       f"{label} {path}: missing main or H1")
+                row["checks"]["article landmark and heading"] = "PASS"
+                page.evaluate("() => document.fonts.ready")
+                page.wait_for_timeout(280)
+
+                def dimensions():
+                    return page.evaluate("""() => ({
+                        viewportWidth: innerWidth,
+                        documentWidth: document.documentElement.scrollWidth,
+                        bodyWidth: document.body.scrollWidth,
+                        articleWidth: Math.round(document.querySelector('main')?.getBoundingClientRect().width || 0)
+                    })""")
+                before = dimensions()
+                overflow = max(0, before["documentWidth"] - before["viewportWidth"])
+                row["dimensions"] = before
+                row["horizontalOverflowPx"] = overflow
+                ensure(overflow <= 2, f"{label} {path}: {overflow}px document overflow")
+                row["checks"]["no document horizontal overflow"] = "PASS"
+
+                # Trigger the browser's normal lazy-image mechanism.  Limit this
+                # to article photos, not decorative SVGs or external map tiles.
+                photos = page.locator("main img[src]")
+                photo_count = photos.count()
+                loaded = []
+                for idx in range(photo_count):
+                    img = photos.nth(idx)
+                    source = img.get_attribute("src") or ""
+                    if not (source.startswith("/") or source.startswith("../")
+                            or source.startswith("./")):
+                        continue
+                    img.scroll_into_view_if_needed(timeout=10000)
+                    try:
+                        img.evaluate("""img => new Promise(resolve => {
+                          if (img.complete) return resolve();
+                          img.addEventListener('load', resolve, {once:true});
+                          img.addEventListener('error', resolve, {once:true});
+                          setTimeout(resolve, 9000);
+                        })""")
+                    except Exception:
+                        pass
+                    info = img.evaluate("""img => ({
+                      src: img.getAttribute('src'),
+                      loaded: img.complete && img.naturalWidth > 0,
+                      naturalWidth: img.naturalWidth
+                    })""")
+                    loaded.append(info)
+                row["localPhotos"] = {"totalArticleImages": photo_count,
+                                      "testedLocal": len(loaded),
+                                      "loaded": sum(bool(i["loaded"]) for i in loaded),
+                                      "failed": [i["src"] for i in loaded if not i["loaded"]]}
+                ensure(all(i["loaded"] for i in loaded),
+                       f"{label} {path}: local article image did not load")
+                row["checks"]["local article images load"] = "PASS"
+
+                # Repeat overflow measurement after photos have loaded; images
+                # can cause a layout regression that isn't present at first paint.
+                after = dimensions()
+                overflow_after = max(0, after["documentWidth"] - after["viewportWidth"])
+                row["horizontalOverflowAfterPhotosPx"] = overflow_after
+                ensure(overflow_after <= 2,
+                       f"{label} {path}: {overflow_after}px overflow after images")
+                row["checks"]["layout stable after article photos"] = "PASS"
+
+                page.evaluate("window.scrollTo(0, 0)")
+                page.screenshot(path=str(OUT / f"detail-{label}-{slug}.png"),
+                                animations="disabled", timeout=12000)
+                row["status"] = "PASS"
+            except Exception as exc:
+                row["status"] = "FAIL"
+                row["error"] = str(exc)[:1000]
+                try:
+                    page.screenshot(path=str(OUT / f"detail-{label}-{slug}-failure.png"),
+                                    animations="disabled", timeout=6000)
+                except Exception:
+                    pass
+            finally:
+                rows.append(row)
+                page.close()
+    finally:
+        context.close()
+    return rows
+
+
 def main():
     binary = (
         os.environ.get("CHROME_BIN")
@@ -216,15 +340,18 @@ def main():
         try:
             for label, width, height in VIEWPORTS:
                 smoke(browser, label, width, height)
+            detail_results = []
+            for label, width, height in VIEWPORTS:
+                detail_results.extend(detail_smoke(browser, label, width, height))
         finally:
             browser.close()
-    report = {"site": BASE, "note": "Synthetic Chrome tests are not a real-phone speed benchmark", "results": results}
+    report = {"site": BASE, "note": "Synthetic Chrome tests are not a real-phone speed benchmark", "results": results, "detailResults": detail_results}
     (OUT / "results.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 1 if any(row["status"] != "PASS" for row in results) else 0
+    return 1 if any(row["status"] != "PASS" for row in results + detail_results) else 0
 
 
 if __name__ == "__main__":
