@@ -11,9 +11,11 @@ const checks = [
   {path:'/privacy.html',kind:'privacy'},
   {path:'/places/st-giles.html',kind:'article'},
   {path:'/places/scott-monument.html',kind:'article-privacy-free'},
+  {path:'/places/arthurs-seat.html',kind:'image-dimensions',imageSrc:'../assets/arthurs-seat.jpg',expectedWidth:1536,expectedHeight:1152},
+  {path:'/places/canongate-worlds-end.html',kind:'image-dimensions',imageSrc:'818px-Netherbow_E.jpg',expectedWidth:818,expectedHeight:1198},
   {path:'/__ew_missing_page_audit_20261011__',kind:'notfound'}
 ];
-async function inspect({path,kind},agent) {
+async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight},agent) {
   const url=base+path;
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),14000);
@@ -66,6 +68,16 @@ async function inspect({path,kind},agent) {
     } else if(kind==='article-privacy-free') {
       findings.detailPrivacyLinkAbsent=!page.includes('href="/privacy.html"');
       findings.privacyPilotClassAbsent=!page.includes('privacy-placement-pilot');
+    } else if(kind==='image-dimensions') {
+      // Public HTTP verification is separate from GitHub CI/source inspection.
+      const tag=(page.match(/<img\b[^>]*>/gi)||[]).find(img=>img.includes(imageSrc));
+      findings.imageLocated=Boolean(tag);
+      findings.width=tag?.match(/\bwidth=["'](\d+)["']/i)?.[1]??null;
+      findings.height=tag?.match(/\bheight=["'](\d+)["']/i)?.[1]??null;
+      findings.expectedWidth=expectedWidth;
+      findings.expectedHeight=expectedHeight;
+      findings.imageDimensionsMatch=Number(findings.width)===expectedWidth&&
+        Number(findings.height)===expectedHeight;
     } else if(kind==='privacy') {
       findings.threeMonthLimit=page.includes('문의 종료일로부터 3개월 이내');
       findings.unwantedProfileOrPayment=/프로필 정보|온라인 결제 기능이 없습니다/.test(page);
