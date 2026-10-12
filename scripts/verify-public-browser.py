@@ -149,6 +149,18 @@ def smoke(browser, label, width, height):
               innerWidth: innerWidth
             })"""
         )
+        privacy_link = page.locator(".contact-privacy-area > .privacy-notice-link")
+        passed("single home privacy notice", privacy_link.count() == 1)
+        computed_gap = privacy_link.evaluate(
+            "(el) => getComputedStyle(el).marginTop"
+        )
+        passed("privacy notice gap is 24px", computed_gap == "24px")
+        if label == "mobile":
+            page.locator(".contact-box").screenshot(
+                path=str(OUT / "mobile-contact-privacy.png"),
+                animations="disabled",
+                timeout=15000,
+            )
         page.evaluate("window.scrollTo(0,0)")
         page.screenshot(path=str(OUT / (label + ".png")), animations="disabled")
         row["status"] = "PASS"
