@@ -206,6 +206,7 @@ DETAIL_SCENARIOS = (
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
     ("grassmarket_covenanters_memorial", "places/grassmarket-executions-covenanters.html"),
     ("royal_mile_street_photos", "places/royal-mile.html"),
+    ("last_public_execution_plaque", "edinburgh/themes/execution-sites.html"),
     ("greyfriars_covenanters_prison", "places/greyfriars-old-cemetery.html"),
     ("greyfriars_martyrs_monument", "places/greyfriars-covenanter-martyrs.html"),
     ("greyfriars_kirk", "places/greyfriars-kirk.html"),
@@ -235,6 +236,7 @@ PHOTO_MINIMUMS = {
     "places/greyfriars-old-cemetery.html": 3,
     "places/grassmarket-executions-covenanters.html": 1,
     "places/royal-mile.html": 2,
+    "edinburgh/themes/execution-sites.html": 1,
     "places/greyfriars-covenanter-martyrs.html": 2,
     "places/scott-monument.html": 3,
     "places/arthurs-seat.html": 1,
@@ -392,6 +394,15 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 2 and published_images == expected_images,
                            f"{label} {path}: two Royal Mile street photos not published")
                     row["checks"]["brightened flags and reused Royal Mile photo published"] = "PASS"
+
+                if path == "edinburgh/themes/execution-sites.html":
+                    expected_images = {
+                        "/assets/edinburgh-last-public-execution-plaque-20261013.jpg": 1536,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 1 and published_images == expected_images,
+                           f"{label} {path}: last public execution plaque photo not published")
+                    row["checks"]["1864 last public execution plaque published"] = "PASS"
 
                 if path == "edinburgh/places/george-street.html":
                     expected_images = {
