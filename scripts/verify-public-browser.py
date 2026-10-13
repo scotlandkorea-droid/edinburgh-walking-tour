@@ -204,6 +204,7 @@ DETAIL_SCENARIOS = (
     ("st_giles_glass_six_figures_photo", "places/st-giles-stained-glass.html"),
     ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
+    ("grassmarket_pub_photos", "places/grassmarket-pub-names.html"),
     ("grassmarket_covenanters_memorial", "places/grassmarket-executions-covenanters.html"),
     ("royal_mile_street_photos", "places/royal-mile.html"),
     ("last_public_execution_plaque", "edinburgh/themes/execution-sites.html"),
@@ -239,6 +240,7 @@ PHOTO_MINIMUMS = {
     "places/st-giles-thistle-chapel.html": 1,
     "places/greyfriars-old-cemetery.html": 3,
     "places/grassmarket-executions-covenanters.html": 1,
+    "places/grassmarket-pub-names.html": 5,
     "places/royal-mile.html": 2,
     "edinburgh/themes/execution-sites.html": 1,
     "places/greyfriars-covenanter-martyrs.html": 2,
@@ -381,6 +383,26 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 3 and published_images == expected_images,
                            f"{label} {path}: three original Inverness photos not published")
                     row["checks"]["three original Inverness photos published"] = "PASS"
+
+                if path == "places/grassmarket-pub-names.html":
+                    expected_photos = (
+                        ("grassmarket-last-drop-exterior-20261013.jpg", 1320),
+                        ("grassmarket-last-drop-entrance-plaque-20261013.jpg", 710),
+                        ("grassmarket-maggie-dicksons-exterior-20261013.jpg", 1260),
+                        ("grassmarket-white-hart-exterior-20261013.jpg", 1320),
+                        ("grassmarket-white-hart-stag-sign-20261013.jpg", 820),
+                    )
+                    rendered = [(i["src"].rsplit("/", 1)[-1], i["naturalWidth"]) for i in loaded]
+                    ensure(rendered == list(expected_photos),
+                           f"{label} {path}: Grassmarket pub photos missing or wrong order: {rendered}")
+                    ensure(page.locator("main .detail-article figure.story-photo").count() == 5,
+                           f"{label} {path}: five distinct pub photo figures expected")
+                    captions = page.locator("main .detail-article figure.story-photo figcaption").all_inner_texts()
+                    ensure(all(k in " ".join(captions) for k in ("라스트 드롭", "매기 딕슨스", "화이트 하트")),
+                           f"{label} {path}: pub figure captions missing")
+                    row["checks"]["five privacy-edited Grassmarket pub photos visible in story order"] = "PASS"
+                    page.screenshot(path=str(OUT / f"detail-{label}-grassmarket-pubs-full.png"),
+                                    full_page=True, animations="disabled", timeout=30000)
 
                 if path == "places/grassmarket-executions-covenanters.html":
                     expected_images = {
