@@ -204,6 +204,7 @@ DETAIL_SCENARIOS = (
     ("st_giles_glass_six_figures_photo", "places/st-giles-stained-glass.html"),
     ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
+    ("grassmarket_covenanters_memorial", "places/grassmarket-executions-covenanters.html"),
     ("greyfriars_covenanters_prison", "places/greyfriars-old-cemetery.html"),
     ("greyfriars_martyrs_monument", "places/greyfriars-covenanter-martyrs.html"),
     ("greyfriars_kirk", "places/greyfriars-kirk.html"),
@@ -231,6 +232,7 @@ PHOTO_MINIMUMS = {
     "places/st-giles-stained-glass.html": 1,
     "places/st-giles-thistle-chapel.html": 1,
     "places/greyfriars-old-cemetery.html": 3,
+    "places/grassmarket-executions-covenanters.html": 1,
     "places/greyfriars-covenanter-martyrs.html": 2,
     "places/scott-monument.html": 3,
     "places/arthurs-seat.html": 1,
@@ -369,6 +371,15 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 3 and published_images == expected_images,
                            f"{label} {path}: three original Inverness photos not published")
                     row["checks"]["three original Inverness photos published"] = "PASS"
+
+                if path == "places/grassmarket-executions-covenanters.html":
+                    expected_images = {
+                        "/assets/grassmarket-covenanters-memorial-pavement-20261013.jpg": 1536,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 1 and published_images == expected_images,
+                           f"{label} {path}: original Grassmarket Covenanters memorial photo not published")
+                    row["checks"]["original Grassmarket memorial photo published"] = "PASS"
 
                 if path == "edinburgh/places/george-street.html":
                     expected_images = {
