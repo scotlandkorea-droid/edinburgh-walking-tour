@@ -323,6 +323,12 @@ def detail_smoke(browser, label, width, height):
                 ensure(all(i["loaded"] for i in loaded),
                        f"{label} {path}: article image did not load")
                 row["checks"]["article images load"] = "PASS"
+                if path == "places/st-giles-thistle-chapel.html":
+                    ensure(len(loaded) == 1
+                           and loaded[0]["naturalWidth"] == 833
+                           and loaded[0]["src"].endswith("?v=20261013"),
+                           f"{label} {path}: new Thistle Chapel photo not published")
+                    row["checks"]["replacement Thistle Chapel photo published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
