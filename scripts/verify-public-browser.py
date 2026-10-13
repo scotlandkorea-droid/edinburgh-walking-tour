@@ -205,6 +205,7 @@ DETAIL_SCENARIOS = (
     ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
     ("greyfriars_covenanters_prison", "places/greyfriars-old-cemetery.html"),
+    ("greyfriars_martyrs_monument", "places/greyfriars-covenanter-martyrs.html"),
     ("greyfriars_kirk", "places/greyfriars-kirk.html"),
     ("victoria_street", "edinburgh/places/victoria-street.html"),
     ("st_andrews_tour", "st-andrews/"),
@@ -228,6 +229,7 @@ PHOTO_MINIMUMS = {
     "places/st-giles-stained-glass.html": 1,
     "places/st-giles-thistle-chapel.html": 1,
     "places/greyfriars-old-cemetery.html": 3,
+    "places/greyfriars-covenanter-martyrs.html": 2,
     "places/scott-monument.html": 3,
     "places/arthurs-seat.html": 1,
     "places/royal-mile-city-chambers.html": 4,
@@ -342,6 +344,16 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 3 and published_images == expected_images,
                            f"{label} {path}: three original Greyfriars photos not published")
                     row["checks"]["three original Greyfriars photos published"] = "PASS"
+
+                if path == "places/greyfriars-covenanter-martyrs.html":
+                    expected_images = {
+                        "/assets/greyfriars-covenanter-martyrs-monument-20261013.jpg": 1536,
+                        "/assets/greyfriars-covenanter-martyrs-inscription-20261013.jpg": 1536,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 2 and published_images == expected_images,
+                           f"{label} {path}: two original martyrs' monument photos not published")
+                    row["checks"]["two original Greyfriars martyrs photos published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
