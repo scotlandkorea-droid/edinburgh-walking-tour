@@ -249,7 +249,7 @@ PHOTO_MINIMUMS = {
     "scotland/places/isle-of-skye.html": 1,
     "scotland/places/inverness.html": 3,
     "edinburgh/places/george-street.html": 2,
-    "edinburgh/places/st-andrew-square.html": 2,
+    "edinburgh/places/st-andrew-square.html": 1,
 }
 
 
@@ -418,13 +418,16 @@ def detail_smoke(browser, label, width, height):
 
                 if path == "edinburgh/places/st-andrew-square.html":
                     expected_images = {
-                        "/assets/st-andrew-square-george-street-church-20261013.jpg": 1024,
                         "/assets/st-andrew-square-melville-monument-henry-dundas-20261013.jpg": 1152,
                     }
                     published_images = {i["src"]: i["naturalWidth"] for i in loaded}
-                    ensure(len(loaded) == 2 and published_images == expected_images,
-                           f"{label} {path}: original church and Henry Dundas monument images not published")
-                    row["checks"]["St Andrew Square two original photos published"] = "PASS"
+                    ensure(len(loaded) == 1 and published_images == expected_images,
+                           f"{label} {path}: Henry Dundas photo missing or unrelated church photo present")
+                    ensure(page.locator("h1").inner_text().strip() == "세인트 앤드루스 스퀘어",
+                           f"{label} {path}: long H1 title remains")
+                    ensure(page.locator(".page-hero .lead").inner_text().strip() == "뉴타운은 왜 이 광장에서 시작됐을까?",
+                           f"{label} {path}: subtitle missing or incorrect")
+                    row["checks"]["short place title and intriguing subtitle; only monument photo published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
