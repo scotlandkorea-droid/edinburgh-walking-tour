@@ -222,6 +222,7 @@ DETAIL_SCENARIOS = (
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
     ("skye_overview", "scotland/places/isle-of-skye.html"),
+    ("skye_mealt_falls_kilt_rock", "scotland/places/isle-of-skye-trotternish.html"),
     ("inverness_selected_photos", "scotland/places/inverness.html"),
     ("george_street_george_iv_photos", "edinburgh/places/george-street.html"),
     ("st_andrew_square_original_photos", "edinburgh/places/st-andrew-square.html"),
@@ -248,6 +249,7 @@ PHOTO_MINIMUMS = {
     "st-andrews/old-course.html": 3,
     "places/royal-mile-deacon-brodie.html": 3,
     "scotland/places/isle-of-skye.html": 1,
+    "scotland/places/isle-of-skye-trotternish.html": 1,
     "scotland/places/inverness.html": 3,
     "edinburgh/places/george-street.html": 2,
     "edinburgh/places/st-andrew-square.html": 1,
@@ -430,6 +432,21 @@ def detail_smoke(browser, label, width, height):
                     ensure(page.locator(".page-hero .lead").inner_text().strip() == "뉴타운은 왜 이 광장에서 시작됐을까?",
                            f"{label} {path}: subtitle missing or incorrect")
                     row["checks"]["short place title and intriguing subtitle; only monument photo published"] = "PASS"
+
+                if path == "scotland/places/isle-of-skye-trotternish.html":
+                    expected_images = {
+                        "/assets/skye-mealt-falls-kilt-rock-still-20261013.jpg": 709,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 1 and published_images == expected_images,
+                           f"{label} {path}: Mealt Falls photo not published")
+                    figure = page.locator("main .detail-article > figure.story-photo")
+                    ensure(figure.count() == 1 and "킬트 록" in figure.locator(
+                           "xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: waterfall photo not directly after Kilt Rock paragraph")
+                    row["checks"]["Mealt Falls and Kilt Rock photo published at story location"] = "PASS"
+                    figure.screenshot(path=str(OUT / f"detail-{label}-skye-mealt-falls.png"),
+                                      animations="disabled", timeout=15000)
 
                 if path == "places/john-knox-house.html":
                     expected_images = {
