@@ -220,6 +220,7 @@ DETAIL_SCENARIOS = (
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
     ("skye_overview", "scotland/places/isle-of-skye.html"),
     ("inverness_selected_photos", "scotland/places/inverness.html"),
+    ("george_street_george_iv_photos", "edinburgh/places/george-street.html"),
 )
 
 
@@ -240,6 +241,7 @@ PHOTO_MINIMUMS = {
     "places/royal-mile-deacon-brodie.html": 3,
     "scotland/places/isle-of-skye.html": 1,
     "scotland/places/inverness.html": 3,
+    "edinburgh/places/george-street.html": 2,
 }
 
 
@@ -367,6 +369,16 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 3 and published_images == expected_images,
                            f"{label} {path}: three original Inverness photos not published")
                     row["checks"]["three original Inverness photos published"] = "PASS"
+
+                if path == "edinburgh/places/george-street.html":
+                    expected_images = {
+                        "/assets/george-street-george-iv-east-view-20261013.jpg": 1536,
+                        "/assets/george-street-george-iv-statue-20261013.jpg": 1152,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 2 and published_images == expected_images,
+                           f"{label} {path}: two original George IV photos not published")
+                    row["checks"]["two original George IV photos published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
