@@ -249,7 +249,6 @@ PHOTO_MINIMUMS = {
     "st-andrews/old-course.html": 3,
     "places/royal-mile-deacon-brodie.html": 3,
     "scotland/places/isle-of-skye.html": 1,
-    "scotland/places/isle-of-skye-trotternish.html": 1,
     "scotland/places/inverness.html": 3,
     "edinburgh/places/george-street.html": 2,
     "edinburgh/places/st-andrew-square.html": 1,
@@ -434,18 +433,26 @@ def detail_smoke(browser, label, width, height):
                     row["checks"]["short place title and intriguing subtitle; only monument photo published"] = "PASS"
 
                 if path == "scotland/places/isle-of-skye-trotternish.html":
-                    expected_images = {
-                        "/assets/skye-mealt-falls-kilt-rock-still-20261013.jpg": 709,
-                    }
-                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
-                    ensure(len(loaded) == 1 and published_images == expected_images,
-                           f"{label} {path}: Mealt Falls photo not published")
-                    figure = page.locator("main .detail-article > figure.story-photo")
-                    ensure(figure.count() == 1 and "킬트 록" in figure.locator(
-                           "xpath=preceding-sibling::*[1]").inner_text(),
-                           f"{label} {path}: waterfall photo not directly after Kilt Rock paragraph")
-                    row["checks"]["Mealt Falls and Kilt Rock photo published at story location"] = "PASS"
-                    figure.screenshot(path=str(OUT / f"detail-{label}-skye-mealt-falls.png"),
+                    figure = page.locator("main .detail-article > figure.story-photo.story-photo-portrait")
+                    video = figure.locator("video.skye-video")
+                    ensure(figure.count() == 1 and video.count() == 1,
+                           f"{label} {path}: Skye video figure missing")
+                    ensure("킬트 록" in figure.locator("xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: video not directly after Kilt Rock paragraph")
+                    ensure(figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
+                           f"{label} {path}: portrait video wider than intended")
+                    video.scroll_into_view_if_needed(timeout=12000)
+                    page.wait_for_function(
+                        "() => {const v=document.querySelector('.detail-article video.skye-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960 && v.src.startsWith('blob:')}",
+                        timeout=40000,
+                    )
+                    ensure(26.5 < video.evaluate("(v) => v.duration") < 27.2,
+                           f"{label} {path}: complete 27s Skye clip not playable")
+                    ensure(video.get_attribute("controls") is not None,
+                           f"{label} {path}: accessible video controls missing")
+                    row["checks"]["27-second original Skye video published with controls"] = "PASS"
+                    row["checks"]["seven segments join into playable MP4"] = "PASS"
+                    figure.screenshot(path=str(OUT / f"detail-{label}-skye-mealt-falls-video.png"),
                                       animations="disabled", timeout=15000)
 
                 if path == "places/john-knox-house.html":
