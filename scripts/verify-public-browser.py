@@ -441,19 +441,23 @@ def detail_smoke(browser, label, width, height):
                            f"{label} {path}: video not directly after Kilt Rock paragraph")
                     ensure(figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
                            f"{label} {path}: portrait video wider than intended")
+                    expected_mp4 = "/assets/skye-mealt-falls-kilt-rock-20261013.mp4"
+                    ensure(video.get_attribute("src") == expected_mp4,
+                           f"{label} {path}: video is not a direct lightweight MP4")
+                    ensure(video.get_attribute("controls") is not None,
+                           f"{label} {path}: video controls missing")
                     video.scroll_into_view_if_needed(timeout=12000)
+                    video.evaluate("(v) => {v.preload='metadata'; v.load()}")
                     page.wait_for_function(
-                        "() => {const v=document.querySelector('.detail-article video.skye-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960 && v.src.startsWith('blob:')}",
+                        "() => {const v=document.querySelector('.detail-article video.skye-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960}",
                         timeout=40000,
                     )
                     ensure(26.5 < video.evaluate("(v) => v.duration") < 27.2,
-                           f"{label} {path}: complete 27s Skye clip not playable")
-                    ensure(video.get_attribute("controls") is not None,
-                           f"{label} {path}: accessible video controls missing")
-                    row["checks"]["27-second original Skye video published with controls"] = "PASS"
-                    row["checks"]["seven segments join into playable MP4"] = "PASS"
+                           f"{label} {path}: 27s Skye clip not playable")
+                    row["checks"]["27-second Skye MP4 published with controls and music"] = "PASS"
+                    row["checks"]["video streamed directly without JS fragments"] = "PASS"
                     figure.screenshot(path=str(OUT / f"detail-{label}-skye-mealt-falls-video.png"),
-                                      animations="disabled", timeout=15000)
+                                    animations="disabled", timeout=15000)
 
                 if path == "places/john-knox-house.html":
                     expected_images = {
