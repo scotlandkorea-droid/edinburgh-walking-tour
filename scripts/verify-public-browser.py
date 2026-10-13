@@ -480,10 +480,10 @@ def detail_smoke(browser, label, width, height):
                            "xpath=preceding-sibling::*[1]").inner_text(),
                            f"{label} {path}: driving clip not next to Prometheus story")
                     ensure(storr_video.get_attribute("src") ==
-                           "/assets/old-man-storr-road-20261013.mp4",
+                           "/assets/old-man-storr-road-revised-20261013.mp4",
                            f"{label} {path}: wrong road video source")
                     ensure(storr_video.get_attribute("poster") ==
-                           "/assets/old-man-storr-road-poster-20261013.jpg",
+                           "/assets/old-man-storr-road-revised-poster-20261013.jpg",
                            f"{label} {path}: missing video poster")
                     ensure(storr_figure.evaluate(
                            "(el) => el.getBoundingClientRect().width <= 461"),
@@ -494,9 +494,9 @@ def detail_smoke(browser, label, width, height):
                         "() => {const v=document.querySelector('.detail-article video.storr-road-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960}",
                         timeout=40000,
                     )
-                    ensure(7.9 < storr_video.evaluate("(v) => v.duration") < 8.5,
-                           f"{label} {path}: 8-second road MP4 not published")
-                    row["checks"]["Old Man of Storr road video published at Prometheus text"] = "PASS"
+                    ensure(11.9 < storr_video.evaluate("(v) => v.duration") < 12.4,
+                           f"{label} {path}: 12-second revised road MP4 not published")
+                    row["checks"]["Revised 12-second Storr road video published without distracting sign"] = "PASS"
                     storr_figure.screenshot(path=str(OUT / f"detail-{label}-storr-road-video.png"),
                                           animations="disabled", timeout=15000)
 
