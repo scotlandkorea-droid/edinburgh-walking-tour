@@ -225,6 +225,7 @@ DETAIL_SCENARIOS = (
     ("inverness_selected_photos", "scotland/places/inverness.html"),
     ("george_street_george_iv_photos", "edinburgh/places/george-street.html"),
     ("st_andrew_square_original_photos", "edinburgh/places/st-andrew-square.html"),
+    ("john_knox_house_entrance_panels", "places/john-knox-house.html"),
 )
 
 
@@ -250,6 +251,7 @@ PHOTO_MINIMUMS = {
     "scotland/places/inverness.html": 3,
     "edinburgh/places/george-street.html": 2,
     "edinburgh/places/st-andrew-square.html": 1,
+    "places/john-knox-house.html": 2,
 }
 
 
@@ -428,6 +430,30 @@ def detail_smoke(browser, label, width, height):
                     ensure(page.locator(".page-hero .lead").inner_text().strip() == "뉴타운은 왜 이 광장에서 시작됐을까?",
                            f"{label} {path}: subtitle missing or incorrect")
                     row["checks"]["short place title and intriguing subtitle; only monument photo published"] = "PASS"
+
+                if path == "places/john-knox-house.html":
+                    expected_images = {
+                        "/assets/john-knox-house-james-mossman-goldsmith-20261013.jpg": 865,
+                        "/assets/john-knox-house-john-knox-preacher-20261013.jpg": 865,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 2 and published_images == expected_images,
+                           f"{label} {path}: two original entrance panel photos not published")
+                    panels = page.locator("main .detail-article > figure.story-photo.story-photo-portrait")
+                    ensure(panels.count() == 2,
+                           f"{label} {path}: entrance panel figures missing")
+                    expected_quotes = ("FOR QUEEN AND CROWN", "JOHN KNOX IS ABLE IN ONE HOUR")
+                    for idx, expected in enumerate(expected_quotes):
+                        figure = panels.nth(idx)
+                        succeeding_quote = figure.locator("xpath=following-sibling::*[1]")
+                        ensure(succeeding_quote.evaluate("(el) => el.tagName === 'BLOCKQUOTE'")
+                               and expected in succeeding_quote.inner_text(),
+                               f"{label} {path}: entrance photo not directly above matching quotation")
+                        ensure(figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
+                               f"{label} {path}: portrait photo exceeds intended max width")
+                    row["checks"]["entrance portraits load, match quotes and fit article"] = "PASS"
+                    page.screenshot(path=str(OUT / f"detail-{label}-john-knox-house-full.png"),
+                                    full_page=True, animations="disabled", timeout=18000)
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
