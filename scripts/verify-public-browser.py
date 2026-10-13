@@ -204,6 +204,7 @@ DETAIL_SCENARIOS = (
     ("st_giles_glass_six_figures_photo", "places/st-giles-stained-glass.html"),
     ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
+    ("greyfriars_covenanters_prison", "places/greyfriars-old-cemetery.html"),
     ("greyfriars_kirk", "places/greyfriars-kirk.html"),
     ("victoria_street", "edinburgh/places/victoria-street.html"),
     ("st_andrews_tour", "st-andrews/"),
@@ -226,6 +227,7 @@ PHOTO_MINIMUMS = {
     "places/st-giles-architecture.html": 1,
     "places/st-giles-stained-glass.html": 1,
     "places/st-giles-thistle-chapel.html": 1,
+    "places/greyfriars-old-cemetery.html": 3,
     "places/scott-monument.html": 3,
     "places/arthurs-seat.html": 1,
     "places/royal-mile-city-chambers.html": 4,
@@ -329,6 +331,17 @@ def detail_smoke(browser, label, width, height):
                            and loaded[0]["src"].endswith("?v=20261013"),
                            f"{label} {path}: new Thistle Chapel photo not published")
                     row["checks"]["replacement Thistle Chapel photo published"] = "PASS"
+
+                if path == "places/greyfriars-old-cemetery.html":
+                    expected_images = {
+                        "/assets/greyfriars-covenanters-prison-gate-20261013.jpg": 1152,
+                        "/assets/greyfriars-covenanters-prison-plaque-20261013.jpg": 1413,
+                        "/assets/greyfriars-mortsafe-20261013.jpg": 1536,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 3 and published_images == expected_images,
+                           f"{label} {path}: three original Greyfriars photos not published")
+                    row["checks"]["three original Greyfriars photos published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
