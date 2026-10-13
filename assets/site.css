@@ -1241,6 +1241,15 @@ body:where(.narrative-place-hub){--ink:#18211d;--muted:#657069;--cream:#f5f2eb;-
   height:auto;
   border-radius:14px;
 }
+/* Shared portrait photo variant for tall memorial and inscription pictures */
+body.course-detail .detail-article>figure.story-photo.story-photo-portrait{
+  width:100%;
+  max-width:460px;
+  margin:24px auto 16px;
+}
+body.course-detail .detail-article>figure.story-photo.story-photo-portrait + blockquote{
+  margin-top:12px;
+}
 
 /* PAGE-SPECIFIC REMAINDERS — retained page-specific styles */
 /* Princes Street: only differences that remain intentional after the shared course-detail system. */
