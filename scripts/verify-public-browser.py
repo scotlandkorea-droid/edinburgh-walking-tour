@@ -222,6 +222,7 @@ DETAIL_SCENARIOS = (
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
     ("skye_overview", "scotland/places/isle-of-skye.html"),
+    ("skye_fairy_pools", "scotland/places/isle-of-skye-cuillin-fairy-pools.html"),
     ("skye_mealt_falls_kilt_rock", "scotland/places/isle-of-skye-trotternish.html"),
     ("inverness_selected_photos", "scotland/places/inverness.html"),
     ("george_street_george_iv_photos", "edinburgh/places/george-street.html"),
@@ -431,6 +432,44 @@ def detail_smoke(browser, label, width, height):
                     ensure(page.locator(".page-hero .lead").inner_text().strip() == "뉴타운은 왜 이 광장에서 시작됐을까?",
                            f"{label} {path}: subtitle missing or incorrect")
                     row["checks"]["short place title and intriguing subtitle; only monument photo published"] = "PASS"
+
+                if path == "scotland/places/isle-of-skye-cuillin-fairy-pools.html":
+                    figures = page.locator("main .detail-article > figure.story-photo.story-photo-portrait")
+                    clips = figures.locator("video.fairy-pools-video")
+                    ensure(figures.count() == 3 and clips.count() == 3,
+                           f"{label} {path}: three Fairy Pools clips missing")
+                    for idx, (name, minimum, maximum) in enumerate((
+                            ("lower", 11.5, 12.5),
+                            ("pools", 11.5, 12.5),
+                            ("falls", 13.5, 14.5))):
+                        figure = figures.nth(idx)
+                        video = clips.nth(idx)
+                        expected_src = f"/assets/skye-fairy-pools-{name}-20261013.mp4"
+                        ensure(video.get_attribute("src") == expected_src
+                               and video.get_attribute("poster") == expected_src.replace(".mp4", "-poster-20261013.jpg").replace("-20261013-poster-20261013", "-poster-20261013"),
+                               f"{label} {path}: wrong Fairy Pools video/poster order")
+                        ensure(video.get_attribute("controls") is not None,
+                               f"{label} {path}: missing play controls")
+                        ensure(figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
+                               f"{label} {path}: video wider than mobile-friendly limit")
+                        video.scroll_into_view_if_needed(timeout=15000)
+                        video.evaluate("(v) => {v.preload = 'metadata'; v.load()}")
+                        page.wait_for_function(
+                            "(idx) => {const v=document.querySelectorAll('.detail-article video.fairy-pools-video')[idx]; return v && v.readyState >= 1 && v.videoHeight >= 854}",
+                            arg=idx, timeout=30000,
+                        )
+                        dur = video.evaluate("(v) => v.duration")
+                        ensure(minimum <= dur <= maximum,
+                               f"{label} {path}: edited video duration incorrect {name}: {dur}")
+                    ensure("작은 폭포와 웅덩이들이" in figures.nth(0).locator("xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: lower stream video not after first pools paragraph")
+                    ensure("물길을 따라 천천히" in figures.nth(1).locator("xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: pool video not after ascending watercourse")
+                    ensure("시간이 허락한다면" in figures.nth(2).locator("xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: upper waterfall video not after walk farther paragraph")
+                    row["checks"]["three voice-protected Fairy Pools MP4s stream in walking order"] = "PASS"
+                    page.screenshot(path=str(OUT / f"detail-{label}-fairy-pools-full.png"),
+                                    full_page=True, animations="disabled", timeout=18000)
 
                 if path == "scotland/places/isle-of-skye-trotternish.html":
                     figure = page.locator("main .detail-article > figure.story-photo.story-photo-portrait")
