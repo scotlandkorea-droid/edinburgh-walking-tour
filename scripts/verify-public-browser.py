@@ -219,6 +219,7 @@ DETAIL_SCENARIOS = (
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
     ("skye_overview", "scotland/places/isle-of-skye.html"),
+    ("inverness_selected_photos", "scotland/places/inverness.html"),
 )
 
 
@@ -238,6 +239,7 @@ PHOTO_MINIMUMS = {
     "st-andrews/old-course.html": 3,
     "places/royal-mile-deacon-brodie.html": 3,
     "scotland/places/isle-of-skye.html": 1,
+    "scotland/places/inverness.html": 3,
 }
 
 
@@ -354,6 +356,17 @@ def detail_smoke(browser, label, width, height):
                     ensure(len(loaded) == 2 and published_images == expected_images,
                            f"{label} {path}: two original martyrs' monument photos not published")
                     row["checks"]["two original Greyfriars martyrs photos published"] = "PASS"
+
+                if path == "scotland/places/inverness.html":
+                    expected_images = {
+                        "/assets/inverness-river-ness-church-spires-20261013.jpg": 1536,
+                        "/assets/inverness-castle-during-restoration-20261013.jpg": 1328,
+                        "/assets/inverness-river-ness-wooded-walk-20261013.jpg": 1536,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 3 and published_images == expected_images,
+                           f"{label} {path}: three original Inverness photos not published")
+                    row["checks"]["three original Inverness photos published"] = "PASS"
 
                 # Repeat overflow measurement after photos have loaded; images
                 # can cause a layout regression that isn't present at first paint.
