@@ -223,6 +223,7 @@ DETAIL_SCENARIOS = (
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
     ("skye_overview", "scotland/places/isle-of-skye.html"),
+    ("skye_arrival_video", "scotland/places/isle-of-skye-arrival.html"),
     ("skye_fairy_pools", "scotland/places/isle-of-skye-cuillin-fairy-pools.html"),
     ("skye_mealt_falls_kilt_rock", "scotland/places/isle-of-skye-trotternish.html"),
     ("inverness_selected_photos", "scotland/places/inverness.html"),
@@ -492,6 +493,40 @@ def detail_smoke(browser, label, width, height):
                     row["checks"]["three voice-protected Fairy Pools MP4s stream in walking order"] = "PASS"
                     page.screenshot(path=str(OUT / f"detail-{label}-fairy-pools-full.png"),
                                     full_page=True, animations="disabled", timeout=18000)
+
+                if path == "scotland/places/isle-of-skye-arrival.html":
+                    castle_video = page.locator("main .detail-article video.skye-arrival-video")
+                    ensure(castle_video.count() == 1,
+                           f"{label} {path}: Eilean Donan Castle arrival clip missing")
+                    castle_figure = castle_video.locator("xpath=parent::figure")
+                    ensure("스코틀랜드 본토" in castle_figure.locator(
+                           "xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: arrival clip not below mainland explanation")
+                    ensure(castle_video.get_attribute("src") ==
+                           "/assets/eilean-donan-castle-approach-20261013.mp4",
+                           f"{label} {path}: incorrect arrival video src")
+                    ensure(castle_video.get_attribute("poster") ==
+                           "/assets/eilean-donan-castle-approach-poster-20261013.jpg",
+                           f"{label} {path}: incorrect arrival poster")
+                    ensure(castle_video.get_attribute("controls") is not None and
+                           castle_video.get_attribute("autoplay") is None,
+                           f"{label} {path}: arrival video play controls not correct")
+                    ensure(castle_figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
+                           f"{label} {path}: arrival video too wide")
+                    castle_video.scroll_into_view_if_needed(timeout=15000)
+                    castle_video.evaluate("(v) => {v.preload='metadata'; v.load()}")
+                    page.wait_for_function(
+                        "() => {const v=document.querySelector('.detail-article video.skye-arrival-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960}",
+                        timeout=40000,
+                    )
+                    duration = castle_video.evaluate("(v) => v.duration")
+                    ensure(11.4 <= duration <= 11.9,
+                           f"{label} {path}: castle video duration incorrect: {duration}")
+                    row["checks"]["Eilean Donan mainland arrival video playable with correct poster"] = "PASS"
+                    castle_figure.screenshot(
+                        path=str(OUT / f"detail-{label}-eilean-donan-castle-video.png"),
+                        animations="disabled", timeout=15000,
+                    )
 
                 if path == "scotland/places/isle-of-skye-trotternish.html":
                     storr_video = page.locator("main .detail-article video.storr-road-video")
