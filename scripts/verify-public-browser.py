@@ -472,7 +472,36 @@ def detail_smoke(browser, label, width, height):
                                     full_page=True, animations="disabled", timeout=18000)
 
                 if path == "scotland/places/isle-of-skye-trotternish.html":
-                    figure = page.locator("main .detail-article > figure.story-photo.story-photo-portrait")
+                    storr_video = page.locator("main .detail-article video.storr-road-video")
+                    ensure(storr_video.count() == 1,
+                           f"{label} {path}: Old Man of Storr driving clip missing")
+                    storr_figure = storr_video.locator("xpath=parent::figure")
+                    ensure("외계 행성" in storr_figure.locator(
+                           "xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: driving clip not next to Prometheus story")
+                    ensure(storr_video.get_attribute("src") ==
+                           "/assets/old-man-storr-road-20261013.mp4",
+                           f"{label} {path}: wrong road video source")
+                    ensure(storr_video.get_attribute("poster") ==
+                           "/assets/old-man-storr-road-poster-20261013.jpg",
+                           f"{label} {path}: missing video poster")
+                    ensure(storr_figure.evaluate(
+                           "(el) => el.getBoundingClientRect().width <= 461"),
+                           f"{label} {path}: road video too wide")
+                    storr_video.scroll_into_view_if_needed(timeout=12000)
+                    storr_video.evaluate("(v) => {v.preload='metadata'; v.load()}")
+                    page.wait_for_function(
+                        "() => {const v=document.querySelector('.detail-article video.storr-road-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960}",
+                        timeout=40000,
+                    )
+                    ensure(7.9 < storr_video.evaluate("(v) => v.duration") < 8.5,
+                           f"{label} {path}: 8-second road MP4 not published")
+                    row["checks"]["Old Man of Storr road video published at Prometheus text"] = "PASS"
+                    storr_figure.screenshot(path=str(OUT / f"detail-{label}-storr-road-video.png"),
+                                          animations="disabled", timeout=15000)
+
+                    figure = page.locator("main .detail-article > figure.story-photo.story-photo-portrait").filter(
+                        has=page.locator("video.skye-video"))
                     video = figure.locator("video.skye-video")
                     ensure(figure.count() == 1 and video.count() == 1,
                            f"{label} {path}: Skye video figure missing")
