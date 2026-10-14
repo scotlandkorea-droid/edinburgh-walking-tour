@@ -582,7 +582,7 @@ console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
 // New Reading hub reuses existing deep-dive content under its canonical URL.
 const readingMarkup=read('travel/reading.html');
-const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html'];
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html'];
 const readingHrefs=[...readingMarkup.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
 if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=reading')))issues.push('Reading hub contextual order mismatch');
 for(const path of readingTargets){
@@ -593,7 +593,7 @@ for(const path of readingTargets){
 if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
 const readingContextCode=read('assets/site-header.js');
 const positions=readingTargets.map(path=>readingContextCode.indexOf("{path:'"+path+"',short:"));
-if(positions.some(p=>p<0)||positions.some((p,i)=>i>0&&p<=positions[i-1]))issues.push('Reading context router order does not match five hub cards');
+if(positions.some(p=>p<0)||positions.some((p,i)=>i>0&&p<=positions[i-1]))issues.push('Reading context router order does not match hub cards');
 const readingNumbers=[...readingMarkup.matchAll(/class="travel-story-no">([^<]+)<\/span>/g)].map(m=>m[1]);
 if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
 console.log('Reading: '+readingTargets.length+' shared articles, matching contextual breadcrumbs and sibling links');
