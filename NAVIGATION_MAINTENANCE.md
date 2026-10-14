@@ -94,9 +94,14 @@ When one of these titles changes, update the central `navigation-data.js` record
 
 ## Permanent deep-dive publishing checklist (2026-10-14)
 
-- A completed "더 자세히 보기" is a real production article in the normal directory, never a temporary/test placeholder. It uses the shared header, `assets/site.css`, `assets/site-header.js`, normal SEO title/description/canonical/OG metadata, accessible breadcrumb, full prose, sources where relevant, and the shared concluding share/back/Kakao components.
+- A completed "더 자세히 보기" is a real production article in the normal directory, never a temporary/test placeholder. It uses the shared header, `assets/site.css`, `assets/site-header.js`, normal SEO title/description/canonical/OG metadata, accessible breadcrumb, full narrative prose without a public '자료 및 근거' appendix, and the shared concluding share/back/Kakao components.
 - When the article is linked from another location page, keep an intact source-specific back link and place a `further-reading-box` before the existing ending controls. Do not replace the source page or alter its numbered series.
 - Every published standalone deep-dive intended as general reading must be added to `travel/reading.html` and the ordered `readingContextEntries` in `assets/site-header.js` *in the same change*. The hub's 01/02/... numbers and dynamic reading-context breadcrumb + previous/next order must match exactly. Preserve `?from=reading` so readers can switch contexts without losing the original source-specific path.
 - Do not hand-edit `assets/search-data.js`: the existing main-branch search workflow owns generation. Confirm that the sitemap contains the new canonical path; production changes must be verified against the repository and then the deployed website separately when available.
 - Keep responsive sizing and reading typography in shared CSS; never add page-specific emergency overrides to force a page into place. Follow `NAVIGATION_MAINTENANCE.md` rules for other bottom navigation surfaces.
 - Check for duplicate reading cards, dangling links, mismatched numbers, breadcrumbs, stale old labels, omitted source backlinks, and duplicate bottom navigation before declaring a new article done.
+
+## Public tour-manuscript references policy (2026-10-14)
+
+- Do not add a visible `자료 및 근거`, references, bibliography or raw source-URL list to normal visitor-facing "더 자세히 보기" articles. Research and fact-check before publication, but keep the visitor-facing article narrative clean. When a source is specifically requested as reading content, agree a separate editorial treatment rather than inserting ad-hoc plain links.
+- Clickable cross-links follow the shared design role. A `further-reading-box` uses one accessible full-card `<a>` with existing CSS; deep dives use `deep-dive-return` inside the common `action-buttons`, and `?from=reading` uses the central `readingContextEntries` for breadcrumb, back and previous/next. Never introduce page-only link/button CSS or duplicate role navigation.
