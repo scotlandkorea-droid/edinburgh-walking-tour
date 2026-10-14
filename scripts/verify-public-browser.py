@@ -216,6 +216,8 @@ DETAIL_SCENARIOS = (
     ("st_andrews_tour", "st-andrews/"),
     ("iona", "scotland/places/iona.html"),
     ("waverley_rail", "travel/train-waverley.html"),
+    ("reading_hub", "travel/reading.html"),
+    ("kilt_history", "travel/explainers/scottish-kilt-history.html"),
     ("scott_monument", "places/scott-monument.html"),
     ("arthurs_seat", "places/arthurs-seat.html"),
     ("city_chambers", "places/royal-mile-city-chambers.html"),
@@ -294,6 +296,25 @@ def detail_smoke(browser, label, width, height):
                 row["checks"]["article landmark and heading"] = "PASS"
                 page.evaluate("() => document.fonts.ready")
                 page.wait_for_timeout(280)
+                if path == "travel/reading.html":
+                    cards = page.locator("main .travel-story-grid a.travel-story-card")
+                    ensure(cards.count() == 6, f"{label} {path}: expected six Reading cards")
+                    ensure(cards.last.get_attribute("href") ==
+                           "/travel/explainers/scottish-kilt-history.html?from=reading",
+                           f"{label} {path}: new kilt story link missing")
+                    ensure(cards.last.locator(".travel-story-no").inner_text().strip() == "06",
+                           f"{label} {path}: kilt item not numbered 06")
+                    row["checks"]["six Reading cards, kilt story at 06"] = "PASS"
+                if path == "travel/explainers/scottish-kilt-history.html":
+                    ensure(page.locator("main article h2").count() == 10,
+                           f"{label} {path}: complete kilt manuscript headings missing")
+                    ensure("수백 년 동안 모습과 의미가 바뀌어 온 스코틀랜드의 역사라고요." in
+                           page.locator("main article").inner_text(),
+                           f"{label} {path}: concluding paragraph missing")
+                    ensure(page.locator("main .deep-dive-return").get_attribute("href") ==
+                           "/travel/reading.html",
+                           f"{label} {path}: Reading return link missing")
+                    row["checks"]["complete manuscript and Reading return"] = "PASS"
 
                 def dimensions():
                     return page.evaluate("""() => ({
