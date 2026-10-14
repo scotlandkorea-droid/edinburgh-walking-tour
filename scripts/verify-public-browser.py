@@ -227,6 +227,7 @@ DETAIL_SCENARIOS = (
     ("arthurs_seat", "places/arthurs-seat.html"),
     ("city_chambers", "places/royal-mile-city-chambers.html"),
     ("canongate_worlds_end", "places/canongate-worlds-end.html"),
+    ("robert_fergusson_stone_poem", "places/canongate-robert-fergusson.html"),
     ("new_college", "places/new-college.html"),
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
@@ -258,6 +259,7 @@ PHOTO_MINIMUMS = {
     "places/arthurs-seat.html": 1,
     "places/royal-mile-city-chambers.html": 4,
     "places/canongate-worlds-end.html": 1,
+    "places/canongate-robert-fergusson.html": 4,
     "places/new-college.html": 4,
     "st-andrews/old-course.html": 3,
     "places/royal-mile-deacon-brodie.html": 3,
@@ -369,6 +371,23 @@ def detail_smoke(browser, label, width, height):
                     ensure(boxes.count() == 1 and boxes.get_attribute("href") == "/travel/explainers/why-scotland-has-so-many-golf-courses.html",
                            f"{label} {path}: golf deep-dive panel missing")
                     row["checks"]["golf travel deep-dive panel"] = "PASS"
+                if path == "places/canongate-robert-fergusson.html":
+                    expected = {
+                        "/assets/robert-fergusson-statue-canongate-20261014.avif": 900,
+                        "/assets/robert-fergusson-auld-reikie-stones-20261014.avif": 1140,
+                        "/assets/robert-fergusson-birth-death-stone-20261014.avif": 893,
+                        "/assets/robert-fergusson-writers-museum-paving.jpg": 1152,
+                    }
+                    photos = {img["src"]: img["naturalWidth"] for img in loaded}
+                    ensure(len(loaded) == 4 and photos == expected,
+                           f"{label} {path}: three new photos or original Writers Museum paving missing")
+                    article_text = page.locator("main article").inner_text()
+                    ensure("정다운 사람들이 저녁이면 모여 목과 입을 축이고" in article_text and
+                           "1750년 에든버러 출생, 1774년 베들럼에서 사망" in article_text,
+                           f"{label} {path}: Korean translation or stone memorial not published")
+                    ensure(page.locator("main article h2").count() == 5,
+                           f"{label} {path}: original five story headings changed")
+                    row["checks"]["statue, six engraved lines, memorial and translation"] = "PASS"
                 def dimensions():
                     return page.evaluate("""() => ({
                         viewportWidth: innerWidth,
