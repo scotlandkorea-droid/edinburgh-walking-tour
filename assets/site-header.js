@@ -49,7 +49,9 @@
   const readingContextEntries=[
     {path:'/travel/explainers/honours-and-orders.html',short:'왕실의 서훈 제도'},
     {path:'/edinburgh/themes/execution-sites.html',short:'에든버러의 처형장들'},
-    {path:'/travel/destinations/faith-places.html',short:'종교 유적지 134곳'}
+    {path:'/travel/destinations/faith-places.html',short:'종교 유적지 134곳'},
+    {path:'/travel/explainers/stained-glass-making.html',short:'스테인드글라스 만들기'},
+    {path:'/travel/explainers/highlands-treeless-hills.html',short:'하일랜드의 나무 없는 산'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
@@ -68,7 +70,7 @@
         const name=document.createElement('span');
         name.className='breadcrumb-current';
         name.setAttribute('aria-current','page');
-        // Reading-hub context uses its stable 01/02/03 order, not the full manuscript H1.
+        // Reading-hub context uses its stable numbered order, not the full manuscript H1.
         name.textContent=String(current+1).padStart(2,'0');
         crumb.append(name);
       }
