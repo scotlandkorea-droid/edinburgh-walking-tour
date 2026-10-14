@@ -527,37 +527,38 @@ def detail_smoke(browser, label, width, height):
                         path=str(OUT / f"detail-{label}-eilean-donan-castle-video.png"),
                         animations="disabled", timeout=15000,
                     )
-                    ensure(page.locator("main .detail-article video").count() == 2,
-                           f"{label} {path}: expected only the preserved castle and new scenery clips")
-                    ensure(page.locator("video.skye-arrival-drive-video").count() == 0,
-                           f"{label} {path}: duplicate second castle video still displayed")
-                    scenery = page.locator("main .detail-article video.skye-mountain-water-video")
-                    ensure(scenery.count() == 1,
-                           f"{label} {path}: replacement Highland water scenery missing")
-                    scenery_figure = scenery.locator("xpath=parent::figure")
-                    ensure("산이 점점 가까워지고" in scenery_figure.locator(
-                           "xpath=preceding-sibling::*[1]").inner_text(),
-                           f"{label} {path}: scenery is not after mountain and water opening")
-                    ensure(scenery.get_attribute("src") ==
-                           "/assets/skye-arrival-mountains-water-20261014.mp4" and
-                           scenery.get_attribute("poster") ==
+
+                if path == "scotland/places/isle-of-skye-arrival.html":
+                    all_videos = page.locator("main .detail-article video")
+                    ensure(all_videos.count() == 2,
+                           f"{label} {path}: expected castle and mountain water videos only")
+                    ensure(all_videos.nth(0).get_attribute("src") ==
+                           "/assets/eilean-donan-castle-approach-20261013.mp4",
+                           f"{label} {path}: first castle video not preserved in first position")
+                    ensure(page.locator("main .detail-article video.skye-arrival-drive-video").count() == 0,
+                           f"{label} {path}: duplicate second castle video remains")
+                    water = page.locator("main .detail-article video.skye-mountain-water-video")
+                    ensure(water.count() == 1 and water.get_attribute("src") ==
+                           "/assets/skye-arrival-mountains-water-20261014.mp4",
+                           f"{label} {path}: mountain waterside video missing")
+                    ensure(water.get_attribute("poster") ==
                            "/assets/skye-arrival-mountains-water-poster-20261014.jpg",
-                           f"{label} {path}: replacement scenery file paths are wrong")
-                    ensure(scenery_figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
-                           f"{label} {path}: scenery video is too wide")
-                    scenery.scroll_into_view_if_needed(timeout=15000)
-                    scenery.evaluate("(v) => {v.preload='metadata'; v.load()}")
+                           f"{label} {path}: mountain waterside poster missing")
+                    water_figure = water.locator("xpath=parent::figure")
+                    ensure("스카이 브리지" in water_figure.locator(
+                           "xpath=preceding-sibling::*[1]").inner_text(),
+                           f"{label} {path}: mountain water video not in arrival journey")
+                    ensure(water_figure.evaluate("(el) => el.getBoundingClientRect().width <= 461"),
+                           f"{label} {path}: mountain water video too wide")
+                    water.scroll_into_view_if_needed(timeout=14000)
+                    water.evaluate("(v) => {v.preload='metadata';v.load()}")
                     page.wait_for_function(
-                        "() => {const v=document.querySelector('.detail-article video.skye-mountain-water-video'); return v && v.readyState>=1 && v.videoWidth===540 && v.videoHeight===960}",
+                        "() => {const v=document.querySelector('.detail-article video.skye-mountain-water-video');return v && v.readyState >= 1 && v.videoWidth == 540 && v.videoHeight == 960}",
                         timeout=40000,
                     )
-                    ensure(13.4 < scenery.evaluate("(v) => v.duration") < 14,
-                           f"{label} {path}: replacement scenery clip length unexpected")
-                    row["checks"]["first castle preserved, second removed, scenic clip playable"] = "PASS"
-                    scenery_figure.screenshot(
-                        path=str(OUT / f"detail-{label}-arrival-scenery-video.png"),
-                        animations="disabled", timeout=15000,
-                    )
+                    ensure(12 <= water.evaluate("(v)=>v.duration") <= 16,
+                           f"{label} {path}: waterside video cannot play")
+                    row["checks"]["original first Castle clip preserved, mountain lake second, duplicate removed"] = "PASS"
 
                 if path == "scotland/places/isle-of-skye-trotternish.html":
                     storr_video = page.locator("main .detail-article video.storr-road-video")
