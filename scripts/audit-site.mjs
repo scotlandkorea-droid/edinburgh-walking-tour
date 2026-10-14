@@ -115,7 +115,8 @@ for (const file of pages) {
     ['/travel/explainers/honours-and-orders.html','/places/st-giles-thistle-chapel.html'],
     ['/edinburgh/themes/execution-sites.html','/places/grassmarket-executions-covenanters.html'],
     ['/travel/explainers/stained-glass-making.html','/places/st-giles-stained-glass.html'],
-    ['/travel/explainers/highlands-treeless-hills.html','/travel/destinations/highlands.html']
+    ['/travel/explainers/highlands-treeless-hills.html','/travel/destinations/highlands.html'],
+    ['/travel/explainers/who-were-the-jacobites.html','/travel/destinations/jacobite-footsteps.html']
   ]);
   if(deepDiveOrigins.has(pathname)||/\bdeep-dive-detail\b/.test(html.match(/<body\b[^>]*>/i)?.[0]||'')){
     const origin=deepDiveOrigins.get(pathname);
@@ -582,7 +583,7 @@ console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
 // New Reading hub reuses existing deep-dive content under its canonical URL.
 const readingMarkup=read('travel/reading.html');
-const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html'];
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html','/travel/explainers/who-were-the-jacobites.html'];
 const readingHrefs=[...readingMarkup.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
 if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=reading')))issues.push('Reading hub contextual order mismatch');
 for(const path of readingTargets){
