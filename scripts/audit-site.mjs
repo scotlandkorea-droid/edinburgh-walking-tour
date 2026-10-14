@@ -317,7 +317,7 @@ for (const [index, pathname] of destinationPaths.entries()) {
       (expectedNext && next[0] !== expectedNext))
     issues.push(file + ': left/right travel navigation does not match ten-topic order');
   if ([...html.matchAll(/\bfurther-reading-box\b/g)].length !==
-      (['/faith-footsteps.html','/highlands.html'].some(p=>pathname.endsWith(p)) ? 1 : 0))
+      (['/faith-footsteps.html','/highlands.html','/jacobite-footsteps.html'].some(p=>pathname.endsWith(p)) ? 1 : 0))
     issues.push(file + ': unexpected/missing specialized further-reading box');
 }
 const faith = read('travel/destinations/faith-footsteps.html');
