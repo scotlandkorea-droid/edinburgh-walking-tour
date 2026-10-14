@@ -227,6 +227,7 @@ DETAIL_SCENARIOS = (
     ("arthurs_seat", "places/arthurs-seat.html"),
     ("city_chambers", "places/royal-mile-city-chambers.html"),
     ("canongate_worlds_end", "places/canongate-worlds-end.html"),
+    ("adam_smith_grave_photos", "places/canongate-adam-smith.html"),
     ("robert_fergusson_stone_poem", "places/canongate-robert-fergusson.html"),
     ("new_college", "places/new-college.html"),
     ("st_andrews_old_course", "st-andrews/old-course.html"),
@@ -259,6 +260,7 @@ PHOTO_MINIMUMS = {
     "places/arthurs-seat.html": 1,
     "places/royal-mile-city-chambers.html": 4,
     "places/canongate-worlds-end.html": 1,
+    "places/canongate-adam-smith.html": 3,
     "places/canongate-robert-fergusson.html": 4,
     "places/new-college.html": 4,
     "st-andrews/old-course.html": 3,
@@ -424,6 +426,20 @@ def detail_smoke(browser, label, width, height):
                 ensure(all(i["loaded"] for i in loaded),
                        f"{label} {path}: article image did not load")
                 row["checks"]["article images load"] = "PASS"
+                if path == "places/canongate-adam-smith.html":
+                    expected = {
+                        "/assets/adam-smith-grave-ground-marker-20261014.avif": 650,
+                        "/assets/adam-smith-grave-overview-20261014.avif": 1008,
+                        "/assets/adam-smith-grave-inscription-20261014.avif": 600,
+                    }
+                    observed = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 3 and observed == expected,
+                           f"{label} {path}: three Adam Smith grave photos not loaded")
+                    ensure(page.locator("main article h2").count() == 7,
+                           f"{label} {path}: original seven headings changed")
+                    ensure('잔디 바닥에 "Adam Smith"' in page.locator("main article").inner_text(),
+                           f"{label} {path}: ground marker directions do not match photo")
+                    row["checks"]["Adam Smith marker, grave and inscription photos"] = "PASS"
                 if path == "places/canongate-robert-fergusson.html":
                     expected = {
                         "/assets/robert-fergusson-statue-canongate-20261014.avif": 900,
