@@ -113,7 +113,9 @@ for (const file of pages) {
   // introduce page-specific style shims when a new explainer is published.
   const deepDiveOrigins=new Map([
     ['/travel/explainers/honours-and-orders.html','/places/st-giles-thistle-chapel.html'],
-    ['/edinburgh/themes/execution-sites.html','/places/grassmarket-executions-covenanters.html']
+    ['/edinburgh/themes/execution-sites.html','/places/grassmarket-executions-covenanters.html'],
+    ['/travel/explainers/stained-glass-making.html','/places/st-giles-stained-glass.html'],
+    ['/travel/explainers/highlands-treeless-hills.html','/travel/destinations/highlands.html']
   ]);
   if(deepDiveOrigins.has(pathname)||/\bdeep-dive-detail\b/.test(html.match(/<body\b[^>]*>/i)?.[0]||'')){
     const origin=deepDiveOrigins.get(pathname);
@@ -314,7 +316,7 @@ for (const [index, pathname] of destinationPaths.entries()) {
       (expectedNext && next[0] !== expectedNext))
     issues.push(file + ': left/right travel navigation does not match ten-topic order');
   if ([...html.matchAll(/\bfurther-reading-box\b/g)].length !==
-      (pathname.endsWith('/faith-footsteps.html') ? 1 : 0))
+      (['/faith-footsteps.html','/highlands.html'].some(p=>pathname.endsWith(p)) ? 1 : 0))
     issues.push(file + ': unexpected/missing specialized further-reading box');
 }
 const faith = read('travel/destinations/faith-footsteps.html');
@@ -580,7 +582,7 @@ console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
 // New Reading hub reuses existing deep-dive content under its canonical URL.
 const readingMarkup=read('travel/reading.html');
-const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html'];
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html'];
 const readingHrefs=[...readingMarkup.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
 if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=reading')))issues.push('Reading hub contextual order mismatch');
 for(const path of readingTargets){
@@ -589,7 +591,12 @@ for(const path of readingTargets){
   if(!details.includes('class="breadcrumbs"'))issues.push('Reading detail breadcrumb absent: '+path);
 }
 if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
-console.log('Reading: three shared original articles, contextual breadcrumb and sibling links');
+const readingContextCode=read('assets/site-header.js');
+const positions=readingTargets.map(path=>readingContextCode.indexOf("{path:'"+path+"',short:"));
+if(positions.some(p=>p<0)||positions.some((p,i)=>i>0&&p<=positions[i-1]))issues.push('Reading context router order does not match five hub cards');
+const readingNumbers=[...readingMarkup.matchAll(/class="travel-story-no">([^<]+)<\/span>/g)].map(m=>m[1]);
+if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
+console.log('Reading: '+readingTargets.length+' shared articles, matching contextual breadcrumbs and sibling links');
 
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + fragmentLinksChecked + ' scroll fragments, '
