@@ -49,7 +49,7 @@ let linksChecked = 0, noindexPages = 0, indexablePages = 0;
 // User-photographed, lightly retouched images must not acquire invented AI-generation labels.
 for (const file of pages) {
   const markup = read(file);
-  if (/AI\\s*(?:로\\s*)?생성(?:한)?\\s*콘텐츠|제공 이미지에 AI 생성 콘텐츠 표시/iu.test(markup)) {
+  if (/AI\s*(?:로\s*)?생성(?:한)?\s*콘텐츠|제공 이미지에 AI 생성 콘텐츠 표시/iu.test(markup)) {
     issues.push('Inaccurate AI-generated image label: ' + file);
   }
 }
