@@ -54,7 +54,8 @@
     {path:'/travel/explainers/highlands-treeless-hills.html',short:'하일랜드의 나무 없는 산'},
     {path:'/travel/explainers/scottish-kilt-history.html',short:'킬트의 역사'},
     {path:'/travel/explainers/scottish-clans.html',short:'스코틀랜드 클랜'},
-    {path:'/travel/explainers/who-were-the-jacobites.html',short:'자코바이트는 누구였을까'}
+    {path:'/travel/explainers/who-were-the-jacobites.html',short:'자코바이트는 누구였을까'},
+    {path:'/travel/explainers/why-scotland-has-so-many-golf-courses.html',short:'스코틀랜드 골프장 이야기'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);

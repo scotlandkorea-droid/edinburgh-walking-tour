@@ -221,6 +221,8 @@ DETAIL_SCENARIOS = (
     ("scottish_clans", "travel/explainers/scottish-clans.html"),
     ("jacobite_clan_link", "travel/destinations/jacobite-footsteps.html"),
     ("jacobite_history", "travel/explainers/who-were-the-jacobites.html"),
+    ("golf_reading", "travel/explainers/why-scotland-has-so-many-golf-courses.html"),
+    ("golf_travel_deep_dive", "travel/destinations/golf.html"),
     ("scott_monument", "places/scott-monument.html"),
     ("arthurs_seat", "places/arthurs-seat.html"),
     ("city_chambers", "places/royal-mile-city-chambers.html"),
@@ -301,13 +303,13 @@ def detail_smoke(browser, label, width, height):
                 page.wait_for_timeout(280)
                 if path == "travel/reading.html":
                     cards = page.locator("main .travel-story-grid a.travel-story-card")
-                    ensure(cards.count() == 8, f"{label} {path}: expected eight Reading cards")
+                    ensure(cards.count() == 9, f"{label} {path}: expected nine Reading cards")
                     ensure(cards.last.get_attribute("href") ==
-                           "/travel/explainers/who-were-the-jacobites.html?from=reading",
-                           f"{label} {path}: Jacobite story link missing")
-                    ensure(cards.last.locator(".travel-story-no").inner_text().strip() == "08",
-                           f"{label} {path}: Jacobite item not numbered 08")
-                    row["checks"]["eight Reading cards, Jacobite at 08"] = "PASS"
+                           "/travel/explainers/why-scotland-has-so-many-golf-courses.html?from=reading",
+                           f"{label} {path}: golf reading link missing")
+                    ensure(cards.last.locator(".travel-story-no").inner_text().strip() == "09",
+                           f"{label} {path}: golf reading item not numbered 09")
+                    row["checks"]["nine Reading cards, golf at 09"] = "PASS"
                 if path == "travel/explainers/scottish-kilt-history.html":
                     ensure(page.locator("main article h2").count() == 10,
                            f"{label} {path}: complete kilt manuscript headings missing")
@@ -350,6 +352,23 @@ def detail_smoke(browser, label, width, height):
                     ensure(panel.count() == 1 and panel.get_attribute("href") == "/travel/explainers/who-were-the-jacobites.html",
                            f"{label} {path}: full Jacobite deep-dive box missing")
                     row["checks"]["Jacobite travel to deep dive"] = "PASS"
+                if path == "travel/explainers/why-scotland-has-so-many-golf-courses.html":
+                    ensure(page.locator("main article h2").count() == 8,
+                           f"{label} {path}: missing eight complete golf sections")
+                    ensure(page.locator("main article h3").count() == 5,
+                           f"{label} {path}: missing five golf-course types")
+                    ensure("골프장이 마을 밖에 따로 있는 것이 아니라, 오랫동안 마을의 풍경 안에 함께 자리 잡고 있는 것입니다." in
+                           page.locator("main article").inner_text(),
+                           f"{label} {path}: original manuscript conclusion missing")
+                    ensure(page.locator("main .deep-dive-return").get_attribute("href") ==
+                           "/travel/destinations/golf.html",
+                           f"{label} {path}: return to Golf travel missing")
+                    row["checks"]["complete original golf manuscript and parent link"] = "PASS"
+                if path == "travel/destinations/golf.html":
+                    boxes = page.locator("main a.further-reading-box")
+                    ensure(boxes.count() == 1 and boxes.get_attribute("href") == "/travel/explainers/why-scotland-has-so-many-golf-courses.html",
+                           f"{label} {path}: golf deep-dive panel missing")
+                    row["checks"]["golf travel deep-dive panel"] = "PASS"
                 def dimensions():
                     return page.evaluate("""() => ({
                         viewportWidth: innerWidth,
