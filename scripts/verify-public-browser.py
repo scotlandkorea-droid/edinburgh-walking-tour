@@ -429,14 +429,16 @@ def detail_smoke(browser, label, width, height):
                        f"{label} {path}: article image did not load")
                 row["checks"]["article images load"] = "PASS"
                 if path == "edinburgh/places/museum-of-edinburgh.html":
-                    expected_src = "/assets/museum-of-edinburgh-exterior-20261014.avif"
+                    expected_src = "/assets/museum-of-edinburgh-exterior-original-clean-20261014.avif"
                     ensure(len(loaded) == 1 and loaded[0]["src"] == expected_src
                            and loaded[0]["naturalWidth"] == 1152,
                            f"{label} {path}: Museum of Edinburgh exterior photo missing")
                     ensure(page.locator("main article h2").count() == 6,
                            f"{label} {path}: original museum story sections changed")
-                    ensure("제공 이미지에 AI 생성 콘텐츠 표시" in page.locator("main article figcaption").inner_text(),
-                           f"{label} {path}: provided-image label missing")
+                    ensure(page.locator("main article figcaption").count() == 0,
+                           f"{label} {path}: redundant museum image caption reintroduced")
+                    ensure("AI 생성 콘텐츠" not in page.locator("main article").inner_text(),
+                           f"{label} {path}: misleading AI content label reintroduced")
                     row["checks"]["museum exterior photo and original story"] = "PASS"
                 if path == "places/canongate-adam-smith.html":
                     expected = {
@@ -451,6 +453,8 @@ def detail_smoke(browser, label, width, height):
                            f"{label} {path}: original seven headings changed")
                     ensure('잔디 바닥에 "Adam Smith"' in page.locator("main article").inner_text(),
                            f"{label} {path}: ground marker directions do not match photo")
+                    ensure(page.locator("main article figcaption").count() == 0,
+                           f"{label} {path}: redundant Adam Smith photo captions reintroduced")
                     row["checks"]["Adam Smith marker, grave and inscription photos"] = "PASS"
                 if path == "places/canongate-robert-fergusson.html":
                     expected = {
@@ -468,6 +472,8 @@ def detail_smoke(browser, label, width, height):
                            f"{label} {path}: Korean translation or stone memorial not published")
                     ensure(page.locator("main article h2").count() == 5,
                            f"{label} {path}: original five story headings changed")
+                    ensure(page.locator("main article figcaption").count() == 0,
+                           f"{label} {path}: redundant Fergusson photo captions reintroduced")
                     row["checks"]["statue, six engraved lines, memorial and translation"] = "PASS"
                 if path == "places/st-giles-thistle-chapel.html":
                     expected_images = {
