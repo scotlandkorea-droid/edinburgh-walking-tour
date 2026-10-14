@@ -218,6 +218,8 @@ DETAIL_SCENARIOS = (
     ("waverley_rail", "travel/train-waverley.html"),
     ("reading_hub", "travel/reading.html"),
     ("kilt_history", "travel/explainers/scottish-kilt-history.html"),
+    ("scottish_clans", "travel/explainers/scottish-clans.html"),
+    ("jacobite_clan_link", "travel/destinations/jacobite-footsteps.html"),
     ("scott_monument", "places/scott-monument.html"),
     ("arthurs_seat", "places/arthurs-seat.html"),
     ("city_chambers", "places/royal-mile-city-chambers.html"),
@@ -298,13 +300,13 @@ def detail_smoke(browser, label, width, height):
                 page.wait_for_timeout(280)
                 if path == "travel/reading.html":
                     cards = page.locator("main .travel-story-grid a.travel-story-card")
-                    ensure(cards.count() == 6, f"{label} {path}: expected six Reading cards")
+                    ensure(cards.count() == 7, f"{label} {path}: expected seven Reading cards")
                     ensure(cards.last.get_attribute("href") ==
-                           "/travel/explainers/scottish-kilt-history.html?from=reading",
-                           f"{label} {path}: new kilt story link missing")
-                    ensure(cards.last.locator(".travel-story-no").inner_text().strip() == "06",
-                           f"{label} {path}: kilt item not numbered 06")
-                    row["checks"]["six Reading cards, kilt story at 06"] = "PASS"
+                           "/travel/explainers/scottish-clans.html?from=reading",
+                           f"{label} {path}: clan story link missing")
+                    ensure(cards.last.locator(".travel-story-no").inner_text().strip() == "07",
+                           f"{label} {path}: clan item not numbered 07")
+                    row["checks"]["seven Reading cards, clan story at 07"] = "PASS"
                 if path == "travel/explainers/scottish-kilt-history.html":
                     ensure(page.locator("main article h2").count() == 10,
                            f"{label} {path}: complete kilt manuscript headings missing")
@@ -316,6 +318,22 @@ def detail_smoke(browser, label, width, height):
                            f"{label} {path}: Reading return link missing")
                     row["checks"]["complete manuscript and Reading return"] = "PASS"
 
+                if path == "travel/explainers/scottish-clans.html":
+                    ensure(page.locator("main article h2").count() == 9,
+                           f"{label} {path}: expected nine complete clan sections")
+                    ensure(page.locator("main article h3").count() == 6,
+                           f"{label} {path}: expected six named clans")
+                    ensure("그 이름들은 지금도 성벽과 지명, 타탄, 그리고 사람들의 기억 속에 남아 있습니다." in
+                           page.locator("main article").inner_text(),
+                           f"{label} {path}: final manuscript paragraph missing")
+                    ensure(page.locator("main .deep-dive-return").get_attribute("href") ==
+                           "/travel/reading.html",
+                           f"{label} {path}: Reading return link missing")
+                    row["checks"]["complete original clan manuscript and navigation"] = "PASS"
+                if path == "travel/destinations/jacobite-footsteps.html":
+                    ensure(page.locator("main a[href='/travel/explainers/scottish-clans.html']").count() == 1,
+                           f"{label} {path}: related clan article link missing")
+                    row["checks"]["Jacobite to clan connection"] = "PASS"
                 def dimensions():
                     return page.evaluate("""() => ({
                         viewportWidth: innerWidth,

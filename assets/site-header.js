@@ -52,7 +52,8 @@
     {path:'/travel/destinations/faith-places.html',short:'종교 유적지 134곳'},
     {path:'/travel/explainers/stained-glass-making.html',short:'스테인드글라스 만들기'},
     {path:'/travel/explainers/highlands-treeless-hills.html',short:'하일랜드의 나무 없는 산'},
-    {path:'/travel/explainers/scottish-kilt-history.html',short:'킬트의 역사'}
+    {path:'/travel/explainers/scottish-kilt-history.html',short:'킬트의 역사'},
+    {path:'/travel/explainers/scottish-clans.html',short:'스코틀랜드 클랜'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
