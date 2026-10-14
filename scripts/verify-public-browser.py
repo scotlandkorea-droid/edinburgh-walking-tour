@@ -229,6 +229,7 @@ DETAIL_SCENARIOS = (
     ("canongate_worlds_end", "places/canongate-worlds-end.html"),
     ("adam_smith_grave_photos", "places/canongate-adam-smith.html"),
     ("robert_fergusson_stone_poem", "places/canongate-robert-fergusson.html"),
+    ("museum_of_edinburgh_exterior", "edinburgh/places/museum-of-edinburgh.html"),
     ("new_college", "places/new-college.html"),
     ("st_andrews_old_course", "st-andrews/old-course.html"),
     ("deacon_brodie", "places/royal-mile-deacon-brodie.html"),
@@ -262,6 +263,7 @@ PHOTO_MINIMUMS = {
     "places/canongate-worlds-end.html": 1,
     "places/canongate-adam-smith.html": 3,
     "places/canongate-robert-fergusson.html": 4,
+    "edinburgh/places/museum-of-edinburgh.html": 1,
     "places/new-college.html": 4,
     "st-andrews/old-course.html": 3,
     "places/royal-mile-deacon-brodie.html": 3,
@@ -426,6 +428,16 @@ def detail_smoke(browser, label, width, height):
                 ensure(all(i["loaded"] for i in loaded),
                        f"{label} {path}: article image did not load")
                 row["checks"]["article images load"] = "PASS"
+                if path == "edinburgh/places/museum-of-edinburgh.html":
+                    expected_src = "/assets/museum-of-edinburgh-exterior-20261014.avif"
+                    ensure(len(loaded) == 1 and loaded[0]["src"] == expected_src
+                           and loaded[0]["naturalWidth"] == 1152,
+                           f"{label} {path}: Museum of Edinburgh exterior photo missing")
+                    ensure(page.locator("main article h2").count() == 6,
+                           f"{label} {path}: original museum story sections changed")
+                    ensure("제공 이미지에 AI 생성 콘텐츠 표시" in page.locator("main article figcaption").inner_text(),
+                           f"{label} {path}: provided-image label missing")
+                    row["checks"]["museum exterior photo and original story"] = "PASS"
                 if path == "places/canongate-adam-smith.html":
                     expected = {
                         "/assets/adam-smith-grave-ground-marker-20261014.avif": 650,
