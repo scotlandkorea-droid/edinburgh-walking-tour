@@ -298,6 +298,20 @@ def detail_smoke(browser, label, width, height):
                 ensure(response and response.status == 200, f"{label} {path}: HTTP status")
                 row["checks"]["public HTTP 200"] = "PASS"
 
+                # Avoid showing image-editing reports and generated-media labels
+                # as reader-facing picture captions. Historical image credits stay.
+                captions = page.locator("main figcaption").all_inner_texts()
+                forbidden_caption_phrases = (
+                    "AI 생성 콘텐츠", "AI로 편집", "실제 배치",
+                    "편집해 배치", "읽는 순서대로 이어 배치",
+                    "음성 제거", "음성 대화가 들리지 않도록",
+                    "새 배경음악을 넣었습니다",
+                )
+                ensure(not any(bad in caption for caption in captions
+                               for bad in forbidden_caption_phrases),
+                       f"{label} {path}: production note or AI label in caption")
+                row["checks"]["reader-facing photo captions"] = "PASS"
+
                 header = page.locator(".site-header .brand span").last
                 ensure(header.inner_text().strip() == "걸어서 에든버러",
                        f"{label} {path}: shared brand")
