@@ -203,6 +203,7 @@ DETAIL_SCENARIOS = (
     ("st_giles_architecture_photo", "places/st-giles-architecture.html"),
     ("st_giles_glass_six_figures_photo", "places/st-giles-stained-glass.html"),
     ("st_giles_thistle_stalls_photo", "places/st-giles-thistle-chapel.html"),
+    ("vennel_grassmarket_west_castle_photo", "edinburgh/places/vennel.html"),
     ("grassmarket_story", "places/grassmarket-burke-hare.html"),
     ("grassmarket_pub_photos", "places/grassmarket-pub-names.html"),
     ("grassmarket_covenanters_memorial", "places/grassmarket-executions-covenanters.html"),
@@ -238,7 +239,8 @@ DETAIL_SCENARIOS = (
 PHOTO_MINIMUMS = {
     "places/st-giles-architecture.html": 1,
     "places/st-giles-stained-glass.html": 1,
-    "places/st-giles-thistle-chapel.html": 1,
+    "places/st-giles-thistle-chapel.html": 2,
+    "edinburgh/places/vennel.html": 1,
     "places/greyfriars-old-cemetery.html": 3,
     "places/grassmarket-executions-covenanters.html": 1,
     "places/grassmarket-pub-names.html": 5,
@@ -347,11 +349,23 @@ def detail_smoke(browser, label, width, height):
                        f"{label} {path}: article image did not load")
                 row["checks"]["article images load"] = "PASS"
                 if path == "places/st-giles-thistle-chapel.html":
-                    ensure(len(loaded) == 1
-                           and loaded[0]["naturalWidth"] == 833
-                           and loaded[0]["src"].endswith("?v=20261013"),
-                           f"{label} {path}: new Thistle Chapel photo not published")
-                    row["checks"]["replacement Thistle Chapel photo published"] = "PASS"
+                    expected_images = {
+                        "/assets/st-giles-thistle-chapel-stalls-20261012.jpg?v=20261013": 833,
+                        "/assets/st-giles-thistle-chapel-royal-arms-20261014.jpg": 1152,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 2 and published_images == expected_images,
+                           f"{label} {path}: Thistle Chapel stalls or royal arms photo missing")
+                    row["checks"]["Thistle Chapel stalls and royal arms photos published"] = "PASS"
+
+                if path == "edinburgh/places/vennel.html":
+                    expected_images = {
+                        "/assets/vennel-grassmarket-west-castle-view-20261014.jpg": 1396,
+                    }
+                    published_images = {i["src"]: i["naturalWidth"] for i in loaded}
+                    ensure(len(loaded) == 1 and published_images == expected_images,
+                           f"{label} {path}: Grassmarket west castle photo not published")
+                    row["checks"]["Vennel west Grassmarket castle photo published"] = "PASS"
 
                 if path == "places/greyfriars-old-cemetery.html":
                     expected_images = {
