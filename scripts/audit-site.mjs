@@ -45,6 +45,19 @@ const redirects = new Set([
 const sitemap = new Set([...read('sitemap.xml').matchAll(/<loc>\s*https?:\/\/[^/]+(\/[^<]*)<\/loc>/g)]
   .map(m => m[1]));
 const issues = [];
+// Search indexing safety: a broken robots policy or site-wide X-Robots-Tag
+// can hide every otherwise valid article, even when the sitemap is correct.
+const robotsPolicy = read('robots.txt');
+if (!/^\s*User-agent:\s*\*\s*$/im.test(robotsPolicy) ||
+    !/^\s*Allow:\s*\/\s*$/im.test(robotsPolicy) ||
+    /^\s*Disallow\s*:/im.test(robotsPolicy) ||
+    !/^\s*Sitemap:\s*https:\/\/edinburgh-walking-tour\.scotlandkorea\.workers\.dev\/sitemap\.xml\s*$/im.test(robotsPolicy)) {
+  issues.push('robots.txt: expected public crawling access and canonical sitemap declaration');
+}
+if (/^\s*X-Robots-Tag\s*:/im.test(read('_headers')))
+  issues.push('_headers: site-wide X-Robots-Tag requires explicit review');
+if (/<(?:priority|changefreq)>/i.test(read('sitemap.xml')))
+  issues.push('sitemap.xml: remove priority/changefreq hints ignored by Google');
 let linksChecked = 0, noindexPages = 0, indexablePages = 0;
 // User-photographed, lightly retouched images must not acquire invented AI-generation labels.
 for (const file of pages) {
