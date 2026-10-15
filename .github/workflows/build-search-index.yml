@@ -17,6 +17,8 @@ on:
       - 'assets/tour-map.js'
       - 'assets/site.css'
       - 'sitemap.xml'
+      - 'robots.txt'
+      - '_headers'
       - '.assetsignore'
       - 'worker.js'
       - 'wrangler.jsonc'
