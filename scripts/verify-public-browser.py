@@ -229,6 +229,7 @@ DETAIL_SCENARIOS = (
     ("canongate_worlds_end", "places/canongate-worlds-end.html"),
     ("adam_smith_grave_photos", "places/canongate-adam-smith.html"),
     ("robert_fergusson_stone_poem", "places/canongate-robert-fergusson.html"),
+    ("writers_museum_seven_photos", "places/writers-museum.html"),
     ("museum_of_edinburgh_exterior", "edinburgh/places/museum-of-edinburgh.html"),
     ("new_college", "places/new-college.html"),
     ("st_andrews_old_course", "st-andrews/old-course.html"),
@@ -263,6 +264,7 @@ PHOTO_MINIMUMS = {
     "places/canongate-worlds-end.html": 1,
     "places/canongate-adam-smith.html": 3,
     "places/canongate-robert-fergusson.html": 4,
+    "places/writers-museum.html": 7,
     "edinburgh/places/museum-of-edinburgh.html": 1,
     "places/new-college.html": 4,
     "st-andrews/old-course.html": 3,
@@ -470,6 +472,28 @@ def detail_smoke(browser, label, width, height):
                     ensure(page.locator("main article figcaption").count() == 0,
                            f"{label} {path}: redundant Adam Smith photo captions reintroduced")
                     row["checks"]["Adam Smith marker, grave and inscription photos"] = "PASS"
+                if path == "places/writers-museum.html":
+                    expected = [
+                        ("writers-museum-lady-stairs-house-20261016.jpg", 1152),
+                        ("writers-museum-burns-scott-stevenson-busts-20261016.jpg", 864),
+                        ("writers-museum-walter-scott-chess-set-20261016.jpg", 1536),
+                        ("writers-museum-walter-scott-manuscripts-20261016.jpg", 1536),
+                        ("writers-museum-walter-scott-rocking-horse-20261016.jpg", 1152),
+                        ("writers-museum-waverley-printing-press-20261016.jpg", 1536),
+                        ("writers-museum-robert-louis-stevenson-gallery-20261016.jpg", 1536),
+                    ]
+                    published = [(img["src"].rsplit("/", 1)[-1], img["naturalWidth"])
+                                 for img in loaded]
+                    ensure(published == expected,
+                           f"{label} {path}: writers museum photo order or image sizes differ: {published}")
+                    captions = page.locator("main article figcaption").all_inner_texts()
+                    ensure(len(captions) == 5 and "로버트 번스" in captions[0] and
+                           "월터 스콧" in captions[0] and "로버트 루이스 스티븐슨" in captions[0] and
+                           "디컨 브로디" in captions[-1],
+                           f"{label} {path}: useful short museum photo captions missing")
+                    ensure(page.locator("main article h2").count() == 9,
+                           f"{label} {path}: original museum sections changed")
+                    row["checks"]["seven original Writers Museum photos and captions"] = "PASS"
                 if path == "places/canongate-robert-fergusson.html":
                     expected = {
                         "/assets/robert-fergusson-statue-canongate-20261014.avif": 900,
