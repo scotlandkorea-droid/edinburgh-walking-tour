@@ -14,6 +14,14 @@ const checks = [
   {path:'/assets/greyfriars-kirk/pulpit-front.webp',kind:'social-webp'},
   {path:'/privacy.html',kind:'privacy'},
   {path:'/edinburgh/people/burke-and-hare.html',kind:'retired-people-redirect',targetPath:'/places/grassmarket-burke-hare.html'},
+  {path:'/places/writers-museum.html',kind:'writers-museum-page'},
+  {path:'/assets/writers-museum-lady-stairs-house-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-burns-scott-stevenson-busts-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-walter-scott-chess-set-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-walter-scott-manuscripts-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-walter-scott-rocking-horse-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-waverley-printing-press-20261016.jpg',kind:'writers-museum-jpg'},
+  {path:'/assets/writers-museum-robert-louis-stevenson-gallery-20261016.jpg',kind:'writers-museum-jpg'},
   {path:'/places/st-giles.html',kind:'article'},
   {path:'/places/scott-monument.html',kind:'article-privacy-free'},
   {path:'/places/arthurs-seat.html',kind:'image-dimensions',imageSrc:'../assets/arthurs-seat.jpg',expectedWidth:1536,expectedHeight:1152},
@@ -122,6 +130,16 @@ async function inspect({path,kind,imageSrc,expectedWidth,expectedHeight,targetPa
       findings.urls=(page.match(/<loc>/g)||[]).length;
       findings.lastmodCount=(page.match(/<lastmod>/g)||[]).length;
       findings.homeLastmod=page.match(/<url>\s*<loc>[^<]+<\/loc>\s*<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1]??null;
+    } else if(kind==='writers-museum-page') {
+      const expectedPhotos=["writers-museum-lady-stairs-house-20261016.jpg","writers-museum-burns-scott-stevenson-busts-20261016.jpg","writers-museum-walter-scott-chess-set-20261016.jpg","writers-museum-walter-scott-manuscripts-20261016.jpg","writers-museum-walter-scott-rocking-horse-20261016.jpg","writers-museum-waverley-printing-press-20261016.jpg","writers-museum-robert-louis-stevenson-gallery-20261016.jpg"];
+      findings.storyPhotoCount=(page.match(/<figure\b[^>]*class="[^"]*story-photo/g)||[]).length;
+      findings.linkedPhotos=expectedPhotos.filter(file=>page.includes('/assets/'+file)).length;
+      findings.storyPhotoComplete=findings.storyPhotoCount===7&&findings.linkedPhotos===7;
+    } else if(kind==='writers-museum-jpg') {
+      const bytes=new Uint8Array(buf);
+      findings.validJPEG=response.status===200&&type.includes('image/jpeg')&&
+        bytes.length>30000&&bytes[0]===0xff&&bytes[1]===0xd8&&
+        bytes[bytes.length-2]===0xff&&bytes[bytes.length-1]===0xd9;
     } else if(kind==='article') {
       findings.ogImage=/property=["']og:image["']/.test(page);
       findings.twitterCard=/name=["']twitter:card["']/.test(page);
