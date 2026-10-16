@@ -58,7 +58,8 @@
     {path:'/travel/explainers/why-scotland-has-so-many-golf-courses.html',short:'스코틀랜드 골프장 이야기'},
     {path:'/travel/scotland-one-month-stay.html',short:'스코틀랜드 한 달 살기'},
     {path:'/travel/explainers/edinburgh-56-degrees-winter.html',short:'에든버러는 북위 56도인데 왜 얼어붙지 않을까?'},
-    {path:'/travel/explainers/st-andrews-day-bank-holidays.html',short:'스코틀랜드의 날인데 왜 학교에 갈까?'}
+    {path:'/travel/explainers/st-andrews-day-bank-holidays.html',short:'스코틀랜드의 날인데 왜 학교에 갈까?'},
+    {path:'/travel/explainers/scottish-banknotes.html',short:'영국인데 스코틀랜드 지폐는 왜 다를까?'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
