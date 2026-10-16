@@ -60,14 +60,28 @@ if (/<(?:priority|changefreq)>/i.test(read('sitemap.xml')))
   issues.push('sitemap.xml: remove priority/changefreq hints ignored by Google');
 let linksChecked = 0, noindexPages = 0, indexablePages = 0;
 // User-photographed, lightly retouched images must not acquire invented AI-generation labels.
+// Captions are for visitors, not a record of editing, voice removal or music additions.
+// Guard published figcaptions on ALL pages without altering content or image files.
+const photoProductionNotes = [
+  /AI\s*생성(?:한)?\s*(?:콘텐츠|이미지)/iu,
+  /AI\s*(?:로|를\s*이용해)\s*(?:편집|보정|제거)/iu,
+  /(?:실제\s*석판\s*사진|사진|영상).{0,18}(?:이어\s*배치|실제\s*배치)/iu,
+  /(?:사람|손님)\s*(?:들\s*)?(?:얼굴|얼굴들).{0,14}(?:가렸|흐리게|제거)/iu,
+  /(?:음성\s*대화가\s*들리지|음성\s*(?:을\s*)?(?:제거|억제|처리))/iu,
+  /(?:새\s*)?배경\s*음악.{0,20}(?:넣|추가|나옵니다|나온다|처리)/iu
+];
 for (const file of pages) {
   const markup = read(file);
   if (/AI\s*(?:로\s*)?생성(?:한)?\s*콘텐츠|제공 이미지에 AI 생성 콘텐츠 표시/iu.test(markup)) {
     issues.push('Inaccurate AI-generated image label: ' + file);
   }
+  for (const match of markup.matchAll(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption\s*>/giu)) {
+    const caption = match[1].replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ')
+      .replace(/\s+/g, ' ').trim();
+    if (photoProductionNotes.some(pattern => pattern.test(caption)))
+      issues.push('Photo caption contains a reader-irrelevant production note: ' + file);
+  }
 }
-
-
 
 // Resolve real scroll targets from the site's existing HTML. The navigation
 // context hashes #tour-nav and #place-nav are intentionally handled by JS.
