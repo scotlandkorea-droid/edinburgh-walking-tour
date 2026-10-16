@@ -56,11 +56,14 @@
     {path:'/travel/explainers/scottish-clans.html',short:'스코틀랜드 클랜'},
     {path:'/travel/explainers/who-were-the-jacobites.html',short:'자코바이트는 누구였을까'},
     {path:'/travel/explainers/why-scotland-has-so-many-golf-courses.html',short:'스코틀랜드 골프장 이야기'},
-    {path:'/travel/scotland-one-month-stay.html',short:'스코틀랜드 한 달 살기'}
+    {path:'/travel/scotland-one-month-stay.html',short:'스코틀랜드 한 달 살기'},
+    {path:'/travel/explainers/edinburgh-56-degrees-winter.html',short:'에든버러는 북위 56도인데 왜 얼어붙지 않을까?'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
     if(current>=0){
+      const pageNumber=Math.floor(current/10)+1;
+      const readingHubUrl=pageNumber===1?'/travel/reading.html':'/travel/reading-page-'+pageNumber+'.html';
       const crumb=document.querySelector('.breadcrumbs');
       if(crumb){
         crumb.replaceChildren();
@@ -71,7 +74,7 @@
         };
         pushLink('홈','/');
         pushLink('스코틀랜드 여행정보','/#travel');
-        pushLink('읽을거리','/travel/reading.html');
+        pushLink('읽을거리',readingHubUrl);
         const name=document.createElement('span');
         name.className='breadcrumb-current';
         name.setAttribute('aria-current','page');
@@ -80,7 +83,7 @@
         crumb.append(name);
       }
       const back=document.querySelector('.deep-dive-return,.travel-ending .travel-hub');
-      if(back){back.href='/travel/reading.html';back.textContent='읽을거리 전체 보기'}
+      if(back){back.href=readingHubUrl;back.textContent='읽을거리 '+pageNumber+'페이지로 돌아가기'}
       const nav=document.createElement('nav');
       nav.className='page-nav role-linear-nav reading-linear-nav';
       nav.dataset.navSystem='reading';
