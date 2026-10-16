@@ -707,6 +707,13 @@ body.travel-detail.transport-detail .travel-article h3{font-size:1.12rem;line-he
 .food-page .food-hub-intro{margin:0 0 26px;color:#59655f}
 /* Food numbered cards deliberately inherit the common travel-story visual standard. */
 
+/* Reusable compact data table for travel detail pages (mobile-first). */
+.travel-detail .travel-article .article-data-table{width:100%;border-collapse:collapse;margin:24px 0 28px;font-size:16px;line-height:1.6}
+.travel-detail .travel-article .article-data-table th,.travel-detail .travel-article .article-data-table td{border-bottom:1px solid #dce3dd;padding:12px 14px;text-align:left;vertical-align:top}
+.travel-detail .travel-article .article-data-table thead th{background:#edf2ee;color:#315844;font-weight:800}
+.travel-detail .travel-article .article-data-table tbody tr:nth-child(even){background:#f7f9f7}
+@media(max-width:520px){.travel-detail .travel-article .article-data-table{font-size:15px}.travel-detail .travel-article .article-data-table th,.travel-detail .travel-article .article-data-table td{padding:10px 12px}}
+
 /* SCOTLAND TRAVEL WALK COMPONENTS 2026-09-23 */
 .walk-list{display:grid;gap:12px;margin:24px 0}.walk-card{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#f7f3eb}.walk-card strong{display:block;font-size:19px;margin-bottom:4px}.walk-note{color:var(--muted);font-size:.95rem}
 
