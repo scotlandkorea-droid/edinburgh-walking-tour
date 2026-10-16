@@ -624,7 +624,7 @@ if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-o
 console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
 // Reading uses one canonical URL per article and 10 numbered cards per index page.
-const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html','/travel/explainers/who-were-the-jacobites.html','/travel/explainers/why-scotland-has-so-many-golf-courses.html','/travel/scotland-one-month-stay.html','/travel/explainers/edinburgh-56-degrees-winter.html','/travel/explainers/st-andrews-day-bank-holidays.html','/travel/explainers/scottish-banknotes.html'];
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html','/travel/explainers/who-were-the-jacobites.html','/travel/explainers/why-scotland-has-so-many-golf-courses.html','/travel/scotland-one-month-stay.html','/travel/explainers/edinburgh-56-degrees-winter.html','/travel/explainers/st-andrews-day-bank-holidays.html','/travel/explainers/scottish-banknotes.html','/travel/explainers/scottish-right-to-roam.html'];
 const readingPages=['travel/reading.html','travel/reading-page-2.html'];
 const readingHrefs=[];
 const readingNumbers=[];
@@ -647,7 +647,7 @@ if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=
 if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
 for(const path of readingTargets){
   const details=read(path.slice(1));
-  if(!details.includes('site-header.js?v=20261016-reading13'))issues.push('Reading detail lacks current shared nav JS: '+path);
+  if(!/site-header\.js\?v=20261016-reading(?:13|14)/.test(details))issues.push('Reading detail lacks current shared nav JS: '+path);
   if(!details.includes('class="breadcrumbs"'))issues.push('Reading detail breadcrumb absent: '+path);
 }
 if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
