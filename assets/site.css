@@ -139,6 +139,13 @@ body:has(.detail-article) main>section{padding-bottom:0}
 }
 .travel-detail .travel-article p{margin-bottom:20px}
 .travel-detail .travel-story-grid{display:grid;gap:14px;margin-top:8px}
+/* Reading hub pagination: one shared, keyboard-accessible style on mobile and desktop. */
+.travel-detail .reading-pagination{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:center;margin:30px 0 38px}
+.travel-detail .reading-pagination a,.travel-detail .reading-pagination [aria-current="page"]{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:9px 13px;border:1px solid #d9e2d9;border-radius:10px;text-decoration:none;font-size:15px;font-weight:750;line-height:1.35;color:var(--travel-green,#315844);background:#fff}
+.travel-detail .reading-pagination [aria-current="page"]{background:var(--travel-green,#315844);color:#fff;border-color:var(--travel-green,#315844)}
+.travel-detail .reading-pagination a:hover{background:#edf3ee}
+.travel-detail .reading-pagination a:focus-visible{outline:3px solid var(--plum,#6f3547);outline-offset:3px}
+
 .travel-detail .travel-story-card{
   display:grid;
   grid-template-columns:44px minmax(0,1fr) 22px;
