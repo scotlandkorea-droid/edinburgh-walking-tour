@@ -623,23 +623,40 @@ if(!read('travel/festivals.html').includes('href="/travel/reading.html"'))issues
 if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html?from=reading"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html?from=reading"'))issues.push('Reading hub deep-dive links missing');
 console.log('Travel categories:',cardLinks.length,'ordered cards audited');
 
-// New Reading hub reuses existing deep-dive content under its canonical URL.
-const readingMarkup=read('travel/reading.html');
-const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html','/travel/explainers/who-were-the-jacobites.html','/travel/explainers/why-scotland-has-so-many-golf-courses.html','/travel/scotland-one-month-stay.html'];
-const readingHrefs=[...readingMarkup.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
+// Reading uses one canonical URL per article and 10 numbered cards per index page.
+const readingTargets=['/travel/explainers/honours-and-orders.html','/edinburgh/themes/execution-sites.html','/travel/destinations/faith-places.html','/travel/explainers/stained-glass-making.html','/travel/explainers/highlands-treeless-hills.html','/travel/explainers/scottish-kilt-history.html','/travel/explainers/scottish-clans.html','/travel/explainers/who-were-the-jacobites.html','/travel/explainers/why-scotland-has-so-many-golf-courses.html','/travel/scotland-one-month-stay.html','/travel/explainers/edinburgh-56-degrees-winter.html'];
+const readingPages=['travel/reading.html','travel/reading-page-2.html'];
+const readingHrefs=[];
+const readingNumbers=[];
+for(let i=0;i<readingPages.length;i++){
+  const page=read(readingPages[i]);
+  const hrefs=[...page.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
+  const nums=[...page.matchAll(/class="travel-story-no">([^<]+)<\\/span>/g)].map(m=>m[1]);
+  if(hrefs.length<1||hrefs.length>10)issues.push('Reading page must contain 1 to 10 cards: '+readingPages[i]);
+  readingHrefs.push(...hrefs);
+  readingNumbers.push(...nums);
+  const current=String(i+1);
+  if(!page.includes('class="reading-pagination"')||!page.includes('aria-current="page">'+current+'</span>'))
+    issues.push('Reading page pagination controls missing: '+readingPages[i]);
+  for(let n=0;n<readingPages.length;n++){
+    const href='/'+readingPages[n];
+    if(n!==i&&!page.includes('href="'+href+'"'))issues.push('Reading page navigation link missing: '+href);
+  }
+}
 if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=reading')))issues.push('Reading hub contextual order mismatch');
+if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
 for(const path of readingTargets){
   const details=read(path.slice(1));
-  if(!details.includes('site-header.js?v=20261016-reading10'))issues.push('Reading detail lacks current shared nav JS: '+path);
+  if(!details.includes('site-header.js?v=20261016-reading11'))issues.push('Reading detail lacks current shared nav JS: '+path);
   if(!details.includes('class="breadcrumbs"'))issues.push('Reading detail breadcrumb absent: '+path);
 }
 if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
 const readingContextCode=read('assets/site-header.js');
 const positions=readingTargets.map(path=>readingContextCode.indexOf("{path:'"+path+"',short:"));
 if(positions.some(p=>p<0)||positions.some((p,i)=>i>0&&p<=positions[i-1]))issues.push('Reading context router order does not match hub cards');
-const readingNumbers=[...readingMarkup.matchAll(/class="travel-story-no">([^<]+)<\/span>/g)].map(m=>m[1]);
-if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
-console.log('Reading: '+readingTargets.length+' shared articles, matching contextual breadcrumbs and sibling links');
+if(!readingContextCode.includes('Math.floor(current/10)+1')||!readingContextCode.includes("readingHubUrl"))
+  issues.push('Reading 10-card page context resolver missing');
+console.log('Reading: '+readingTargets.length+' shared articles, '+readingPages.length+' pages of up to ten, contextual navigation audited');
 
 console.log('Audited ' + pages.length + ' HTML pages, ' + linksChecked
   + ' local references, ' + fragmentLinksChecked + ' scroll fragments, '
