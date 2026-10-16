@@ -631,7 +631,7 @@ const readingNumbers=[];
 for(let i=0;i<readingPages.length;i++){
   const page=read(readingPages[i]);
   const hrefs=[...page.matchAll(/class="travel-story-card" href="([^"]+)"/g)].map(m=>m[1]);
-  const nums=[...page.matchAll(/class="travel-story-no">([^<]+)<\\/span>/g)].map(m=>m[1]);
+  const nums=[...page.matchAll(new RegExp('class="travel-story-no">([^<]+)</span>','g'))].map(m=>m[1]);
   if(hrefs.length<1||hrefs.length>10)issues.push('Reading page must contain 1 to 10 cards: '+readingPages[i]);
   readingHrefs.push(...hrefs);
   readingNumbers.push(...nums);
