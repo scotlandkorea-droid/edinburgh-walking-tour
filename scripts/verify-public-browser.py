@@ -848,6 +848,56 @@ def detail_smoke(browser, label, width, height):
     return rows
 
 
+def reading_pagination_smoke(browser, label, width, height):
+    """Inspect the actual public Reading list and the 10-to-11 article navigation."""
+    context = browser.new_context(
+        viewport={"width": width, "height": height},
+        device_scale_factor=1,
+        is_mobile=(label == "mobile"),
+        has_touch=(label != "desktop"),
+        locale="ko-KR",
+    )
+    page = context.new_page()
+    row = {"viewport": label, "scope": "Reading 1-2 pagination and items 10-11", "checks": {}}
+    def passed(name, truth):
+        ensure(bool(truth), f"{label}: Reading: {name}")
+        row["checks"][name] = "PASS"
+    try:
+        response = page.goto(BASE + "travel/reading.html", wait_until="domcontentloaded", timeout=45000)
+        passed("reading page one HTTP 200", response and response.status == 200)
+        passed("page one contains precisely ten cards", page.locator(".travel-story-grid .travel-story-card").count() == 10)
+        passed("page one numbered 01 to 10", page.locator(".travel-story-no").all_inner_texts() == [str(i).zfill(2) for i in range(1, 11)])
+        passed("page one current number one", page.locator(".reading-pagination [aria-current='page']").inner_text().strip() == "1")
+        passed("page one fits viewport", page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 2"))
+        page.locator(".reading-pagination a[href='/travel/reading-page-2.html']").first.click()
+        page.wait_for_url("**/travel/reading-page-2.html", timeout=12000)
+        passed("page two reachable", page.locator(".travel-story-grid .travel-story-card").count() == 1)
+        passed("page two has article 11", page.locator(".travel-story-no").first.inner_text().strip() == "11")
+        passed("page two current number two", page.locator(".reading-pagination [aria-current='page']").inner_text().strip() == "2")
+        passed("page two fits viewport", page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 2"))
+        page.screenshot(path=str(OUT / f"reading-{label}-page2.png"), animations="disabled", timeout=12000)
+        page.locator(".travel-story-grid .travel-story-card").first.click()
+        page.wait_for_url("**/travel/explainers/edinburgh-56-degrees-winter.html?from=reading", timeout=12000)
+        passed("article 11 title visible", "에든버러는 북위 56도인데 왜 얼어붙지 않을까?" in page.locator("h1").inner_text())
+        passed("article 11 breadcrumb numbered 11", page.locator(".breadcrumbs .breadcrumb-current").inner_text().strip() == "11")
+        passed("article 11 links back to page two", page.locator(".travel-ending .travel-hub").get_attribute("href") == "/travel/reading-page-2.html")
+        passed("article 11 previous points to article 10", page.locator(".reading-linear-nav .role-prev").get_attribute("href") == "/travel/scotland-one-month-stay.html?from=reading")
+        page.goto(BASE + "travel/scotland-one-month-stay.html?from=reading", wait_until="domcontentloaded", timeout=45000)
+        passed("article 10 next uses article 11 title", "에든버러는 북위 56도인데 왜 얼어붙지 않을까?" in page.locator(".reading-linear-nav .role-next").inner_text())
+        passed("article 10 next points to 11", page.locator(".reading-linear-nav .role-next").get_attribute("href") == "/travel/explainers/edinburgh-56-degrees-winter.html?from=reading")
+        row["status"] = "PASS"
+    except Exception as exc:
+        row["status"] = "FAIL"
+        row["error"] = str(exc)[:1000]
+        try:
+            page.screenshot(path=str(OUT / f"reading-{label}-failure.png"), animations="disabled", timeout=6000)
+        except Exception:
+            pass
+    finally:
+        context.close()
+    return row
+
+
 def main():
     binary = (
         os.environ.get("CHROME_BIN")
@@ -870,15 +920,16 @@ def main():
             detail_results = []
             for label, width, height in VIEWPORTS:
                 detail_results.extend(detail_smoke(browser, label, width, height))
+            reading_results = [reading_pagination_smoke(browser, label, width, height) for label, width, height in VIEWPORTS]
         finally:
             browser.close()
-    report = {"site": BASE, "note": "Synthetic Chrome tests are not a real-phone speed benchmark", "results": results, "detailResults": detail_results}
+    report = {"site": BASE, "note": "Synthetic Chrome tests are not a real-phone speed benchmark", "results": results, "detailResults": detail_results, "readingResults": reading_results}
     (OUT / "results.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 1 if any(row["status"] != "PASS" for row in results + detail_results) else 0
+    return 1 if any(row["status"] != "PASS" for row in results + detail_results + reading_results) else 0
 
 
 if __name__ == "__main__":
