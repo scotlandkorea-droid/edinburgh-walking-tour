@@ -334,6 +334,10 @@ window.EW_NAV_DATA={
           "url": "/scotland/places/glencoe.html"
         },
         {
+          "name": "오반",
+          "url": "/scotland/places/oban.html"
+        },
+        {
           "name": "네스호",
           "url": "/scotland/places/loch-ness.html"
         },
