@@ -610,9 +610,15 @@ console.log('Photo redirects: '+photoRedirects.size+' legacy URLs tested for GET
 // Main travel categories: order, sibling boundaries and deep-reading links.
 const travelCards=(read('index.html').match(/<div class="travel-grid">([\s\S]*?)<\/div>/)||[])[1]||'';
 const cardLinks=[...travelCards.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
-const requiredCards=['/travel/entry.html','/travel/when-to-go.html','/travel/where-to-go.html','/travel/transport.html','/travel/accommodation.html','/travel/food-drink.html','/travel/shopping.html','/travel/hiking.html','/travel/festivals.html','/travel/reading.html'];
+const requiredCards=['/travel/when-to-go.html','/travel/where-to-go.html','/travel/entry.html','/travel/accommodation.html','/travel/transport.html','/travel/food-drink.html','/travel/shopping.html','/travel/hiking.html','/travel/festivals.html','/travel/reading.html'];
 if(JSON.stringify(cardLinks)!==JSON.stringify(requiredCards))issues.push('Home travel cards must be in ten-category order');
-if(!read('travel/when-to-go.html').includes('href="/travel/entry.html"'))issues.push('Entry to when navigation missing');
+for(let i=0;i<requiredCards.length;i++){
+  const doc=read(requiredCards[i].slice(1));
+  const markup=(doc.match(/<nav class="travel-series[^"]*" aria-label="이전·다음 여행정보">([\s\S]*?)<\/nav>/)||[])[1]||'';
+  const neighbors=[...markup.matchAll(/<a class="(?:prev|next)" href="([^"]+)"/g)].map(m=>m[1]);
+  const expected=[requiredCards[i-1],requiredCards[i+1]].filter(Boolean);
+  if(JSON.stringify(neighbors)!==JSON.stringify(expected))issues.push('Travel category previous/next mismatch: '+requiredCards[i]);
+}
 if(!read('travel/festivals.html').includes('href="/travel/reading.html"'))issues.push('Festivals to reading navigation missing');
 if(!read('travel/reading.html').includes('href="/travel/explainers/honours-and-orders.html?from=reading"')||!read('travel/reading.html').includes('href="/edinburgh/themes/execution-sites.html?from=reading"'))issues.push('Reading hub deep-dive links missing');
 console.log('Travel categories:',cardLinks.length,'ordered cards audited');
