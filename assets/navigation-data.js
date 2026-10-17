@@ -376,12 +376,16 @@ window.EW_NAV_DATA={
       "name": "서부",
       "items": [
         {
-          "name": "글래스고",
-          "url": "/scotland/places/glasgow.html"
-        },
-        {
           "name": "덤바턴",
           "url": "/scotland/places/dumbarton.html"
+        },
+        {
+          "name": "에어",
+          "url": "/scotland/places/ayr.html"
+        },
+        {
+          "name": "글래스고",
+          "url": "/scotland/places/glasgow.html"
         }
       ]
     },
