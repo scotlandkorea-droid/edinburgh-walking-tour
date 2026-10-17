@@ -280,18 +280,10 @@ window.EW_NAV_DATA={
       "scope": "scotland",
       "name": "파이프",
       "items": [
-        {
-          "name": "카네기 생가 박물관",
-          "url": "/scotland/places/andrew-carnegie-birthplace-museum.html"
-        },
-        {
-          "name": "포클랜드",
-          "url": "/scotland/places/falkland.html"
-        },
-        {
-          "name": "세인트앤드루스 (St Andrews)",
-          "url": "/st-andrews/"
-        }
+        {"name":"던펌린 수도원","url":"/scotland/places/dunfermline-abbey.html"},
+        {"name":"카네기 생가 박물관","url":"/scotland/places/andrew-carnegie-birthplace-museum.html"},
+        {"name":"포클랜드","url":"/scotland/places/falkland.html"},
+        {"name":"세인트앤드루스 (St Andrews)","url":"/st-andrews/"}
       ]
     },
     {
