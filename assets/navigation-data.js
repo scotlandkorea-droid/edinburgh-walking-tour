@@ -280,8 +280,7 @@ window.EW_NAV_DATA={
       "scope": "scotland",
       "name": "파이프",
       "items": [
-        {"name":"던펌린 수도원","url":"/scotland/places/dunfermline-abbey.html"},
-        {"name":"카네기 생가 박물관","url":"/scotland/places/andrew-carnegie-birthplace-museum.html"},
+        {"name":"던펌린","url":"/scotland/places/dunfermline.html"},
         {"name":"포클랜드","url":"/scotland/places/falkland.html"},
         {"name":"세인트앤드루스 (St Andrews)","url":"/st-andrews/"}
       ]
@@ -429,6 +428,21 @@ window.EW_NAV_DATA={
     }
   ],
   "series": [
+    {
+      "id": "dunfermline",
+      "name": "던펌린",
+      "hub": "/scotland/places/dunfermline.html",
+      "hubLabel": "던펌린 전체 보기",
+      "kind": "이야기",
+      "placeOnly": true,
+      "includeHubPrev": false,
+      "items": [
+        {"number":"01","name":"카네기 생가 박물관","url":"/scotland/places/andrew-carnegie-birthplace-museum.html"},
+        {"number":"02","name":"던펌린 수도원","url":"/scotland/places/dunfermline-abbey.html"}
+      ],
+      "detailEyebrow": false
+    },
+
     {
       "id": "edinburgh-castle",
       "name": "에든버러 성",
