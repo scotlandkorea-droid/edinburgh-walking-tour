@@ -61,7 +61,8 @@
     {path:'/travel/explainers/st-andrews-day-bank-holidays.html',short:'스코틀랜드의 날인데 왜 학교에 갈까?'},
     {path:'/travel/explainers/scottish-banknotes.html',short:'영국인데 스코틀랜드 지폐는 왜 다를까?'},
     {path:'/travel/explainers/scottish-right-to-roam.html',short:'남의 땅을 걸어도 될까'},
-    {path:'/travel/explainers/why-uk-supermarkets-have-few-fish.html',short:'영국은 섬나라인데 왜 가게에는 생선이 별로 없을까'}
+    {path:'/travel/explainers/why-uk-supermarkets-have-few-fish.html',short:'영국은 섬나라인데 왜 가게에는 생선이 별로 없을까'},
+    {path:'/travel/explainers/why-edinburgh-new-town-is-still-new.html',short:'에든버러 뉴타운은 왜 아직도 뉴타운일까?'}
   ];
   if(new URLSearchParams(location.search).get('from')==='reading'){
     const current=readingContextEntries.findIndex(x=>x.path===location.pathname);
