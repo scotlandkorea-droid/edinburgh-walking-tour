@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261017-bothwell1';
+  const VERSION='20261017-livingstone1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
