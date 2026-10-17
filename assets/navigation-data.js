@@ -378,6 +378,10 @@ window.EW_NAV_DATA={
         {
           "name": "글래스고",
           "url": "/scotland/places/glasgow.html"
+        },
+        {
+          "name": "덤바턴",
+          "url": "/scotland/places/dumbarton.html"
         }
       ]
     },
