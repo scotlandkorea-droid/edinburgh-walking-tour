@@ -295,6 +295,10 @@ window.EW_NAV_DATA={
           "url": "/scotland/places/dundee.html"
         },
         {
+          "name": "스톤헤이븐",
+          "url": "/scotland/places/stonehaven.html"
+        },
+        {
           "name": "던노타 성",
           "url": "/scotland/places/dunnottar-castle.html"
         },
