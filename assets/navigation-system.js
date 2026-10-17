@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261017-luss1';
+  const VERSION='20261017-dunfermline1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
