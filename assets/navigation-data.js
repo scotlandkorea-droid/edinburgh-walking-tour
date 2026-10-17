@@ -300,6 +300,10 @@ window.EW_NAV_DATA={
       "name": "동부 · 북동부",
       "items": [
         {
+          "name": "던디",
+          "url": "/scotland/places/dundee.html"
+        },
+        {
           "name": "던노타 성",
           "url": "/scotland/places/dunnottar-castle.html"
         },
