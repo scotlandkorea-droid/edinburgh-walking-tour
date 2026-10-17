@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261017-dunfermline-hub1';
+  const VERSION='20261017-stonehaven1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
