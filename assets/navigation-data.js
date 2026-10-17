@@ -381,6 +381,7 @@ window.EW_NAV_DATA={
         {"name":"에어","url":"/scotland/places/ayr.html"},
         {"name":"덤바턴","url":"/scotland/places/dumbarton.html"},
         {"name":"러스","url":"/scotland/places/luss.html"},
+        {"name":"블랜타이어","url":"/scotland/places/david-livingstone-birthplace-museum.html"},
         {"name":"보스웰","url":"/scotland/places/bothwell-bridge-battle.html"},
         {"name":"글래스고 걷기 안내","url":"/scotland/places/glasgow.html"}
       ]
