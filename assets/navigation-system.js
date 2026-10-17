@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20261017-dunfermline1';
+  const VERSION='20261017-dunfermline-hub1';
   const NAV_TOUR='#tour-nav';
   const NAV_PLACE='#place-nav';
 
@@ -213,7 +213,7 @@
   const seriesItemsFor=(series,context)=>context==='place'&&Array.isArray(series.placeItems)&&series.placeItems.length
     ?series.placeItems
     :(series.items||[]);
-  const seriesEnabledForContext=(series,context)=>!(context==='place'&&series.placeMode==='region');
+  const seriesEnabledForContext=(series,context)=>!(context==='place'&&series.placeMode==='region')&&!(context==='tour'&&series.placeOnly);
 
   const findSeries=(data,path,context='tour')=>{
     for(const series of data.series||[]){
@@ -410,7 +410,7 @@
   const syncSeriesTabs=(series,index,context)=>{
     if(series.kind!=='이야기')return;
     let tabs=document.querySelector('.story-series-tabs');
-    if(!tabs&&context==='place'&&Array.isArray(series.placeItems)){
+    if(!tabs&&context==='place'&&(Array.isArray(series.placeItems)||series.placeOnly)){
       tabs=document.createElement('nav');
       tabs.className='story-series-tabs place-context-series-tabs';
       const wrap=document.querySelector('.detail-intro>.wrap,.page-hero>.wrap');
