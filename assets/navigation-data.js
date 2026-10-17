@@ -308,6 +308,10 @@ window.EW_NAV_DATA={
           "url": "/scotland/places/dunnottar-castle.html"
         },
         {
+          "name": "애버딘",
+          "url": "/scotland/places/aberdeen.html"
+        },
+        {
           "name": "피터헤드",
           "url": "/scotland/places/peterhead.html"
         },
