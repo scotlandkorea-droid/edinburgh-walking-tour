@@ -306,6 +306,10 @@ window.EW_NAV_DATA={
         {
           "name": "피터헤드",
           "url": "/scotland/places/peterhead.html"
+        },
+        {
+          "name": "엘긴",
+          "url": "/scotland/places/elgin.html"
         }
       ]
     },
