@@ -327,6 +327,10 @@ window.EW_NAV_DATA={
           "url": "/scotland/places/stirling.html"
         },
         {
+          "name": "퍼스",
+          "url": "/scotland/places/perth.html"
+        },
+        {
           "name": "피틀로크리",
           "url": "/scotland/places/pitlochry.html"
         }
