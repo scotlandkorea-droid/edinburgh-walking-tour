@@ -383,18 +383,10 @@ window.EW_NAV_DATA={
       "scope": "scotland",
       "name": "서부",
       "items": [
-        {
-          "name": "덤바턴",
-          "url": "/scotland/places/dumbarton.html"
-        },
-        {
-          "name": "에어",
-          "url": "/scotland/places/ayr.html"
-        },
-        {
-          "name": "글래스고",
-          "url": "/scotland/places/glasgow.html"
-        }
+        {"name":"에어","url":"/scotland/places/ayr.html"},
+        {"name":"덤바턴","url":"/scotland/places/dumbarton.html"},
+        {"name":"러스","url":"/scotland/places/luss.html"},
+        {"name":"글래스고 걷기 안내","url":"/scotland/places/glasgow.html"}
       ]
     },
     {
