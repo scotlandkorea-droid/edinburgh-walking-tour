@@ -647,7 +647,7 @@ if(JSON.stringify(readingHrefs)!==JSON.stringify(readingTargets.map(x=>x+'?from=
 if(JSON.stringify(readingNumbers)!==JSON.stringify(readingTargets.map((_,i)=>String(i+1).padStart(2,'0'))))issues.push('Reading hub numeric labels mismatch');
 for(const path of readingTargets){
   const details=read(path.slice(1));
-  if(!/site-header\.js\?v=20261016-reading(?:13|14|15)/.test(details))issues.push('Reading detail lacks current shared nav JS: '+path);
+  if(!/site-header\.js\?v=202610(?:16|17)-reading(?:13|14|15)/.test(details))issues.push('Reading detail lacks current shared nav JS: '+path);
   if(!details.includes('class="breadcrumbs"'))issues.push('Reading detail breadcrumb absent: '+path);
 }
 if(!read('assets/site-header.js').includes("get('from')==='reading'"))issues.push('Reading context router missing');
