@@ -17,7 +17,7 @@ if(!window.L)return;
 document.querySelectorAll('[data-hiking-map]').forEach(el=>{
 if(el.dataset.ready)return;el.dataset.ready='1';
 const n=Number(el.getAttribute('data-hiking-map')),main=!n;
-const map=L.map(el,{scrollWheelZoom:false,zoomControl:true,attributionControl:true});
+const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 const bounds=L.latLngBounds([]);
 const chosen=main?routes:routes.filter(r=>r.id===n);
@@ -30,7 +30,7 @@ if(main)L.circleMarker(mid,{radius:12,fillColor:r.color,color:'#fff',weight:2,fi
 if(!main&&!r.area){[[r.points[0],'출발'],[r.points[r.points.length-1],'도착']].forEach(([p,t])=>L.circleMarker(p,{radius:6,fillColor:r.color,color:'#fff',weight:2,fillOpacity:1}).addTo(map).bindTooltip(t));}
 });
 towns.forEach(([name,lat,lon])=>L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1}).addTo(map).bindTooltip(name,{permanent:true,direction:'right',className:'hiking-map-town'}));
-if(main){map.fitBounds([[54.6,-6.6],[58.2,-1.55]],{padding:[20,20]});}else{map.fitBounds(bounds.pad(.22),{padding:[30,30],maxZoom:10});}
+if(main){map.fitBounds([[54.7,-6.4],[58.0,-1.6]],{padding:[10,10]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
 }
