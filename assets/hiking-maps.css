@@ -10,3 +10,6 @@
 .hiking-map-number{background:transparent;border:0;color:white}
 .hiking-map-number:before{display:none}
 @media(max-width:640px){.hiking-map{height:420px}.hiking-map-shell.is-detail .hiking-map{height:350px}.hiking-map-legend{font-size:13px;gap:8px 10px}}
+
+/* Compact unboxed city labels: preserve route visibility. */
+.hiking-town-text{background:transparent!important;border:0!important;box-shadow:none!important;color:#243746;font:600 11px/16px -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;white-space:nowrap;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,0 0 3px #fff;pointer-events:none}
