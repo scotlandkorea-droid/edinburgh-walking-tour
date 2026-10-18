@@ -23,6 +23,21 @@ const stageNames={
 7:[['Drymen',56.067,-4.451],['Aberfoyle',56.179,-4.385],['Callander',56.243,-4.216],['Strathyre',56.324,-4.325],['Killin',56.468,-4.319],['Aberfeldy',56.620,-3.865],['Pitlochry',56.703,-3.729]],
 8:[['Fort William',56.819,-5.106],['Gairlochy',56.914,-4.992],['Laggan',57.040,-4.820],['Fort Augustus',57.145,-4.681],['Invermoriston',57.215,-4.617],['Drumnadrochit',57.333,-4.480],['Inverness',57.477,-4.225]]
 };
+function drawWestHighland(el){
+ const r=routes[5], W=440,H=940;
+ const pts=[
+ ['Milngavie',55.941,-4.319],['Drymen',56.067,-4.451],['Balmaha',56.088,-4.540],
+ ['Rowardennan',56.151,-4.643],['Inversnaid',56.245,-4.685],['Inverarnan',56.329,-4.720],
+ ['Crianlarich',56.390,-4.615],['Tyndrum',56.432,-4.711],['Bridge of Orchy',56.516,-4.766],
+ ['Inveroran',56.540,-4.785],['Kingshouse',56.651,-4.843],['Kinlochleven',56.713,-4.964],['Fort William',56.819,-5.106]
+ ];
+ const xy=(lat,lon)=>[222+(lon+4.72)*205,860-(lat-55.94)*800];
+ const line=pts.map((p,i)=>{const [x,y]=xy(p[1],p[2]);return (i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}).join(' ');
+ const labels=pts.map((p,i)=>{const [x,y]=xy(p[1],p[2]);const right=i%2===0,dx=right?14:-14;
+ return '<circle cx="'+x+'" cy="'+y+'" r="4" fill="white" stroke="#bd574e" stroke-width="2.5"/><text x="'+(x+dx)+'" y="'+(y+4)+'" text-anchor="'+(right?'start':'end')+'" fill="#263a3c" font-size="12.5" font-weight="'+(i===0||i===pts.length-1?'700':'500')+'" stroke="white" stroke-width="4" paint-order="stroke">'+p[0]+'</text>';}).join('');
+ el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="West Highland Way from Milngavie to Fort William, south to north"><path d="'+line+'" fill="none" stroke="#d15b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'+labels+'</svg>';
+ el.classList.add('hiking-course-diagram','hiking-course-vertical');
+}
 function drawCourse(el,n){
  const r=routes.find(x=>x.id===n),stages=stageNames[n]||[];
  if(!r||!stages.length)return;
@@ -51,6 +66,7 @@ if(!window.L)return;
 document.querySelectorAll('[data-hiking-map]').forEach(el=>{
 if(el.dataset.ready)return;el.dataset.ready='1';
 const n=Number(el.getAttribute('data-hiking-map')),main=!n;
+if(n===6){drawWestHighland(el);return;}
 if(n>=1&&n<=8){drawCourse(el,n);return;}
 const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
