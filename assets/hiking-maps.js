@@ -27,6 +27,9 @@ L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo
 L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
 }
 r.points.forEach(p=>bounds.extend(p));
+const labelPoint=r.points[Math.floor(r.points.length/2)];
+L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:String(r.id).padStart(2,'0'),iconSize:[24,24],iconAnchor:[12,12]})}).addTo(map);
+
 if(r.area){
 r.points.forEach(p=>L.circleMarker(p,{radius:main?4:6,fillColor:r.color,color:'#fff',weight:1,fillOpacity:.9,interactive:false}).addTo(map));
 }
