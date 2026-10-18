@@ -14,4 +14,4 @@
 /* Compact unboxed city labels: preserve route visibility. */
 .hiking-town-text{background:transparent!important;border:0!important;box-shadow:none!important;color:#243746;font:600 11px/16px -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;white-space:nowrap;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,0 0 3px #fff;pointer-events:none}
 
-.hiking-route-index{background:#fff;border:1px solid #60717a;border-radius:50%;width:24px!important;height:24px!important;line-height:22px;text-align:center;font:700 11px/22px -apple-system,BlinkMacSystemFont,sans-serif;color:#213c48;box-shadow:0 1px 3px #0002;pointer-events:none}
+.hiking-route-index{background:transparent!important;border:0!important;box-shadow:none!important;width:20px!important;height:20px!important;pointer-events:none}.hiking-route-index span{display:block;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;background:#ffffffd9;color:var(--route-color);font:700 10px/16px -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;text-shadow:none}
