@@ -52,11 +52,12 @@ const n=Number(el.getAttribute('data-hiking-map')),main=!n;
 
 if(n>=1&&n<=8){drawCourse(el,n);return;}
 const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+const terrainTiles=main?'https://tile.opentopomap.org/{z}/{x}/{y}.png':'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+L.tileLayer(terrainTiles,{maxZoom:main?15:18,attribution:main?'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)':'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 const bounds=L.latLngBounds([]);
 const chosen=main?routes.filter(r=>r.id!==9):routes.filter(r=>r.id===n);
 chosen.forEach(r=>{
-if(!r.area){
+if(!r.area&&!main){
 L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo(map);
 L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
 }
@@ -64,7 +65,7 @@ r.points.forEach(p=>bounds.extend(p));
 const labelPoint=main?({1:[55.84,-3.35],2:[56.35,-3.00],3:[55.89,-3.72],4:[55.99,-2.45],5:[55.64,-2.30],6:[56.48,-4.88],7:[56.47,-4.23],8:[57.26,-4.48],9:[56.84,-4.98]}[r.id]):r.points[Math.floor(r.points.length/2)];
 L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:'<span style="--route-color:'+r.color+'">'+String(r.id).padStart(2,'0')+'</span>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map);
 
-if(r.area){
+if(r.area&&!main){
 const peaks=[[56.796,-5.004],[56.65,-4.99],[56.68,-4.97],[56.55,-4.75],[56.19,-4.63],[56.34,-4.22],[56.62,-3.94],[57.12,-3.67],[57.07,-3.67],[57.04,-3.53],[57.19,-3.84],[57.21,-4.71],[57.45,-5.25]];
 peaks.forEach(p=>L.marker(p,{interactive:false,icon:L.divIcon({className:'hiking-munro-peak',html:'▲',iconSize:[15,15],iconAnchor:[7,8]})}).addTo(map));
 }
