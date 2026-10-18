@@ -46,11 +46,11 @@ function drawCourse(el,n){
  const midLat=(minLat+maxLat)/2,scale=Math.cos(midLat*Math.PI/180);
  const minLon=Math.min(...coords.map(p=>p[1])),maxLon=Math.max(...coords.map(p=>p[1]));
  const latRange=Math.max(.035,maxLat-minLat),lonRange=Math.max(.035,(maxLon-minLon)*scale);
- const W=760,H=560, padX=185,padY=48;
+ const W=n===6?460:760,H=n===6?900:560, padX=n===6?125:185,padY=48;
  const factor=Math.min((W-2*padX)/lonRange,(H-2*padY)/latRange);
  const xy=(lat,lon)=>[W/2+((lon-(minLon+maxLon)/2)*scale)*factor,H/2-(lat-midLat)*factor];
  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
- const points=r.points.map(p=>xy(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+ const points=(n===6?stages.map(x=>[x[1],x[2]]):r.points).map(p=>xy(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
  const dots=stages.map(([name,lat,lon],i)=>{
  const [x,y]=xy(lat,lon),right=i%2===0,dx=right?12:-12,anchor=right?'start':'end';
  const labelY=y+((i%3)-1)*7;
@@ -58,7 +58,7 @@ function drawCourse(el,n){
  '<text x="'+(x+dx)+'" y="'+(labelY+4)+'" text-anchor="'+anchor+'" fill="#24343b" stroke="white" stroke-width="4" paint-order="stroke" font-size="13" font-weight="'+(i===0||i===stages.length-1?'700':'500')+'">'+esc(name)+'</text>';
  }).join('');
  el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' course diagram with English place names" preserveAspectRatio="xMidYMid meet"><polyline points="'+points+'" fill="none" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polyline points="'+points+'" fill="none" stroke="'+r.color+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'</svg>';
- el.classList.add('hiking-course-diagram');
+ el.classList.add('hiking-course-diagram');if(n===6)el.classList.add('hiking-course-portrait');
 }
 
 function start(){
