@@ -13,7 +13,7 @@ const routes=[
 ];
 const stageNames={
 1:[['Flotterstone',55.872,-3.220],['Glencorse Reservoir',55.855,-3.285],['Scald Law',55.831,-3.327]],
-2:[['North Queensferry',56.010,-3.395],['Dalgety Bay',56.032,-3.351],['Aberdour',56.054,-3.300],['Kinghorn',56.069,-3.176],['Kirkcaldy',56.112,-3.159],['Leven',56.196,-2.997],['Elie',56.192,-2.823],['Anstruther',56.223,-2.701],['Crail',56.261,-2.627],['St Andrews',56.340,-2.799],['Newburgh',56.351,-3.207]],
+2:[['Kincardine',56.069,-3.720],['North Queensferry',56.010,-3.395],['Dalgety Bay',56.032,-3.351],['Aberdour',56.054,-3.300],['Burntisland',56.059,-3.232],['Kinghorn',56.069,-3.176],['Kirkcaldy',56.112,-3.159],['Leven',56.196,-2.997],['Elie',56.192,-2.823],['Anstruther',56.223,-2.701],['Crail',56.261,-2.627],['Kingsbarns',56.300,-2.657],['St Andrews',56.340,-2.799],['Newburgh',56.351,-3.207]],
 3:[['Edinburgh',55.941,-3.222],['Ratho',55.921,-3.380],['Linlithgow',55.978,-3.600],['Falkirk Wheel',55.999,-3.841],['Kirkintilloch',55.940,-4.152],['Bowling',55.931,-4.491]],
 4:[['Helensburgh',56.002,-4.732],['Balloch',56.002,-4.591],['Strathblane',55.986,-4.308],['Kirkintilloch',55.940,-4.152],['Falkirk',55.999,-3.784],['Linlithgow',55.978,-3.600],['South Queensferry',55.990,-3.399],['Edinburgh',55.953,-3.189],['North Berwick',56.058,-2.717],['Dunbar',56.000,-2.516]],
 5:[['Melrose',55.598,-2.722],['St Boswells',55.574,-2.645],['Harestanes',55.533,-2.525],['Morebattle',55.515,-2.352],['Kirk Yetholm',55.546,-2.279],['Wooler',55.548,-2.013],['Holy Island',55.670,-1.800]],
@@ -39,23 +39,23 @@ function drawWestHighland(el){
 function drawCourse(el,n){
  const r=routes.find(x=>x.id===n),stages=stageNames[n]||[];
  if(!r||!stages.length)return;
- const coords=r.points.concat(stages.map(x=>[x[1],x[2]]));
+ const coords=stages.map(x=>[x[1],x[2]]);
  const minLat=Math.min(...coords.map(p=>p[0])),maxLat=Math.max(...coords.map(p=>p[0]));
  const midLat=(minLat+maxLat)/2,scale=Math.cos(midLat*Math.PI/180);
  const minLon=Math.min(...coords.map(p=>p[1])),maxLon=Math.max(...coords.map(p=>p[1]));
  const latRange=Math.max(.035,maxLat-minLat),lonRange=Math.max(.035,(maxLon-minLon)*scale);
- const W=760,H=560,padX=185,padY=48;
+ const W=760,H=560,padX=110,padY=58;
  const factor=Math.min((W-2*padX)/lonRange,(H-2*padY)/latRange);
  const xy=(lat,lon)=>[W/2+((lon-(minLon+maxLon)/2)*scale)*factor,H/2-(lat-midLat)*factor];
  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
- const points=r.points.map(p=>xy(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+ const points=coords.map(p=>xy(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
  const dots=stages.map(([name,lat,lon],i)=>{
  const [x,y]=xy(lat,lon),right=i%2===0,dx=right?12:-12,anchor=right?'start':'end';
  const labelY=y+((i%3)-1)*7;
  return '<circle cx="'+x+'" cy="'+y+'" r="4.5" fill="white" stroke="'+r.color+'" stroke-width="2.5"/>'+
  '<text x="'+(x+dx)+'" y="'+(labelY+4)+'" text-anchor="'+anchor+'" fill="#24343b" stroke="white" stroke-width="4" paint-order="stroke" font-size="13" font-weight="'+(i===0||i===stages.length-1?'700':'500')+'">'+esc(name)+'</text>';
  }).join('');
- el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' course diagram with English place names" preserveAspectRatio="xMidYMid meet"><polyline points="'+points+'" fill="none" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polyline points="'+points+'" fill="none" stroke="'+r.color+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'</svg>';
+ el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' course diagram with English place names" preserveAspectRatio="xMidYMid meet"><polyline points="'+points+'" fill="none" stroke="'+r.color+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'</svg>';
  el.classList.add('hiking-course-diagram');
 }
 
