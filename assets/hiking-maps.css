@@ -1,0 +1,12 @@
+/* Shared map presentation across hiking hub and detail pages. */
+.hiking-map-shell{margin:28px 0 34px}
+.hiking-map{width:100%;height:520px;border:1px solid #d8e1e4;border-radius:12px;overflow:hidden;background:#e9f0ed}
+.hiking-map-shell.is-detail .hiking-map{height:440px}
+.hiking-map-legend{display:flex;flex-wrap:wrap;gap:8px 15px;margin:12px 0;font-size:14px;line-height:1.6}
+.hiking-map-legend a{text-decoration:none;color:inherit}
+.hiking-map-legend b{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;margin-right:5px;border-radius:50%;color:white;font-size:12px}
+.hiking-map-note{font-size:13px;line-height:1.65;color:#586775;margin-top:9px}
+.hiking-map-label,.hiking-map-town,.hiking-map-number{font:600 12px/1.4 -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;box-shadow:none}
+.hiking-map-number{background:transparent;border:0;color:white}
+.hiking-map-number:before{display:none}
+@media(max-width:640px){.hiking-map{height:420px}.hiking-map-shell.is-detail .hiking-map{height:350px}.hiking-map-legend{font-size:13px;gap:8px 10px}}
