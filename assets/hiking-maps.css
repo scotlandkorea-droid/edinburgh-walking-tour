@@ -15,3 +15,6 @@
 .hiking-town-text{background:transparent!important;border:0!important;box-shadow:none!important;color:#243746;font:600 11px/16px -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;white-space:nowrap;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,0 0 3px #fff;pointer-events:none}
 
 .hiking-route-index{background:transparent!important;border:0!important;box-shadow:none!important;width:20px!important;height:20px!important;pointer-events:none}.hiking-route-index span{display:block;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;background:#ffffffd9;color:var(--route-color);font:700 10px/16px -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;text-shadow:none}
+
+.hiking-munro-peak{background:transparent!important;border:0!important;color:#79563b;font:700 15px/15px sans-serif;text-shadow:0 0 3px white;pointer-events:none}
+.hiking-stage-label{background:transparent!important;border:0!important;box-shadow:none!important;color:#293b45;font:600 10px/16px -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;white-space:nowrap;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,0 0 3px #fff;pointer-events:none}
