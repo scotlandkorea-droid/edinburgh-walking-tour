@@ -31,7 +31,7 @@ function drawWestHighland(el){
  ['Crianlarich',56.390,-4.615],['Tyndrum',56.432,-4.711],['Bridge of Orchy',56.516,-4.766],
  ['Inveroran',56.540,-4.785],['Kingshouse',56.651,-4.843],['Kinlochleven',56.713,-4.964],['Fort William',56.819,-5.106]
  ];
- const xy=(lat,lon)=>[222+(lon+4.72)*205,860-(lat-55.94)*800];
+ const xy=(lat,lon)=>[210+(lon+4.72)*105,860-(lat-55.94)*800];
  const line=pts.map((p,i)=>{const [x,y]=xy(p[1],p[2]);return (i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}).join(' ');
  const labels=pts.map((p,i)=>{const [x,y]=xy(p[1],p[2]);const right=i%2===0,dx=right?14:-14;
  return '<circle cx="'+x+'" cy="'+y+'" r="4" fill="white" stroke="#bd574e" stroke-width="2.5"/><text x="'+(x+dx)+'" y="'+(y+4)+'" text-anchor="'+(right?'start':'end')+'" fill="#263a3c" font-size="12.5" font-weight="'+(i===0||i===pts.length-1?'700':'500')+'" stroke="white" stroke-width="4" paint-order="stroke">'+p[0]+'</text>';}).join('');
