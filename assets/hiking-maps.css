@@ -29,3 +29,6 @@
 
 /* Detail maps: remove the rectangular frame without altering route drawings or the main overview map. */
 .hiking-map-shell.is-detail .hiking-map{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
+
+/* Hiking detail illustrations: no enclosing rectangular frame; overview map remains unchanged. */
+.hiking-map-shell.is-detail .hiking-map{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
