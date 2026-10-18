@@ -20,7 +20,7 @@ const n=Number(el.getAttribute('data-hiking-map')),main=!n;
 const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 const bounds=L.latLngBounds([]);
-const chosen=main?routes:routes.filter(r=>r.id===n);
+const chosen=main?routes.filter(r=>r.id!==9):routes.filter(r=>r.id===n);
 chosen.forEach(r=>{
 if(!r.area&&r.id!==2){
 L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo(map);
@@ -31,7 +31,12 @@ const labelPoint=main?({1:[55.84,-3.35],2:[56.22,-2.57],3:[56.04,-3.76],4:[55.91
 L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:'<span style="--route-color:'+r.color+'">'+String(r.id).padStart(2,'0')+'</span>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map);
 
 if(r.area){
-r.points.forEach(p=>L.circleMarker(p,{radius:main?4:6,fillColor:r.color,color:'#fff',weight:1,fillOpacity:.9,interactive:false}).addTo(map));
+const peaks=[[56.796,-5.004],[56.65,-4.99],[56.68,-4.97],[56.55,-4.75],[56.19,-4.63],[56.34,-4.22],[56.62,-3.94],[57.12,-3.67],[57.07,-3.67],[57.04,-3.53],[57.19,-3.84],[57.21,-4.71],[57.45,-5.25]];
+peaks.forEach(p=>L.marker(p,{interactive:false,icon:L.divIcon({className:'hiking-munro-peak',html:'▲',iconSize:[15,15],iconAnchor:[7,8]})}).addTo(map));
+}
+if(!main&&r.id===6){
+const stages=[['밀가비 · 출발',55.94,-4.32],['드라이먼',56.07,-4.45],['발마하',56.09,-4.54],['로와데넌',56.15,-4.64],['인버아너넌',56.33,-4.72],['틴드럼',56.43,-4.71],['브리지 오브 오키',56.52,-4.77],['킹스하우스',56.65,-4.84],['킨로클레븐',56.71,-4.96],['포트 윌리엄 · 도착',56.82,-5.11]];
+stages.forEach(([name,lat,lon],i)=>{L.circleMarker([lat,lon],{radius:3.5,color:r.color,fillColor:'#fff',weight:2,fillOpacity:1,interactive:false}).addTo(map);L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-stage-label',html:name,iconSize:[125,18],iconAnchor:i%2?[130,8]:[-8,8]})}).addTo(map);});
 }
 });
 towns.forEach(([name,lat,lon])=>{
