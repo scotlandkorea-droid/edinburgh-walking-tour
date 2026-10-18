@@ -34,9 +34,25 @@ if(r.area){
 const peaks=[[56.796,-5.004],[56.65,-4.99],[56.68,-4.97],[56.55,-4.75],[56.19,-4.63],[56.34,-4.22],[56.62,-3.94],[57.12,-3.67],[57.07,-3.67],[57.04,-3.53],[57.19,-3.84],[57.21,-4.71],[57.45,-5.25]];
 peaks.forEach(p=>L.marker(p,{interactive:false,icon:L.divIcon({className:'hiking-munro-peak',html:'▲',iconSize:[15,15],iconAnchor:[7,8]})}).addTo(map));
 }
-if(!main&&r.id===6){
-const stages=[['밀가비 · 출발',55.94,-4.32],['드라이먼',56.07,-4.45],['발마하',56.09,-4.54],['로와데넌',56.15,-4.64],['인버아너넌',56.33,-4.72],['틴드럼',56.43,-4.71],['브리지 오브 오키',56.52,-4.77],['킹스하우스',56.65,-4.84],['킨로클레븐',56.71,-4.96],['포트 윌리엄 · 도착',56.82,-5.11]];
-stages.forEach(([name,lat,lon],i)=>{L.circleMarker([lat,lon],{radius:3.5,color:r.color,fillColor:'#fff',weight:2,fillOpacity:1,interactive:false}).addTo(map);L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-stage-label',html:name,iconSize:[125,18],iconAnchor:i%2?[130,8]:[-8,8]})}).addTo(map);});
+if(!main){
+/* Names correspond to the source articles. Points indicate towns or landmarks,
+   while the connecting line remains a geographic overview, not a GPS trail. */
+const stageNames={
+1:[['Flotterstone',55.872,-3.220],['Glencorse Reservoir',55.855,-3.285],['Scald Law',55.831,-3.327]],
+2:[['North Queensferry',56.010,-3.395],['Dalgety Bay',56.032,-3.351],['Aberdour',56.054,-3.300],['Kinghorn',56.069,-3.176],['Kirkcaldy',56.112,-3.159],['Leven',56.196,-2.997],['Elie',56.192,-2.823],['Anstruther',56.223,-2.701],['Crail',56.261,-2.627],['St Andrews',56.340,-2.799],['Newburgh',56.351,-3.207]],
+3:[['Edinburgh',55.941,-3.222],['Ratho',55.921,-3.380],['Linlithgow',55.978,-3.600],['Falkirk Wheel',55.999,-3.841],['Kirkintilloch',55.940,-4.152],['Bowling',55.931,-4.491]],
+4:[['Helensburgh',56.002,-4.732],['Balloch',56.002,-4.591],['Strathblane',55.986,-4.308],['Kirkintilloch',55.940,-4.152],['Falkirk',55.999,-3.784],['Linlithgow',55.978,-3.600],['South Queensferry',55.990,-3.399],['Edinburgh',55.953,-3.189],['North Berwick',56.058,-2.717],['Dunbar',56.000,-2.516]],
+5:[['Melrose',55.598,-2.722],['St Boswells',55.574,-2.645],['Harestanes',55.533,-2.525],['Morebattle',55.515,-2.352],['Kirk Yetholm',55.546,-2.279],['Wooler',55.548,-2.013],['Holy Island',55.670,-1.800]],
+6:[['Milngavie',55.941,-4.319],['Drymen',56.067,-4.451],['Balmaha',56.088,-4.540],['Rowardennan',56.151,-4.643],['Inverarnan',56.329,-4.720],['Tyndrum',56.432,-4.711],['Bridge of Orchy',56.516,-4.766],['Kingshouse',56.651,-4.843],['Kinlochleven',56.713,-4.964],['Fort William',56.819,-5.106]],
+7:[['Drymen',56.067,-4.451],['Aberfoyle',56.179,-4.385],['Callander',56.243,-4.216],['Strathyre',56.324,-4.325],['Killin',56.468,-4.319],['Aberfeldy',56.620,-3.865],['Pitlochry',56.703,-3.729]],
+8:[['Fort William',56.819,-5.106],['Gairlochy',56.914,-4.992],['Laggan',57.040,-4.820],['Fort Augustus',57.145,-4.681],['Invermoriston',57.215,-4.617],['Drumnadrochit',57.333,-4.480],['Inverness',57.477,-4.225]]
+};
+const stages=stageNames[r.id]||[];
+stages.forEach(([name,lat,lon],i)=>{
+L.circleMarker([lat,lon],{radius:3.3,color:r.color,fillColor:'#fff',weight:2,fillOpacity:1,interactive:false}).addTo(map);
+const right=i%2===0;
+L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-stage-label',html:'<span>'+name+'</span>',iconSize:[112,18],iconAnchor:right?[-7,9]:[119,9]})}).addTo(map);
+});
 }
 });
 /* Base map already labels major towns; avoid duplicate labels. */
