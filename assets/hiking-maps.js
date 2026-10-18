@@ -22,7 +22,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,att
 const bounds=L.latLngBounds([]);
 const chosen=main?routes:routes.filter(r=>r.id===n);
 chosen.forEach(r=>{
-if(!r.area){L.polyline(r.points,{color:'#fff',weight:7,opacity:.92,interactive:false}).addTo(map);L.polyline(r.points,{color:r.color,weight:4,opacity:.95,dashArray:'8 7',interactive:false}).addTo(map);}
+if(!r.area&&r.id!==2){L.polyline(r.points,{color:'#fff',weight:7,opacity:.92,interactive:false}).addTo(map);L.polyline(r.points,{color:r.color,weight:4,opacity:.95,dashArray:'8 7',interactive:false}).addTo(map);}
 r.points.forEach(p=>bounds.extend(p));
 const mid=r.points[Math.floor(r.points.length/2)];
 L.circleMarker(mid,{radius:main?12:14,fillColor:r.color,color:'#fff',weight:2,fillOpacity:1}).addTo(map).bindTooltip(String(r.id).padStart(2,'0')+' · '+r.name,{permanent:!main,direction:'top',className:'hiking-map-label'});
