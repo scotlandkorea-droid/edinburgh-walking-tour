@@ -20,15 +20,12 @@
 .hiking-stage-label{background:transparent!important;border:0!important;box-shadow:none!important;color:#293b45;font:600 10px/16px -apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;white-space:nowrap;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,0 0 3px #fff;pointer-events:none}
 
 /* Detail route diagrams: no basemap, no map tiles, preserve geographic north-up shape. */
-.hiking-map.hiking-course-diagram{height:auto!important;aspect-ratio:760/560;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px}
+.hiking-map.hiking-course-diagram{height:auto!important;aspect-ratio:760/560;background:transparent;display:flex;align-items:center;justify-content:center;padding:0}
 .hiking-course-diagram svg{display:block;width:100%;height:100%;max-height:560px}
 
 /* One-course vertical drawing: no rectangular map frame. */
 .hiking-map.hiking-course-vertical{aspect-ratio:440/940;border:0;border-radius:0;padding:0;overflow:visible;background:transparent;max-width:440px;margin:0 auto}
 .hiking-course-vertical svg{max-height:none;height:auto}
-
-/* Detail maps: remove the rectangular frame without altering route drawings or the main overview map. */
-.hiking-map-shell.is-detail .hiking-map{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
 
 /* Hiking detail illustrations: no enclosing rectangular frame; overview map remains unchanged. */
 .hiking-map-shell.is-detail .hiking-map{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
