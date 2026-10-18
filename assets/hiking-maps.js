@@ -27,7 +27,7 @@ L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo
 L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
 }
 r.points.forEach(p=>bounds.extend(p));
-const labelPoint=main?({1:[55.84,-3.35],2:[56.41,-3.35],3:[55.88,-3.75],4:[55.99,-2.45],5:[55.64,-2.30],6:[56.48,-4.88],7:[56.47,-4.23],8:[57.26,-4.48],9:[56.84,-4.98]}[r.id]):r.points[Math.floor(r.points.length/2)];
+const labelPoint=main?({1:[55.84,-3.35],2:[56.41,-3.35],3:[55.89,-3.72],4:[55.99,-2.45],5:[55.64,-2.30],6:[56.48,-4.88],7:[56.47,-4.23],8:[57.26,-4.48],9:[56.84,-4.98]}[r.id]):r.points[Math.floor(r.points.length/2)];
 L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:'<span style="--route-color:'+r.color+'">'+String(r.id).padStart(2,'0')+'</span>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map);
 
 if(r.area){
@@ -39,10 +39,12 @@ const stages=[['밀가비 · 출발',55.94,-4.32],['드라이먼',56.07,-4.45],[
 stages.forEach(([name,lat,lon],i)=>{L.circleMarker([lat,lon],{radius:3.5,color:r.color,fillColor:'#fff',weight:2,fillOpacity:1,interactive:false}).addTo(map);L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-stage-label',html:name,iconSize:[125,18],iconAnchor:i%2?[130,8]:[-8,8]})}).addTo(map);});
 }
 });
-if(false)towns.forEach(([name,lat,lon])=>{
+/* Base map already labels major towns; avoid duplicate labels. */
+/* towns.forEach(([name,lat,lon])=>{
 L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1,interactive:false}).addTo(map);
 L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-town-text',html:name,iconSize:[90,16],iconAnchor:[-7,9]})}).addTo(map);
 });
+*/
 if(main){map.fitBounds([[55.50,-5.08],[57.62,-1.75]],{padding:[5,5]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
