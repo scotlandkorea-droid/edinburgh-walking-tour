@@ -12,11 +12,46 @@ const routes=[
 {id:9,name:'먼로 배깅',color:'#79563b',points:[[56.80,-5.00],[56.19,-4.63],[56.34,-4.22],[57.12,-3.67]],zoom:8,area:true}
 ];
 const towns=[['에든버러',55.953,-3.19],['글래스고',55.864,-4.25],['포트 윌리엄',56.82,-5.11],['인버네스',57.48,-4.23]];
+
+const stageNames={
+1:[['Flotterstone',55.872,-3.220],['Glencorse Reservoir',55.855,-3.285],['Scald Law',55.831,-3.327]],
+2:[['North Queensferry',56.010,-3.395],['Dalgety Bay',56.032,-3.351],['Aberdour',56.054,-3.300],['Kinghorn',56.069,-3.176],['Kirkcaldy',56.112,-3.159],['Leven',56.196,-2.997],['Elie',56.192,-2.823],['Anstruther',56.223,-2.701],['Crail',56.261,-2.627],['St Andrews',56.340,-2.799],['Newburgh',56.351,-3.207]],
+3:[['Edinburgh',55.941,-3.222],['Ratho',55.921,-3.380],['Linlithgow',55.978,-3.600],['Falkirk Wheel',55.999,-3.841],['Kirkintilloch',55.940,-4.152],['Bowling',55.931,-4.491]],
+4:[['Helensburgh',56.002,-4.732],['Balloch',56.002,-4.591],['Strathblane',55.986,-4.308],['Kirkintilloch',55.940,-4.152],['Falkirk',55.999,-3.784],['Linlithgow',55.978,-3.600],['South Queensferry',55.990,-3.399],['Edinburgh',55.953,-3.189],['North Berwick',56.058,-2.717],['Dunbar',56.000,-2.516]],
+5:[['Melrose',55.598,-2.722],['St Boswells',55.574,-2.645],['Harestanes',55.533,-2.525],['Morebattle',55.515,-2.352],['Kirk Yetholm',55.546,-2.279],['Wooler',55.548,-2.013],['Holy Island',55.670,-1.800]],
+6:[['Milngavie',55.941,-4.319],['Drymen',56.067,-4.451],['Balmaha',56.088,-4.540],['Rowardennan',56.151,-4.643],['Inverarnan',56.329,-4.720],['Tyndrum',56.432,-4.711],['Bridge of Orchy',56.516,-4.766],['Kingshouse',56.651,-4.843],['Kinlochleven',56.713,-4.964],['Fort William',56.819,-5.106]],
+7:[['Drymen',56.067,-4.451],['Aberfoyle',56.179,-4.385],['Callander',56.243,-4.216],['Strathyre',56.324,-4.325],['Killin',56.468,-4.319],['Aberfeldy',56.620,-3.865],['Pitlochry',56.703,-3.729]],
+8:[['Fort William',56.819,-5.106],['Gairlochy',56.914,-4.992],['Laggan',57.040,-4.820],['Fort Augustus',57.145,-4.681],['Invermoriston',57.215,-4.617],['Drumnadrochit',57.333,-4.480],['Inverness',57.477,-4.225]]
+};
+function drawCourse(el,n){
+ const r=routes.find(x=>x.id===n),stages=stageNames[n]||[];
+ if(!r||!stages.length)return;
+ const coords=r.points.concat(stages.map(x=>[x[1],x[2]]));
+ const minLat=Math.min(...coords.map(p=>p[0])),maxLat=Math.max(...coords.map(p=>p[0]));
+ const midLat=(minLat+maxLat)/2,scale=Math.cos(midLat*Math.PI/180);
+ const minLon=Math.min(...coords.map(p=>p[1])),maxLon=Math.max(...coords.map(p=>p[1]));
+ const latRange=Math.max(.035,maxLat-minLat),lonRange=Math.max(.035,(maxLon-minLon)*scale);
+ const W=760,H=560, padX=185,padY=48;
+ const factor=Math.min((W-2*padX)/lonRange,(H-2*padY)/latRange);
+ const xy=(lat,lon)=>[W/2+((lon-(minLon+maxLon)/2)*scale)*factor,H/2-(lat-midLat)*factor];
+ const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+ const points=r.points.map(p=>xy(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+ const dots=stages.map(([name,lat,lon],i)=>{
+ const [x,y]=xy(lat,lon),right=i%2===0,dx=right?12:-12,anchor=right?'start':'end';
+ const labelY=y+((i%3)-1)*7;
+ return '<circle cx="'+x+'" cy="'+y+'" r="4.5" fill="white" stroke="'+r.color+'" stroke-width="2.5"/>'+
+ '<text x="'+(x+dx)+'" y="'+(labelY+4)+'" text-anchor="'+anchor+'" fill="#24343b" stroke="white" stroke-width="4" paint-order="stroke" font-size="13" font-weight="'+(i===0||i===stages.length-1?'700':'500')+'">'+esc(name)+'</text>';
+ }).join('');
+ el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' course diagram with English place names" preserveAspectRatio="xMidYMid meet"><polyline points="'+points+'" fill="none" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polyline points="'+points+'" fill="none" stroke="'+r.color+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'</svg>';
+ el.classList.add('hiking-course-diagram');
+}
+
 function start(){
 if(!window.L)return;
 document.querySelectorAll('[data-hiking-map]').forEach(el=>{
 if(el.dataset.ready)return;el.dataset.ready='1';
 const n=Number(el.getAttribute('data-hiking-map')),main=!n;
+if(n>=1&&n<=8){drawCourse(el,n);return;}
 const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 const bounds=L.latLngBounds([]);
@@ -37,16 +72,7 @@ peaks.forEach(p=>L.marker(p,{interactive:false,icon:L.divIcon({className:'hiking
 if(!main){
 /* Names correspond to the source articles. Points indicate towns or landmarks,
    while the connecting line remains a geographic overview, not a GPS trail. */
-const stageNames={
-1:[['Flotterstone',55.872,-3.220],['Glencorse Reservoir',55.855,-3.285],['Scald Law',55.831,-3.327]],
-2:[['North Queensferry',56.010,-3.395],['Dalgety Bay',56.032,-3.351],['Aberdour',56.054,-3.300],['Kinghorn',56.069,-3.176],['Kirkcaldy',56.112,-3.159],['Leven',56.196,-2.997],['Elie',56.192,-2.823],['Anstruther',56.223,-2.701],['Crail',56.261,-2.627],['St Andrews',56.340,-2.799],['Newburgh',56.351,-3.207]],
-3:[['Edinburgh',55.941,-3.222],['Ratho',55.921,-3.380],['Linlithgow',55.978,-3.600],['Falkirk Wheel',55.999,-3.841],['Kirkintilloch',55.940,-4.152],['Bowling',55.931,-4.491]],
-4:[['Helensburgh',56.002,-4.732],['Balloch',56.002,-4.591],['Strathblane',55.986,-4.308],['Kirkintilloch',55.940,-4.152],['Falkirk',55.999,-3.784],['Linlithgow',55.978,-3.600],['South Queensferry',55.990,-3.399],['Edinburgh',55.953,-3.189],['North Berwick',56.058,-2.717],['Dunbar',56.000,-2.516]],
-5:[['Melrose',55.598,-2.722],['St Boswells',55.574,-2.645],['Harestanes',55.533,-2.525],['Morebattle',55.515,-2.352],['Kirk Yetholm',55.546,-2.279],['Wooler',55.548,-2.013],['Holy Island',55.670,-1.800]],
-6:[['Milngavie',55.941,-4.319],['Drymen',56.067,-4.451],['Balmaha',56.088,-4.540],['Rowardennan',56.151,-4.643],['Inverarnan',56.329,-4.720],['Tyndrum',56.432,-4.711],['Bridge of Orchy',56.516,-4.766],['Kingshouse',56.651,-4.843],['Kinlochleven',56.713,-4.964],['Fort William',56.819,-5.106]],
-7:[['Drymen',56.067,-4.451],['Aberfoyle',56.179,-4.385],['Callander',56.243,-4.216],['Strathyre',56.324,-4.325],['Killin',56.468,-4.319],['Aberfeldy',56.620,-3.865],['Pitlochry',56.703,-3.729]],
-8:[['Fort William',56.819,-5.106],['Gairlochy',56.914,-4.992],['Laggan',57.040,-4.820],['Fort Augustus',57.145,-4.681],['Invermoriston',57.215,-4.617],['Drumnadrochit',57.333,-4.480],['Inverness',57.477,-4.225]]
-};
+
 const stages=stageNames[r.id]||[];
 stages.forEach(([name,lat,lon],i)=>{
 L.circleMarker([lat,lon],{radius:3.3,color:r.color,fillColor:'#fff',weight:2,fillOpacity:1,interactive:false}).addTo(map);
