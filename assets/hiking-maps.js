@@ -36,15 +36,11 @@ function drawCourse(el,n){
  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
  const pos=pts.map(xy), path=pos.map(([x,y],i)=>(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)).join(' ');
  const dots=pts.map((p,i)=>{
- const [x,y]=pos[i], right=portrait?i%2===0:((i%4)<2), dx=right?12:-12;
- const labelY=y+(portrait?0:(i%3-1)*9);
+ const [x,y]=pos[i], right=r.id===4&&i===pts.length-1?true:portrait?i%2===0:((i%4)<2), dx=right?12:-12;
+ const labelY=r.id===4&&i===pts.length-2?y-23:r.id===4&&i===pts.length-1?y+25:y+(portrait?0:(i%3-1)*9);
  return '<circle cx="'+x+'" cy="'+y+'" r="3.8" fill="#fff" stroke="'+r.color+'" stroke-width="2.3"/><text x="'+(x+dx)+'" y="'+(labelY+4)+'" text-anchor="'+(right?'start':'end')+'" fill="#24343b" stroke="#fff" stroke-width="4" paint-order="stroke" font-size="12.5" font-weight="'+(i===0||i===pts.length-1?'700':'500')+'">'+esc(p.name)+'</text>';
  }).join('');
- const last=pos[pos.length-1],prev=pos[pos.length-2];
- const angle=Math.atan2(last[1]-prev[1],last[0]-prev[0]);
- const ax=last[0]-Math.cos(angle)*11,ay=last[1]-Math.sin(angle)*11;
- const arrow='<path d="M '+(ax+Math.cos(angle+2.5)*9)+' '+(ay+Math.sin(angle+2.5)*9)+' L '+last[0]+' '+last[1]+' L '+(ax+Math.cos(angle-2.5)*9)+' '+(ay+Math.sin(angle-2.5)*9)+'" fill="none" stroke="'+r.color+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
- el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' route with English place names"><path d="'+path+'" fill="none" stroke="'+r.color+'" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>'+dots+arrow+'</svg>';
+ el.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(r.name)+' route with English place names"><path d="'+path+'" fill="none" stroke="'+r.color+'" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'</svg>';
  el.classList.add('hiking-course-diagram');el.style.aspectRatio=W+' / '+H;
 }
 
