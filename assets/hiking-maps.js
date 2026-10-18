@@ -27,7 +27,7 @@ L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo
 L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
 }
 r.points.forEach(p=>bounds.extend(p));
-const labelPoint=r.points[Math.floor(r.points.length/2)];
+const labelPoint=main?({1:[55.85,-3.32],2:[56.34,-2.80],3:[56.00,-3.84],4:[55.99,-3.40],5:[55.60,-2.72],6:[56.52,-4.77],7:[56.70,-3.73],8:[57.21,-4.62],9:[56.80,-5.00]}[r.id]):r.points[Math.floor(r.points.length/2)];
 L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:String(r.id).padStart(2,'0'),iconSize:[24,24],iconAnchor:[12,12]})}).addTo(map);
 
 if(r.area){
@@ -38,7 +38,7 @@ towns.forEach(([name,lat,lon])=>{
 L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1,interactive:false}).addTo(map);
 L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-town-text',html:name,iconSize:[90,16],iconAnchor:[-7,9]})}).addTo(map);
 });
-if(main){map.fitBounds([[54.7,-6.4],[58.0,-1.6]],{padding:[10,10]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
+if(main){map.fitBounds([[55.35,-5.35],[57.65,-1.65]],{padding:[10,10]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
 }
