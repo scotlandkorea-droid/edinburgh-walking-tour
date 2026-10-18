@@ -22,14 +22,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,att
 const bounds=L.latLngBounds([]);
 const chosen=main?routes:routes.filter(r=>r.id===n);
 chosen.forEach(r=>{
-if(!r.area&&r.id!==2){L.polyline(r.points,{color:'#fff',weight:7,opacity:.92,interactive:false}).addTo(map);L.polyline(r.points,{color:r.color,weight:4,opacity:.95,dashArray:'8 7',interactive:false}).addTo(map);}
+if(!r.area&&r.id!==2){
+L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo(map);
+L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
+}
 r.points.forEach(p=>bounds.extend(p));
-const mid=r.points[Math.floor(r.points.length/2)];
-L.circleMarker(mid,{radius:main?12:14,fillColor:r.color,color:'#fff',weight:2,fillOpacity:1}).addTo(map).bindTooltip(String(r.id).padStart(2,'0')+' · '+r.name,{permanent:!main,direction:'top',className:'hiking-map-label'});
-if(main)L.circleMarker(mid,{radius:12,fillColor:r.color,color:'#fff',weight:2,fillOpacity:1}).addTo(map).bindTooltip(String(r.id).padStart(2,'0'),{permanent:true,direction:'center',className:'hiking-map-number'});
-if(!main&&!r.area){[[r.points[0],'출발'],[r.points[r.points.length-1],'도착']].forEach(([p,t])=>L.circleMarker(p,{radius:6,fillColor:r.color,color:'#fff',weight:2,fillOpacity:1}).addTo(map).bindTooltip(t));}
+if(r.area){
+r.points.forEach(p=>L.circleMarker(p,{radius:main?4:6,fillColor:r.color,color:'#fff',weight:1,fillOpacity:.9,interactive:false}).addTo(map));
+}
 });
-towns.forEach(([name,lat,lon])=>L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1}).addTo(map).bindTooltip(name,{permanent:true,direction:'right',className:'hiking-map-town'}));
+towns.forEach(([name,lat,lon])=>{
+L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1,interactive:false}).addTo(map);
+L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-town-text',html:name,iconSize:[90,16],iconAnchor:[-7,9]})}).addTo(map);
+});
 if(main){map.fitBounds([[54.7,-6.4],[58.0,-1.6]],{padding:[10,10]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
