@@ -45,7 +45,7 @@ L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpaci
 L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-town-text',html:name,iconSize:[90,16],iconAnchor:[-7,9]})}).addTo(map);
 });
 */
-if(main){map.fitBounds([[55.50,-5.08],[57.62,-1.75]],{padding:[5,5]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
+if(main){map.fitBounds([[55.28,-5.20],[57.67,-1.62]],{padding:[5,5]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
 }
