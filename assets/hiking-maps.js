@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const routes=[
 {id:1,name:'펜틀란드 힐스',color:'#dc8b20',points:[[55.88,-3.31],[55.85,-3.32],[55.83,-3.34]],zoom:11},
-{id:2,name:'파이프 코스탈 패스',color:'#2474b7',points:[[56.06,-3.72],[56.00,-3.39],[56.05,-3.28],[56.06,-3.23],[56.11,-3.16],[56.11,-3.00],[56.20,-2.70],[56.23,-2.70],[56.19,-2.59],[56.21,-2.51],[56.34,-2.80],[56.35,-3.38]],zoom:9},
+{id:2,name:'파이프 코스탈 패스',color:'#2474b7',points:[[56.06,-3.72],[56.04,-3.58],[56.01,-3.45],[56.00,-3.39],[56.03,-3.27],[56.06,-3.23],[56.11,-3.16],[56.14,-3.04],[56.19,-2.85],[56.20,-2.73],[56.22,-2.70],[56.19,-2.59],[56.21,-2.51],[56.25,-2.59],[56.30,-2.66],[56.34,-2.80],[56.37,-2.95],[56.39,-3.10],[56.35,-3.38]],zoom:9},
 {id:3,name:'유니언 운하·포스 클라이드 운하',color:'#32946a',points:[[55.94,-3.22],[55.97,-3.60],[55.98,-3.69],[56.00,-3.84],[55.94,-4.15],[55.90,-4.28]],zoom:9},
 {id:4,name:'존 뮤어 웨이',color:'#9b55a4',points:[[56.00,-4.73],[56.00,-4.59],[55.94,-4.15],[56.00,-3.78],[55.98,-3.60],[55.99,-3.40],[55.96,-3.19],[56.06,-2.72],[56.00,-2.51]],zoom:8},
 {id:5,name:'세인트 커스버트 웨이',color:'#d64b75',points:[[55.60,-2.72],[55.57,-2.64],[55.55,-2.28],[55.55,-2.02],[55.66,-1.93],[55.67,-1.80]],zoom:9},
@@ -18,16 +18,16 @@ document.querySelectorAll('[data-hiking-map]').forEach(el=>{
 if(el.dataset.ready)return;el.dataset.ready='1';
 const n=Number(el.getAttribute('data-hiking-map')),main=!n;
 const map=L.map(el,{scrollWheelZoom:false,zoomControl:false,attributionControl:true,dragging:false,touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tap:false});
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
 const bounds=L.latLngBounds([]);
 const chosen=main?routes.filter(r=>r.id!==9):routes.filter(r=>r.id===n);
 chosen.forEach(r=>{
-if(!r.area&&r.id!==2){
+if(!r.area){
 L.polyline(r.points,{color:'#fff',weight:7,opacity:.94,interactive:false}).addTo(map);
 L.polyline(r.points,{color:r.color,weight:4.5,opacity:1,interactive:false}).addTo(map);
 }
 r.points.forEach(p=>bounds.extend(p));
-const labelPoint=main?({1:[55.84,-3.35],2:[56.22,-2.57],3:[56.04,-3.76],4:[55.91,-2.47],5:[55.64,-2.30],6:[56.48,-4.88],7:[56.47,-4.23],8:[57.26,-4.48],9:[56.84,-4.98]}[r.id]):r.points[Math.floor(r.points.length/2)];
+const labelPoint=main?({1:[55.84,-3.35],2:[56.41,-3.35],3:[55.99,-3.84],4:[55.99,-2.45],5:[55.64,-2.30],6:[56.48,-4.88],7:[56.47,-4.23],8:[57.26,-4.48],9:[56.84,-4.98]}[r.id]):r.points[Math.floor(r.points.length/2)];
 L.marker(labelPoint,{interactive:false,icon:L.divIcon({className:'hiking-route-index',html:'<span style="--route-color:'+r.color+'">'+String(r.id).padStart(2,'0')+'</span>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map);
 
 if(r.area){
@@ -43,7 +43,7 @@ towns.forEach(([name,lat,lon])=>{
 L.circleMarker([lat,lon],{radius:3,color:'#334155',fillColor:'#334155',fillOpacity:1,weight:1,interactive:false}).addTo(map);
 L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'hiking-town-text',html:name,iconSize:[90,16],iconAnchor:[-7,9]})}).addTo(map);
 });
-if(main){map.fitBounds([[55.28,-5.20],[57.67,-1.62]],{padding:[10,10]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
+if(main){map.fitBounds([[55.50,-5.08],[57.62,-1.75]],{padding:[5,5]});}else{map.fitBounds(bounds.pad(.28),{padding:[25,25],maxZoom:10});}
 setTimeout(()=>map.invalidateSize(),100);
 });
 }
