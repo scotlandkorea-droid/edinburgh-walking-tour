@@ -1,5 +1,5 @@
 /* Shared map presentation across hiking hub and detail pages. */
-.hiking-map-shell{margin:28px 0 34px}
+.hiking-map-shell{padding:0;margin:28px 0 34px}
 .hiking-map{width:100%;height:520px;border:1px solid #d8e1e4;border-radius:12px;overflow:hidden;background:#e9f0ed}
 .hiking-map-shell.is-detail .hiking-map{height:440px}
 .hiking-map-legend{display:flex;flex-wrap:wrap;gap:8px 15px;margin:12px 0;font-size:14px;line-height:1.6}
