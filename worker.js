@@ -77,6 +77,22 @@ export default {
       }
     }
 
+    // Serve the two Naver search-preview assets with explicit image MIME types.
+    // The static files remain the single source of truth; no image is replaced.
+    const previewTypes = {
+      "/favicon.ico": "image/x-icon",
+      "/assets/ef5aaf4cfaf9f16155eb5ee1cd41d106619e0101e5cda928c3643511b0087258.png": "image/png"
+    };
+    if ((method === "GET" || method === "HEAD") && previewTypes[url.pathname]) {
+      const asset = await env.ASSETS.fetch(request);
+      if (!asset.ok) return asset;
+      const headers = new Headers(asset.headers);
+      headers.set("Content-Type", previewTypes[url.pathname]);
+      headers.set("X-Content-Type-Options", "nosniff");
+      headers.set("Cache-Control", "public, max-age=3600");
+      return new Response(asset.body, { status: asset.status, headers });
+    }
+
     const response = await env.ASSETS.fetch(request);
 
     // Shared UI assets change frequently while the site is being refined.
